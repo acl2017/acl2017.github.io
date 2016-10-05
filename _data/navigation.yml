@@ -1,6 +1,6 @@
 # main links links
 main:
-  - title: "Program"
+  - title: "Calls"
     url: /tutorials/
 
   # - title: "Registration"
@@ -21,16 +21,8 @@ pages:
       - title: "Organizing Committee"
       - url: /pages/organization.md
 
-  - title: Registration
-
-  - title: Program
-
-  - title: Contact
-
-  - title: Sponsors
-
 program:
-  - title: Program
+  - title: Calls
     children:
       - title: "Main Conference"
         url:
