@@ -1,0 +1,17 @@
+# Authors
+
+regina:
+  name        : "Regina Barzilay"
+  uri         : "http://people.csail.mit.edu/regina/"
+  email       : "regina@csail.mit.edu​"
+  bio         : "Professor of Electrical Engineering and Computer Science, MIT​."
+  avatar      : "bio-photo.jpg"
+
+knmnyn:
+  name        : "Min-Yen Kan"
+  uri         : "http://www.comp.nus.edu.sg/~kanmy"
+  email       : "kanmy@comp.nus.edu.sg"
+  bio         : "Associate Professor at the National University of Singapore."
+  avatar      : "https://secure.gravatar.com/avatar/85d174cc041ab91e724bb9d9d4e46c88.png?r=PG&s=150"
+  twitter     : "knmnyn"
+  google_plus : "knmnyn"

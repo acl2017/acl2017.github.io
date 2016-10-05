@@ -1,13 +1,16 @@
 # main links links
 main:
   - title: "Program"
-    url: /tutorials
+    url: /tutorials/
 
   # - title: "Registration"
   #   url: /
 
   - title: "Organization"
     url: /organization
+
+  - title: "PC Blog"
+    url: /blog
 
   # - title: "Sponsors"
   #   url: /
@@ -34,7 +37,7 @@ program:
       - title: "Workshops"
         url:
       - title: "Tutorials"
-        url: /tutorials
+        url: /tutorials/
 
   #   children:
   #     - title: "Quick-Start Guide"
