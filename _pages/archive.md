@@ -3,7 +3,6 @@ layout: archive
 permalink: /blog/
 author_profile: false
 sidebar: false
-read_time: false
 share: true
 comments: false
 ---
