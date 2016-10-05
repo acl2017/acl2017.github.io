@@ -29,7 +29,7 @@ Jordan Boyd-Graber, University of Colorado, Boulder
 <h3>Publication Chairs</h3>
 Wei Lu, Singapore University of Technology and Design<br/>
 Sameer Singh, University of California, Irvine<br/>
-Margaret Mitchell, Microsoft Research
+Margaret Mitchell, Google
 
 <h3>Demonstration Chairs</h3>
 Heng Ji, Rensselaer Polytechnic Institute<br/>
@@ -42,6 +42,9 @@ Marine Carpuat, University of Maryland, College Park
 
 <h3>Publicity Chair</h3>
 Charley Chan, Bloomberg
+
+<h3>Student Volunteer Coordinator</h3>
+Kostadin Cholakov, Humboldt-Universität zu Berlin
 
 <h3>Webmaster &amp; Appmaster</h3>
 Nitin Madnani, Educational Testing Service
