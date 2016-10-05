@@ -1,7 +1,7 @@
 ---
 title: 
 layout: single
-permalink: /tutorials
+permalink: /tutorials/
 sidebar: 
     nav: "program"
 ---

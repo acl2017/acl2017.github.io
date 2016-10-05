@@ -1,6 +1,7 @@
 ---
 title: Organizing Committee
 layout: single
+excerpt: "ACL 2017 organizing committee."
 permalink: /organization
 sidebar: false
 ---
