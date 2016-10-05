@@ -10,7 +10,7 @@ main:
     url: /organization
 
   - title: "PC Blog"
-    url: /blog
+    url: /blog/
 
   # - title: "Sponsors"
   #   url: /
