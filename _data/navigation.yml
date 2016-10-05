@@ -1,13 +1,16 @@
 # main links links
 main:
-  - title: "Program"
-    url: /tutorials
+  - title: "Calls"
+    url: /tutorials/
 
   # - title: "Registration"
   #   url: /
 
   - title: "Organization"
     url: /organization
+
+  - title: "PC Blog"
+    url: /blog/
 
   # - title: "Sponsors"
   #   url: /
@@ -18,23 +21,15 @@ pages:
       - title: "Organizing Committee"
       - url: /pages/organization.md
 
-  - title: Registration
-
-  - title: Program
-
-  - title: Contact
-
-  - title: Sponsors
-
 program:
-  - title: Program
+  - title: Calls
     children:
       - title: "Main Conference"
         url:
       - title: "Workshops"
         url:
       - title: "Tutorials"
-        url: /tutorials
+        url: /tutorials/
 
   #   children:
   #     - title: "Quick-Start Guide"
