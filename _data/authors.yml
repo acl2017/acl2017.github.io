@@ -5,7 +5,7 @@ regina:
   uri         : "http://people.csail.mit.edu/regina/"
   email       : "regina@csail.mit.edu​"
   bio         : "Professor of Electrical Engineering and Computer Science, MIT​."
-  avatar      : "bio-photo.jpg"
+  avatar      : "https://people.csail.mit.edu/regina/Regina.jpg"
 
 knmnyn:
   name        : "Min-Yen Kan"
