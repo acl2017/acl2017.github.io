@@ -12,8 +12,6 @@ comments: true
 author: regina
 read_time: false
 ---
-Dear Reader,
-
 We, the PC co-chairs, decided to start a blog to document our progress in organizing ACL 2017, while soliciting your help and advice along the way.
 
 As you may have noted by our affiliations, I and Min cover the entire world in terms of daylight -- the sun never sets on the ACL Empire -- as we are exactly on opposite time zones with 12 hours time difference.  However, our history goes way back -- we were both doctoral students in the Columbia NLP group, just in adjacent offices.
