@@ -41,6 +41,6 @@
     {% else %}
       <p class="page__meta">{{ post.date | date: "%B %d, %Y" }}</p>
     {% endif %}
-    {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
+    {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}<br/><a class="page__meta" href="{{ post.url }}">(Read more...)</a></p>{% endif %}<br><br>
   </article>
 </div>
