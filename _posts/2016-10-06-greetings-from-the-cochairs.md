@@ -11,7 +11,7 @@ tags:
 comments: true
 author: regina
 read_time: false
-excerpt: "Why do we need a program chairclear blog?"
+excerpt: "Why do we need a program chair blog?"
 ---
 Dear Reader,
 
