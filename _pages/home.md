@@ -11,7 +11,7 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**October 6, 2016**. Read the first [blog post](history/greetings-from-the-cochairs/) from PC co-chairs Regina Barzilay and Min-Yen Kan..
+**October 6, 2016**. Read the first [blog post](history/greetings-from-the-cochairs/) from PC co-chairs Regina Barzilay and Min-Yen Kan...
 {: .notice--info}
 
 
