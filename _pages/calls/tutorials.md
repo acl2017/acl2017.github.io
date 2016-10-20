@@ -1,13 +1,15 @@
 ---
 title: 
 layout: single
-permalink: /tutorials/
+permalink: /calls/tutorials/
 sidebar: 
     nav: "program"
 ---
 {% include base_path %}
 
-<h2>Joint Call for Tutorial Proposals: EACL/ACL/EMNLP 2017</h2>
+{% include toc icon="gears" %}
+
+<span style="font-weight: bolder;font-size: larger;">Joint Call for Tutorial Proposals: EACL/ACL/EMNLP 2017</span>
 
 The European Chapter of the Association for Computational Linguistics (EACL), the Association for Computational Linguistics (ACL), and the Conference on Empirical Methods in Natural Language Processing (EMNLP) invite
 proposals for tutorials to be held in conjunction with EACL 2017, ACL 2017, or EMNLP 2017. We  seek proposals for tutorials in all areas of computational linguistics (CL), broadly conceived to include disciplines such as Linguistics,
@@ -20,8 +22,7 @@ We particularly welcome:
 
 In order to gather a widespread audience, the experience and qualifications of the instructors will also be taken into account. 
 
-
-<h3>Important Dates</h3>
+## Important Dates
 
 <table style="width: 80%">
     <tbody>
@@ -85,7 +86,9 @@ In order to gather a widespread audience, the experience and qualifications of t
     </tbody>
 </table>
 
-<h3>Venues</h3>
+<h5>Note: All deadlines are 11:59PM Pacific Time.</h5>
+
+## Venues
 
 Tutorials will be held at one of the following conference venues:
 
@@ -93,11 +96,11 @@ Tutorials will be held at one of the following conference venues:
 - [ACL 2017](http://acl2017.org/tutorials) is the 55th annual meeting of the Association for Computational Linguistics and will take place in Vancouver, Canada, from July 30th through August 4th, 2017. The selected tutorials will be given on 30th July. 
 - EMNLP 2017  is planned for Copenhagen on the 4-6 September 2017. The tutorials will be given on the 3 September. 
 
-<h3>Remuneration</h3>
+## Remuneration
 
-Remuneration for tutorials is regulated by  ACL policies . Please note that remuneration for tutorial presenters is fixed according to the above policy and does not cover registration fees for the main conference.
+Remuneration for tutorials is regulated by ACL policies . Please note that remuneration for tutorial presenters is fixed according to the above policy and does not cover registration fees for the main conference.
 
-<h3>Submission Details</h3>
+## Submission Details
 
 Proposals for tutorials should contain:
    
@@ -110,13 +113,13 @@ Proposals for tutorials should contain:
 
 Tutorial proposals should be submitted online by November 30, 2016 through the [START system](https://www.softconf.com/g/acl-tutorials2017/). Proposals will be reviewed jointly by the Tutorial Co-Chairs of the three conferences.
 
-<h3>Tutorial Speaker Responsibilities</h3>
+## Tutorial Speaker Responsibilities
 
 Accepted tutorial speakers will be notified by December 30, 2016, and must then provide descriptions of their tutorials for inclusion in the conference registration material by January 30, 2017. The description should be in two formats:  (a) an ASCII version that can be included in email announcements and published on the conference web site, and a (b) PDF version for inclusion in the electronic proceedings (detailed instructions to follow).
 
 Tutorial speakers must provide tutorial course materials, at least containing copies of the course slides as well as a bibliography for the material covered in the tutorial, by the deadlines specified for the three conferences.
 
-<h3>Tutorial Chairs</h3>
+## Tutorial Chairs
 _EACL 2017_<br/>
 Lucia Specia, University of Sheffield<br/>
 Alex Klementiev, Amazon Development Center Germany GmbH
@@ -129,4 +132,4 @@ _EMNLP 2017_<br/>
 Nathan Schneider, Georgetown University
 Alexandra Birch, University of Edinburgh
 
-<h4>Note: Please send all inquiries concerning 2017 tutorials to acl17tutorials (at) gmail (dot) com.</h4>
+<h5>Note: Please send all inquiries concerning 2017 tutorials to acl17tutorials (at) gmail (dot) com.</h5>
