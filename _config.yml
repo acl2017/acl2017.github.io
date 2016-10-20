@@ -97,6 +97,7 @@ author:
 include:
   - .htaccess
   - _pages
+  - _pages/calls
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
