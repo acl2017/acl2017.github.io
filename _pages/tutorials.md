@@ -108,7 +108,7 @@ Proposals for tutorials should contain:
 5. A description of special requirements for technical equipment (e.g. internet access).
 6. A note specifying which venue(s) (EACL/ACL/EMNLP) would be acceptable and/or preferable.
 
-Tutorial proposals should be submitted online by November 30, 2016 through the [START system](https://www.softconf.com/acl2017/tutorial/). Proposals will be reviewed jointly by the Tutorial Co-Chairs of the three conferences.
+Tutorial proposals should be submitted online by November 30, 2016 through the [START system](https://www.softconf.com/g/acl-tutorials2017/). Proposals will be reviewed jointly by the Tutorial Co-Chairs of the three conferences.
 
 <h3>Tutorial Speaker Responsibilities</h3>
 
