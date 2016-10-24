@@ -1,7 +1,7 @@
 # main links links
 main:
   - title: "Calls"
-    url: /tutorials/
+    url: /calls/papers/
 
   # - title: "Registration"
   #   url: /
@@ -24,12 +24,12 @@ pages:
 program:
   - title: Calls
     children:
-      - title: "Main Conference"
-        url:
+      - title: "Papers"
+        url: /calls/papers/
       - title: "Workshops"
         url:
       - title: "Tutorials"
-        url: /tutorials/
+        url: /calls/tutorials/
 
   #   children:
   #     - title: "Quick-Start Guide"
