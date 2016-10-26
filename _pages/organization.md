@@ -35,6 +35,11 @@ Margaret Mitchell, Google
 Heng Ji, Rensselaer Polytechnic Institute<br/>
 Mohit Bansal, University of North Carolina, Chapel Hill
 
+<h3>Student Research Workshop Organizers</h3>
+Spandana Gella, University of Edinburgh<br/>
+Allyson Ettinger, University of Maryland, College Park<br/>
+Matthieu Labeau, Laboratoire d'Informatique pour la Mécanique et les Sciences de l'Ingénieur (LIMSI)
+
 <h3>Faculty Advisors to the Student Research Workshop</h3>
 Cecilia Ovesdotter Alm, Rochester Institute of Technology<br/>
 Mark Dredze, Johns Hopkins University<br/>
