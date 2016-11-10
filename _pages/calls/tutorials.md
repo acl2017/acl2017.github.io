@@ -129,7 +129,7 @@ Maja Popović, Humboldt-Universität zu Berlin<br/>
 Jordan Boyd-Graber, University of Colorado, Boulder
 
 _EMNLP 2017_<br/>
-Nathan Schneider, Georgetown University
+Nathan Schneider, Georgetown University<br/>
 Alexandra Birch, University of Edinburgh
 
 <h5>Note: Please send all inquiries concerning 2017 tutorials to acl17tutorials (at) gmail (dot) com.</h5>
