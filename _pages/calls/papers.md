@@ -58,7 +58,7 @@ areas (in alphabetical order):
         <tr>
           <td>Camera Ready Due</td>
           <td>Saturday</td>
-          <td>April 15, 2017</td>
+          <td>April 22, 2017 (supercedes original April 15 date)</td>
         </tr>
     </tbody>
 </table>
