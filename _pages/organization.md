@@ -48,6 +48,9 @@ Marine Carpuat, University of Maryland, College Park
 <h3>Publicity Chair</h3>
 Charley Chan, Bloomberg
 
+<h3>Conference Handbook Chair</h3>
+Christian Federmann, Microsoft
+
 <h3>Student Volunteer Coordinator</h3>
 Kostadin Cholakov, Humboldt-Universität zu Berlin
 
