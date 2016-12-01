@@ -160,10 +160,9 @@ management system at:
 
 - [https://www.softconf.com/acl2017/shortpapers](https://www.softconf.com/acl2017/shortpapers) - for short papers.
 
-Long paper submissions must follow the two-column format of ACL 2017 proceedings without exceeding eight (8) pages of content. References do not count against this limit. Short paper submissions must also follow the two-column format of ACL 2017 proceedings, and must not exceed four (4) pages.  We strongly recommend the use of ACL LaTeX style files tailored for this year's conference. Submissions must conform to the official style guidelines, which are contained in the style files, and they must be in PDF.
+Long paper submissions must follow the two-column format of ACL 2017 proceedings without exceeding eight (8) pages of content. References do not count against this limit. Short paper submissions must also follow the two-column format of ACL 2017 proceedings, and must not exceed four (4) pages. We strongly recommend the use of ACL LaTeX style files tailored for this year's conference. Submissions must conform to the official style guidelines, which are contained in the style files, and they must be in PDF format.
 
-Style files and other information about paper formatting
-requirements will be made available on this website.
+Style files and other information about paper formatting requirements will be made available on this website.
 
 
 ###  Multiple Submission Policy
