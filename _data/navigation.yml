@@ -26,6 +26,8 @@ program:
     children:
       - title: "Papers"
         url: /calls/papers/
+      - title: "Demos"
+        url: /calls/demos/
       - title: "Workshops"
         url:
       - title: "Tutorials"

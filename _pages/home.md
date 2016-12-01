@@ -11,12 +11,13 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
+**December 1, 2016**. Call for [demos](/calls/demos/) posted.
+{: .notice--info}
+
+
 **October 20, 2016**. Call for [papers](/calls/papers/) posted.
 {: .notice--info}
 
-
-**October 4, 2016**. EACL/ACL/EMNLP joint call for [tutorials](/calls/tutorials/) posted.
-{: .notice--info}
 
 <h2>Welcome!</h2>
 
