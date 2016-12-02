@@ -44,6 +44,8 @@ This year we will also award a Best Demo Award! This will encourage researchers 
     </tbody>
 </table>
 
+<h5>Note: All deadlines are 11:59PM Pacific Time.</h5>
+
 ## Submission Information
 
 Submitted systems may be of the following types:
