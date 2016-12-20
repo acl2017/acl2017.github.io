@@ -11,12 +11,16 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**December 1, 2016**. Call for [demos](/calls/demos/) posted.
+**December 20, 2016**. List of [workshops &amp; co-located events](/workshops/) posted.
 {: .notice--info}
+
+
+**December 1, 2016**. Call for [demos](/calls/demos/) posted.
+{: .notice}
 
 
 **October 20, 2016**. Call for [papers](/calls/papers/) posted.
-{: .notice--info}
+{: .notice}
 
 
 <h2>Welcome!</h2>
