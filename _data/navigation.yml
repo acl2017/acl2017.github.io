@@ -3,14 +3,20 @@ main:
   - title: "Calls"
     url: /calls/papers/
 
-  # - title: "Registration"
-  #   url: /
+  - title: "Workshops"
+    url: "/workshops"
+
+  # - title: "Tutorials"
+  #   url: "/tutorials"
 
   - title: "Organization"
     url: /organization
 
   - title: "PC Blog"
     url: https://chairs-blog.acl2017.org
+
+  # - title: "Registration"
+  #   url: /registration
 
   # - title: "Sponsors"
   #   url: /
@@ -21,6 +27,11 @@ pages:
       - title: "Organizing Committee"
       - url: /pages/organization.md
 
+  - title: Workshops
+    children:
+      - title: "ACL 2017 Workshops"
+      - url: /pages/workshops.md
+
 program:
   - title: Calls
     children:
@@ -29,7 +40,7 @@ program:
       - title: "Demos"
         url: /calls/demos/
       - title: "Workshops"
-        url:
+        url: /calls/workshops/
       - title: "Tutorials"
         url: /calls/tutorials/
 
