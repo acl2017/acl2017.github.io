@@ -14,7 +14,7 @@ Please refer to each individual event's website for its paper deadlines and othe
 
 - BUCC: 10th Workshop on Building and Using Comparable Corpora 
 
-- BioNLP: Workshop on Biomedical Natural Language Processing
+- [BioNLP: Workshop on Biomedical Natural Language Processing](https://www.aclweb.org/aclwiki/index.php?title=SIGBIOMED)
 
 - [CoNLL: The SIGNLL Conference on Computational Natural Language Learning](http://www.conll.org)
 
