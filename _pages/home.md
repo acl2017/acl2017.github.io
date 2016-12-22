@@ -11,7 +11,7 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**December 20, 2016**. List of [workshops &amp; co-located events](/workshops/) posted.
+**December 22, 2016**. List of [workshops &amp; co-located events](/workshops/) posted.
 {: .notice--info}
 
 
