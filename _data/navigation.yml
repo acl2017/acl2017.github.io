@@ -18,8 +18,8 @@ main:
   # - title: "Registration"
   #   url: /registration
 
-  # - title: "Sponsors"
-  #   url: /
+  - title: "Sponsors"
+    url: /sponsors/overview/
 
 pages:
   - title: Organization
@@ -43,6 +43,16 @@ program:
         url: /calls/workshops/
       - title: "Tutorials"
         url: /calls/tutorials/
+
+sponsors:
+  - title: Sponsorship
+    children:
+      - title: "Overview"
+        url: /sponsors/overview/
+      - title: "Tiers &amp; Pricing"
+        url: /sponsors/benefits/
+      - title: "Current Sponsors"
+        url: /sponsors/list/
 
   #   children:
   #     - title: "Quick-Start Guide"
