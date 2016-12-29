@@ -98,6 +98,7 @@ include:
   - .htaccess
   - _pages
   - _pages/calls
+  - _pages/sponsors
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
