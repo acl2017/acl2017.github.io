@@ -51,8 +51,8 @@ sponsors:
         url: /sponsors/overview/
       - title: "Tiers &amp; Pricing"
         url: /sponsors/benefits/
-      - title: "Current Sponsors"
-        url: /sponsors/list/
+      # - title: "Current Sponsors"
+      #   url: /sponsors/list/
 
   #   children:
   #     - title: "Quick-Start Guide"
