@@ -75,9 +75,7 @@ expected to be provided by the local organizer. If so, please specify
 desired hardware platform, hard disk and memory capacity, operating system
 and other software needed in order to run the demo.
 
-Submissions may consist of 6 pages (including references. We strongly recommend the use of ACL LaTeX style files tailored for this year's conference. Submissions must conform to the official style guidelines, which are contained in the style files, and they must be in PDF format.
-
-Style files and other information about paper formatting requirements will be made available on this website.
+Submissions may consist of 6 pages (including references. We strongly recommend the use of the official ACL 2017 style templates: [LaTeX](/downloads/acl17-latex.zip) and Microsoft Word (coming soon). Submissions must conform to the official style guidelines, which are contained in these templates, and they must be in PDF format.
 
 ## Reviewing Policy
 
