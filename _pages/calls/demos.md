@@ -46,7 +46,7 @@ This year we will also award a Best Demo Award! This will encourage researchers 
 
 <h5>Note: All deadlines are 11:59PM Pacific Time.</h5>
 
-## Submission Information
+## Demo Submission and Templates
 
 Submitted systems may be of the following types:
 
@@ -75,7 +75,12 @@ expected to be provided by the local organizer. If so, please specify
 desired hardware platform, hard disk and memory capacity, operating system
 and other software needed in order to run the demo.
 
-Submissions may consist of 6 pages (including references. We strongly recommend the use of the official ACL 2017 style templates: [LaTeX](/downloads/acl17-latex.zip) and Microsoft Word (coming soon). Submissions must conform to the official style guidelines, which are contained in these templates, and they must be in PDF format.
+Submissions may consist of 6 pages (including references. We strongly recommend the use of the official ACL 2017 style templates: 
+
+- [LaTeX](/downloads/acl17-latex.zip) 
+- Microsoft Word (coming soon). 
+
+Submissions must conform to the official style guidelines, which are contained in these templates, and they must be in PDF format.
 
 ## Reviewing Policy
 

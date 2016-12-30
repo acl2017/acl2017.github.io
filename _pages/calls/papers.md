@@ -151,7 +151,7 @@ must be avoided. Instead, use citations such as _"Smith previously
 showed (Smith, 1991) ..."_ Papers that do not conform to these
 requirements will be rejected without review.
 
-### Electronic Submission &amp; Templates
+### Paper Submission and Templates
 
 Submission is electronic, using the Softconf START conference
 management system at:
@@ -160,7 +160,12 @@ management system at:
 
 - [https://www.softconf.com/acl2017/shortpapers](https://www.softconf.com/acl2017/shortpapers) &ndash; for short papers
 
-Long paper submissions must follow the two-column format of ACL proceedings without exceeding eight (8) pages of content. Short paper submissions must also follow the two-column format of ACL proceedings, and must not exceed four (4) pages. References do not count against these limits. We strongly recommend the use of the official ACL 2017 style templates: [LaTeX](/downloads/acl17-latex.zip) and Microsoft Word (coming soon). All submissions must in PDF format and must conform to the official style guidelines, which are contained in these template files.
+Long paper submissions must follow the two-column format of ACL proceedings without exceeding eight (8) pages of content. Short paper submissions must also follow the two-column format of ACL proceedings, and must not exceed four (4) pages. References do not count against these limits. We strongly recommend the use of the official ACL 2017 style templates: 
+
+ - [LaTeX](/downloads/acl17-latex.zip) 
+ - Microsoft Word (coming soon). 
+
+All submissions must in PDF format and must conform to the official style guidelines, which are contained in these template files.
 
 ###  Multiple Submission Policy
 
