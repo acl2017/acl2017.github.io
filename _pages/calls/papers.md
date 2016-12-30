@@ -151,19 +151,16 @@ must be avoided. Instead, use citations such as _"Smith previously
 showed (Smith, 1991) ..."_ Papers that do not conform to these
 requirements will be rejected without review.
 
-### Electronic Submission
+### Electronic Submission &amp; Templates
 
 Submission is electronic, using the Softconf START conference
 management system at:
 
-- [https://www.softconf.com/acl2017/papers](https://www.softconf.com/acl2017/papers)  - for long papers
+- [https://www.softconf.com/acl2017/papers](https://www.softconf.com/acl2017/papers) &ndash; for long papers
 
-- [https://www.softconf.com/acl2017/shortpapers](https://www.softconf.com/acl2017/shortpapers) - for short papers.
+- [https://www.softconf.com/acl2017/shortpapers](https://www.softconf.com/acl2017/shortpapers) &ndash; for short papers
 
-Long paper submissions must follow the two-column format of ACL 2017 proceedings without exceeding eight (8) pages of content. References do not count against this limit. Short paper submissions must also follow the two-column format of ACL 2017 proceedings, and must not exceed four (4) pages. We strongly recommend the use of ACL LaTeX style files tailored for this year's conference. Submissions must conform to the official style guidelines, which are contained in the style files, and they must be in PDF format.
-
-Style files and other information about paper formatting requirements will be made available on this website.
-
+Long paper submissions must follow the two-column format of ACL proceedings without exceeding eight (8) pages of content. Short paper submissions must also follow the two-column format of ACL proceedings, and must not exceed four (4) pages. References do not count against these limits. We strongly recommend the use of the official ACL 2017 style templates: [LaTeX](/downloads/acl17-latex.zip) and Microsoft Word (coming soon). All submissions must in PDF format and must conform to the official style guidelines, which are contained in these template files.
 
 ###  Multiple Submission Policy
 
