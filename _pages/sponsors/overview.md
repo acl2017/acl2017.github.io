@@ -1,5 +1,5 @@
 ---
-title: "Why Become a Sponsor?"
+title: "Sponsorship Overview"
 layout: single
 permalink: /sponsors/overview/
 feature_row:
@@ -14,15 +14,25 @@ feature_row2:
     alt: "bronze sponsor pricing summary"
   - image_path: supporter-sponsor.png
     alt: "supporter sponsor pricing summary"
+gallery:
+  - url: http://www.amazon.com
+    image_path: amazon-logo.png
+    alt: "Amazon Logo"
+    title: "Amazon"
 sidebar: 
     nav: "sponsors"
 ---
 {% include base_path %}
 
+{% include toc icon="gears" %}
+
+On this page, we provide an overview of why the Association for Computational Linguistics solicits sponsorships, a summary of the sponsorship benefits, and a list of the sponsors for the ACL 2017 conference.
+
+# Why Become a Sponsor?
 The Annual Meeting for the Association for Computational Linguistics (ACL) provides the pre-eminent forum for dissemination of the latest developments in computational linguistics and natural language processing.  The ACL, its regional chapter in Europe (EACL), and the Special Interest Group on  Linguistic data and corpus-based approaches to NLP (EMNLP) will host the following ACL-related conferences in 2017:
 
  1. EACL 2017 in Valencia, Spain (April 3 &ndash; 7)
- 2. ACL-HLT 2017 in Vancouver, Canada (August 30 July &ndash; 4)
+ 2. ACL-HLT 2017 in Vancouver, Canada (July 30 &ndash; August 4)
  3. EMNLP 2017 in Copenhagen, Denmark, USA (September 7 &ndash; 11)
 
 In recent years, ACL conferences have enjoyed a growth spurt and now attract between 1,200 and 1,700 paying attendees, EACL conferences between 500 and 600, and EMNLP conferences between 700 and 850.
@@ -44,8 +54,18 @@ The specific benefits provided depend on the sponsorship tier. ACL conferences o
 
 {% include feature_row id="feature_row2" %}
 
-To see full pricing details for all sponsorship tiers and packs, please click on the button below.
+For contact information &amp; pricing details for all sponsorship tiers and packs, please click on the button below.
 
 <div class="text-center"> 
 <a href="/sponsors/benefits/"><button class="btn btn--large btn--inverse">Sponsorship Tiers &amp; Pricing</button></a>
 </div>
+<br/>
+
+# Current Sponsors
+
+We gratefully acknowledge support provided by the following for the ACL 2017 conference:
+
+## Platinum Tier
+
+{% include gallery class="fourth" %}
+
