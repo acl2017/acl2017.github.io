@@ -38,3 +38,5 @@ Please refer to each individual event's website for its paper deadlines and othe
 
 - [TextGraphs-11: Graph-based Methods for Natural Language Processing](https://sites.google.com/site/textgraphs2017/)
 
+- [WiNLP: Women in Natural Language Processing](http://www.winlp.org/winlp-workshop/)
+
