@@ -11,7 +11,7 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**December 30, 2016**. Calls for [papers](/calls/papers/) and [demos](/calls/demos/) have been updated with [LaTeX style templates](/downloads/acl17-latex.zip). Microsoft Word templates coming soon.
+**December 30, 2016**. Calls for [papers](/calls/papers/) and [demos](/calls/demos/) have been updated with [LaTeX](/downloads/acl17-latex.zip) and [Microsoft Word](/downloads/acl17-word.zip) style templates.
 {: .notice--info}
 
 **December 22, 2016**. List of [workshops &amp; co-located events](/workshops/) posted.
