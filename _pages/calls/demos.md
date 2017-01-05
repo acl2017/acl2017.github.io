@@ -78,7 +78,7 @@ and other software needed in order to run the demo.
 Submissions may consist of 6 pages (including references. We strongly recommend the use of the official ACL 2017 style templates: 
 
 - [LaTeX](/downloads/acl17-latex.zip) 
-- Microsoft Word (coming soon). 
+- [Microsoft Word](/downloads/acl17-word.zip)
 
 Submissions must conform to the official style guidelines, which are contained in these templates, and they must be in PDF format.
 

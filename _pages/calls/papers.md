@@ -163,7 +163,7 @@ management system at:
 Long paper submissions must follow the two-column format of ACL proceedings without exceeding eight (8) pages of content. Short paper submissions must also follow the two-column format of ACL proceedings, and must not exceed four (4) pages. References do not count against these limits. We strongly recommend the use of the official ACL 2017 style templates: 
 
  - [LaTeX](/downloads/acl17-latex.zip) 
- - Microsoft Word (coming soon). 
+ - [Microsoft Word](/downloads/acl17-word.zip)
 
 All submissions must in PDF format and must conform to the official style guidelines, which are contained in these template files.
 
