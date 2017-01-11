@@ -19,7 +19,7 @@ gallery:
     image_path: amazon-logo.png
     alt: "Amazon Logo"
     title: "Amazon"
-  - url: http://www.tencent.com/en-us/index.shtml
+  - url: http://ai.tencent.com/ailab/
     image_path: tenecent-logo.png
     alt: "Tenecent Logo"
     title: "Tenecent"
