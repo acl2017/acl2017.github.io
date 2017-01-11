@@ -19,6 +19,12 @@ gallery:
     image_path: amazon-logo.png
     alt: "Amazon Logo"
     title: "Amazon"
+  - url: http://www.tencent.com/en-us/index.shtml
+    image_path: tenecent-logo.png
+    alt: "Tenecent Logo"
+    title: "Tenecent"
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
 sidebar: 
     nav: "sponsors"
 ---
