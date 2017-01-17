@@ -14,7 +14,7 @@ feature_row2:
     alt: "bronze sponsor pricing summary"
   - image_path: supporter-sponsor.png
     alt: "supporter sponsor pricing summary"
-gallery:
+platinum:
   - url: http://www.amazon.com
     image_path: amazon-logo.png
     alt: "Amazon Logo"
@@ -23,6 +23,14 @@ gallery:
     image_path: tenecent-logo.png
     alt: "Tenecent Logo"
     title: "Tenecent"
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
+bronze:
+  - url: https://yandex.com
+    image_path: yandex-logo.png
+    alt: "Yandex Logo"
+    title: "Yandex"
+  - image_path: blank-logo.png
   - image_path: blank-logo.png
   - image_path: blank-logo.png
 sidebar: 
@@ -73,5 +81,9 @@ We gratefully acknowledge support provided by the following for the ACL 2017 con
 
 ## Platinum Tier
 
-{% include gallery class="fourth" %}
+{% include gallery id="platinum" class="fourth" %}
+
+## Bronze Tier
+
+{% include gallery id="bronze" class="fourth" %}
 
