@@ -11,11 +11,11 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**January 5, 2017**. Calls for [papers](/calls/papers/) and [demos](/calls/demos/) have been updated with [LaTeX](/downloads/acl17-latex.zip) and [Microsoft Word](/downloads/acl17-word.zip) style templates.
+**January 17, 2017**. List of [accepted tutorials](/tutorials/) posted.
 {: .notice--info}
 
-**December 22, 2016**. List of [workshops &amp; co-located events](/workshops/) posted.
-{: .notice}
+**January 5, 2017**. Calls for [papers](/calls/papers/) and [demos](/calls/demos/) have been updated with [LaTeX](/downloads/acl17-latex.zip) and [Microsoft Word](/downloads/acl17-word.zip) style templates.
+{: .notice--info}
 
 <h2>Welcome!</h2>
 
