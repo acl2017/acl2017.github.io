@@ -46,7 +46,7 @@ This year we will also award a Best Demo Award! This will encourage researchers 
 
 <h5>Note: All deadlines are 11:59PM Pacific Time.</h5>
 
-## Demo Submission and Templates
+## General Notes
 
 Submitted systems may be of the following types:
 
@@ -75,7 +75,12 @@ expected to be provided by the local organizer. If so, please specify
 desired hardware platform, hard disk and memory capacity, operating system
 and other software needed in order to run the demo.
 
-Submissions may consist of 6 pages (including references. We strongly recommend the use of the official ACL 2017 style templates: 
+## Demo Submission and Templates
+
+Submission is electronic, using the Softconf START conference
+management system at [https://www.softconf.com/acl2017/demos/](https://www.softconf.com/acl2017/demos/).
+
+Submissions may consist of 6 pages (including references). We strongly recommend the use of the official ACL 2017 style templates: 
 
 - [LaTeX](/downloads/acl17-latex.zip) 
 - [Microsoft Word](/downloads/acl17-word.zip)
