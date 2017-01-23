@@ -25,6 +25,14 @@ platinum:
     title: "Tenecent"
   - image_path: blank-logo.png
   - image_path: blank-logo.png
+gold:
+  - url: http://www.ebay.com
+    image_path: ebay-logo.png
+    alt: "Ebay Logo"
+    title: "Ebay"
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
 bronze:
   - url: https://yandex.com
     image_path: yandex-logo.png
@@ -82,6 +90,10 @@ We gratefully acknowledge support provided by the following for the ACL 2017 con
 ## Platinum Tier
 
 {% include gallery id="platinum" class="fourth" %}
+
+## Gold Tier
+
+{% include gallery id="gold" class="fourth" %}
 
 ## Bronze Tier
 
