@@ -41,6 +41,14 @@ bronze:
   - image_path: blank-logo.png
   - image_path: blank-logo.png
   - image_path: blank-logo.png
+supporter:
+  - url: http://www.washington.edu
+    image_path: uw-logo.png
+    alt: "University of Washington Logo"
+    title: "University of Washington"
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
 sidebar: 
     nav: "sponsors"
 ---
@@ -99,3 +107,12 @@ We gratefully acknowledge support provided by the following for the ACL 2017 con
 
 {% include gallery id="bronze" class="fourth" %}
 
+## Supporter Tier
+
+{% include gallery id="supporter" class="fourth" %}
+
+# Other Support
+
+![image-left](/images/nsf-logo.jpg){: .align-left}
+
+We acknowledge the generous support of the National Science Foundation which has [awarded](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1714855&HistoricalAwards=false) a $15,000 grant to the [ACL Student Research Workshop](https://sites.google.com/site/aclsrw2017/). The money will be used to subsidize housing, registration, and travel costs for US-based students who are selected to participate in the workshop. 
