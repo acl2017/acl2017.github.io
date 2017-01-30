@@ -151,4 +151,13 @@
   &--small {
     font-size: $type-size-7;
   }
+
+  /* button for acl conference program location names */
+
+  &--location {
+    padding: 0.25em 0.4em;
+    font-size: $type-size-7;
+  }
+
+
 }

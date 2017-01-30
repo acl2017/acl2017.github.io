@@ -1,0 +1,113 @@
+/* ==========================================================================
+    CONFERENCE SCHEDULE
+   ========================================================================== */
+
+div.schedule {
+    max-width: 100%;
+}
+
+div.day {
+    @include span(12);
+    padding: 0.5em;
+    font-family: $serif;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+    font-size: $type-size-3;
+    background-color: $lighter-gray;
+    border: 1px solid $light-gray;
+}
+
+div.session {
+    display: inline;
+    padding: 0.5em;
+    padding-left: 1em;
+    border-left: 1px solid $light-gray;
+    border-bottom: 1px solid $light-gray;
+    border-right: 1px solid $light-gray;
+
+    &.session-tutorials, &.session-plenary {
+        @include span(12);
+    }
+
+    &.session-papers1, &.session-papers2 {
+        @include span(12 of 12);
+
+        @include breakpoint($medium) {
+            @include span(12 of 12);
+        }
+
+        @include breakpoint($medium-wide) {
+            @include span(12 of 12);
+        }
+
+        @include breakpoint($large) {
+            @include span(4 wide of 12 (gutter-override: 0));
+        }
+
+        @include breakpoint($x-large) {
+            @include span(4 wide of 12 (gutter-override: 0));
+        }
+    }
+
+    &.session-papers3 {
+        @include span(12 of 12);
+
+        @include breakpoint($medium) {
+            @include span(12 of 12);
+        }
+
+        @include breakpoint($medium-wide) {
+            @include span(12 of 12);
+        }
+
+        @include breakpoint($large) {
+            @include span(4 last (gutter-override: 0));
+        }
+
+        @include breakpoint($x-large) {
+            @include span(4 last (gutter-override: 0));
+        }
+    }
+
+    .session-title {
+        font-size: $type-size-4;
+        color: $text-color;
+    }
+
+    &.session-expandable {
+        .session-title:after {
+            content: ' ↓';
+        }
+
+        .session-title.expanded:after {
+            content: ' ↑';
+        }
+    }
+
+    .session-time {
+        font-style: italic;
+    }
+
+    .session-details {
+        ul {
+            padding: 0px;
+            list-style-type: none;
+            line-height: 1em;
+        }
+    }
+    .paper-title {
+        font-size: $type-size-6;
+        font-weight: bold;
+    }
+
+    .session-location {
+        float: right;
+    }
+
+    .session-people {
+        font-size: $type-size-4;
+    }
+
+}
+
