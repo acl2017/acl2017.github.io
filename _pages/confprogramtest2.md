@@ -95,7 +95,7 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom</span>
     </div>
     <div class="session session-expandable session-plenary">
-        <span class="session-title">Invited Talk: "How can NLP help cure cancer?"</span><br/>        
+        <a href="#" class="session-title">Invited Talk: "How can NLP help cure cancer?"</a><br/>        
         <span class="session-time">6:00 PM &ndash; 9:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom</span>
         <div class="session-details">
@@ -110,6 +110,10 @@ script: |
                 <p>In the second part of the talk, I will push beyond standard tools, introducing new functionalities and avoiding annotation-hungry training paradigms ill-suited for clinical practice. In particular, I will focus on interpretable neural models that provide rationales underlying their predictions, and semi-supervised methods for information extraction.</p>
             </div>
         </div>
+    </div>
+    <div class="session session-plenary">
+        <span class="session-title">Break</span><br/>        
+        <span class="session-time">10:30 AM &ndash; 11:00 AM</span>
     </div>
     <div class="session session-expandable session-papers1" id="session-1a">
         <a href="#" class="session-title">Machine Translation I</a><br/>
@@ -204,7 +208,47 @@ script: |
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="session-details">
-        foobar
+            <table class="paper-table">
+                <tr>
+                    <td colspan="2">Chair: Mari Ostendorf</td>
+                </tr>
+                <tr>
+                    <td>11:00–11:20</td>
+                    <td>
+                        <span class="paper-title">Integer Linear Programming for Discourse Parsing. </span><em>Jérémy Perret, Stergos Afantenos, Nicholas Asher and Mathieu Morey</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:20–11:40</td>
+                    <td>
+                        <span class="paper-title">A Diversity-Promoting Objective Function for Neural Conversation Models. </span><em>Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao and Bill Dolan</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:40–12:00</td>
+                    <td>
+                        <span class="paper-title">Multi-domain Neural Network Language Generation for Spoken Dialogue Systems. </span><em>Tsung-Hsien Wen, Milica Gasic, Nikola Mrkšić, Lina M. Rojas Barahona, Pei-Hao Su, David Vandyke and Steve Young</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12:00–12:10</td>
+                    <td>
+                        <span class="paper-title">A Long Short-Term Memory Framework for Predicting Humor in Dialogues. </span><em>Dario Bertero and Pascale Fung</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12:10–12:20</td>
+                    <td>
+                        <span class="paper-title">Conversational Flow in Oxford-style Debates. </span><em>Justine Zhang, Ravi Kumar, Sujith Ravi and Cristian Danescu-Niculescu-Mizil</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12:20–12:30</td>
+                    <td>
+                        <span class="paper-title">Counter-fitting Word Vectors to Linguistic Constraints. </span><em>Nikola Mrkšić, Diarmuid Ó Séaghdha, Blaise Thomson, Milica Gasic, Lina M. Rojas Barahona, Pei-Hao Su, David Vandyke, Tsung-Hsien Wen and Steve Young</em>
+                    </td>
+                </tr>
+            </table>
         </div> 
     </div>
     <div class="session session-plenary">

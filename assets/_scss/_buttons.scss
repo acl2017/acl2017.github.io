@@ -155,8 +155,13 @@
   /* button for acl conference program location names */
 
   &--location {
-    padding: 0.25em 0.4em;
-    font-size: $type-size-7;
+
+    padding: 0.25em 0.35em;
+    font-size: $type-size-8;
+
+    @include breakpoint($medium) {
+          font-size: $type-size-7;
+    }
   }
 
 
