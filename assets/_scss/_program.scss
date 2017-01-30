@@ -22,9 +22,7 @@ div.session {
     display: inline;
     padding: 0.5em;
     padding-left: 1em;
-    border-left: 1px solid $light-gray;
-    border-bottom: 1px solid $light-gray;
-    border-right: 1px solid $light-gray;
+    border: 1px solid $light-gray;
 
     &.session-tutorials, &.session-plenary {
         @include span(12);
