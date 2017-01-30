@@ -42,20 +42,20 @@ script: |
         <div class="session-details">
             <ul>
                 <li>
-                    <span class="paper-title">[T1] English Resource Semantics</span><br/>
+                    <span class="tutorial-title">[T1] English Resource Semantics</span><br/>
                     <a href="#" class="btn btn--location inline-location">Executive 3AB</a>
                 </li>
                 <li>
-                 <span class="paper-title">[T2] Multilingual Multimodal Language Processing Using Neural Networks</span><br/>
+                 <span class="tutorial-title">[T2] Multilingual Multimodal Language Processing Using Neural Networks</span><br/>
                  <a href="#" class="btn btn--location inline-location">Spinnaker</a>
              </li>
              <li>
-                <span class="paper-title">[T3] Question Answering with Knowledge Base, Web and Beyond</span><br/>
+                <span class="tutorial-title">[T3] Question Answering with Knowledge Base, Web and Beyond</span><br/>
                 <a href="#" class="btn btn--location inline-location">Marina 3</a></li>
             </ul>      
         </div>
     </div>
-    <div class="session session-tutorials">
+    <div class="session session-plenary">
         <span class="session-title">Lunch</span><br/>        
         <span class="session-time">12:30 PM &ndash; 2:00 PM</span>
     </div>
@@ -65,15 +65,15 @@ script: |
         <div class="session-details">
             <ul>
                 <li>
-                    <span class="paper-title">[T4] Recent Progress in Deep Learning for NLP</span><br/>
+                    <span class="tutorial-title">[T4] Recent Progress in Deep Learning for NLP</span><br/>
                     <a href="#" class="btn btn--location inline-location">Spinnaker</a>
                 </li>
                 <li>
-                 <span class="paper-title">[T5] Scalable Statistical Relational Learning for NLP</span><br/>
+                 <span class="tutorial-title">[T5] Scalable Statistical Relational Learning for NLP</span><br/>
                  <a href="#" class="btn btn--location inline-location">Marina 3</a>
              </li>
              <li>
-                <span class="paper-title">[T6] Statistical Machine Translation between Related Languages</span><br/>
+                <span class="tutorial-title">[T6] Statistical Machine Translation between Related Languages</span><br/>
                 <a href="#" class="btn btn--location inline-location">Executive 3AB</a></li>
             </ul>      
         </div>
@@ -84,25 +84,131 @@ script: |
         <span class="session-location btn btn--location">Grande Foyer &amp; Terrace</span>
     </div>
     <div class="day" id="first-day">Monday, June 13</div>
-    <div class="session session-expandable session-papers1" id="session-1a">
-        <a href="#" class="session-title">Machine Translation I</a><br/>        
-        <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
+    <div class="session session-plenary">
+        <span class="session-title">Breakfast</span><br/>        
+        <span class="session-time">7:30 AM &ndash; 8:45 AM</span>
+    </div>
+    <div class="session session-plenary">
+        <span class="session-title">Welcome</span><br/>        
+        <span class="session-people">Kevin Knight, Ani Nenkova, Owen Rambow</span><br/>
+        <span class="session-time">9:00 AM &ndash; 9:15 AM</span>
+        <span class="session-location btn btn--location">Grande Ballroom</span>
+    </div>
+    <div class="session session-expandable session-plenary">
+        <span class="session-title">Invited Talk: "How can NLP help cure cancer?"</span><br/>        
+        <span class="session-time">6:00 PM &ndash; 9:00 PM</span>
+        <span class="session-location btn btn--location">Grande Ballroom</span>
         <div class="session-details">
-        foobar
-        </div> 
+            <div class="session-abstract">
+
+                <p>Cancer inflicts a heavy toll on our society. One out of seven women will be diagnosed with breast cancer during their lifetime, a fraction of them contributing to about 450,000 deaths annually worldwide. Despite billions of dollars invested in cancer research, our understanding of the disease, treatment, and prevention is still limited.</p>
+
+                <p>Majority of cancer research today takes place in biology and medicine. Computer science plays a minor supporting role in this process if at all. In this talk, I hope to convince you that NLP as a field has a chance to play a significant role in this battle. Indeed, free-form text remains the primary means by which physicians record their observations and clinical findings. Unfortunately, this rich source of textual information is severely underutilized by predictive models in oncology. Current models rely primarily only on structured data.</p>
+
+                <p>In the first part of my talk, I will describe a number of tasks where NLP-based models can make a difference in clinical practice. For example, these include improving models of disease progression, preventing over-treatment, and narrowing down to the cure. This part of the talk draws on active collaborations with oncologists from Massachusetts General Hospital (MGH).</p>
+
+                <p>In the second part of the talk, I will push beyond standard tools, introducing new functionalities and avoiding annotation-hungry training paradigms ill-suited for clinical practice. In particular, I will focus on interpretable neural models that provide rationales underlying their predictions, and semi-supervised methods for information extraction.</p>
+            </div>
+        </div>
+    </div>
+    <div class="session session-expandable session-papers1" id="session-1a">
+        <a href="#" class="session-title">Machine Translation I</a><br/>
+        <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
+        <span class="session-location btn btn--location">Grande Ballroom A</span>
+        <div class="session-details">
+            <table class="paper-table">
+                <tr>
+                    <td colspan="2">Chair: David Chiang</td>
+                </tr>
+                <tr>
+                    <td>11:00–11:20</td>
+                    <td>
+                        <span class="paper-title">Achieving Accurate Conclusions in Evaluation of Automatic Machine Translation Metrics. </span><em>Yvette Graham and Qun Liu</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:20–11:40</td>
+                    <td><span class="paper-title">Flexible Non-Terminals for Dependency Tree-to-Tree Reordering. </span> <em>John Richardson, Fabien Cromieres, Toshiaki Nakazawa and Sadao Kurohashi</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:40–12:00</td>
+                    <td><span class="paper-title">Selecting Syntactic, Non-redundant Segments in Active Learning for Machine Translation. </span><em>Akiva Miura, Graham Neubig, Michael Paul and Satoshi Nakamura</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12:00–12:10</td>
+                    <td><span class="paper-title">Multi-Source Neural Translation. </span><em>Barret Zoph and Kevin Knight</em></td>
+                </tr>
+                <tr>
+                    <td>12:10–12:20</td>
+                    <td><span class="paper-title">Controlling Politeness in Neural Machine Translation via Side Constraints. </span><em>Rico Sennrich, Barry Haddow and Alexandra Birch</em></td>
+                </tr>
+                <tr>
+                    <td>12:20–12:30</td>
+                    <td><span class="paper-title">An Empirical Evaluation of Noise Contrastive Estimation for the Neural Network Joint Model of Translation. </span><em>Colin Cherry</em></td>
+                </tr>                
+            </table>
+        </div>
     </div>
     <div class="session session-expandable session-papers2" id="session-1b">
-        <a href="#" class="session-title">Machine Translation I</a><br/>        
+        <a href="#" class="session-title">Summarization</a><br/>        
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
+        <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="session-details">
-        foobar
+            <table class="paper-table">
+                <tr>
+                    <td colspan="2">Chair: Fei Liu</td>
+                </tr>
+                <tr>
+                    <td>11:00–11:20</td>
+                    <td>
+                        <span class="paper-title">Neural Network-Based Abstract Generation for Opinions and Arguments. </span><em>Lu Wang and Wang Ling</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:20–11:40</td>
+                    <td>
+                        <span class="paper-title">A Low-Rank Approximation Approach to Learning Joint Embeddings of News Stories and Images for Timeline Summarization. </span><em>William Yang Wang, Yashar Mehdad, Dragomir Radev and Amanda Stent</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:40–12:00</td>
+                    <td>
+                        <span class="paper-title">Entity-balanced Gaussian pLSA for Automated Comparison. </span><em>Danish Contractor, Parag Singla and Mausam</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12:00–12:10</td>
+                    <td>
+                        <span class="paper-title">Automatic Summarization of Student Course Feedback. </span><em>Wencan Luo, Fei Liu, Zitao Liu and Diane Litman</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12:10–12:20</td>
+                    <td>
+                        <span class="paper-title">Abstractive Sentence Summarization with Attentive Recurrent Neural Networks. </span><em>Sumit Chopra, Michael Auli and Alexander M. Rush</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12:20–12:30</td>
+                    <td>
+                        <span class="paper-title">Knowledge-Guided Linguistic Rewrites for Inference Rule Verification. </span><em>Prachi Jain and Mausam</em>
+                    </td>
+                </tr>
+            </table>
         </div> 
     </div>
     <div class="session session-expandable session-papers3" id="session-1c">
-        <a href="#" class="session-title">Machine Translation I</a><br/>        
+        <a href="#" class="session-title">Dialog</a><br/>        
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
+        <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="session-details">
         foobar
         </div> 
     </div>
+    <div class="session session-plenary">
+        <span class="session-title">Lunch</span><br/>        
+        <span class="session-time">12:30 PM &ndash; 2:00 PM</span>
+    </div>    
 </div>

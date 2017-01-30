@@ -13,7 +13,7 @@ div.day {
     font-weight: bold;
     text-align: left;
     vertical-align: middle;
-    font-size: $type-size-3;
+    font-size: $type-size-4;
     background-color: $lighter-gray;
     border: 1px solid $light-gray;
 }
@@ -71,11 +71,11 @@ div.session {
     }
 
     .session-title {
-        font-size: $type-size-4;
+        font-size: $type-size-5;
         color: $text-color;
     }
 
-    &.session-expandable {
+    /* &.session-expandable {
         .session-title:after {
             content: ' ↓';
         }
@@ -83,7 +83,7 @@ div.session {
         .session-title.expanded:after {
             content: ' ↑';
         }
-    }
+    } */
 
     .session-time {
         font-style: italic;
@@ -96,8 +96,26 @@ div.session {
             line-height: 1em;
         }
     }
-    .paper-title {
+
+    .session-abstract {
         font-size: $type-size-6;
+    }
+
+    .paper-table {
+        border: 0px;
+        font-size: $type-size-6;
+
+        td {
+            border: 0px;
+        }
+    }
+
+    .tutorial-title {
+        font-size: $type-size-6;
+        font-weight: bold;
+    }
+
+    .paper-title  {
         font-weight: bold;
     }
 
@@ -106,7 +124,7 @@ div.session {
     }
 
     .session-people {
-        font-size: $type-size-4;
+        font-size: $type-size-5;
     }
 
 }
