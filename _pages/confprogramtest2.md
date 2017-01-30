@@ -29,6 +29,19 @@ script: |
             $('body').on('click', 'a.session-location', function(event) {
                 return false;
             });
+
+            $('body').on('click', 'a.poster-category', function(event) {
+                return false;
+            });
+
+            $('body').on('click', 'a.info-button', function(event) {
+                return false;
+            });
+
+            $('body').on('click', 'a.info-link', function(event) {
+                event.stopPropagation();
+            });
+
         });
     </script>
 ---
@@ -495,6 +508,286 @@ script: |
     <a href="#" class="session-title">Posters, Demos & Dinner</a><br/>        
         <span class="session-time">6:00 PM &ndash; 8:00 PM</span>
         <div class="session-details">
+            <a href="#" class="poster-category btn btn--small">Main Conference</a>
+            <table class="paper-table">
+                <tr>
+                    <td>
+                        <span class="paper-title">A Recurrent Neural Networks Approach for Estimating the Quality of Machine Translation Output. </span><em>Hyun Kim and Jong-Hyeok Lee</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Agreement on Target-bidirectional Neural Machine Translation. </span><em>Lemao Liu, Masao Utiyama, Andrew Finch and Eiichiro Sumita</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">An Unsupervised Model of Orthographic Variation for Historical Document Transcription. </span><em>Dan Garrette and Hannah Alpert-Abrams</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Bidirectional RNN for Medical Event Detection in Electronic Health Records. </span><em>Abhyuday Jagannatha and Hong Yu</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Breaking the Closed World Assumption in Text Classification. </span><em>Geli Fei and Bing Liu</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Building Chinese Affective Resources in Valence-Arousal Dimensions. </span><em>Liang-Chih Yu, Lung-Hao Lee, Shuai Hao, Jin Wang, Yunchao He, Jun Hu, K. Robert Lai and Xuejie Zhang</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Combining Recurrent and Convolutional Neural Networks for Relation Classification. </span><em>Ngoc Thang Vu, Heike Adel, Pankaj Gupta and Hinrich Schütze</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Conversational Markers of Constructive Discussions. </span><em>Vlad Niculae and Cristian Danescu-Niculescu-Mizil</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Cross-lingual Wikification Using Multilingual Embeddings. </span><em>Chen-Tse Tsai and Dan Roth</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Deconstructing Complex Search Tasks: a Bayesian Nonparametric Approach for Extracting Sub-tasks. </span><em>Rishabh Mehrotra, Prasanta Bhattacharya and Emine Yilmaz</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Expectation-Regulated Neural Model for Event Mention Extraction. </span><em>Ching-Yun Chang, Zhiyang Teng and Yue Zhang</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Grammatical error correction using neural machine translation. </span><em>Zheng Yuan and Ted Briscoe</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Improved Neural Network-based Multi-label Classification with Better Initialization Leveraging Label Co-occurrence. </span><em>Gakuto Kurata, Bing Xiang and Bowen Zhou</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Improving event prediction by representing script participants. </span><em>Simon Ahrendt and Vera Demberg</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Individual Variation in the Choice of Referential Form. </span><em>Thiago Castro Ferreira, Emiel Krahmer and Sander Wubben</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Inferring Psycholinguistic Properties of Words. </span><em>Gustavo Paetzold and Lucia Specia</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Intra-Topic Variability Normalization based on Linear Projection for Topic Classification. </span><em>Quan Liu, Wu Guo, Zhen-Hua Ling, Hui Jiang and Yu Hu</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Joint Learning Templates and Slots for Event Schema Induction. </span><em>Lei Sha, Sujian Li, Baobao Chang, Zhifang Sui and Zhifang Sui</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Large-scale Multitask Learning for Machine Translation Quality Estimation. </span><em>Kashif Shah and Lucia Specia</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Learning Distributed Word Representations For Bidirectional LSTM Recurrent Neural Network. </span><em>Peilu Wang, Yao Qian, Frank Soong, Lei He and Hai Zhao</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Leverage Financial News to Predict Stock Price Movements Using Word Embeddings and Deep Neural Networks. </span><em>Yangtuo Peng and Hui Jiang</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Multimodal Semantic Learning from Child-Directed Input. </span><em>Angeliki Lazaridou, Grzegorz Chrupała, Raquel Fernandez and Marco Baroni</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Online Multilingual Topic Models with Multi-Level Hyperpriors. </span><em>Kriste Krstovski, David Smith and Michael J. Kurtz</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Psycholinguistic Features for Deceptive Role Detection in Werewolf. </span><em>Codruta Girlea, Roxana Girju and Eyal Amir</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Recurrent Support Vector Machines For Slot Tagging In Spoken Language Understanding. </span><em>Yangyang Shi, Kaisheng Yao, Hu Chen, Dong Yu, Yi-Cheng Pan and Mei-Yuh Hwang</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">STransE: a novel embedding model of entities and relationships in knowledge bases. </span><em>Dat Quoc Nguyen, Kairit Sirts, Lizhen Qu and Mark Johnson</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Sequential Short-Text Classification with Recurrent and Convolutional Neural Networks. </span><em>Ji Young Lee and Franck Dernoncourt</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Shift-Reduce CCG Parsing using Neural Network Models. </span><em>Bharat Ram Ambati, Tejaswini Deoskar and Mark Steedman</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Structured Prediction with Output Embeddings for Semantic Image Annotation. </span><em>Ariadna Quattoni, Arnau Ramisa, Pranava Swaroop Madhyastha, Edgar Simo-Serra and Francesc Moreno-Noguer</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Symmetric Patterns and Coordinations: Fast and Enhanced Representations of Verbs and Adjectives. </span><em>Roy Schwartz, Roi Reichart and Ari Rappoport</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">The Sensitivity of Topic Coherence Evaluation to Topic Cardinality. </span><em>Jey Han Lau and Timothy Baldwin</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Transition-Based Syntactic Linearization with Lookahead Features. </span><em>Ratish Puduppully, Yue Zhang and Manish Shrivastava</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Vision and Feature Norms: Improving automatic feature norm learning through cross-modal maps. </span><em>Luana Bulat, Douwe Kiela and Stephen Clark</em>
+                    </td>
+                </tr>
+            </table>
+            <a href="#" class="poster-category btn btn--small">Student Research Workshop</a>
+            <table class="paper-table">
+                <tr>
+                    <td>
+                        <span class="paper-title">An End-to-end Approach to Learning Semantic Frames with Feedforward Neural Network. </span><em>Yukun Feng, Yipei Xu and Dong Yu</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Analogy-based detection of morphological and semantic relations with word embeddings: what works and what doesn't. </span><em>Anna Gladkova, Aleksandr Drozd and Satoshi Matsuoka</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Argument Identification in Chinese Editorials. </span><em>Marisa Chow</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Automatic tagging and retrieval of E-Commerce products based on visual features. </span><em>Vasu Sharma and Harish Karnick</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Combining syntactic patterns and Wikipedia's hierarchy of hyperlinks to extract relations: The case of meronymy extraction. </span><em>Debela Tesfaye Gemechu, Michael Zock and Solomon Teferra</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Data-driven Paraphrasing and Stylistic Harmonization. </span><em>Gerold Hintz</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Detecting 'Smart' Spammers on Social Network: A Topic Model Approach. </span><em>Linqing Liu, Yao Lu, Ye Luo, Renxian Zhang, Laurent Itti and Jianwei Lu</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Developing language technology tools and resources for a resource-poor language: Sindhi. </span><em>Raveesh Motlani</em>
+                    </td>
+                </tr>
+            </table>
+            <a href="#" class="poster-category btn btn--small">System Demonstrations</a>
+            <table class="paper-table">
+                <tr>
+                    <td>
+                        <span class="paper-title">Illinois Math Solver: Math Reasoning on the Web. </span><em>Subhro Roy and Dan Roth</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">LingoTurk: managing crowdsourced tasks for psycholinguistics. </span><em>Florian Pusse, Asad Sayeed and Vera Demberg</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Sentential Paraphrasing as Black-Box Machine Translation. </span><em>Courtney Napoles, Chris Callison-Burch and Matt Post</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">A Tag-based English Math Word Problem Solver with Understanding, Reasoning and Explanation. </span><em>Chao-Chun Liang, Kuang-Yi Hsu, Chien-Tsung Huang, Chung-Min Li, Shen-Yu Miao and Keh-Yih Su</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Cross-media Event Extraction and Recommendation. </span><em>Di Lu, Clare Voss, Fangbo Tao, Xiang Ren, Rachel Guan, Rostyslav Korolov, Tongtao Zhang, Dongang Wang, Hongzhi Li, Taylor Cassidy, Heng Ji, Shih-fu Chang, Jiawei Han, William Wallace, James Hendler, Mei Si and Lance Kaplan</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">SODA: Service Oriented Domain Adaptation Architecture for Microblog Categorization. </span><em>Himanshu Sharad Bhatt, Sandipan Dandapat, Peddamuthu Balaji, Shourya Roy, Sharmistha Jat and Deepali Semwal</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Lecture Translator - Speech translation framework for simultaneous lecture translation. </span><em>Markus Müller, Thai Son Nguyen, Jan Niehues, Eunah Cho, Bastian Krüger, Thanh-Le Ha, Kevin Kilgour, Matthias Sperber, Mohammed Mediani, Sebastian Stüker and Alex Waibel</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Zara The Supergirl: An Empathetic Personality Recognition System. </span><em>Pascale Fung, Anik Dey, Farhad Bin Siddique, Ruixi Lin, Yang Yang, Yan Wan and Ho Yin Ricky Chan</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">Kathaa: A Visual Programming Framework for NLP Applications. </span><em>Sharada Prasanna Mohanty, Nehal J Wani, Manish Srivastava and Dipti Misra Sharma</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="paper-title">"Why Should I Trust You?": Explaining the Predictions of Any Classifier. </span><em>Marco Ribeiro, Sameer Singh and Carlos Guestrin</em>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="session session-expandable session-plenary">
+        <a href="#" class="session-title">Social Event</a><br/>        
+        <span class="session-time">8:00 PM &ndash; 10:00 PM</span>
+        <div class="session-details">
+            <div class="session-abstract">
+                
+                <a href="#" class="info-button btn btn--info btn--small">Included in registration</a>
+
+                <p>Enjoy a fun evening under the stars!</p>
+
+                <p>Bring your Flower Power to our SoCal Beach Party! After the main dinner and Poster Session, join us on the Bayview Lawn adjacent to the Pavilion for desserts, coffee, tea, and drinks (cash bar). A Beach Boys style band will entertain you when you are not busy in the VW Bus Photo Booth, talking amongst your friends and colleagues, or playing with the beach balls.</p>
+
+                <p>Learn more about the social event <a class="info-link" target="_blank" href="http://naacl.org/naacl-hlt-2016/social_event.html">here</a>.</p>
+            </div>
         </div>
     </div>
 </div>
