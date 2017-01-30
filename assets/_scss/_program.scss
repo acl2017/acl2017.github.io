@@ -88,6 +88,8 @@ div.session {
     }
 
     .session-details {
+        overflow: hidden;
+        display: inline-block;
         ul {
             padding: 0px;
             list-style-type: none;
