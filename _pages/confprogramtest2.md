@@ -8,18 +8,19 @@ script: |
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $(".session-details").hide();
+            $('[class$="-details"]').hide();
 
             $('body').on('click', 'div.session-expandable', function(event) {
                 event.preventDefault();
-                $(this).children('.session-details').slideToggle();
-                $(this).children('.session-title').toggleClass('expanded');
+                $(this).children('[class$="-details"]').slideToggle();
+                $(this).children('#expander').toggleClass('expanded');
             });
+
 
             $('body').on('click', 'div.session-title', function(event) {
                 event.preventDefault();
-                $(this).children('.session-details').slideToggle();
-                $(this).children('.session-title').toggleClass('expanded');
+                $(this).children('[class$="-details"]').slideToggle();
+                $(this).children('#expander').toggleClass('expanded');
             });
 
             $('body').on('click', 'a.inline-location', function(event) {
@@ -27,10 +28,6 @@ script: |
             });
 
             $('body').on('click', 'a.session-location', function(event) {
-                return false;
-            });
-
-            $('body').on('click', 'a.poster-category', function(event) {
                 return false;
             });
 
@@ -50,9 +47,9 @@ script: |
 <div class="schedule">
     <div class="day" id="first-day">Sunday, June 12</div>
     <div class="session session-expandable session-tutorials" id="session-morning-tutorials">
-        <a href="#" class="session-title">Morning Tutorials</a><br/>        
-        <span class="session-time">9:30 AM &ndash; 12:30 PM</span>
-        <div class="session-details">
+        <div id="expander"></div><a href="#" class="session-title">Morning Tutorials</a><br/>
+        <span class="session-time">9:30 AM &ndash; 12:30 PM</span><br/>
+        <div class="tutorial-session-details">
             <ul>
                 <li>
                     <span class="tutorial-title">[T1] English Resource Semantics</span><br/>
@@ -73,9 +70,9 @@ script: |
         <span class="session-time">12:30 PM &ndash; 2:00 PM</span>
     </div>
     <div class="session session-expandable session-tutorials" id="session-afternoon-tutorials">
-        <a href="#" class="session-title">Afternoon Tutorials</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Afternoon Tutorials</a><br/>        
         <span class="session-time">2:00 PM &ndash; 5:00 PM</span>
-        <div class="session-details">
+        <div class="tutorial-session-details">
             <ul>
                 <li>
                     <span class="tutorial-title">[T4] Recent Progress in Deep Learning for NLP</span><br/>
@@ -91,7 +88,7 @@ script: |
             </ul>      
         </div>
     </div>
-    <div class="session session-tutorials">
+    <div class="session session-plenary">
         <span class="session-title">Welcome Reception</span><br/>        
         <span class="session-time">6:00 PM &ndash; 9:00 PM</span>
         <span class="session-location btn btn--location">Grande Foyer &amp; Terrace</span>
@@ -108,10 +105,10 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom</span>
     </div>
     <div class="session session-expandable session-plenary">
-        <a href="#" class="session-title">Invited Talk: "How can NLP help cure cancer?"</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Invited Talk: "How can NLP help cure cancer?"</a><br/>        
         <span class="session-time">6:00 PM &ndash; 9:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <div class="session-abstract">
 
                 <p>Cancer inflicts a heavy toll on our society. One out of seven women will be diagnosed with breast cancer during their lifetime, a fraction of them contributing to about 450,000 deaths annually worldwide. Despite billions of dollars invested in cancer research, our understanding of the disease, treatment, and prevention is still limited.</p>
@@ -129,10 +126,10 @@ script: |
         <span class="session-time">10:30 AM &ndash; 11:00 AM</span>
     </div>
     <div class="session session-expandable session-papers1" id="session-1a">
-        <a href="#" class="session-title">Machine Translation I</a><br/>
+        <div id="expander"></div><a href="#" class="session-title">Machine Translation I</a><br/>
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: David Chiang</td>
@@ -169,10 +166,10 @@ script: |
         </div>
     </div>
     <div class="session session-expandable session-papers2" id="session-1b">
-        <a href="#" class="session-title">Summarization</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Summarization</a><br/>        
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Fei Liu</td>
@@ -217,10 +214,10 @@ script: |
         </div> 
     </div>
     <div class="session session-expandable session-papers3" id="session-1c">
-        <a href="#" class="session-title">Dialog</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Dialog</a><br/>        
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Mari Ostendorf</td>
@@ -269,10 +266,10 @@ script: |
         <span class="session-time">12:30 PM &ndash; 2:00 PM</span>
     </div>    
     <div class="session session-expandable session-papers1" id="session-2a">
-        <a href="#" class="session-title">Language and Vision</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Language and Vision</a><br/>        
         <span class="session-time">2:00 PM &ndash; 3:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Meg Mitchell</td>
@@ -311,10 +308,10 @@ script: |
         </div>
     </div>
     <div class="session session-expandable session-papers2" id="session-2b">
-        <a href="#" class="session-title">Parsing</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Parsing</a><br/>        
         <span class="session-time">2:00 PM &ndash; 3:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Alexander Rush</td>
@@ -353,10 +350,10 @@ script: |
         </div>
     </div>
     <div class="session session-expandable session-papers3" id="session-2c">
-        <a href="#" class="session-title">Named Entity Recognition</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Named Entity Recognition</a><br/>        
         <span class="session-time">2:00 PM &ndash; 3:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Alessandro Moschitti</td>
@@ -399,10 +396,10 @@ script: |
         <span class="session-time">3:30 PM &ndash; 4:00 PM</span>
     </div>   
     <div class="session session-expandable session-papers1" id="session-3a">
-        <a href="#" class="session-title">Event Detection</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Event Detection</a><br/>        
         <span class="session-time">4:00 PM &ndash; 5:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Heng Ji</td>
@@ -429,10 +426,10 @@ script: |
         </div>
     </div>
     <div class="session session-expandable session-papers2" id="session-3b">
-        <a href="#" class="session-title">Language Models</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Language Models</a><br/>        
         <span class="session-time">4:00 PM &ndash; 5:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Chris Dyer</td>
@@ -459,10 +456,10 @@ script: |
         </div>
     </div>
     <div class="session session-expandable session-papers3" id="session-3c">
-        <a href="#" class="session-title">Non-literal Language</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Non-literal Language</a><br/>        
         <span class="session-time">4:00 PM &ndash; 5:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Marie-Catherine de Marneffe</td>
@@ -493,11 +490,10 @@ script: |
         <span class="session-time">5:00 PM &ndash; 5:15 PM</span>
     </div>  
     <div class="session session-expandable session-plenary">
-        <a href="#" class="session-title">One-Minute Madness</a><br/>        
-        <span class="session-time">5:15 PM &ndash; 6:00 PM</span>
-        <div class="session-details">
+        <div id="expander"></div><a href="#" class="session-title">One-Minute Madness</a><br/>        
+        <span class="session-time">5:15 PM &ndash; 6:00 PM</span><br/>
+        <div class="paper-session-details">
             <div class="session-abstract">
-                
                 <p>Chair: Joel Tetreault</p>
 
                 <p>Prior to the poster session, TACL and long-paper poster presenters will be given one minute each to pitch their paper. The poster session will immediately follow these presentations along with a buffet dinner.</p>
@@ -505,10 +501,10 @@ script: |
         </div>
     </div>
     <div class="session session-expandable session-plenary">
-    <a href="#" class="session-title">Posters, Demos & Dinner</a><br/>        
+    <div id="expander"></div><a href="#" class="session-title">Posters, Demos & Dinner</a><br/>        
         <span class="session-time">6:00 PM &ndash; 8:00 PM</span>
-        <div class="session-details">
-            <a href="#" class="poster-category btn btn--small">Main Conference</a>
+        <div class="paper-session-details">
+            <span class="info-button btn btn--small">Main Conference</span>
             <table class="paper-table">
                 <tr>
                     <td>
@@ -676,7 +672,7 @@ script: |
                     </td>
                 </tr>
             </table>
-            <a href="#" class="poster-category btn btn--small">Student Research Workshop</a>
+            <span class="info-button btn btn--small">Student Research Workshop</span>
             <table class="paper-table">
                 <tr>
                     <td>
@@ -719,7 +715,7 @@ script: |
                     </td>
                 </tr>
             </table>
-            <a href="#" class="poster-category btn btn--small">System Demonstrations</a>
+            <span class="info-button btn btn--small">System Demonstrations</span>
             <table class="paper-table">
                 <tr>
                     <td>
@@ -775,12 +771,12 @@ script: |
         </div>
     </div>
     <div class="session session-expandable session-plenary">
-        <a href="#" class="session-title">Social Event</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Social Event</a><br/>        
         <span class="session-time">8:00 PM &ndash; 10:00 PM</span>
-        <div class="session-details">
+        <div class="paper-session-details">
             <div class="session-abstract">
                 
-                <a href="#" class="info-button btn btn--info btn--small">Included in registration</a>
+                <span class="info-button btn btn--small">Included in registration</span>
 
                 <p>Enjoy a fun evening under the stars!</p>
 

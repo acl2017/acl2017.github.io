@@ -73,23 +73,33 @@ div.session {
         color: $text-color;
     }
 
-    /* &.session-expandable {
+    /*&.session-expandable {
         .session-title:after {
-            content: ' ↓';
+            content: ' +';
         }
 
         .session-title.expanded:after {
-            content: ' ↑';
+            content: ' -';
         }
-    } */
+    }*/
 
     .session-time {
+        margin-right: 5px;
+
+        @include breakpoint($medium) {
+            margin-right: 10px;
+        }
+
+        font-size: $type-size-5;
         font-style: italic;
     }
 
-    .session-details {
-        overflow: hidden;
-        display: inline-block;
+
+    .paper-session-details {
+        float: left;
+    }
+
+    .tutorial-session-details {
         ul {
             padding: 0px;
             list-style-type: none;
@@ -120,10 +130,35 @@ div.session {
 
     .session-location {
         float: right;
+        cursor: text;
+    }
+
+    .info-button {
+        cursor: text;
     }
 
     .session-people {
         font-size: $type-size-5;
+    }
+
+    #expander {
+      display: inline-block;
+
+      margin-right: 5px;
+      width: 10px;
+      height: 10px;
+      @include breakpoint($medium) {
+        margin-right: 10px;
+        width: 12px;
+        height: 12px;
+      }
+      background: linear-gradient(to bottom, transparent 35%, $dark-gray 35%, $dark-gray 65%,  transparent 65%),
+        linear-gradient(to right, transparent 35%, $dark-gray 35%, $dark-gray 65%, transparent 65%);
+      border: 1px solid $gray;
+    }
+
+    #expander.expanded {
+      background: linear-gradient(to bottom, transparent 35%, $dark-gray 35%, $dark-gray 65%,  transparent 65%);
     }
 
 }
