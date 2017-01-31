@@ -61,6 +61,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Morning Tutorials</a><br/>
         <span class="session-time">9:30 AM &ndash; 12:30 PM</span><br/>
         <div class="tutorial-session-details">
+            <hr class="detail-separator"/>
             <ul>
                 <li>
                     <span class="tutorial-title">[T1] English Resource Semantics</span><br/>
@@ -84,6 +85,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Afternoon Tutorials</a><br/>        
         <span class="session-time">2:00 PM &ndash; 5:00 PM</span>
         <div class="tutorial-session-details">
+            <hr class="detail-separator"/>
             <ul>
                 <li>
                     <span class="tutorial-title">[T4] Recent Progress in Deep Learning for NLP</span><br/>
@@ -121,6 +123,7 @@ script: |
         <span class="session-time">9:15 AM &ndash; 10:30 AM</span>
         <span class="session-location btn btn--location">Grande Ballroom</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <div class="session-abstract">
 
                 <p>Cancer inflicts a heavy toll on our society. One out of seven women will be diagnosed with breast cancer during their lifetime, a fraction of them contributing to about 450,000 deaths annually worldwide. Despite billions of dollars invested in cancer research, our understanding of the disease, treatment, and prevention is still limited.</p>
@@ -142,6 +145,7 @@ script: |
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: David Chiang</td>
@@ -182,6 +186,7 @@ script: |
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Fei Liu</td>
@@ -230,6 +235,7 @@ script: |
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Mari Ostendorf</td>
@@ -282,6 +288,7 @@ script: |
         <span class="session-time">2:00 PM &ndash; 3:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Meg Mitchell</td>
@@ -324,6 +331,7 @@ script: |
         <span class="session-time">2:00 PM &ndash; 3:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Alexander Rush</td>
@@ -366,6 +374,7 @@ script: |
         <span class="session-time">2:00 PM &ndash; 3:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Alessandro Moschitti</td>
@@ -412,6 +421,7 @@ script: |
         <span class="session-time">4:00 PM &ndash; 5:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Heng Ji</td>
@@ -442,6 +452,7 @@ script: |
         <span class="session-time">4:00 PM &ndash; 5:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Chris Dyer</td>
@@ -472,6 +483,7 @@ script: |
         <span class="session-time">4:00 PM &ndash; 5:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Marie-Catherine de Marneffe</td>
@@ -506,6 +518,7 @@ script: |
         <span class="session-time">5:15 PM &ndash; 6:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <div class="session-abstract">
                 <p>Chair: Joel Tetreault</p>
 
@@ -518,6 +531,7 @@ script: |
         <span class="session-time">6:00 PM &ndash; 8:00 PM</span>
         <span class="session-location btn btn--location">Pavilion</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <span class="info-button btn btn--small">Main Conference</span>
             <table class="paper-table">
                 <tr>
@@ -794,6 +808,7 @@ script: |
         <span class="session-time">9:00 AM &ndash; 10:30 AM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Mike Lewis</td>
@@ -836,6 +851,7 @@ script: |
         <span class="session-time">9:00 AM &ndash; 10:30 AM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Dilek Hakkani-Tur</td>
@@ -878,6 +894,7 @@ script: |
         <span class="session-time">9:00 AM &ndash; 10:30 AM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Jinho Choi</td>
@@ -924,6 +941,7 @@ script: |
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Lu Wang</td>
@@ -966,6 +984,7 @@ script: |
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Ellen Riloff</td>
@@ -1008,6 +1027,7 @@ script: |
         <span class="session-time">11:00 AM &ndash; 12:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Ray Mooney</td>
@@ -1053,6 +1073,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Panel Discussion: How Will Deep Learning Change Computational Linguistics?</a><br/>        
         <span class="session-time">1:15 PM &ndash; 2:15 PM</span><br/>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <div class="session-abstract">
                 <strong>Moderator</strong>: Jason Eisner<br/>
 
@@ -1078,6 +1099,7 @@ script: |
         <span class="session-time">2:30 PM &ndash; 3:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Colin Cherry</td>
@@ -1108,6 +1130,7 @@ script: |
         <span class="session-time">2:30 PM &ndash; 3:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Byron Wallace</td>
@@ -1138,6 +1161,7 @@ script: |
         <span class="session-time">2:30 PM &ndash; 3:30 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Dipanjan Das</td>
@@ -1172,6 +1196,7 @@ script: |
         <span class="session-time">4:00 PM &ndash; 5:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Marine Carpuat</td>
@@ -1208,6 +1233,7 @@ script: |
         <span class="session-time">4:00 PM &ndash; 5:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Vincent Ng</td>
@@ -1244,6 +1270,7 @@ script: |
         <span class="session-time">4:00 PM &ndash; 5:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Manaal Faruqui</td>
@@ -1278,6 +1305,7 @@ script: |
         <span class="session-time">5:15 PM &ndash; 6:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <div class="session-abstract">
                 <p>Chair: Joel Tetreault</p>
 
@@ -1290,6 +1318,7 @@ script: |
         <span class="session-time">6:00 PM &ndash; 8:00 PM</span>
         <span class="session-location btn btn--location">Pavilion</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <span class="info-button btn btn--small">Main Conference</span>
             <table class="paper-table">
                 <tr>
@@ -1566,6 +1595,7 @@ script: |
         <span class="session-time">8:00 PM &ndash; 10:00 PM</span>
         <span class="session-location btn btn--location">Bayview Lawn</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <div class="session-abstract">
                 
                 <span class="info-button btn btn--small">Included in registration</span>
@@ -1589,6 +1619,7 @@ script: |
         <span class="session-time">9:00 AM &ndash; 10:15 AM</span>
         <span class="session-location btn btn--location">Grande Ballroom</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <div class="session-abstract">
                 <p>Natural Language Generation (NLG) systems have different characteristics than other NLP systems, which effects how they are evaluated. In particular, it can be difficult to meaningfully evaluate NLG texts by comparing them against gold-standard reference texts, because (A) there are usually many possible texts which are acceptable to users and (B) some NLG systems produce texts which are better (as judged by human users) than human-written corpus texts. Partially because of these reasons, the NLG community places much more emphasis on human-based evaluations than most areas of NLP.</p>
 
@@ -1605,6 +1636,7 @@ script: |
         <span class="session-time">10:45 AM &ndash; 12:15 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Ed Hovy</td>
@@ -1647,6 +1679,7 @@ script: |
         <span class="session-time">10:45 AM &ndash; 12:15 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Mohit Bansal</td>
@@ -1689,6 +1722,7 @@ script: |
         <span class="session-time">10:45 AM &ndash; 12:15 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Hinrich Schütze</td>
@@ -1740,6 +1774,7 @@ script: |
         <span class="session-time">2:15 PM &ndash; 3:45 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Cristian Danescu-Niculescu-Mizil</td>
@@ -1782,6 +1817,7 @@ script: |
         <span class="session-time">2:15 PM &ndash; 3:45 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Steven Bethard</td>
@@ -1824,6 +1860,7 @@ script: |
         <span class="session-time">2:15 PM &ndash; 3:45 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
+            <hr class="detail-separator"/>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Jacob Eisenstein</td>
@@ -1870,7 +1907,7 @@ script: |
         <span class="session-time">4:15 PM &ndash; 5:45 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom</span><br/>
         <div class="paper-session-details">
-            
+            <hr class="detail-separator"/>            
             <div class="session-abstract"><p>Chair: Owen Rambow</p></div>
 
             <span class="info-button btn btn--small">Best Short Paper</span>
