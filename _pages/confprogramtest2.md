@@ -46,6 +46,10 @@ script: |
             $('body').on('click', 'table.paper-table', function(event) {
                 event.stopPropagation();
             });
+
+            $('body').on('click', '.tutorial-session-details ul', function(event) {
+                event.stopPropagation();
+            });
         });
     </script>
 ---
