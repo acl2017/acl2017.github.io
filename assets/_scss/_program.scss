@@ -6,6 +6,10 @@ div.schedule {
     max-width: 100%;
 }
 
+#hidden-program-table {
+    display: none;
+}
+
 div.day {
     @include span(12);
     padding: 0.5em;

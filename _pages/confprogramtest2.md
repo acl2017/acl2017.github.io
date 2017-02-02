@@ -18,29 +18,37 @@ script: |
             return dateObj.toLocaleDateString() + ' ' + padTime(dateObj.getHours()) + ':' + padTime(dateObj.getMinutes());
         }
 
+        function inferAMPM(time) {
+            var hour = time.split(':')[0]
+            return (hour == 12 || hour <= 7) ? ' PM' : ' AM';
+        }
+
         function generatePDFfromTable() {
+
             // clear the hidden table before starting
             clearHiddenProgramTable();
 
-            // now populate with the currently chosen papers
+            // now populate the hidden table with the currently 
+            // chosen papers
             populateHiddenProgramTable();
+
             var doc = new jsPDF('p', 'pt', 'letter');
             var res = doc.autoTableHtmlToJson(document.getElementById("hidden-program-table"));
             doc.autoTable(res.columns, res.data, {
                 theme: 'grid',
-                startY: 60, 
+                startY: 70, 
                 showHeader: false,
                 addPageContent: function (data) {
                     // HEADER
                     doc.setFontSize(16);
                     // doc.setTextColor(40);
                     doc.setFontStyle('normal');
-                    doc.text("ACL 2017 Schedule", (doc.internal.pageSize.width - (data.settings.margin.left*2))/2 - 10, 40);
+                    doc.text("ACL 2017 Schedule", (doc.internal.pageSize.width - (data.settings.margin.left*2))/2 - 30, 50);
 
                     // FOOTER
                     doc.setFont('courier');
                     doc.setFontSize(8);
-                    doc.text('Generated via http://acl2017.org/program', data.settings.margin.left, doc.internal.pageSize.height - 10);
+                    doc.text('(Generated via http://acl2017.org/program)', data.settings.margin.left, doc.internal.pageSize.height - 10);
                 },
                 styles: {
                     font: 'times',
@@ -59,10 +67,13 @@ script: |
                     if (cellClass == 'header' || cellClass == 'day-header') {
                         cell.width = 465;
                         cell.styles.columnWidth = 465;
-                        cell.textPos.x = (465 - data.settings.margin.left)/2;
                         cell.text = cell.text.join(" ");
+                        cell.textPos.x = 465/2;
                     }
-                    else if (cellClass == "skip") {
+                    if (cellClass == 'day-header') {
+                        cell.textPos.x = (465 - data.settings.margin.left)/2 + 60;
+                    }
+                    else if (cellClass == "skip" || cellClass == 'day-skip') {
                         doc.rect(data.settings.margin.left, data.row.y, data.table.width, 20, 'S');
                     }
                 },
@@ -76,6 +87,10 @@ script: |
                         cell.text = cell.text.join(" ");
                         cell.styles.fontStyle = 'bold';
                         cell.styles.fontSize = 12;
+                        cell.styles.fillColor = [189, 193, 196];
+                    }
+                    else if (cellClass== 'day-skip') {
+                        cell.styles.fillColor = [189, 193, 196];
                     }
                 },
                 bodyStyles: {
@@ -99,23 +114,17 @@ script: |
             var paperTimes = paperTimeText.split('-');
             var paperSlotStart = paperTimes[0];
             var paperSlotEnd = paperTimes[1];
-            var paperStartingHour = paperSlotStart.split(':')[0];
-            if (paperStartingHour == 12 || paperStartingHour <= 7) {
-                paperSlotAMPM = ' PM';
-            }
-            else {
-                paperSlotAMPM = ' AM';
-            }
+            var paperSlotAMPM = inferAMPM(paperSlotStart);
             var exactPaperStartingTime = sessionDay + ', 2017 ' + paperSlotStart + paperSlotAMPM;
             return [new Date(exactPaperStartingTime).toJSON(), paperSlotStart, paperSlotEnd, paperTitle, paperSession.attr('id')];
         }
 
         function makeDayHeaderRow(day) {
-            return '<tr><td class="skip"></td><td class="day-header">' + day + '</td></tr>';
+            return '<tr><td class="day-skip"></td><td class="day-header">' + day + '</td></tr>';
         }
 
         function makeSessionHeaderRow(start, title, location) {
-            return '<tr><td class="skip"></td><td class="header">' + start + ', ' + location + ' [' + title + ']' + '</td></tr>';
+            return '<tr><td class="skip"></td><td class="header">' + start + inferAMPM(start) + ', ' + location + ' [' + title + ']' + '</td></tr>';
         }
 
         function makePaperRow(start, end, title) {
@@ -123,7 +132,7 @@ script: |
         }
 
         function clearHiddenProgramTable() {
-            $('hidden-program-table tbody').html('');
+            $('#hidden-program-table tbody').html('');
         }
 
         function populateHiddenProgramTable() {
@@ -270,7 +279,7 @@ script: |
 ---
 {% include base_path %}
 
-<table id="hidden-program-table" style="display: none;">
+<table id="hidden-program-table">
     <thead>
         <tr><th></th><th></th></tr>
     </thead>
