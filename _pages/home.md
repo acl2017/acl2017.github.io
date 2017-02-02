@@ -11,10 +11,10 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**January 25, 2017**. The NSF has [awarded](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1714855&HistoricalAwards=false) $15,000 to the [Student Research Workshop](https://sites.google.com/site/aclsrw2017/) to help subsidize travel, conference, and housing costs for students participating in the workshop. 
+**February 1, 2017**. The final [call for papers](/calls/papers) has been posted. Changes include an [updated submission deadline](/calls/papers#important-dates) (4 extra hours!), [area chairs](/calls/papers/#area-chairs), and [an updated multiple submission policy](/calls/papers/#multiple-submission-policy).
 {: .notice--info}
 
-**January 17, 2017**. List of [accepted tutorials](/tutorials/) posted.
+**January 25, 2017**. The NSF has [awarded](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1714855&HistoricalAwards=false) $15,000 to the [Student Research Workshop](https://sites.google.com/site/aclsrw2017/) to help subsidize travel, conference, and housing costs for students participating in the workshop. 
 {: .notice--info}
 
 <h2>Welcome!</h2>

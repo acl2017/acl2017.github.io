@@ -22,7 +22,7 @@ areas (in alphabetical order):
 - Discourse and pragmatics
 - Document analysis including text categorization, topic models, and retrieval
 - Generation
-- Information extraction, text mining, and question answering
+- Information extraction and general NLP applications including but not limited to text mining, question answering, document analysis, text categorization, topic models, retrieval, and grammatical error correction
 - Machine learning
 - Machine translation
 - Multilinguality
@@ -63,7 +63,8 @@ areas (in alphabetical order):
     </tbody>
 </table>
 
-<h5>Note: All deadlines are 11:59PM Pacific Time.</h5>
+<h5>Note: All deadlines are 11:59PM GMT -12 (anywhere in the world).</h5>
+<h5>Changed from Pacific Standard Time, an extra 4 hours!</h5>
 
 ## Tutorials
 For tutorial submissions, please see the [call for tutorials](/calls/tutorials).
@@ -169,7 +170,7 @@ All submissions must in PDF format and must conform to the official style guidel
 
 ###  Multiple Submission Policy
 
-Papers that have been or will be submitted to other meetings or publications must indicate this at submission time, and must be withdrawn from the other venues if accepted by ACL 2017. Authors of papers accepted for presentation at ACL 2017 must notify the program chairs by the camera-ready deadline as to whether the paper will be presented. We will not accept for publication or presentation papers that overlap significantly in content or results with papers that will be (or have been) published elsewhere.
+Papers that have been or will be submitted to other meetings or publications must indicate this at submission time in an author-blinded cover page, and must be withdrawn from the other venues if accepted by ACL 2017. Authors of papers accepted for presentation at ACL 2017 must notify the program chairs by the camera-ready deadline as to whether the paper will be presented. We will not accept for publication or presentation papers that overlap significantly in content or results with papers that will be (or have been) published elsewhere.
 
 Preprint servers such as [arXiv.org](http://arXiv.org) and workshops that do not have published proceedings are not considered archival for purposes of submission. Authors must state in the online submission form the name of the workshop or preprint server and title of the non-archival version. The version submitted for review should be suitably anonymized and not contain references to the prior non-archival version. Reviewers will be told: "The author(s) have notified us that there exists a non-archival previous version of this paper with significantly overlapping text. We have approved submission under these circumstances, but to preserve the spirit of blind review, the current submission does not reference the non-archival version." Reviewers are free to do what they like with this information.
 
@@ -190,3 +191,23 @@ register for ACL 2017 by the early registration deadline.
   Technology) and Min-Yen Kan (National University of Singapore)
 - Email: [acl17pcchairs@gmail.com](mailto:acl17pcchairs@gmail.com)
 
+## Area Chairs
+
+- Biomedical: Aurélie Névéol, Karin Verspoor
+- Cognitive Modeling and Psycholinguistics: Roger Levy, Anders Søgaard
+- Dialogue and Interactive Systems: Ron Artstein, Raquel Fernandez, Oliver Lemon
+- Discourse and Pragmatics: Yangfeng Ji, Sujian Li, Bonnie Webber
+- Information Extraction and NLP Applications: Eugene Agichtein, Chia-Hui Chang, Jing Jiang, Sarvnaz Karimi, Zornitsa Kozareva, Kang Liu, Tie-Yan Liu, Mausam, Alessandro Moschitti, Smaranda Muresan
+- Machine Learning: Grzegorz Chrupała, Amir Globerson, Tommi Jaakkola, Sujith Ravi, William Yang Wang
+- Machine Translation: Yang Liu, Minh-Thang Luong, Haitao Mi, Graham Neubig, Deyi Xiong
+- Multidisciplinary: Michael Piotrowski, Karën Fort
+- Multilinguality: Omri Abend, Mona Diab
+- Phonology, Morphology and Word Segmentation: Jason Eisner, Hinrich Schütze
+- Resources and Evaluation: Sophie Rosset, Wajdi Zaghouani
+- Semantics: Manaal Faruqui, Hannaneh Hajishirzi, Anna Korhonen, Preslav Nakov, Mehroosh Sadrzadeh, Aline Villavicencio
+- Sentiment Analysis and Opinion Mining: Alexandra Balahur, Lun-Wei Ku, Saif M Mohammad
+- Social Media: Zhiyuan Liu, Shimei Pan, Svitlana Volkova
+- Speech: Chiori Hori, Chia-ying Lee
+- Summarization and Generation: Wenjie Li, Alexander M Rush, Verena Rieser
+- Tagging, Chunking, Syntax and Parsing: Emily Pitler, Barbara Plank, Yue Zhang, Hai Zhao
+- Vision, Robotics and Grounding: Mohit Bansal, Nate Kushman
