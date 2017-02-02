@@ -7,26 +7,43 @@ sidebar: false
 script: |
     <script type="text/javascript">
 
-        timeToSessionLocationHash = {};
-        chosenTimeToPaperHash = {};
+        sessionInfoHash = {};
+        chosenPapersHash = {};
 
-        function padString(str) {
+        function padTime(str) {
             return String('0' + str).slice(-2);
         }
 
         function formatDate(dateObj) {
-            return dateObj.toLocaleDateString() + ' ' + padString(dateObj.getHours()) + ':' + padString(dateObj.getMinutes());
+            return dateObj.toLocaleDateString() + ' ' + padTime(dateObj.getHours()) + ':' + padTime(dateObj.getMinutes());
         }
 
-        function generatePDF2() {
-            var doc = new jsPDF('p', 'pt');
-            var res = doc.autoTableHtmlToJson(document.getElementById("foo"));
+        function generatePDFfromTable() {
+            // clear the hidden table before starting
+            clearHiddenProgramTable();
+
+            // now populate with the currently chosen papers
+            populateHiddenProgramTable();
+            var doc = new jsPDF('p', 'pt', 'letter');
+            var res = doc.autoTableHtmlToJson(document.getElementById("hidden-program-table"));
             doc.autoTable(res.columns, res.data, {
                 theme: 'grid',
                 startY: 60, 
                 showHeader: false,
+                addPageContent: function (data) {
+                    // HEADER
+                    doc.setFontSize(16);
+                    // doc.setTextColor(40);
+                    doc.setFontStyle('normal');
+                    doc.text("ACL 2017 Schedule", (doc.internal.pageSize.width - (data.settings.margin.left*2))/2 - 10, 40);
+
+                    // FOOTER
+                    doc.setFont('courier');
+                    doc.setFontSize(8);
+                    doc.text('Generated via http://acl2017.org/program', data.settings.margin.left, doc.internal.pageSize.height - 10);
+                },
                 styles: {
-                    font: 'helvetica',
+                    font: 'times',
                     overflow: 'linebreak'
                 },
                 columnStyles: {0: 
@@ -34,15 +51,15 @@ script: |
                         fontStyle: 'bold',
                     },
                     1: {
-                        columnWidth: 460
+                        columnWidth: 465
                     }
                 },
                 drawCell: function(cell, data) {
                     var cellClass = cell.raw.className;
-                    if (cellClass == 'header') {
-                        cell.width = 460;
-                        cell.styles.columnWidth = 460;
-                        cell.textPos.x = (460 - data.settings.margin.left)/2;
+                    if (cellClass == 'header' || cellClass == 'day-header') {
+                        cell.width = 465;
+                        cell.styles.columnWidth = 465;
+                        cell.textPos.x = (465 - data.settings.margin.left)/2;
                         cell.text = cell.text.join(" ");
                     }
                     else if (cellClass == "skip") {
@@ -55,63 +72,128 @@ script: |
                         cell.text = cell.text.join(" ");
                         cell.styles.fontStyle = 'bold';
                     }
+                    else if (cellClass == 'day-header') {
+                        cell.text = cell.text.join(" ");
+                        cell.styles.fontStyle = 'bold';
+                        cell.styles.fontSize = 12;
+                    }
                 },
                 bodyStyles: {
-                    fontSize: 8
+                    fontSize: 10
                 }
             });
             doc.output('dataurlnewwindow');
         }
 
-        function generatePDF() {
-            var selectedTimeSlots = Object.keys(chosenTimeToPaperHash).sort();
-            var doc = new jsPDF();
-            doc.setFont("helvetica");
-            doc.setFontSize(8);
-            var linesToWrite = [];
-            for (var i=0; i<selectedTimeSlots.length; i++) {
-                var timeSlot = selectedTimeSlots[i];
-                var paperTitle = chosenTimeToPaperHash[timeSlot];
-                var titleAndLocation = timeToSessionLocationHash[timeSlot];
-                var lineToWrite = formatDate(new Date(timeSlot)) + ' ' + paperTitle + ' ' + titleAndLocation[0] + ' ' + titleAndLocation[1];
-                linesToWrite.push(lineToWrite);
-            }
-            doc.text(linesToWrite, 10, 10);
-            doc.output('dataurlnewwindow');
-        }
-
         function getPaperInfoFromTime(paperTimeObj) {
+
+            // get the paper session and day
             var paperSession = paperTimeObj.parents('.session');
-            var sessionTitle =  paperSession.children('.session-title').text().trim();
-            var sessionLocation = paperSession.children('span.session-location').text().trim();
             var sessionDay = paperSession.prevAll('.day:first').text().trim();
+
+            // get the paper title
+            var paperTitle = paperTimeObj.siblings('td').text().trim();
+
+            // get the paper slot and the starting and ending times
             var paperTimeText = paperTimeObj.text().trim();
-            var paperStartingTime = paperTimeText.split('-')[0];
-            var paperStartingHour = paperStartingTime.split(':')[0];
+            var paperTimes = paperTimeText.split('-');
+            var paperSlotStart = paperTimes[0];
+            var paperSlotEnd = paperTimes[1];
+            var paperStartingHour = paperSlotStart.split(':')[0];
             if (paperStartingHour == 12 || paperStartingHour <= 7) {
-                paperStartingTime += ' PM';
+                paperSlotAMPM = ' PM';
             }
             else {
-                paperStartingTime += ' AM';
+                paperSlotAMPM = ' AM';
             }
-            var exactPaperTime = sessionDay + ', 2017 ' + paperStartingTime;
-            return [new Date(exactPaperTime), sessionTitle, sessionLocation];
+            var exactPaperStartingTime = sessionDay + ', 2017 ' + paperSlotStart + paperSlotAMPM;
+            return [new Date(exactPaperStartingTime).toJSON(), paperSlotStart, paperSlotEnd, paperTitle, paperSession.attr('id')];
+        }
+
+        function makeDayHeaderRow(day) {
+            return '<tr><td class="skip"></td><td class="day-header">' + day + '</td></tr>';
+        }
+
+        function makeSessionHeaderRow(start, title, location) {
+            return '<tr><td class="skip"></td><td class="header">' + start + ', ' + location + ' [' + title + ']' + '</td></tr>';
+        }
+
+        function makePaperRow(start, end, title) {
+            return '<tr><td>' + start + '–' + end + '</td><td>' + title + '</td></tr>';
+        }
+
+        function clearHiddenProgramTable() {
+            $('hidden-program-table tbody').html('');
+        }
+
+        function populateHiddenProgramTable() {
+
+            // sort all of the chosen papers by starting times
+            var chosenPaperTimes = Object.keys(chosenPapersHash);
+            chosenPaperTimes.sort(function(a, b) { return new Date(a) - new Date(b) });
+
+            // now iterate over these sorted papers and create the
+            // rows for the hidden table that will be used to 
+            // generate the PDF
+            var prevSession = null;
+            var prevDay = null;
+            var prevSessionLocation = null;
+            var latestEndingTime;
+            var output = [];
+            for(var i=0; i<chosenPaperTimes.length; i++) {
+                var paper = chosenPapersHash[chosenPaperTimes[i]];
+                if (sessionInfoHash[paper.session].day == prevDay) {
+                    // if the day is the same, then we check the session
+                    // if the session is the same, then we just add:
+                    // - the paper info itself
+                    if (paper.session == prevSession) {
+                        output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
+                    }
+                    // if the day is the same but the session is not,
+                    // then we need to add:
+                    // - a new session header
+                    // - the paper info itself
+                    else {
+                        var session = sessionInfoHash[paper.session];
+                        output.push(makeSessionHeaderRow(paper.start, session.title, session.location));
+                        output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
+                    }
+                }
+                // if the day is NOT the same, we need to add:
+                // - a new day header
+                // - a new session header
+                // - the paper info itself
+                else {
+                    var session = sessionInfoHash[paper.session];
+                    output.push(makeDayHeaderRow(session.day));
+                    output.push(makeSessionHeaderRow(paper.start, session.title, session.location));
+                    output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
+                }
+                prevSession = paper.session;
+                prevDay = sessionInfoHash[paper.session].day;
+            }
+            $('#hidden-program-table tbody').append(output);
         }
 
         $(document).ready(function() {
             
-            // pre-populate the array that hashes paper time slots
-            // to the title of the session they are in and the location
-            // they are at
-            $('td#paper-time').each(function() {
-                var paperInfo = getPaperInfoFromTime($(this));
-                var exactPaperTimeObject = paperInfo[0];
-                var sessionTitle = paperInfo[1];
-                var sessionLocation = paperInfo[2];
-                var titleAndLocation = new Array(sessionTitle, sessionLocation);
-                timeToSessionLocationHash[exactPaperTimeObject.toJSON()] = titleAndLocation;
+            // get all the paper sessions and save the day and location
+            // for each of the in a hash
+            var paperSessions = $("[id|='session']").filter(function() { 
+                return this.id.match(/session-\d[a-z]/) 
+            });
+            $(paperSessions).each(function() {
+                var sessionTitle = $(this).children('.session-title').text().trim();
+                var sessionLocation = $(this).children('span.session-location').text().trim();
+                var sessionDay = $(this).prevAll('.day:first').text().trim();
+                var session = {};
+                session.title = sessionTitle;
+                session.location = sessionLocation;
+                session.day = sessionDay;
+                sessionInfoHash[$(this).attr('id')] = session;
             });
 
+            // hide all of the session details when starting up
             $('[class$="-details"]').hide();
 
             $('body').on('click', 'div.session-expandable', function(event) {
@@ -159,14 +241,19 @@ script: |
                 event.preventDefault();
                 var paperTimeObj = $(this).children('td#paper-time')
                 var paperTime = paperTimeObj.text().trim();
-                var paperTitle = $(this).children('td#paper-time').siblings('td').text().trim();
-                var paperSession = paperTimeObj.parents('.session')
                 var paperInfo = getPaperInfoFromTime(paperTimeObj);
-                var exactPaperTimeKey = paperInfo[0].toJSON();
-                if (exactPaperTimeKey in chosenTimeToPaperHash) {
-                    if (chosenTimeToPaperHash[exactPaperTimeKey] == paperTitle) {
+                var paperObject = {};
+                var exactStartingTime = paperInfo[0];
+                paperObject.start = paperInfo[1];
+                paperObject.end = paperInfo[2];
+                var paperTitle = paperInfo[3];
+                paperObject.session = paperInfo[4];
+                paperObject.exactStartingTime = exactStartingTime;
+                paperObject.title = paperTitle;
+                if (exactStartingTime in chosenPapersHash) {
+                    if (chosenPapersHash[exactStartingTime].title == paperTitle) {
                         $(this).removeClass('selected');
-                        delete chosenTimeToPaperHash[exactPaperTimeKey];
+                        delete chosenPapersHash[exactStartingTime];
                     }
                     else {
                         alert('You have already selected a paper in this time slot.');
@@ -174,45 +261,23 @@ script: |
                     }
                 }
                 else {
-                    chosenTimeToPaperHash[exactPaperTimeKey] = paperTitle;
+                    chosenPapersHash[exactStartingTime] = paperObject;
                     $(this).addClass('selected');
                 }
             });
-
         });
     </script>
 ---
 {% include base_path %}
 
-<table id="foo">
-  <tr><th></th><th></th></tr>
-  <tr>
-    <td class="skip"></td>
-    <td class="header">11:30 – 12:10, Dialog, Grande Ballroom C</td>
-  </tr>
-  <tr>
-    <td width="20%">11:30–11:50</td>
-    <td>Efficient Structured Inference for Transition-Based Parsing with Neural Networks and Error States. Ashish Vaswani and Kenji Sagae</td>
-  </tr>
-  <tr>
-    <td>11:50–12:10</td>
-    <td>Efficient Structured Inference for Transition-Based Parsing with Neural Networks and Error States. Ashish Vaswani and Kenji Sagae</td>
-  </tr>
-  <tr>
-    <td class="skip"></td>
-    <td class="header">12:30 – 2:10, Semantics, Grande Ballroom A</td>
-  </tr>
-  <tr>
-    <td>11:30–11:50</td>
-    <td>Efficient Structured Inference for Transition-Based Parsing with Neural Networks and Error States. Ashish Vaswani and Kenji Sagae</td>
-  </tr>
-  <tr>
-    <td>11:30–11:50</td>
-    <td>Efficient Structured Inference for Transition-Based Parsing with Neural Networks and Error States. Ashish Vaswani and Kenji Sagae</td>
-  </tr>
+<table id="hidden-program-table" style="display: none;">
+    <thead>
+        <tr><th></th><th></th></tr>
+    </thead>
+    <tbody></tbody>
 </table>
 
-<a href="#" onclick="generatePDF2();" class="btn">Generate PDF</a>
+<a href="#" onclick="generatePDFfromTable();" class="btn">Generate PDF</a>
 <div class="schedule">
     <div class="day" id="first-day">Sunday, July 30</div>
     <div class="session session-expandable session-tutorials" id="session-morning-tutorials">
