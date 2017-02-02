@@ -73,15 +73,6 @@ div.session {
         color: $text-color;
     }
 
-    /*&.session-expandable {
-        .session-title:after {
-            content: ' +';
-        }
-
-        .session-title.expanded:after {
-            content: ' -';
-        }
-    }*/
 
     .session-time {
         margin-right: 5px;
@@ -148,6 +139,15 @@ div.session {
 
     .session-people {
         font-size: $type-size-5;
+    }
+
+    tr#paper {
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+    tr#paper.selected {
+        background-color: $lighter-gray2;
     }
 
     #expander {
