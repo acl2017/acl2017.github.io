@@ -5,10 +5,13 @@ excerpt: "ACL 2017 conference program."
 permalink: /confprogramtest2
 sidebar: false
 script: |
+    <script>vex.defaultOptions.className = 'vex-theme-wireframe'</script>
     <script type="text/javascript">
 
         sessionInfoHash = {};
         chosenPapersHash = {};
+        plenarySessionHash = {};
+        includePlenaryInSchedule = true;
 
         function padTime(str) {
             return String('0' + str).slice(-2);
@@ -20,7 +23,7 @@ script: |
 
         function inferAMPM(time) {
             var hour = time.split(':')[0]
-            return (hour == 12 || hour <= 7) ? ' PM' : ' AM';
+            return (hour == 12 || hour <= 6) ? ' PM' : ' AM';
         }
 
         function generatePDFfromTable() {
@@ -35,17 +38,22 @@ script: |
             var doc = new jsPDF('p', 'pt', 'letter');
             var res = doc.autoTableHtmlToJson(document.getElementById("hidden-program-table"));
             doc.autoTable(res.columns, res.data, {
+                pagebreak: 'avoid',
+                avoidRowSplit: true,
                 theme: 'grid',
                 startY: 70, 
                 showHeader: false,
                 addPageContent: function (data) {
-                    // HEADER
-                    doc.setFontSize(16);
-                    // doc.setTextColor(40);
-                    doc.setFontStyle('normal');
-                    doc.text("ACL 2017 Schedule", (doc.internal.pageSize.width - (data.settings.margin.left*2))/2 - 30, 50);
+                    // HEADER only on the first page
+                    var pageNumber =doc.internal.getCurrentPageInfo().pageNumber;
 
-                    // FOOTER
+                    if (pageNumber == 1) {
+                        doc.setFontSize(16);
+                        doc.setFontStyle('normal');
+                        doc.text("ACL 2017 Schedule", (doc.internal.pageSize.width - (data.settings.margin.left*2))/2 - 30, 50);
+                    }
+
+                    // FOOTER on each page
                     doc.setFont('courier');
                     doc.setFontSize(8);
                     doc.text('(Generated via http://acl2017.org/program)', data.settings.margin.left, doc.internal.pageSize.height - 10);
@@ -67,35 +75,45 @@ script: |
                     if (cellClass == 'header' || cellClass == 'day-header') {
                         cell.width = 465;
                         cell.styles.columnWidth = 465;
-                        cell.text = cell.text.join(" ");
-                        cell.textPos.x = 465/2;
+                        cell.text = doc.splitTextToSize(cell.text.join(' '), 465, {fontSize: 12});
+                        // cell.text = cell.text.join(" ");
+                        // cell.textPos.x = 465/2 - 30;
                     }
                     if (cellClass == 'day-header') {
                         cell.textPos.x = (465 - data.settings.margin.left)/2 + 60;
                     }
-                    else if (cellClass == "skip" || cellClass == 'day-skip') {
+                    if (cellClass == 'plenary-header') {
+                        cell.width = 465;
+                        cell.styles.columnWidth = 465;
+                        cell.text = doc.splitTextToSize(cell.text.join(' '), 465, {fontSize: 12});
+                        // cell.text = cell.text.join(" ");
+                    }
+                    if (cellClass == "skip" || cellClass == 'day-skip') {
                         doc.rect(data.settings.margin.left, data.row.y, data.table.width, 20, 'S');
                     }
                 },
                 createdCell: function(cell, data) {
                     var cellClass = cell.raw.className;
                     if (cellClass == 'header') {
-                        cell.text = cell.text.join(" ");
-                        cell.styles.fontStyle = 'bold';
+                        cell.styles.fontStyle = 'italic';
+                        cell.styles.fontSize = 12;
                     }
                     else if (cellClass == 'day-header') {
-                        cell.text = cell.text.join(" ");
                         cell.styles.fontStyle = 'bold';
                         cell.styles.fontSize = 12;
                         cell.styles.fillColor = [189, 193, 196];
                     }
+                    else if (cellClass == 'plenary-header') {
+                        cell.styles.fontStyle = 'italic';
+                        cell.styles.fontSize = 12;
+                    }
                     else if (cellClass== 'day-skip') {
                         cell.styles.fillColor = [189, 193, 196];
                     }
+                    else {
+                        cell.styles.fontSize = 10;
+                    }
                 },
-                bodyStyles: {
-                    fontSize: 10
-                }
             });
             doc.output('dataurlnewwindow');
         }
@@ -123,9 +141,20 @@ script: |
             return '<tr><td class="day-skip"></td><td class="day-header">' + day + '</td></tr>';
         }
 
-        function makeSessionHeaderRow(start, title, location) {
-            return '<tr><td class="skip"></td><td class="header">' + start + inferAMPM(start) + ', ' + location + ' [' + title + ']' + '</td></tr>';
+        function makePaperSessionHeaderRow(start, title, location) {
+                return '<tr><td class="skip"></td><td class="header">' + start + inferAMPM(start) + ', ' + location + ' [' + title + ']' + '</td></tr>';
         }
+
+        function makePlenarySessionHeaderRow(start, title, location) {
+            if (location == '') {
+                ans = '<tr><td class="skip"></td><td class="plenary-header">' + start + ', ' + title + '</td></tr>';
+            }
+            else {
+                ans =  '<tr><td class="skip"></td><td class="plenary-header">' + start + ', ' + location + ', ' + title  + '</td></tr>';
+            }
+            return ans;
+        }
+
 
         function makePaperRow(start, end, title) {
             return '<tr><td>' + start + '–' + end + '</td><td>' + title + '</td></tr>';
@@ -137,9 +166,11 @@ script: |
 
         function populateHiddenProgramTable() {
 
-            // sort all of the chosen papers by starting times
-            var chosenPaperTimes = Object.keys(chosenPapersHash);
-            chosenPaperTimes.sort(function(a, b) { return new Date(a) - new Date(b) });
+            // if we are including plenary information in the PDF
+            // then sort its keys too and merge the two sets of
+            // keys together before sorting
+            var sortedPaperTimes = includePlenaryInSchedule ? Object.keys(chosenPapersHash).concat(Object.keys(plenarySessionHash)) : Object.keys(chosenPapersHash);
+            sortedPaperTimes.sort(function(a, b) { return new Date(a) - new Date(b) });
 
             // now iterate over these sorted papers and create the
             // rows for the hidden table that will be used to 
@@ -149,43 +180,69 @@ script: |
             var prevSessionLocation = null;
             var latestEndingTime;
             var output = [];
-            for(var i=0; i<chosenPaperTimes.length; i++) {
-                var paper = chosenPapersHash[chosenPaperTimes[i]];
-                if (sessionInfoHash[paper.session].day == prevDay) {
-                    // if the day is the same, then we check the session
-                    // if the session is the same, then we just add:
-                    // - the paper info itself
-                    if (paper.session == prevSession) {
-                        output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
+            for(var i=0; i<sortedPaperTimes.length; i++) {
+                var key = sortedPaperTimes[i];
+                // if it's a plenary session
+                if (key in plenarySessionHash) {
+                    var plenarySession = plenarySessionHash[key]
+                    if (plenarySession.day == prevDay) {
+                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.title, plenarySession.location));
                     }
-                    // if the day is the same but the session is not,
-                    // then we need to add:
+                    else {
+                        output.push(makeDayHeaderRow(plenarySession.day));
+                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.title, plenarySession.location));
+                    }
+                    prevSession = plenarySession.id;
+                    prevDay = plenarySession.day;
+                }
+                // if it's a paper ...
+                else if (key in chosenPapersHash) {
+
+                    var paper = chosenPapersHash[key];
+                    if (sessionInfoHash[paper.session].day == prevDay) {
+                        // if the day is the same, then we check the session
+                        // if the session is the same, then we just add:
+                        // - the paper info itself
+                        if (paper.session == prevSession) {
+                            output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
+                        }
+                        // if the day is the same but the session is not,
+                        // then we need to add:
+                        // - a new session header
+                        // - the paper info itself
+                        else {
+                            var session = sessionInfoHash[paper.session];
+                            output.push(makePaperSessionHeaderRow(paper.start, session.title, session.location));
+                            output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
+                        }
+                    }
+                    // if the day is NOT the same, we need to add:
+                    // - a new day header
                     // - a new session header
                     // - the paper info itself
                     else {
                         var session = sessionInfoHash[paper.session];
-                        output.push(makeSessionHeaderRow(paper.start, session.title, session.location));
+                        output.push(makeDayHeaderRow(session.day));
+                        output.push(makePaperSessionHeaderRow(paper.start, session.title, session.location));
                         output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
                     }
+                    prevSession = paper.session;
+                    prevDay = sessionInfoHash[paper.session].day;
                 }
-                // if the day is NOT the same, we need to add:
-                // - a new day header
-                // - a new session header
-                // - the paper info itself
-                else {
-                    var session = sessionInfoHash[paper.session];
-                    output.push(makeDayHeaderRow(session.day));
-                    output.push(makeSessionHeaderRow(paper.start, session.title, session.location));
-                    output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
-                }
-                prevSession = paper.session;
-                prevDay = sessionInfoHash[paper.session].day;
             }
+
+            // append the output to the hidden table
             $('#hidden-program-table tbody').append(output);
         }
 
         $(document).ready(function() {
             
+            // all the Remove All buttons are disabled on startup
+            $('.session-deselector').addClass('disabled');
+
+            // the include plenary checkbox is checked on startup
+            $('input#includePlenaryCheckBox').prop('checked', true);
+
             // get all the paper sessions and save the day and location
             // for each of the in a hash
             var paperSessions = $("[id|='session']").filter(function() { 
@@ -202,19 +259,115 @@ script: |
                 sessionInfoHash[$(this).attr('id')] = session;
             });
 
+            // also save the plenary session info in another hash since we
+            // may need to add this to the pdf. Use the exact starting
+            // time as the hash key
+             $('.session-plenary').each(function() {
+                var sessionTitle = $(this).children('.session-title').text().trim();
+                var sessionLocation = $(this).children('span.session-location').text().trim();
+                var sessionTimeText = $(this).children('span.session-time').text().trim();
+                var sessionTimes = sessionTimeText.match(/\d+:\d+ [AP]M/g)
+                var sessionDay = $(this).prevAll('.day:first').text().trim();
+                var sessionStart = sessionTimes[0];
+                var sessionEnd = sessionTimes[1];
+                var exactSessionStartingTime = sessionDay + ', 2017 ' + sessionStart;
+                var session = {};
+                session.title = sessionTitle;
+                session.location = sessionLocation;
+                session.day = sessionDay;
+                session.start = sessionStart;
+                session.end = sessionEnd;
+                session.id = $(this).attr('id');
+                plenarySessionHash[new Date(exactSessionStartingTime).toJSON()] = session;
+             });
+
+            $('body').on('click', 'a.session-selector', function(event) {
+
+                // if we are disabled, do nothing
+                if ($(this).hasClass('disabled')) {
+                    return false;
+                }
+
+                // if we are choosing the entire session, then basically
+                // "click" on all of the not-selected papers
+                var papersTriggered = [];
+                var sessionPapers = $(this).siblings('table.paper-table').find('tr#paper');
+                var unselectedPapers = sessionPapers.not('.selected');
+                unselectedPapers.trigger('click', [papersTriggered, true]);
+
+                // now find out how many papers are selected after the trigger
+                var selectedPapers = sessionPapers.filter('.selected');
+
+                // if we triggered no papers
+                if (papersTriggered.length == 0) { 
+                    // if there were already papers selected and we just 
+                    // didn't add to them, then the message should be 
+                    // about additional papers
+                    if (unselectedPapers.length < sessionPapers.length) {
+                        vex.dialog.alert('No additional papers were chosen since you have conflicts for those time slots.')
+                    }
+                    // if there were no papers selected when we clicked
+                    // then the message should be about all papers
+                    else {
+                        vex.dialog.alert('No papers were chosen since you have conflicts for all the time slots.')
+                    }
+                }
+                // if we trigged some papers
+                else {
+                    // if there were already papers selected and we added
+                    // some new ones (but not all) to them, then the message 
+                    // should be about additional papers
+                    if ((unselectedPapers.length < sessionPapers.length) && (papersTriggered.length + selectedPapers.length < sessionPapers.length)) {
+                        var verb = papersTriggered.length == 1 ? 'was' : 'were';
+                        vex.dialog.alert('Only ' +  papersTriggered.length +  ' additional paper(s) ' + verb + ' chosen. You have conflicts for the remaining time slots.')
+                    }
+                    // if there were no papers selected and we added 
+                    // some new ones (but not all), then the message
+                    // should be about all newly added papers, not
+                    // just the additional ones
+                    if ((unselectedPapers.length == sessionPapers.length) && (papersTriggered.length + selectedPapers.length < sessionPapers.length)) {
+                        var verb = selectedPapers.length == 1 ? 'was' : 'were';
+                        vex.dialog.alert('Only ' +  selectedPapers.length +  ' paper(s) ' + verb + ' chosen. You have conflicts for the remaining time slots.')
+                    }
+                }
+
+                // this is not really a link
+                event.preventDefault();
+                return false;
+            });
+
+            $('body').on('click', 'a.session-deselector', function(event) {
+
+                // if we are disabled, do nothing
+                if ($(this).hasClass('disabled')) {
+                    return false;
+                }
+
+                // otherwise, if we are removing the entire session, then
+                // basically "click" on all of the already selected papers
+                var papersTriggered = [];
+                var sessionPapers = $(this).siblings('table.paper-table').find('tr#paper');
+                var selectedPapers = sessionPapers.filter('.selected');
+                selectedPapers.trigger('click', [papersTriggered, true]);
+
+                // this is not really a link
+                event.preventDefault();
+                return false;
+            });
+
             // hide all of the session details when starting up
             $('[class$="-details"]').hide();
 
             $('body').on('click', 'div.session-expandable', function(event) {
                 event.preventDefault();
-                $(this).children('[class$="-details"]').slideToggle();
+                $(this).children('[class$="-details"]').slideToggle(300);
                 $(this).children('#expander').toggleClass('expanded');
             });
 
 
             $('body').on('click', 'div.session-title', function(event) {
                 event.preventDefault();
-                $(this).children('[class$="-details"]').slideToggle();
+                $(this).children('[class$="-details"]').slideToggle(300);
                 $(this).children('#expander').toggleClass('expanded');
             });
 
@@ -222,7 +375,7 @@ script: |
                 return false;
             });
 
-            $('body').on('click', 'a.session-location', function(event) {
+            $('body').on('click', 'span.session-location', function(event) {
                 return false;
             });
 
@@ -246,7 +399,37 @@ script: |
                 event.stopPropagation();
             });
 
-            $('body').on('click', 'table.paper-table tr#paper ', function(event) {
+            $('body').on('click', 'div.paper-session-details', function(event) {
+                event.stopPropagation();
+            });
+
+            $('body').on('click', 'input#includePlenaryCheckBox', function(event) {
+                    includePlenaryInSchedule = $(this).prop('checked');
+            });
+
+            $('body').on('click', 'a#generatePDFButton', function(event) {
+                // if we haven't chosen any papers, show a warning
+                // if we aren't including any plenary sessions then just raise 
+                // an alert since there's nothing to put in the PDF. 
+                // Otherwise, confirm that the user just wants the plenary
+                // sessions.
+                // if (Object.keys(chosenPapersHash).length == 0) {
+                //     if (includePlenaryInSchedule) {
+                //         vex.dialog.confirm({
+                //             message: "The PDF will contain only the plenary sessions since no papers were chosen. Proceed?",
+                //             callback: function (value) {
+                                
+                //             }
+                //         });
+                //     }
+                // }
+                // else {
+                generatePDFfromTable();
+                // }
+                event.preventDefault();
+            });
+
+            $('body').on('click', 'table.paper-table tr#paper ', function(event, papersTriggered, fromSession) {
                 event.preventDefault();
                 var paperTimeObj = $(this).children('td#paper-time')
                 var paperTime = paperTimeObj.text().trim();
@@ -260,24 +443,58 @@ script: |
                 paperObject.exactStartingTime = exactStartingTime;
                 paperObject.title = paperTitle;
                 if (exactStartingTime in chosenPapersHash) {
+
+                    // if we are unselecting an already selected paper
                     if (chosenPapersHash[exactStartingTime].title == paperTitle) {
                         $(this).removeClass('selected');
                         delete chosenPapersHash[exactStartingTime];
+
+                        // we also need to enable the choose button
+                        $(this).parents('table.paper-table').siblings('.session-selector').removeClass('disabled');
+
+                        // we also need to disable the remove button if this 
+                        // was the only paper selected in the session
+                        var selectedPapers = $(this).siblings('tr#paper').filter('.selected');
+                        if (selectedPapers.length == 0) {
+                            $(this).parents('table.paper-table').siblings('.session-deselector').addClass('disabled');
+                        }
                     }
                     else {
-                        alert('You have already selected a paper in this time slot.');
+                        if (!fromSession) {
+                            vex.dialog.alert('You have already chosen a paper for this time slot.');
+                        }
                         return false;
                     }
                 }
                 else {
+                    // if we are selecting a previously unselected paper
                     chosenPapersHash[exactStartingTime] = paperObject;
                     $(this).addClass('selected');
+
+                    // we also need to enable the remove button
+                    $(this).parents('table.paper-table').siblings('.session-deselector').removeClass('disabled');
+
+                    if (fromSession) {
+                        papersTriggered.push(1);
+                    }
+
+                    // and disable the choose button if all the papers
+                    // are now selected anyway
+                    var sessionPapers = $(this).siblings('tr#paper');
+                    var selectedPapers = sessionPapers.filter('.selected');
+                    if (sessionPapers.length == selectedPapers.length) {
+                        $(this).parents('table.paper-table').siblings('.session-selector').addClass('disabled');
+                    }
+
                 }
             });
         });
     </script>
 ---
 {% include base_path %}
+
+<link rel="stylesheet" href="/assets/css/vex.css" />
+<link rel="stylesheet" href="/assets/css/vex-theme-wireframe.css" />
 
 <table id="hidden-program-table">
     <thead>
@@ -286,7 +503,6 @@ script: |
     <tbody></tbody>
 </table>
 
-<a href="#" onclick="generatePDFfromTable();" class="btn">Generate PDF</a>
 <div class="schedule">
     <div class="day" id="first-day">Sunday, July 30</div>
     <div class="session session-expandable session-tutorials" id="session-morning-tutorials">
@@ -309,7 +525,7 @@ script: |
             </ul>      
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-lunch-1">
         <span class="session-title">Lunch</span><br/>        
         <span class="session-time">12:30 PM &ndash; 2:00 PM</span>
     </div>
@@ -333,17 +549,17 @@ script: |
             </ul>      
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-reception">
         <span class="session-title">Welcome Reception</span><br/>        
         <span class="session-time">6:00 PM &ndash; 9:00 PM</span>
         <span class="session-location btn btn--location">Grande Foyer &amp; Terrace</span>
     </div>
     <div class="day" id="second-day">Monday, July 31</div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-breakfast-1">
         <span class="session-title">Breakfast</span><br/>        
         <span class="session-time">7:30 AM &ndash; 8:45 AM</span>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-welcome">
         <span class="session-title">Welcome</span><br/>        
         <span class="session-people">Kevin Knight, Ani Nenkova, Owen Rambow</span><br/>
         <span class="session-time">9:00 AM &ndash; 9:15 AM</span>
@@ -357,7 +573,6 @@ script: |
         <div class="paper-session-details">
             <hr class="detail-separator"/>
             <div class="session-abstract">
-
                 <p>Cancer inflicts a heavy toll on our society. One out of seven women will be diagnosed with breast cancer during their lifetime, a fraction of them contributing to about 450,000 deaths annually worldwide. Despite billions of dollars invested in cancer research, our understanding of the disease, treatment, and prevention is still limited.</p>
 
                 <p>Majority of cancer research today takes place in biology and medicine. Computer science plays a minor supporting role in this process if at all. In this talk, I hope to convince you that NLP as a field has a chance to play a significant role in this battle. Indeed, free-form text remains the primary means by which physicians record their observations and clinical findings. Unfortunately, this rich source of textual information is severely underutilized by predictive models in oncology. Current models rely primarily only on structured data.</p>
@@ -368,7 +583,7 @@ script: |
             </div>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-break1">
         <span class="session-title">Break</span><br/>        
         <span class="session-time">10:30 AM &ndash; 11:00 AM</span>
     </div>
@@ -378,6 +593,9 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-1a-selector">
+            Choose All</a>
+            <a href="#" class="session-deselector" id="session-1a-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: David Chiang</td>
@@ -419,6 +637,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-1b-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-1b-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Fei Liu</td>
@@ -468,6 +688,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-1c-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-1c-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Mari Ostendorf</td>
@@ -511,7 +733,7 @@ script: |
             </table>
         </div> 
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-lunch-2">
         <span class="session-title">Lunch</span><br/>        
         <span class="session-time">12:30 PM &ndash; 2:00 PM</span>
     </div>    
@@ -521,6 +743,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-2a-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-2a-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Meg Mitchell</td>
@@ -564,6 +788,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-2b-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-2b-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Alexander Rush</td>
@@ -607,6 +833,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-2c-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-2c-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Alessandro Moschitti</td>
@@ -644,7 +872,7 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-break-2">
         <span class="session-title">Break</span><br/>        
         <span class="session-time">3:30 PM &ndash; 4:00 PM</span>
     </div>   
@@ -654,6 +882,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-3a-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-3a-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Heng Ji</td>
@@ -685,6 +915,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-3b-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-3b-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Chris Dyer</td>
@@ -716,6 +948,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-3c-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-3c-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Marie-Catherine de Marneffe</td>
@@ -741,11 +975,11 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-break-3">
         <span class="session-title">Break</span><br/>        
         <span class="session-time">5:00 PM &ndash; 5:15 PM</span>
     </div>  
-    <div class="session session-expandable session-plenary">
+    <div class="session session-expandable session-plenary" id="session-omm-1">
         <div id="expander"></div><a href="#" class="session-title">One-Minute Madness</a><br/>
         <span class="session-time">5:15 PM &ndash; 6:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom</span>
@@ -758,7 +992,7 @@ script: |
             </div>
         </div>
     </div>
-    <div class="session session-expandable session-plenary" id="session-first-poster">
+    <div class="session session-expandable session-plenary" id="session-poster-1">
         <div id="expander"></div><a href="#" class="session-title">Posters, Demos &amp; Dinner</a><br/>        
         <span class="session-time">6:00 PM &ndash; 8:00 PM</span>
         <span class="session-location btn btn--location">Pavilion</span>
@@ -766,167 +1000,167 @@ script: |
             <hr class="detail-separator"/>
             <span class="info-button btn btn--small">Main Conference</span>
             <table class="paper-table">
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">A Recurrent Neural Networks Approach for Estimating the Quality of Machine Translation Output. </span><em>Hyun Kim and Jong-Hyeok Lee</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Agreement on Target-bidirectional Neural Machine Translation. </span><em>Lemao Liu, Masao Utiyama, Andrew Finch and Eiichiro Sumita</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">An Unsupervised Model of Orthographic Variation for Historical Document Transcription. </span><em>Dan Garrette and Hannah Alpert-Abrams</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Bidirectional RNN for Medical Event Detection in Electronic Health Records. </span><em>Abhyuday Jagannatha and Hong Yu</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Breaking the Closed World Assumption in Text Classification. </span><em>Geli Fei and Bing Liu</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Building Chinese Affective Resources in Valence-Arousal Dimensions. </span><em>Liang-Chih Yu, Lung-Hao Lee, Shuai Hao, Jin Wang, Yunchao He, Jun Hu, K. Robert Lai and Xuejie Zhang</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Combining Recurrent and Convolutional Neural Networks for Relation Classification. </span><em>Ngoc Thang Vu, Heike Adel, Pankaj Gupta and Hinrich Schütze</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Conversational Markers of Constructive Discussions. </span><em>Vlad Niculae and Cristian Danescu-Niculescu-Mizil</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Cross-lingual Wikification Using Multilingual Embeddings. </span><em>Chen-Tse Tsai and Dan Roth</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Deconstructing Complex Search Tasks: a Bayesian Nonparametric Approach for Extracting Sub-tasks. </span><em>Rishabh Mehrotra, Prasanta Bhattacharya and Emine Yilmaz</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Expectation-Regulated Neural Model for Event Mention Extraction. </span><em>Ching-Yun Chang, Zhiyang Teng and Yue Zhang</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Grammatical error correction using neural machine translation. </span><em>Zheng Yuan and Ted Briscoe</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Improved Neural Network-based Multi-label Classification with Better Initialization Leveraging Label Co-occurrence. </span><em>Gakuto Kurata, Bing Xiang and Bowen Zhou</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Improving event prediction by representing script participants. </span><em>Simon Ahrendt and Vera Demberg</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Individual Variation in the Choice of Referential Form. </span><em>Thiago Castro Ferreira, Emiel Krahmer and Sander Wubben</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Inferring Psycholinguistic Properties of Words. </span><em>Gustavo Paetzold and Lucia Specia</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Intra-Topic Variability Normalization based on Linear Projection for Topic Classification. </span><em>Quan Liu, Wu Guo, Zhen-Hua Ling, Hui Jiang and Yu Hu</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Joint Learning Templates and Slots for Event Schema Induction. </span><em>Lei Sha, Sujian Li, Baobao Chang, Zhifang Sui and Zhifang Sui</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Large-scale Multitask Learning for Machine Translation Quality Estimation. </span><em>Kashif Shah and Lucia Specia</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Learning Distributed Word Representations For Bidirectional LSTM Recurrent Neural Network. </span><em>Peilu Wang, Yao Qian, Frank Soong, Lei He and Hai Zhao</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Leverage Financial News to Predict Stock Price Movements Using Word Embeddings and Deep Neural Networks. </span><em>Yangtuo Peng and Hui Jiang</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Multimodal Semantic Learning from Child-Directed Input. </span><em>Angeliki Lazaridou, Grzegorz Chrupała, Raquel Fernandez and Marco Baroni</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Online Multilingual Topic Models with Multi-Level Hyperpriors. </span><em>Kriste Krstovski, David Smith and Michael J. Kurtz</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Psycholinguistic Features for Deceptive Role Detection in Werewolf. </span><em>Codruta Girlea, Roxana Girju and Eyal Amir</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Recurrent Support Vector Machines For Slot Tagging In Spoken Language Understanding. </span><em>Yangyang Shi, Kaisheng Yao, Hu Chen, Dong Yu, Yi-Cheng Pan and Mei-Yuh Hwang</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">STransE: a novel embedding model of entities and relationships in knowledge bases. </span><em>Dat Quoc Nguyen, Kairit Sirts, Lizhen Qu and Mark Johnson</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Sequential Short-Text Classification with Recurrent and Convolutional Neural Networks. </span><em>Ji Young Lee and Franck Dernoncourt</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Shift-Reduce CCG Parsing using Neural Network Models. </span><em>Bharat Ram Ambati, Tejaswini Deoskar and Mark Steedman</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Structured Prediction with Output Embeddings for Semantic Image Annotation. </span><em>Ariadna Quattoni, Arnau Ramisa, Pranava Swaroop Madhyastha, Edgar Simo-Serra and Francesc Moreno-Noguer</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Symmetric Patterns and Coordinations: Fast and Enhanced Representations of Verbs and Adjectives. </span><em>Roy Schwartz, Roi Reichart and Ari Rappoport</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">The Sensitivity of Topic Coherence Evaluation to Topic Cardinality. </span><em>Jey Han Lau and Timothy Baldwin</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Transition-Based Syntactic Linearization with Lookahead Features. </span><em>Ratish Puduppully, Yue Zhang and Manish Shrivastava</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Vision and Feature Norms: Improving automatic feature norm learning through cross-modal maps. </span><em>Luana Bulat, Douwe Kiela and Stephen Clark</em>
                     </td>
@@ -934,42 +1168,42 @@ script: |
             </table>
             <span class="info-button btn btn--small">Student Research Workshop</span>
             <table class="paper-table">
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">An End-to-end Approach to Learning Semantic Frames with Feedforward Neural Network. </span><em>Yukun Feng, Yipei Xu and Dong Yu</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Analogy-based detection of morphological and semantic relations with word embeddings: what works and what doesn't. </span><em>Anna Gladkova, Aleksandr Drozd and Satoshi Matsuoka</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Argument Identification in Chinese Editorials. </span><em>Marisa Chow</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Automatic tagging and retrieval of E-Commerce products based on visual features. </span><em>Vasu Sharma and Harish Karnick</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Combining syntactic patterns and Wikipedia's hierarchy of hyperlinks to extract relations: The case of meronymy extraction. </span><em>Debela Tesfaye Gemechu, Michael Zock and Solomon Teferra</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Data-driven Paraphrasing and Stylistic Harmonization. </span><em>Gerold Hintz</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Detecting 'Smart' Spammers on Social Network: A Topic Model Approach. </span><em>Linqing Liu, Yao Lu, Ye Luo, Renxian Zhang, Laurent Itti and Jianwei Lu</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Developing language technology tools and resources for a resource-poor language: Sindhi. </span><em>Raveesh Motlani</em>
                     </td>
@@ -977,52 +1211,52 @@ script: |
             </table>
             <span class="info-button btn btn--small">System Demonstrations</span>
             <table class="paper-table">
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">rstWeb - A Browser-based Annotation Interface for Rhetorical Structure Theory and Discourse Relations. </span><em>Amir Zeldes</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Instant Feedback for Increasing the Presence of Solutions in Peer Reviews. </span><em>Huy Nguyen, Wenting Xiong and Diane Litman</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Farasa: A Fast and Furious Segmenter for Arabic. </span><em>Ahmed Abdelali, Kareem Darwish, Nadir Durrani and Hamdy Mubarak</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">iAppraise: A Manual Machine Translation Evaluation Environment Supporting Eye-tracking. </span><em>Ahmed Abdelali, Nadir Durrani and Francisco Guzmán</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Linguistica 5: Unsupervised Learning of Linguistic Structure. </span><em>Jackson Lee and John Goldsmith</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">TransRead: Designing a Bilingual Reading Experience with Machine Translation Technologies. </span><em>François Yvon, Yong Xu, Marianna Apidianaki, Clément Pillias and Pierre Cubaud</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">New Dimensions in Testimony Demonstration. </span><em>Ron Artstein, Alesia Gainer, Kallirroi Georgila, Anton Leuski, Ari Shapiro and David Traum</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">ArgRewrite: A Web-based Revision Assistant for Argumentative Writings. </span><em>Fan Zhang, Rebecca Hwa, Diane Litman and Homa B. Hashemi</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Scaling Up Word Clustering. </span><em>Jon Dehdari, Liling Tan and Josef van Genabith</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Task Completion Platform: A self-serve multi-domain goal oriented dialogue platform. </span><em>Paul Crook, Alex Marin, Vipul Agarwal, Khushboo Aggarwal, Tasos Anastasakos, Ravi Bikkula, Daniel Boies, Asli Celikyilmaz, Senthilkumar Chandramohan, Zhaleh Feizollahi, Roman Holenstein, Minwoo Jeong, Omar Khan, Young-Bum Kim, Elizabeth Krawczyk, Xiaohu Liu, Danko Panic, Vasiliy Radostev, Nikhil Ramesh, Jean-Phillipe Robichaud, Alexandre Rochette, Logan Stromberg and Ruhi Sarikaya</em>
                     </td>
@@ -1031,7 +1265,7 @@ script: |
         </div>
     </div>
     <div class="day" id="third-day">Tuesday, August 1</div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-breakfast-2">
         <span class="session-title">Breakfast</span><br/>        
         <span class="session-time">7:30 AM &ndash; 8:45 AM</span>
     </div>
@@ -1041,6 +1275,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-4a-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-4a-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Mike Lewis</td>
@@ -1084,6 +1320,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-4b-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-4b-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Dilek Hakkani-Tur</td>
@@ -1127,6 +1365,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-4c-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-4c-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Jinho Choi</td>
@@ -1164,7 +1404,7 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-break-4">
         <span class="session-title">Break</span><br/>        
         <span class="session-time">10:30 AM &ndash; 11:00 AM</span>
     </div>
@@ -1174,6 +1414,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-5a-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-5a-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Lu Wang</td>
@@ -1217,6 +1459,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-5b-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-5b-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Ellen Riloff</td>
@@ -1260,6 +1504,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-5c-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-5c-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Ray Mooney</td>
@@ -1297,7 +1543,7 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-lunch-3">
         <span class="session-title">Lunch</span><br/>        
         <span class="session-time">12:30 PM &ndash; 1:15 PM</span>
     </div>
@@ -1332,6 +1578,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-6a-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-6a-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Colin Cherry</td>
@@ -1363,6 +1611,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-6b-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-6b-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Byron Wallace</td>
@@ -1394,6 +1644,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-6c-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-6c-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Dipanjan Das</td>
@@ -1419,7 +1671,7 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-break-5">
         <span class="session-title">Break</span><br/>        
         <span class="session-time">3:30 PM &ndash; 4:00 PM</span>
     </div>
@@ -1429,6 +1681,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-7a-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-7a-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Marine Carpuat</td>
@@ -1466,6 +1720,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-7b-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-7b-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Vincent Ng</td>
@@ -1503,6 +1759,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-7c-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-7c-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Manaal Faruqui</td>
@@ -1528,11 +1786,11 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-break-6">
         <span class="session-title">Break</span><br/>        
         <span class="session-time">5:00 PM &ndash; 5:15 PM</span>
     </div>
-    <div class="session session-expandable session-plenary">
+    <div class="session session-expandable session-plenary" id="session-omm-2">
         <div id="expander"></div><a href="#" class="session-title">One-Minute Madness</a><br/>
         <span class="session-time">5:15 PM &ndash; 6:00 PM</span>
         <span class="session-location btn btn--location">Grande Ballroom</span>
@@ -1545,7 +1803,7 @@ script: |
             </div>
         </div>
     </div>
-    <div class="session session-expandable session-plenary" id="session-second-poster">
+    <div class="session session-expandable session-plenary" id="session-poster-2">
         <div id="expander"></div><a href="#" class="session-title">Posters, Demos &amp; Dinner</a><br/>        
         <span class="session-time">6:00 PM &ndash; 8:00 PM</span>
         <span class="session-location btn btn--location">Pavilion</span>
@@ -1553,167 +1811,167 @@ script: |
             <hr class="detail-separator"/>
             <span class="info-button btn btn--small">Main Conference</span>
             <table class="paper-table">
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Assessing Relative Sentence Complexity using an Incremental CCG Parser. </span><em>Bharat Ram Ambati, Siva Reddy and Mark Steedman</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Automatic Prediction of Linguistic Decline in Writings of Subjects with Degenerative Dementia. </span><em>Davy Weissenbacher, Travis A. Johnson, Laura Wojtulewicz, Amylou Dueck, Dona Locke, Richard Caselli and Graciela Gonzalez</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Automatically Inferring Implicit Properties in Similes. </span><em>Ashequl Qadir, Ellen Riloff and Marilyn Walker</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">BIRA: Improved Predictive Exchange Word Clustering. </span><em>Jon Dehdari, Liling Tan and Josef van Genabith</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Bootstrapping Translation Detection and Sentence Extraction from Comparable Corpora. </span><em>Kriste Krstovski and David Smith</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Capturing Semantic Similarity for Entity Linking with Convolutional Neural Networks. </span><em>Matthew Francis-Landau, Greg Durrett and Dan Klein</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Consensus Maximization Fusion of Probabilistic Information Extractors. </span><em>Miguel Rodriguez, Sean Goldberg and Daisy Zhe Wang</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Cross-genre Event Extraction with Knowledge Enrichment. </span><em>Hao Li and Heng Ji</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Deep Lexical Segmentation and Syntactic Parsing in the Easy-First Dependency Framework. </span><em>Matthieu Constant, Joseph Le Roux and Nadi Tomeh</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Discriminative Reranking for Grammatical Error Correction with Statistical Machine Translation. </span><em>Tomoya Mizumoto and Yuji Matsumoto</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Emergent: a novel data-set for stance classification. </span><em>William Ferreira and Andreas Vlachos</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Eyes Don't Lie: Predicting Machine Translation Quality Using Eye Movement. </span><em>Hassan Sajjad, Francisco Guzmán, Nadir Durrani, Ahmed Abdelali, Houda Bouamor, Irina Temnikova and Stephan Vogel</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Fast and Easy Short Answer Grading with High Accuracy. </span><em>Md Arafat Sultan, Cristobal Salazar and Tamara Sumner</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Frustratingly Easy Cross-Lingual Transfer for Transition-Based Dependency Parsing. </span><em>Ophélie Lacroix, Lauriane Aufrant, Guillaume Wisniewski and François Yvon</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Geolocation for Twitter: Timing Matters. </span><em>Mark Dredze, Miles Osborne and Prabhanjan Kambadur</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Incorporating Side Information into Recurrent Neural Network Language Models. </span><em>Cong Duy Vu Hoang, Trevor Cohn and Gholamreza Haffari</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Integrating Morphological Desegmentation into Phrase-based Decoding. </span><em>Mohammad Salameh, Colin Cherry and Grzegorz Kondrak</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Interlocking Phrases in Phrase-based Statistical Machine Translation. </span><em>Ye Kyaw Thu, Andrew Finch and Eiichiro Sumita</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">K-Embeddings: Learning Conceptual Embeddings for Words using Context. </span><em>Thuy Vu and D. Stott Parker</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Learning Composition Models for Phrase Embeddings. </span><em>Mo Yu and Mark Dredze</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Learning a POS tagger for AAVE-like language. </span><em>Anna Jørgensen, Dirk Hovy and Anders Søgaard</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Learning to Recognize Ancillary Information for Automatic Paraphrase Identification. </span><em>Simone Filice and Alessandro Moschitti</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">MAWPS: A Math Word Problem Repository. </span><em>Rik Koncel-Kedziorski, Subhro Roy, Aida Amini, Nate Kushman and Hannaneh Hajishirzi</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Making Dependency Labeling Simple, Fast and Accurate. </span><em>Tianxiao Shen, Tao Lei and Regina Barzilay</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">PIC a Different Word: A Simple Model for Lexical Substitution in Context. </span><em>Stephen Roller and Katrin Erk</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">PRIMT: A Pick-Revise Framework for Interactive Machine Translation. </span><em>Shanbo Cheng, Shujian Huang, Huadong Chen, Xin-Yu Dai and Jiajun Chen</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Patterns of Wisdom: Discourse-Level Style in Multi-Sentence Quotations. </span><em>Kyle Booten and Marti A. Hearst</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Right-truncatable Neural Word Embeddings. </span><em>Jun Suzuki and Masaaki Nagata</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Sentiment Composition of Words with Opposing Polarities. </span><em>Svetlana Kiritchenko and Saif Mohammad</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Simple, Fast Noise-Contrastive Estimation for Large RNN Vocabularies. </span><em>Barret Zoph, Ashish Vaswani, Jonathan May and Kevin Knight</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Sparse Bilingual Word Representations for Cross-lingual Lexical Entailment. </span><em>Yogarshi Vyas and Marine Carpuat</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">The Instantiation Discourse Relation: A Corpus Analysis of Its Properties and Improved Detection. </span><em>Junyi Jessy Li and Ani Nenkova</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Visual Storytelling. </span><em>Ting-Hao Huang, Francis Ferraro, Nasrin Mostafazadeh, Ishan Misra, Jacob Devlin, Aishwarya Agrawal, Ross Girshick, Xiaodong He, Pushmeet Kohli, Dhruv Batra, Larry Zitnick, Devi Parikh, Lucy Vanderwende, Michel Galley and Margaret Mitchell</em>
                     </td>
@@ -1721,47 +1979,47 @@ script: |
             </table>
             <span class="info-button btn btn--small">Student Research Workshop</span>
             <table class="paper-table">
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Effects of Communicative Pressures on Novice L2 Learners' Use of Optional Formal Devices. </span><em>Yoav Binoun, Francesca Delogu, Clayton Greenberg, Mindaugas Mozuraitis and Matthew Crocker</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Explicit Argument Identification for Discourse Parsing In Hindi: A Hybrid Pipeline. </span><em>Rohit Jain and Dipti Sharma</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Exploring Fine-Grained Emotion Detection in Tweets. </span><em>Jasy Suet Yan Liew and Howard Turtle</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Extraction of Bilingual Technical Terms for Chinese-Japanese Patent Translation. </span><em>Wei Yang, Jinghui Yan and Yves Lepage</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Hateful Symbols or Hateful People? Predictive Features for Hate Speech Detection on Twitter. </span><em>Zeerak Waseem and Dirk Hovy</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Non-decreasing Sub-modular Function for Comprehensible Summarization. </span><em>Litton JKurisinkel, Pruthwik Mishra, Vigneshwaran Muralidaran, Vasudeva Varma and Dipti Misra Sharma</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Phylogenetic simulations over constraint-based grammar formalisms. </span><em>Andrew Lamont and Jonathan Washington</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Question Answering over Knowledge Base using Weakly Supervised Memory Networks. </span><em>Sarthak Jain</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Using Related Languages to Enhance Statistical Language Models. </span><em>Anna Currey, Alina Karakanta and Jon Dehdari</em>
                     </td>
@@ -1769,52 +2027,52 @@ script: |
             </table>
             <span class="info-button btn btn--small">System Demonstrations</span>
             <table class="paper-table">
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Illinois Math Solver: Math Reasoning on the Web. </span><em>Subhro Roy and Dan Roth</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">LingoTurk: managing crowdsourced tasks for psycholinguistics. </span><em>Florian Pusse, Asad Sayeed and Vera Demberg</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Sentential Paraphrasing as Black-Box Machine Translation. </span><em>Courtney Napoles, Chris Callison-Burch and Matt Post</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">A Tag-based English Math Word Problem Solver with Understanding, Reasoning and Explanation. </span><em>Chao-Chun Liang, Kuang-Yi Hsu, Chien-Tsung Huang, Chung-Min Li, Shen-Yu Miao and Keh-Yih Su</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Cross-media Event Extraction and Recommendation. </span><em>Di Lu, Clare Voss, Fangbo Tao, Xiang Ren, Rachel Guan, Rostyslav Korolov, Tongtao Zhang, Dongang Wang, Hongzhi Li, Taylor Cassidy, Heng Ji, Shih-fu Chang, Jiawei Han, William Wallace, James Hendler, Mei Si and Lance Kaplan</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">SODA: Service Oriented Domain Adaptation Architecture for Microblog Categorization. </span><em>Himanshu Sharad Bhatt, Sandipan Dandapat, Peddamuthu Balaji, Shourya Roy, Sharmistha Jat and Deepali Semwal</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Lecture Translator - Speech translation framework for simultaneous lecture translation. </span><em>Markus Müller, Thai Son Nguyen, Jan Niehues, Eunah Cho, Bastian Krüger, Thanh-Le Ha, Kevin Kilgour, Matthias Sperber, Mohammed Mediani, Sebastian Stüker and Alex Waibel</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Zara The Supergirl: An Empathetic Personality Recognition System. </span><em>Pascale Fung, Anik Dey, Farhad Bin Siddique, Ruixi Lin, Yang Yang, Yan Wan and Ho Yin Ricky Chan</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">Kathaa: A Visual Programming Framework for NLP Applications. </span><em>Sharada Prasanna Mohanty, Nehal J Wani, Manish Srivastava and Dipti Misra Sharma</em>
                     </td>
                 </tr>
-                <tr id="paper">
+                <tr id="poster">
                     <td>
                         <span class="paper-title">"Why Should I Trust You?": Explaining the Predictions of Any Classifier. </span><em>Marco Ribeiro, Sameer Singh and Carlos Guestrin</em>
                     </td>
@@ -1822,7 +2080,7 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-expandable session-plenary">
+    <div class="session session-expandable session-plenary" id="session-social">
         <div id="expander"></div><a href="#" class="session-title">Social Event</a><br/>        
         <span class="session-time">8:00 PM &ndash; 10:00 PM</span>
         <span class="session-location btn btn--location">Bayview Lawn</span>
@@ -1841,7 +2099,7 @@ script: |
         </div>
     </div>
     <div class="day" id="fourth-day">Wednesday, August 2</div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-breakfast-3">
         <span class="session-title">Breakfast</span><br/>        
         <span class="session-time">7:30 AM &ndash; 8:45 AM</span>
     </div>
@@ -1859,7 +2117,7 @@ script: |
             </div>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-break-7">
         <span class="session-title">Break</span><br/>        
         <span class="session-time">10:15 AM &ndash; 10:45 AM</span>
     </div>
@@ -1869,6 +2127,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-8a-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-8a-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Ed Hovy</td>
@@ -1912,6 +2172,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-8b-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-8b-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Mohit Bansal</td>
@@ -1955,6 +2217,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-8c-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-8c-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Hinrich Schütze</td>
@@ -1992,7 +2256,7 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-lunch-4">
         <span class="session-title">Lunch</span><br/>        
         <span class="session-time">12:15 PM &ndash; 1:00 PM</span>
     </div>
@@ -2007,6 +2271,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom A</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-9a-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-9a-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Cristian Danescu-Niculescu-Mizil</td>
@@ -2050,6 +2316,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom B</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-9b-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-9b-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Steven Bethard</td>
@@ -2093,6 +2361,8 @@ script: |
         <span class="session-location btn btn--location">Grande Ballroom C</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-9c-selector">Choose All</a>
+            <a href="#" class="session-deselector" id="session-9c-deselector">Remove All</a>
             <table class="paper-table">
                 <tr>
                     <td colspan="2">Chair: Jacob Eisenstein</td>
@@ -2130,7 +2400,7 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-break-8">
         <span class="session-title">Break</span><br/>        
         <span class="session-time">3:45 PM &ndash; 4:15 PM</span>
     </div>
@@ -2168,10 +2438,16 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-plenary">
+    <div class="session session-plenary" id="session-closing">
         <span class="session-title">Closing Remarks</span><br/>        
         <span class="session-time">5:35 PM &ndash; 5:45 PM</span>
     </div>
-
+    <div id="generatePDFForm">
+        <div id="formContainer">
+            <input type="checkbox" id="includePlenaryCheckBox" value="second_checkbox"/>&nbsp;&nbsp;<span id="checkBoxLabel">Include plenary sessions in schedule</span>
+            <br/>
+            <a href="#" id="generatePDFButton" class="btn btn--info btn--large">Generate PDF</a>
+        </div>
+    </div>
 </div>
 

@@ -6,8 +6,87 @@ div.schedule {
     max-width: 100%;
 }
 
+div#generatePDF {
+    padding-top: 20px;
+    max-width: 100%;
+}
+
 #hidden-program-table {
     display: none;
+}
+
+a.session-selector {
+    color: #fff;
+    background-color: $success-color;
+    font-size: $type-size-8;
+    padding: 0.35em 0.45em;
+    font-family: $sans-serif;
+    font-weight: bold;
+    text-align: center;
+    @include breakpoint($medium) {
+      font-size: $type-size-7;
+    }
+    &.disabled {
+        background-color: $success-color;
+        /*pointer-events: none;*/
+        cursor: not-allowed;
+        filter: alpha(opacity=40);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        opacity: 0.40;
+    }
+}
+
+a.session-deselector {
+    color: #fff;
+    background-color: $danger-color;
+    font-size: $type-size-8;
+    padding: 0.35em 0.45em;
+    font-family: $sans-serif;
+    font-weight: bold;
+    text-align: center;
+    @include breakpoint($medium) {
+      font-size: $type-size-7;
+    }
+    &.disabled {
+        background-color: $danger-color;
+        /*pointer-events: none;*/
+        cursor: not-allowed;
+        filter: alpha(opacity=40);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        opacity: 0.40;
+    }
+}
+
+div#generatePDFForm {
+    @include span(12);
+    padding: 0.5em;
+    font-family: $serif;
+    text-align: center;
+    vertical-align: middle;
+    font-size: $type-size-6;
+    background-color: $lighter-gray;
+    border: 1px solid $light-gray;
+
+    a#generatePDFButton {
+        margin-top: 10px;
+        font-size: $type-size-5;
+
+        @include breakpoint($medium) {
+            font-size: $type-size-4;
+        }
+    }
+
+    input#includePlenaryCheckBox {
+        color: #f2f2f2;
+        width: 16px;
+        height: 16px;
+    }
+
+    span#checkBoxLabel {
+        font-size: $type-size-4;
+    }
 }
 
 div.day {
