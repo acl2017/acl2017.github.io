@@ -2,7 +2,7 @@
 title: Conference Program
 layout: schedule
 excerpt: "ACL 2017 conference program."
-permalink: /confprogramtest2
+permalink: /testing/program
 sidebar: false
 script: |
     <script>vex.defaultOptions.className = 'vex-theme-wireframe'</script>
@@ -56,7 +56,7 @@ script: |
                     // FOOTER on each page
                     doc.setFont('courier');
                     doc.setFontSize(8);
-                    doc.text('(Generated via http://acl2017.org/program)', data.settings.margin.left, doc.internal.pageSize.height - 10);
+                    doc.text('(Generated via http://acl2017.org/testing/program)', data.settings.margin.left, doc.internal.pageSize.height - 10);
                 },
                 styles: {
                     font: 'times',

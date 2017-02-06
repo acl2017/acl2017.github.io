@@ -99,6 +99,7 @@ include:
   - _pages
   - _pages/calls
   - _pages/sponsors
+  - _pages/testing
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
