@@ -23,14 +23,20 @@ platinum:
     image_path: tenecent-logo.png
     alt: "Tenecent Logo"
     title: "Tenecent"
-  - image_path: blank-logo.png
+  - url: http://www.google.com
+    image_path: google-logo.png
+    alt: "Google Logo"
+    title: "Google"
   - image_path: blank-logo.png
 gold:
   - url: http://www.ebay.com
     image_path: ebay-logo.png
     alt: "Ebay Logo"
     title: "Ebay"
-  - image_path: blank-logo.png
+  - url: http://www.microsoft.com
+    image_path: microsoft-logo.png
+    alt: "Microsoft Logo"
+    title: "Microsoft"
   - image_path: blank-logo.png
   - image_path: blank-logo.png
 bronze:
