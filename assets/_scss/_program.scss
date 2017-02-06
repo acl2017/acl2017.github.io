@@ -101,6 +101,21 @@ div.day {
     border: 1px solid $light-gray;
 }
 
+div#testingInstructions {
+    font-size: $type-size-6;
+    padding: 10px;
+
+    @include breakpoint($medium) {
+        font-size: $type-size-5;
+    }
+
+    div#testingNotes {
+        float: left;
+    }
+
+}
+
+
 div.session {
     display: inline;
     padding: 0.5em;

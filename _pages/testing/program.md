@@ -243,6 +243,9 @@ script: |
             // the include plenary checkbox is checked on startup
             $('input#includePlenaryCheckBox').prop('checked', true);
 
+            // hide the testing notes
+            $('div#testingNotes').hide();
+
             // get all the paper sessions and save the day and location
             // for each of the in a hash
             var paperSessions = $("[id|='session']").filter(function() { 
@@ -407,26 +410,41 @@ script: |
                     includePlenaryInSchedule = $(this).prop('checked');
             });
 
-            $('body').on('click', 'a#generatePDFButton', function(event) {
-                // if we haven't chosen any papers, show a warning
-                // if we aren't including any plenary sessions then just raise 
-                // an alert since there's nothing to put in the PDF. 
-                // Otherwise, confirm that the user just wants the plenary
-                // sessions.
-                // if (Object.keys(chosenPapersHash).length == 0) {
-                //     if (includePlenaryInSchedule) {
-                //         vex.dialog.confirm({
-                //             message: "The PDF will contain only the plenary sessions since no papers were chosen. Proceed?",
-                //             callback: function (value) {
-                                
-                //             }
-                //         });
-                //     }
-                // }
-                // else {
-                generatePDFfromTable();
-                // }
+            $('body').on('click', 'a#notesCollapseLink', function(event) {
                 event.preventDefault();
+                if ($(this).text() == '[Hide Notes]') {
+                    $(this).text('[Show Notes]');
+                }
+                else {
+                    $(this).text('[Hide Notes]');
+                }
+                $('#testingNotes').slideToggle();
+            });
+
+            $('body').on('click', 'a#generatePDFButton', function(event) {
+                // if we haven't chosen any papers, and we aren't including
+                // plenary sessions either, then raise an error. If we are
+                // including plenary sessions and no papers, then confirm.
+                event.preventDefault();
+                if (Object.keys(chosenPapersHash).length == 0) {
+                    if (includePlenaryInSchedule) {
+                        vex.dialog.confirm({
+                            message: "The PDF will contain only the plenary sessions since no papers were chosen. Proceed?",
+                            callback: function (value) {
+                                if (value) {
+                                    generatePDFfromTable();
+                                }
+                                else {
+                                    return false;
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        vex.dialog.alert('Nothing to generate. No papers were chosen and plenary sessions were excluded.')
+                        return false;
+                    }
+                }
             });
 
             $('body').on('click', 'table.paper-table tr#paper ', function(event, papersTriggered, fromSession) {
@@ -502,6 +520,22 @@ script: |
     </thead>
     <tbody></tbody>
 </table>
+
+<div id="testingInstructions">
+    <p>Welcome, testers! Thank you for helping us test the ACL 2017 conference program page. For the first time, the program page will allow conference attendees to choose the sessions (or individual paper talks) they want to attend <em>and</em> generate a PDF of their customized schedule! </p>
+
+    <strong>Important testing notes</strong> (please read if you are here for the first time). <a href="#" id="notesCollapseLink">[Show Notes]</a>
+        <div id="testingNotes">
+        <ul>
+            <li>Since ACL 2017 doesn't have a program yet, we used the content from the NAACL 2016 conference for the purposes of testing.</li>
+            <li>The page has been tested on MacOS 10.12.2 on recent versions of Chrome, Firefox, and Safari browsers. It would be good to test on other OSes (Windows, Linux) and other browsers, although older IE version (earlier than IE 10) will probably not work. </li>
+            <li>The page has also been tested on iPhones but not on Android devices. On Android devices, Chrome is more likely to work rather than the default Android Browser.</li>
+            <li>Note that if you are using Safari, you will need to use <em>Cmd-P</em> to print and <em>File > Save as ... </em>to download the schedule. Chrome and Firefox have buttons for printing and saving as part of their PDF rendering UI.</li>
+            <li>Currently, users can only choose papers sessions and individual papers. However, we can certainly extend this to posters since people might want to pick those out in advance too.</li>
+            <li>The generated PDF might have some blank rows at the bottom as padding since the PDF generation has been programmed to avoid rows being split across pages.</li>
+        </ul>
+    </div>
+</div>
 
 <div class="schedule">
     <div class="day" id="first-day">Sunday, July 30</div>
@@ -2450,4 +2484,3 @@ script: |
         </div>
     </div>
 </div>
-
