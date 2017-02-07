@@ -18,6 +18,8 @@ Please refer to each individual event's website for its paper deadlines and othe
 
 - [CoNLL: The SIGNLL Conference on Computational Natural Language Learning](http://www.conll.org)
 
+- [CLPsych: Computational Linguistics and Clinical Psychology – From  Linguistic Signal to Clinical Reality](http://clpsych.org)
+
 - [EventStory: Events and Stories in the News](https://sites.google.com/site/eventsandstoriesinthenews/)
 
 - [LaTeCH-CLfL: Joint SIGHUM Workshop on Computational Linguistics for Cultural Heritage, Social Sciences, Humanities and Literature](https://sighum.wordpress.com/events/latech-clfl-2017/)
