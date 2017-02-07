@@ -16,9 +16,9 @@ Please refer to each individual event's website for its paper deadlines and othe
 
 - [BioNLP: Workshop on Biomedical Natural Language Processing](https://www.aclweb.org/aclwiki/index.php?title=SIGBIOMED)
 
-- [CoNLL: The SIGNLL Conference on Computational Natural Language Learning](http://www.conll.org)
-
 - [CLPsych: Computational Linguistics and Clinical Psychology – From  Linguistic Signal to Clinical Reality](http://clpsych.org)
+
+- [CoNLL: The SIGNLL Conference on Computational Natural Language Learning](http://www.conll.org)
 
 - [EventStory: Events and Stories in the News](https://sites.google.com/site/eventsandstoriesinthenews/)
 
