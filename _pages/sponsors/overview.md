@@ -69,7 +69,7 @@ The Annual Meeting for the Association for Computational Linguistics (ACL) provi
 
  1. EACL 2017 in Valencia, Spain (April 3 &ndash; 7)
  2. ACL-HLT 2017 in Vancouver, Canada (July 30 &ndash; August 4)
- 3. EMNLP 2017 in Copenhagen, Denmark, USA (September 7 &ndash; 11)
+ 3. EMNLP 2017 in Copenhagen, Denmark (September 7 &ndash; 11)
 
 In recent years, ACL conferences have enjoyed a growth spurt and now attract between 1,200 and 1,700 paying attendees, EACL conferences between 500 and 600, and EMNLP conferences between 700 and 850.
 
