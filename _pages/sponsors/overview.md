@@ -37,7 +37,10 @@ gold:
     image_path: microsoft-logo.png
     alt: "Microsoft Logo"
     title: "Microsoft"
-  - image_path: blank-logo.png
+  - url: http://www.research.ibm.com
+    image_path: ibm-logo.png
+    alt: "IBM Logo"
+    title: "IBM"
   - image_path: blank-logo.png
 bronze:
   - url: https://yandex.com
