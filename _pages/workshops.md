@@ -10,13 +10,13 @@ sidebar: false
 
 Please refer to each individual event's website for its paper deadlines and other details. 
 
-- [SRW: ACL Student Research Workshop](https://sites.google.com/site/aclsrw2017/): Part of the main conference and attendance is covered within the main conference registration fees.
+- [SRW: ACL Student Research Workshop](https://sites.google.com/site/aclsrw2017/): Part of the main conference and attendance is covered by the main conference registration fees.
 
-<span class="btn btn--small">July 30, 2017</span>
+### Sunday, July 30, 2017
 
 - [WiNLP: Women in Natural Language Processing](http://www.winlp.org/winlp-workshop/)
 
-<span class="btn btn--small">August 3, 2017</span>
+### Thursday, August 3, 2017
 
 - [BUCC: 10th Workshop on Building and Using Comparable Corpora](https://comparable.limsi.fr/bucc2017/)
 
@@ -30,7 +30,7 @@ Please refer to each individual event's website for its paper deadlines and othe
 
 - [TextGraphs-11: Graph-based Methods for Natural Language Processing](https://sites.google.com/site/textgraphs2017/)
 
-<span class="btn btn--small">August 4, 2017</span>
+### Friday, August 4, 2017
 
 - [ALW1: 1st Workshop on Abusive Language Online](https://sites.google.com/site/abusivelanguageworkshop2017/)
 
@@ -42,7 +42,7 @@ Please refer to each individual event's website for its paper deadlines and othe
 
 - [NMT: 1st Workshop on Neural Machine Translation](https://sites.google.com/site/acl17nmt/)
 
-<span class="btn btn--small">August 3 &ndash; 4, 2017</span>
+### Thursday &amp; Friday, August 3 &ndash; 4, 2017
 
 - [CoNLL: The SIGNLL Conference on Computational Natural Language Learning](http://www.conll.org)
 
