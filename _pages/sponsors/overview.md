@@ -27,7 +27,10 @@ platinum:
     image_path: google-logo.png
     alt: "Google Logo"
     title: "Google"
-  - image_path: blank-logo.png
+  - url: http://www.baidu.com
+    image_path: baidu-logo.png
+    alt: "Baidu Logo"
+    title: "Baidu"
 gold:
   - url: http://www.ebay.com
     image_path: ebay-logo.png
@@ -42,6 +45,14 @@ gold:
     alt: "IBM Logo"
     title: "IBM"
   - image_path: blank-logo.png
+silver:
+  - url: https://www.oracle.com
+    image_path: oracle-logo.png
+    alt: "Oracle Logo"
+    title: "Oracle"
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
 bronze:
   - url: https://yandex.com
     image_path: yandex-logo.png
@@ -55,8 +66,14 @@ supporter:
     image_path: uw-logo.png
     alt: "University of Washington Logo"
     title: "University of Washington"
-  - image_path: blank-logo.png
-  - image_path: blank-logo.png
+  - url: http://www.brandeis.edu/departments/computer-science/comp-linguistics/
+    image_path: brandeis-logo.png
+    alt: "Brandeis University Logo"
+    title: "Computational Linguistics@Brandeis University"
+  - url: http://datascience.columbia.edu
+    image_path: columbia-logo.png
+    alt: "Columbia University Logo"
+    title: "Data Science Institute@Columbia University"
   - image_path: blank-logo.png
 sidebar: 
     nav: "sponsors"
@@ -111,6 +128,10 @@ We gratefully acknowledge support provided by the following for the ACL 2017 con
 ## Gold Tier
 
 {% include gallery id="gold" class="fourth" %}
+
+## Silver Tier
+
+{% include gallery id="silver" class="fourth" %}
 
 ## Bronze Tier
 
