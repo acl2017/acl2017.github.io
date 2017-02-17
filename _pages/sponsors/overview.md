@@ -50,7 +50,10 @@ silver:
     image_path: oracle-logo.png
     alt: "Oracle Logo"
     title: "Oracle"
-  - image_path: blank-logo.png
+  - url: http://www.nuance.com/index.htm
+    image_path: nuance-logo.png
+    alt: "Nuance Logo"
+    title: "Nuance"
   - image_path: blank-logo.png
   - image_path: blank-logo.png
 bronze:
