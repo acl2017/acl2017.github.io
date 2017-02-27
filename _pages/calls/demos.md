@@ -82,7 +82,7 @@ management system at [https://www.softconf.com/acl2017/demos/](https://www.softc
 
 Submissions may consist of 6 pages (including references). We strongly recommend the use of the official ACL 2017 style templates: 
 
-- [LaTeX](/downloads/acl17-latex.zip) 
+- [LaTeX](/downloads/acl17-latex-demos.zip) 
 - [Microsoft Word](/downloads/acl17-word.zip)
 
 Submissions must conform to the official style guidelines, which are contained in these templates, and they must be in PDF format.
@@ -95,5 +95,5 @@ Self-references are also allowed.
 
 ## Contact Information
 - Demo co-chairs: Mohit Bansal (University of North Carolina, Chapel Hill) and Heng Ji (Rensselaer Polytechnic Institute)
-- Email: [ acl2017-demochairs@googlegroups.com](mailto: acl2017-demochairs@googlegroups.com)
+- Email: [acl2017-demochairs@googlegroups.com](mailto: acl2017-demochairs@googlegroups.com)
 - [ACLWeb link](https://www.aclweb.org/portal/content/call-acl-2017-system-demonstrations-and-new-best-demo-paper-award)
