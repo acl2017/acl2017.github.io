@@ -31,6 +31,10 @@ platinum:
     image_path: baidu-logo.png
     alt: "Baidu Logo"
     title: "Baidu"
+  - url: http://www.apple.com
+    image_path: apple-logo.png
+    alt: "Apple Logo"
+    title: "Apple"
 gold:
   - url: http://www.ebay.com
     image_path: ebay-logo.png
