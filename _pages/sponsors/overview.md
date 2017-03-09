@@ -101,7 +101,38 @@ sidebar:
 
 {% include toc icon="gears" %}
 
-On this page, we provide an overview of why the Association for Computational Linguistics solicits sponsorships, a summary of the sponsorship benefits, and a list of the sponsors for the ACL 2017 conference.
+On this page, we provide a list of the sponsors for the ACL 2017 conference, an overview of why the Association for Computational Linguistics solicits sponsorships, and a summary of the sponsorship benefits.
+
+# Current Sponsors
+
+We gratefully acknowledge support provided by the following for the ACL 2017 conference:
+
+## Platinum Tier
+
+{% include gallery id="platinum" class="fourth" %}
+
+## Gold Tier
+
+{% include gallery id="gold" class="fourth" %}
+
+## Silver Tier
+
+{% include gallery id="silver" class="fourth" %}
+
+## Bronze Tier
+
+{% include gallery id="bronze" class="fourth" %}
+
+## Supporter Tier
+
+{% include gallery id="supporter" class="fourth" %}
+
+# Other Support
+
+![image-left](/images/nsf-logo.jpg){: .align-left}
+
+We acknowledge the generous support of the National Science Foundation which has [awarded](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1714855&HistoricalAwards=false) a $15,000 grant to the [ACL Student Research Workshop](https://sites.google.com/site/aclsrw2017/). The money will be used to subsidize housing, registration, and travel costs for US-based students who are selected to participate in the workshop. 
+<br/><br/>
 
 # Why Become a Sponsor?
 The Annual Meeting for the Association for Computational Linguistics (ACL) provides the pre-eminent forum for dissemination of the latest developments in computational linguistics and natural language processing.  The ACL, its regional chapter in Europe (EACL), and the Special Interest Group on  Linguistic data and corpus-based approaches to NLP (EMNLP) will host the following ACL-related conferences in 2017:
@@ -135,33 +166,3 @@ For contact information &amp; pricing details for all sponsorship tiers and pack
 <a href="/sponsors/benefits/"><button class="btn btn--large btn--inverse">Sponsorship Tiers &amp; Pricing</button></a>
 </div>
 <br/>
-
-# Current Sponsors
-
-We gratefully acknowledge support provided by the following for the ACL 2017 conference:
-
-## Platinum Tier
-
-{% include gallery id="platinum" class="fourth" %}
-
-## Gold Tier
-
-{% include gallery id="gold" class="fourth" %}
-
-## Silver Tier
-
-{% include gallery id="silver" class="fourth" %}
-
-## Bronze Tier
-
-{% include gallery id="bronze" class="fourth" %}
-
-## Supporter Tier
-
-{% include gallery id="supporter" class="fourth" %}
-
-# Other Support
-
-![image-left](/images/nsf-logo.jpg){: .align-left}
-
-We acknowledge the generous support of the National Science Foundation which has [awarded](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1714855&HistoricalAwards=false) a $15,000 grant to the [ACL Student Research Workshop](https://sites.google.com/site/aclsrw2017/). The money will be used to subsidize housing, registration, and travel costs for US-based students who are selected to participate in the workshop. 
