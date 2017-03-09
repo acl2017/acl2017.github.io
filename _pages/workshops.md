@@ -46,8 +46,7 @@ Please refer to each individual event's website for its paper deadlines and othe
 
 - [CoNLL: The SIGNLL Conference on Computational Natural Language Learning](http://www.conll.org)
 
-
-- [*SEM: Sixth Joint Conference On Lexical And Computational Semantics](https://sites.google.com/site/carabirubi3251651561/)
+- [*SEM: Sixth Joint Conference On Lexical And Computational Semantics](https://sites.google.com/site/starsem2017/)
 
 - [SemEval: 11th International Workshop on Semantic Evaluation](http://alt.qcri.org/semeval2017/)
 
