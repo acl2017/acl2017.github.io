@@ -48,6 +48,10 @@ gold:
     image_path: sap-logo.png
     alt: "SAP Logo"
     title: "SAP"
+  - url: https://www.elsevier.com
+    image_path: elsevier-logo.png
+    alt: "Elsevier Logo"
+    title: "Elsevier"
 silver:
   - url: https://www.oracle.com
     image_path: oracle-logo.png
