@@ -85,7 +85,7 @@ bronze:
   - image_path: blank-logo.png
   - image_path: blank-logo.png
 supporter:
-  - url: http://www.washington.edu
+  - url: http://www.compling.uw.edu
     image_path: uw-logo.png
     alt: "University of Washington Logo"
     title: "University of Washington"
