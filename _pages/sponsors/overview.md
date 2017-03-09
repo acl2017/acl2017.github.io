@@ -44,7 +44,10 @@ gold:
     image_path: ibm-logo.png
     alt: "IBM Logo"
     title: "IBM"
-  - image_path: blank-logo.png
+  - url: https://www.sap.com/index.html
+    image_path: sap-logo.png
+    alt: "SAP Logo"
+    title: "SAP"
 silver:
   - url: https://www.oracle.com
     image_path: oracle-logo.png
@@ -54,14 +57,27 @@ silver:
     image_path: nuance-logo.png
     alt: "Nuance Logo"
     title: "Nuance"
-  - image_path: blank-logo.png
-  - image_path: blank-logo.png
+  - url: http://www.sogou.com/
+    image_path: sogou-logo.png
+    alt: "Sogou Logo"
+    title: "Sogou"
+  - url: http://www.huawei.com/en/
+    image_path: huawei-logo.png
+    alt: "Huwaei Technologies Logo"
+    title: "Huwaei Technologies"
+  - url: http://www.adobe.com
+    image_path: adobe-logo.png
+    alt: "Adobe Logo"
+    title: "Adobe"
 bronze:
   - url: https://yandex.com
     image_path: yandex-logo.png
     alt: "Yandex Logo"
     title: "Yandex"
-  - image_path: blank-logo.png
+  - url: https://www.grammarly.com
+    image_path: grammarly-logo.png
+    alt: "Grammarly Logo"
+    title: "Grammarly"
   - image_path: blank-logo.png
   - image_path: blank-logo.png
 supporter:
