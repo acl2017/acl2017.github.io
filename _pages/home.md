@@ -11,9 +11,6 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**February 26, 2017**. The final [call for demos](/calls/demos) has been posted. Just like the papers, the [submission deadline](/calls/demos#important-dates) has been updated to provide 4 extra hours! 
-{: .notice--info}
-
 <h2>Welcome!</h2>
 
 The 55th annual meeting of the Association for Computational Linguistics (ACL) will take place in Vancouver, Canada. ACL 2017 will be held at the [Westin Bayshore Hotel](http://www.starwoodhotels.com/westin/property/overview/index.html?propertyID=1080) in downtown Vancouver from July 30th through August 4th, 2017.
