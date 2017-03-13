@@ -13,7 +13,7 @@ The following tutorials have been accepted for ACL 2017 and will be held on Sund
 ## Morning
 
 
-<span class="btn btn--small">T1</span>&nbsp;&nbsp;Natural Language Processing for Precision Medicine. <br/>
+<span class="btn btn--small">T1</span>&nbsp;&nbsp;Natural Language Processing for Precision Medicine <br/>
 <a href="http://research.microsoft.com/en-us/um/people/hoifung/">Hoifung Poon</a>, <a href="https://www.microsoft.com/en-us/research/people/chrisq/">Chris Quirk</a>, <a href="https://scholar.google.com/citations?user=9qY7NPEAAAAJ&amp;hl=en">Kristina Toutanova</a>, and <a href="https://www.microsoft.com/en-us/research/people/scottyih/">Wen-tau Yih</a>
 
 <span class="btn btn--small">T2</span>&nbsp;&nbsp;Multimodal Machine Learning<br/>
