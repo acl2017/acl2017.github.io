@@ -10,21 +10,26 @@ sidebar: false
 
 The following tutorials have been accepted for ACL 2017 and will be held on Sunday, July 30th, 2017. Exact timings will be posted as part of the official program.
 
-- Multimodal Machine Learning<br/>
-[Louis-Philippe Morency](https://www.cs.cmu.edu/~morency/) and [Tadas Baltrusaitis](http://www.cl.cam.ac.uk/~tb346/)
+## Morning
 
-- Deep Learning for Dialogue Systems<br/>
-[Yun-Nung Chen](http://www.cs.cmu.edu/~yvchen/), [Asli Celikyilmaz](https://www.microsoft.com/en-us/research/people/aslicel/), and [Dilek Hakkani-Tur](https://research.google.com/pubs/104927.html)
 
-- Deep Learning for Semantic Composition<br/>
-[Xiaodan Zhu](http://www.xiaodanzhu.com/about.html) and [Edward Grefenstette](http://egrefen.com)
+<span class="btn btn--small">T1</span>&nbsp;&nbsp;Natural Language Processing for Precision Medicine. <br/>
+<span style="padding-left: 49px;"><a href="http://research.microsoft.com/en-us/um/people/hoifung/">Hoifung Poon</a>, <a href="https://www.microsoft.com/en-us/research/people/chrisq/">Chris Quirk</a>, <a href="https://scholar.google.com/citations?user=9qY7NPEAAAAJ&amp;hl=en">Kristina Toutanova</a>, and <a href="https://www.microsoft.com/en-us/research/people/scottyih/">Wen-tau Yih</a></span>
 
-- Beyond Words: Deep Learning for Multi-word Expressions and Collocations<br/>
-[Valia Kordoni](https://www.angl.hu-berlin.de/department/staff/kordoni)
+<span class="btn btn--small">T2</span>&nbsp;&nbsp;Multimodal Machine Learning<br/>
+<span style="padding-left: 49px;"><a href="https://www.cs.cmu.edu/~morency/">Louis-Philippe Morency</a> and <a href="http://www.cl.cam.ac.uk/~tb346/">Tadas Baltrusaitis</a></span>
 
-- Natural Language Processing for Precision Medicine<br/>
-[Hoifung Poon](http://research.microsoft.com/en-us/um/people/hoifung/), [Chris Quirk](https://www.microsoft.com/en-us/research/people/chrisq/), [Kristina Toutanova](https://scholar.google.com/citations?user=9qY7NPEAAAAJ&hl=en), and [Wen-tau Yih](https://www.microsoft.com/en-us/research/people/scottyih/)
+<span class="btn btn--small">T3</span>&nbsp;&nbsp;Deep Learning for Semantic Composition<br/>
+<span style="padding-left: 49px;"><a href="http://www.xiaodanzhu.com/about.html">Xiaodan Zhu</a> and <a href="http://egrefen.com">Edward Grefenstette</a></span>
 
-- Making Better Use of the Crowd<br/>
-[Jennifer Wortman Vaughan](http://www.jennwv.com)
+## Afternoon
+
+<span class="btn btn--small">T4</span>&nbsp;&nbsp;Deep Learning for Dialogue Systems<br/>
+<span style="padding-left: 49px;"><a href="http://www.cs.cmu.edu/~yvchen/">Yun-Nung Chen</a>, <a href="https://www.microsoft.com/en-us/research/people/aslicel/">Asli Celikyilmaz</a>, and <a href="https://research.google.com/pubs/104927.html">Dilek Hakkani-Tur</a></span>
+
+<span class="btn btn--small">T5</span>&nbsp;&nbsp;Beyond Words: Deep Learning for Multi-word Expressions and Collocations<br/>
+<span style="padding-left: 49px;"><a href="https://www.angl.hu-berlin.de/department/staff/kordoni">Valia Kordoni</a></span>
+
+<span class="btn btn--small">T6</span>&nbsp;&nbsp;Making Better Use of the Crowd<br/>
+<span style="padding-left: 49px;"><a href="http://www.jennwv.com">Jennifer Wortman Vaughan</a></span>
 
