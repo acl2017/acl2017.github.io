@@ -86,7 +86,10 @@ silver:
     image_path: adobe-logo.png
     alt: "Adobe Logo"
     title: "Adobe"
-  - image_path: blank-logo.png
+  - url: http://www.duolingo.com
+    image_path: duolingo-logo.png
+    alt: "Duolingo Logo"
+    title: "Duolingo"
   - image_path: blank-logo.png
   - image_path: blank-logo.png
 bronze:
