@@ -35,6 +35,12 @@ platinum:
     image_path: apple-logo.png
     alt: "Apple Logo"
     title: "Apple"
+  - url: http://alibabagroup.com/en/global/home
+    image_path: alibaba-logo.png
+    alt: "Alibaba Logo"
+    title: "Alibaba"
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
 gold:
   - url: http://www.ebay.com
     image_path: ebay-logo.png
@@ -56,6 +62,9 @@ gold:
     image_path: elsevier-logo.png
     alt: "Elsevier Logo"
     title: "Elsevier"
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
 silver:
   - url: https://www.oracle.com
     image_path: oracle-logo.png
@@ -77,6 +86,9 @@ silver:
     image_path: adobe-logo.png
     alt: "Adobe Logo"
     title: "Adobe"
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
 bronze:
   - url: https://yandex.com
     image_path: yandex-logo.png
