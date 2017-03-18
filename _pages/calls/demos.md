@@ -2,8 +2,7 @@
 title: 
 layout: single
 permalink: /calls/demos/
-sidebar: 
-    nav: "program"
+sidebar: false
 ---
 {% include base_path %}
 
