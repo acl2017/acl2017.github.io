@@ -1,25 +1,33 @@
 # main links links
 main:
-  - title: "Calls"
-    url: /calls/papers/
 
-  - title: "Workshops"
-    url: "/workshops"
+  # - title: "Calls"
+  #   url: /calls/papers/
+
+  - title: "Registration"
+    url: /registration
 
   - title: "Tutorials"
     url: "/tutorials"
 
-  - title: "Organization"
-    url: /organization
+  - title: "Workshops"
+    url: "/workshops"
+
+  - title: "Participants"
+    url: "/participants/accommodation/"
 
   - title: "PC Blog"
     url: https://chairs-blog.acl2017.org
 
-  # - title: "Registration"
-  #   url: /registration
+  - title: "Organization"
+    url: /organization
 
   - title: "Sponsors"
     url: /sponsors/overview/
+
+  - title: "Archive"
+    url: /archive
+
 
 pages:
   - title: Organization
@@ -32,17 +40,21 @@ pages:
       - title: "ACL 2017 Workshops"
       - url: /pages/workshops.md
 
-program:
-  - title: Calls
+# program:
+#   - title: Calls
+#     children:
+#       - title: "Papers"
+#         url: /calls/papers/
+#       - title: "Demos"
+#         url: /calls/demos/
+
+participants:
+  - title: "Information for Participants"
     children:
-      - title: "Papers"
-        url: /calls/papers/
-      - title: "Demos"
-        url: /calls/demos/
-      - title: "Workshops"
-        url: /calls/workshops/
-      - title: "Tutorials"
-        url: /calls/tutorials/
+      - title: "Accommodation"
+        url: /participants/accommodation/
+      - title: "Social Event"
+        url: /participants/social/
 
 sponsors:
   - title: Sponsorship
