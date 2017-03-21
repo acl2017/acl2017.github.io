@@ -43,7 +43,7 @@ Please note that:
 
 Your registration includes an exciting scientific program, two poster sessions (with dinners), demonstrations, exhibits, breakfasts and breaks each day.  
 
-Also included is access to the conference social event, an evening of desserts, beverages and music to take place Tuesday, August 1st, following the poster session, at the Vancouver Aquarium.
+Also included is access to the [conference social event](/social), an evening of desserts, beverages and music to take place Tuesday, August 1st, following the poster session, at the Vancouver Aquarium.
 
 ## Estimated Fees
 
