@@ -11,7 +11,7 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**March 18, 2017**. Preliminary information about [registration](/registration/) and about [accommodation](/accommodation) is available. Please register and book your rooms at the discounted rates as soon as possible!
+**March 18, 2017**. Preliminary information about [registration](/registration/) and about [accommodation](/accommodation) is available. Please book your rooms at the discounted rates as soon as possible. There are several other large events being held in Vancouver at the same time as ACL, and we expect the hotels to fill up.
 {: .notice--info}     
  
 <h2>Welcome!</h2>
