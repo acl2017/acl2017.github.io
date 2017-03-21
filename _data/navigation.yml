@@ -7,14 +7,14 @@ main:
   - title: "Registration"
     url: /registration
 
+  - title: "Accommodation"
+    url: "/accommodation"
+
   - title: "Tutorials"
     url: "/tutorials"
 
   - title: "Workshops"
     url: "/workshops"
-
-  - title: "Accommodation"
-    url: "/accommodation"
 
   - title: "PC Blog"
     url: https://chairs-blog.acl2017.org
