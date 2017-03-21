@@ -13,8 +13,8 @@ main:
   - title: "Workshops"
     url: "/workshops"
 
-  - title: "Participants"
-    url: "/participants/accommodation/"
+  - title: "Accommodation"
+    url: "/accommodation"
 
   - title: "PC Blog"
     url: https://chairs-blog.acl2017.org

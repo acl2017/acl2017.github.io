@@ -1,9 +1,8 @@
 ---
 title: Social Event
 layout: single
-permalink: /participants/social/
-sidebar: 
-    nav: "participants"
+permalink: /social/
+sidebar: false
 ---
 {% include base_path %}
 

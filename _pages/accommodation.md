@@ -1,9 +1,8 @@
 ---
 title: Accommodation
 layout: single
-permalink: /participants/accommodation/
-sidebar: 
-    nav: "participants"
+permalink: /accommodation/
+sidebar: false
 ---
 {% include base_path %}
 
@@ -21,37 +20,42 @@ Links to reservation pages and more details for each of the hotels are provided 
 
 ### Westin Bayshore Vancouver 
 
-Click [here](https://www.starwoodmeeting.com/events/start.action?id=1611213443&key=1B2786E7) to reserve.
-
-- Official [website](http://www.westinbayshore.com/).
+- [1601 Bayshore Drive, Vancouver, BC V6G 2V4](https://www.google.com/maps/place/The+Westin+Bayshore,+Vancouver/@49.2921193,-123.1313515,17z/data=!3m1!4b1!4m5!3m4!1s0x54867188a23819af:0xaf6eaf737c65b77f!8m2!3d49.2921158!4d-123.1291628); +1-604-682-3377
 - Conference Hotel. 
 - Located 9.2 miles (14.8 km) from Vancouver International Airport. 
 - Complimentary wifi in all guest rooms.
 - Single/Double Room: $279 CAD, Triple Room: $309 CAD, Quad Room: $339 CAD.
 - Self Parking: $38 CAD per night, Valet Parking: $42 CAD per night. Prices include taxes.
-- [1601 Bayshore Drive, Vancouver, BC V6G 2V4](https://www.google.com/maps/place/The+Westin+Bayshore,+Vancouver/@49.2921193,-123.1313515,17z/data=!3m1!4b1!4m5!3m4!1s0x54867188a23819af:0xaf6eaf737c65b77f!8m2!3d49.2921158!4d-123.1291628); +1-604-682-3377
 - ACL discounted rates are available through Friday, July 7, 2017 at 5pm local time.
+
+<div class="text-center"> 
+<a href="https://www.starwoodmeeting.com/events/start.action?id=1611213443&key=1B2786E7"><button class="btn btn--large">Click to Reserve</button></a>
+</div>
+
 
 ### Marriott Vancouver Pinnacle Downtown
 
-Click [here](https://aws.passkey.com/e/49043562) to reserve.
-
-- Official [website](http://www.marriott.com/hotels/travel/yvrdt-vancouver-marriott-pinnacle-downtown-hotel/).
+- [1128 West Hastings Street, Vancouver, BC V6E 4R5](https://www.google.com/maps/place/Vancouver+Marriott+Pinnacle+Downtown+Hotel/@49.2879135,-123.1230467,17z/data=!4m12!1m6!3m5!1s0x54867183efc86e0d:0x368976848d4c1998!2sVancouver+Marriott+Pinnacle+Downtown+Hotel!8m2!3d49.28791!4d-123.120858!3m4!1s0x54867183efc86e0d:0x368976848d4c1998!8m2!3d49.28791!4d-123.120858); +1-604-684-1128
 - Located 9.3 miles NE  of the airport.  This hotel does not provide shuttle service.
 - Single/Double Room: $309 CAD.
-- [1128 West Hastings Street, Vancouver, BC V6E 4R5](https://www.google.com/maps/place/Vancouver+Marriott+Pinnacle+Downtown+Hotel/@49.2879135,-123.1230467,17z/data=!4m12!1m6!3m5!1s0x54867183efc86e0d:0x368976848d4c1998!2sVancouver+Marriott+Pinnacle+Downtown+Hotel!8m2!3d49.28791!4d-123.120858!3m4!1s0x54867183efc86e0d:0x368976848d4c1998!8m2!3d49.28791!4d-123.120858); +1-604-684-1128
 - ACL discounted rates are available through Thursday, June 15, 2017 at 5pm local time.
+
+<div class="text-center"> 
+<a href="https://aws.passkey.com/e/49043562"><button class="btn btn--large">Click to Reserve</button></a>
+</div>
+
 
 ### Sheraton Vancouver Wall Centre
 
-Click [here](https://www.starwoodmeeting.com/events/start.action?id=1701194750&key=89F9058) to reserve.
-
-- Official [website](http://www.sheratonvancouver.com/).
+- [1088 Burrard Street, Vancouver, BC V6Z 2R9](https://www.google.com/maps/place/Sheraton+Vancouver+Wall+Centre/@49.2801799,-123.1288822,17z/data=!3m1!4b1!4m5!3m4!1s0x548673d526270ceb:0x3392fb600a9680c1!8m2!3d49.2801764!4d-123.1266935); +1-604-331-1000
 - Complimentary wifi in all guest rooms.
 - Single/Double Traditional Room: $289 CAD, Single/Double View Room: $344 CAD.
 - Valet and self-parking are available.
-- [1088 Burrard Street, Vancouver, BC V6Z 2R9](https://www.google.com/maps/place/Sheraton+Vancouver+Wall+Centre/@49.2801799,-123.1288822,17z/data=!3m1!4b1!4m5!3m4!1s0x548673d526270ceb:0x3392fb600a9680c1!8m2!3d49.2801764!4d-123.1266935); +1-604-331-1000
 - ACL discounted rates are available through Tuesday, May 30, 2017 at 5pm local time.
+
+<div class="text-center"> 
+<a href="https://www.starwoodmeeting.com/events/start.action?id=1701194750&key=89F9058"><button class="btn btn--large">Click to Reserve</button></a>
+</div>
 
 ## Student Accommodation
 
@@ -63,19 +67,16 @@ The Georgian Court Hotel and YWCA Hotel are conveniently located in the same blo
 
 ### Westin Bayshore Vancouver 
 
-- Official [website](http://www.westinbayshore.com/).
+- [1601 Bayshore Drive, Vancouver, BC V6G 2V4](https://www.google.com/maps/place/The+Westin+Bayshore,+Vancouver/@49.2921193,-123.1313515,17z/data=!3m1!4b1!4m5!3m4!1s0x54867188a23819af:0xaf6eaf737c65b77f!8m2!3d49.2921158!4d-123.1291628); +1-604-682-3377
 - Conference Hotel.
 - Located 9.2 miles (14.8 km) from Vancouver International Airport. 
 - Complimentary wifi in all guest rooms.
 - Single/Double Room: $199 CAD.
-- [1601 Bayshore Drive, Vancouver, BC V6G 2V4](https://www.google.com/maps/place/The+Westin+Bayshore,+Vancouver/@49.2921193,-123.1313515,17z/data=!3m1!4b1!4m5!3m4!1s0x54867188a23819af:0xaf6eaf737c65b77f!8m2!3d49.2921158!4d-123.1291628); +1-604-682-3377
 
 ### Georgian Court Hotel
-- Official [website](http://www.georgiancourthotelvancouver.com/).
 - [773 Beatty Street (at Robson St.) Vancouver, BC V6B 2M4](https://www.google.com/maps/place/Georgian+Court+Hotel/@49.2782574,-123.1157609,17z/data=!3m1!4b1!4m5!3m4!1s0x5486717c493daa35:0x506892125292ed1c!8m2!3d49.2782539!4d-123.1135722); +1-604-682-5555; +1-800-663-1155 (toll-free)
 
 ### YWCA Hotel
-- Official [website](http://www.ywcahotel.com/).
 - [733 Beatty Street, Vancouver, BC V6B 2M4](https://www.google.com/maps/place/YWCA+Hotel+Vancouver/@49.2801799,-123.1288822,17z/data=!4m5!3m4!1s0x5486717c46c1f76f:0x9804bb69de053ca8!8m2!3d49.2784463!4d-123.1129753); +1-604-895-5830
 
 <table style="width: 70%; font-size: medium;">
@@ -117,7 +118,7 @@ The Georgian Court Hotel and YWCA Hotel are conveniently located in the same blo
 Extra persons can *only* be accommodated in the Double;Double w/Private Bath at $15 CAD per night per person with a maximum of 4 people. Wifi, linens, and towels included.
 
 <div class="text-center"> 
-<a href="https://goo.gl/forms/qqEhvIgmpIxhRRzH3"><button class="btn btn--large btn--inverse">Reservation Request Form</button></a>
+<a href="https://goo.gl/forms/qqEhvIgmpIxhRRzH3"><button class="btn btn--large">Student Reservation Request Form</button></a>
 </div>
 
 ## Transportation
