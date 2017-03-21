@@ -1,16 +1,11 @@
 ---
-layout: archive
-permalink: /blog/
-author_profile: false
-sidebar: false
-share: true
-comments: false
+title: Archived Information
+layout: single
+permalink: /archive/
 ---
 
 {% include base_path %}
 
-<h3 class="archive__subtitle">Recent Posts</h3>
+[Call For Papers](/calls/papers/)
 
-{% for post in site.posts %}
-  {% include archive-single.html %}
-{% endfor %}
+[Call For System Demonstrations](/calls/demos/)
