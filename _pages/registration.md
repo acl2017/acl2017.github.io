@@ -41,13 +41,13 @@ Please note that:
 
 ## What's included
 
-Your registration includes an exciting scientific program, two poster sessions (with dinners), demonstrations, exhibits, breakfasts and breaks each day.  
+Your registration includes an exciting scientific program, a welcome reception, two poster sessions (with dinners), demonstrations, exhibits, breakfasts and breaks each day.  
 
 Also included is access to the [conference social event](/social), an evening of desserts, beverages and music to take place Tuesday, August 1st, following the poster session, at the Vancouver Aquarium.
 
 ## Estimated Fees
 
-We expect registration fees to be similar to those at ACL 2016, although the fees have not yet been set and may increase somewhat.  Below are the fees charged for ACL 2016 that may be used as an approximation for planning your travel budget.
+We expect registration fees to be similar to those at ACL 2016, although the fees have not yet been set and may increase somewhat.  Below are the fees (in USD) charged for ACL 2016 that may be used as an approximation for planning your travel budget.
 
 <table style="font-size: medium;">
     <thead>

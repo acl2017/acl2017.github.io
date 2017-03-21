@@ -59,9 +59,9 @@ Links to reservation pages and more details for each of the hotels are provided 
 
 ## Student Accommodation
 
-The ACL Office will accept your reservation request and make the reservations on your behalf.  Room sharing is recommended since only a limited number of rooms are available at the discounted rates.  
+The ACL Office will accept your reservation request and make the reservations on your behalf.  Room sharing is recommended since only a limited number of rooms are available at the discounted rates. If you would like to share, you will need to specify the total number of people who will be sharing the room including yourself (i.e., yourself plus 1 to 3 others). Please be aware that rooms typically come with two beds so any more than two people may have to share a bed.
 
-Please complete [this form](https://goo.gl/forms/qqEhvIgmpIxhRRzH3) to make your reservation request.  We will do our best to honor your preferred hotel from the list below on a first-come first served basis.  All requests must be received **no later than Thursday, June 1, 2017** by the ACL Office.
+Please complete [this form](https://goo.gl/forms/hx5qKruufwnU9xro2) to make your reservation request.  We will do our best to honor your preferred hotel from the list below on a first-come first served basis.  All requests must be received **no later than Thursday, June 1, 2017** by the ACL Office.
 
 The Georgian Court Hotel and YWCA Hotel are conveniently located in the same block, which makes it easier to share costs when traveling to the Conference Hotel if you do not care to walk. These hotels are about 2.09km (1.3 miles) &mdash; a 15-20 minute walk &mdash; from the Conference Hotel.
 
@@ -75,6 +75,11 @@ The Georgian Court Hotel and YWCA Hotel are conveniently located in the same blo
 
 ### Georgian Court Hotel
 - [773 Beatty Street (at Robson St.) Vancouver, BC V6B 2M4](https://www.google.com/maps/place/Georgian+Court+Hotel/@49.2782574,-123.1157609,17z/data=!3m1!4b1!4m5!3m4!1s0x5486717c493daa35:0x506892125292ed1c!8m2!3d49.2782539!4d-123.1135722); +1-604-682-5555; +1-800-663-1155 (toll-free)
+- Single/Double Room: $199 CAD.
+- $30 CAD surcharge for each person beyond double (4 people maximum).
+- Valet parking offered at the hotel. 
+- Free airport shuttle that runs from the hotel.  
+- Complimentary wifi and daily bottled water in all guest rooms.
 
 ### YWCA Hotel
 - [733 Beatty Street, Vancouver, BC V6B 2M4](https://www.google.com/maps/place/YWCA+Hotel+Vancouver/@49.2801799,-123.1288822,17z/data=!4m5!3m4!1s0x5486717c46c1f76f:0x9804bb69de053ca8!8m2!3d49.2784463!4d-123.1129753); +1-604-895-5830
@@ -118,7 +123,7 @@ The Georgian Court Hotel and YWCA Hotel are conveniently located in the same blo
 Extra persons can *only* be accommodated in the Double;Double w/Private Bath at $15 CAD per night per person with a maximum of 4 people. Wifi, linens, and towels included.
 
 <div class="text-center"> 
-<a href="https://goo.gl/forms/qqEhvIgmpIxhRRzH3"><button class="btn btn--large">Student Reservation Request Form</button></a>
+<a href="https://goo.gl/forms/hx5qKruufwnU9xro2"><button class="btn btn--large">Student Reservation Request Form</button></a>
 </div>
 
 ## Transportation
