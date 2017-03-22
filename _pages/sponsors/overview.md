@@ -101,7 +101,10 @@ bronze:
     image_path: grammarly-logo.png
     alt: "Grammarly Logo"
     title: "Grammarly"
-  - image_path: blank-logo.png
+  - url: http://lab.toutiao.com/ 
+    image_path: toutiao-logo.png
+    alt: "Toutiao Logo"
+    title: "Toutiao"
   - image_path: blank-logo.png
 supporter:
   - url: http://www.compling.uw.edu
