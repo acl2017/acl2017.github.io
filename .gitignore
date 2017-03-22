@@ -8,3 +8,5 @@ _site
 codekit-config.json
 node_modules
 npm-debug.log*
+/scripts
+/images/adobe-logo.pxm
