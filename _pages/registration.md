@@ -43,7 +43,7 @@ Please note that:
 
 As in previous years, your conference registration includes the main conference sessions, poster sessions, and demonstration sessions. Workshops and tutorials are not included. Also included are a Welcome Reception Sunday evening, breakfasts, mid-morning and mid-afternoon coffee breaks each day, and full dinners at both of the poster/demo sessions on Monday and Tuesday evenings.  
 
-Be sure to plan to attend the [Social Event](/social), an evening of desserts, beverages and music to take place Tuesday, August 1st, following the poster session, at the Vancouver Aquarium following the Tuesday evening poster session (also included)! 
+Be sure to plan to attend the [Social Event](/participants#social-event), an evening of desserts, beverages and music to take place Tuesday, August 1st, following the poster session, at the Vancouver Aquarium following the Tuesday evening poster session (also included)! 
 
 ## Estimated Fees
 
