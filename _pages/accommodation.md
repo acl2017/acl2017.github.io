@@ -3,18 +3,41 @@ title: Accommodation
 layout: single
 permalink: /accommodation/
 sidebar: false
+gallery:
+  - url: http://acl2017.org/downloads/westin-bayshore-floorplans.pdf
+    image_path: "floorplans-icon.png"
+    alt: "Westin Bayshore Floorplans"
+    title: "Westin Bayshore Floorplans"
 ---
 {% include base_path %}
 
 {% include toc icon="gears" %}
 
-## General Information
+## About Vancouver
 
-We have secured accommodation for regular participants at ACL discounted rates at three conveniently located hotels in Vancouver: [Westin Bayshore Vancouver](#westin-bayshore-vancouver) (the conference hotel, with the largest block of rooms), the [Marriott Vancouver Pinnacle Downtown](#marriott-vancouver-pinnacle-downtown) (a spillover hotel with 50 guest rooms), and the [Sheraton Vancouver Wall Centre](#sheraton-vancouver-wall-centre) (another spillover hotel with 60 guest rooms). 
+From June &mdash; August, temperatures are generally warm, ranging from 20-28&deg;C (approximately 78-90&deg;F). Lots of sunshine can be expected. Daylight hours are approximately 6:00 am – 9:00 pm. Currently (as of March 19th), one Canadian dollar (CAD) is equal to .70€ or $0.75.
 
-We also have booked a small number of rooms specifically for students at super-discounted rates:  [Westin Bayshore Vancouver](#westin-bayshore-vancouver-1) (the conference hotel, with 10 rooms), the [Georgian Court Hotel](#georgian-court-hotel) (with 20 rooms), and the [YWCA Hotel](#ywca-hotel) (with 20 rooms).  To the extent possible, we encourage students to share rooms.
+### Conference Venue
+
+ACL 2017 will be held from July 30th through August 4th, 2017 at the Westin Bayshore Hotel in downtown Vancouver:
+<pre>
+1601 Bayshore Drive
+Vancouver, BC V6G 2V4
+Tel:  +1-604-682-3377
+<a href="http://www.westinbayshore.com/">http://www.westinbayshore.com/</a>
+</pre>
+
+All parts of the conference will take place at the Westin Bayshore Hotel on the first and second floors.  Precise room assignments will be made closer to the conference. 
+
+{% include gallery %}
+
+### Things to Do &amp; See
+
+Enjoy views of the coastline, distant mountains, and Stanley Park, plus easy access to all of the best things to do in Vancouver.  Boasting one of the most spectacular coastal locations in the world, the snowcapped mountains and the Pacific Ocean come together to create a truly magnificent setting. In addition, you are moments from shopping at Robson Street and Pacific Centre Mall, and attractions like the Vancouver Aquarium and Granville Island. Find even more things to do in Vancouver at <a href="www.tourismvancouver.com">www.tourismvancouver.com</a> or visit the hotel's website.
 
 ## Regular Accommodation
+
+We have secured accommodation for regular participants at ACL discounted rates at three conveniently located hotels in Vancouver: [Westin Bayshore Vancouver](#westin-bayshore-vancouver) (the conference hotel, with the largest block of rooms), the [Marriott Vancouver Pinnacle Downtown](#marriott-vancouver-pinnacle-downtown) (a spillover hotel with 50 guest rooms), and the [Sheraton Vancouver Wall Centre](#sheraton-vancouver-wall-centre) (another spillover hotel with 60 guest rooms). 
 
 Links to reservation pages and more details for each of the hotels are provided below.
 
@@ -58,6 +81,8 @@ Links to reservation pages and more details for each of the hotels are provided 
 </div>
 
 ## Student Accommodation
+
+We also have booked a small number of rooms specifically for students at super-discounted rates:  [Westin Bayshore Vancouver](#westin-bayshore-vancouver-1) (the conference hotel, with 10 rooms), the [Georgian Court Hotel](#georgian-court-hotel) (with 20 rooms), and the [YWCA Hotel](#ywca-hotel) (with 20 rooms).  To the extent possible, we encourage students to share rooms.
 
 The ACL Office will accept your reservation request and make the reservations on your behalf.  Room sharing is recommended since only a limited number of rooms are available at the discounted rates. If you would like to share, you will need to specify the total number of people who will be sharing the room including yourself (i.e., yourself plus 1 to 3 others). Please be aware that rooms typically come with two beds so any more than two people may have to share a bed.
 
@@ -134,3 +159,20 @@ Transportation to the Westin Bayshore Hotel, the Marriott Vancouver Pinnacle Dow
 - Bus: $8.75 CAD (one way)
 - Subway: $ 8.75 CAD (one way)
 - Taxi: $35 CAD (one way; prices may vary)
+
+## Conference Map
+
+The following Google Map shows all of the hotels mentioned above along with the Aquarium. 
+
+<iframe src="https://www.google.com/maps/d/embed?mid=1EhSyPf9HTBeVIoAe0FwJ5dMdHkc" width="640" height="480"></iframe>
+
+## Visa Information
+
+Since visa applications can take 1–4 months to be approved, we advise that you apply well in advance. 
+
+If you require an invitation letter for your visa application, please email the ACL Business Manager, <a href="mailto:acl@aclweb.org">Priscilla Rasmussen</a> with the following information: 
+
+- Your full name
+- Your address
+- If you are presenting, the title of the paper you are presenting as well as the venue of the presentation: Main Conference, or Workshop (give name of workshop), or Tutorial (give name of tutorial).
+

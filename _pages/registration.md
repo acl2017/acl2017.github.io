@@ -41,9 +41,9 @@ Please note that:
 
 ## What's included
 
-Your registration includes an exciting scientific program, a welcome reception, two poster sessions (with dinners), demonstrations, exhibits, breakfasts and breaks each day.  
+As in previous years, your conference registration includes the main conference sessions, poster sessions, and demonstration sessions. Workshops and tutorials are not included. Also included are a Welcome Reception Sunday evening, breakfasts, mid-morning and mid-afternoon coffee breaks each day, and full dinners at both of the poster/demo sessions on Monday and Tuesday evenings.  
 
-Also included is access to the [conference social event](/social), an evening of desserts, beverages and music to take place Tuesday, August 1st, following the poster session, at the Vancouver Aquarium.
+Be sure to plan to attend the [Social Event](/social), an evening of desserts, beverages and music to take place Tuesday, August 1st, following the poster session, at the Vancouver Aquarium following the Tuesday evening poster session (also included)! 
 
 ## Estimated Fees
 
