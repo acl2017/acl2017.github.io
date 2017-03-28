@@ -39,7 +39,10 @@ platinum:
     image_path: alibaba-logo.png
     alt: "Alibaba Logo"
     title: "Alibaba"
-  - image_path: blank-logo.png
+  - url: http://www.facebook.com
+    image_path: facebook-logo.png
+    alt: "Facebook Logo"
+    title: "Facebook"
   - image_path: blank-logo.png
 gold:
   - url: http://www.ebay.com
@@ -62,7 +65,10 @@ gold:
     image_path: elsevier-logo.png
     alt: "Elsevier Logo"
     title: "Elsevier"
-  - image_path: blank-logo.png
+  - url: http://www.maluuba.com
+    image_path: maluuba-logo.png
+    alt: "Maluuba Logo"
+    title: "Maluuba"
   - image_path: blank-logo.png
   - image_path: blank-logo.png
 silver:
@@ -90,7 +96,10 @@ silver:
     image_path: duolingo-logo.png
     alt: "Duolingo Logo"
     title: "Duolingo"
-  - image_path: blank-logo.png
+  - url: http://www.cvte.com/en/
+    image_path: cvte-logo.png
+    alt: "CVTE Logo"
+    title: "CVTE"
   - image_path: blank-logo.png
 bronze:
   - url: https://yandex.com
