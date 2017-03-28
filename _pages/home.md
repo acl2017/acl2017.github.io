@@ -11,10 +11,10 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**March 28, 2017**. Information on obtaining an [invitation letter for a visa](/accommodation#visa-information) is now available. If you require a visa to attend ACL, please start the process as soon as possible.
+**March 28, 2017**. Information on obtaining an [invitation letter for a visa](/participants#visa-information) is now available. If you require a visa to attend ACL, please start the process as soon as possible.
 {: .notice--info} 
 
-**March 18, 2017**. Preliminary information about [registration](/registration/) and about [accommodation](/accommodation) is available. Please book your rooms at the discounted rates as soon as possible. There are several other large events being held in Vancouver at the same time as ACL, and we expect the hotels to fill up.
+**March 18, 2017**. Preliminary information about [registration](/registration/) and about [regular](/participants#regular-accommodation) as well as [student](/participants#student-accommodation) accommodation is available. Please book your rooms at the discounted rates as soon as possible. There are several other large events being held in Vancouver at the same time as ACL, and we expect the hotels to fill up.
 {: .notice}     
  
 <h2>Welcome!</h2>

@@ -7,8 +7,8 @@ main:
   - title: "Registration"
     url: /registration
 
-  - title: "Accommodation"
-    url: "/accommodation"
+  - title: "Participants"
+    url: "/participants"
 
   - title: "Tutorials"
     url: "/tutorials"

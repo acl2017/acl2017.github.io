@@ -1,7 +1,7 @@
 ---
-title: Accommodation
+title: Information for Participants
 layout: single
-permalink: /accommodation/
+permalink: /participants/
 sidebar: false
 gallery:
   - url: http://acl2017.org/downloads/westin-bayshore-floorplans.pdf
