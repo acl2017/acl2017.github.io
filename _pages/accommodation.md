@@ -164,7 +164,7 @@ Transportation to the Westin Bayshore Hotel, the Marriott Vancouver Pinnacle Dow
 
 The following Google Map shows all of the hotels mentioned above along with the Aquarium. 
 
-<iframe src="https://www.google.com/maps/d/embed?mid=1EhSyPf9HTBeVIoAe0FwJ5dMdHkc" width="640" height="480"></iframe>
+<iframe src="https://www.google.com/maps/d/embed?mid=1EhSyPf9HTBeVIoAe0FwJ5dMdHkc" width="480" height="360"></iframe>
 
 ## Visa Information
 
