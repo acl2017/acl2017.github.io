@@ -52,7 +52,7 @@ Links to reservation pages and more details for each of the hotels are provided 
 - ACL discounted rates are available through Friday, July 7, 2017 at 5pm local time.
 
 <div class="text-center"> 
-<a href="https://www.starwoodmeeting.com/events/start.action?id=1611213443&key=1B2786E7"><button class="btn btn--large">Click to Reserve</button></a>
+<a href="https://www.starwoodmeeting.com/events/start.action?id=1611213443&key=1B2786E7" target="_blank"><button class="btn btn--large">Click to Reserve</button></a>
 </div>
 
 
@@ -64,7 +64,7 @@ Links to reservation pages and more details for each of the hotels are provided 
 - ACL discounted rates are available through Thursday, June 15, 2017 at 5pm local time.
 
 <div class="text-center"> 
-<a href="https://aws.passkey.com/e/49043562"><button class="btn btn--large">Click to Reserve</button></a>
+<a href="https://aws.passkey.com/e/49043562" target="_blank"><button class="btn btn--large">Click to Reserve</button></a>
 </div>
 
 
@@ -77,7 +77,7 @@ Links to reservation pages and more details for each of the hotels are provided 
 - ACL discounted rates are available through Tuesday, May 30, 2017 at 5pm local time.
 
 <div class="text-center"> 
-<a href="https://www.starwoodmeeting.com/events/start.action?id=1701194750&key=89F9058"><button class="btn btn--large">Click to Reserve</button></a>
+<a href="https://www.starwoodmeeting.com/events/start.action?id=1701194750&key=89F9058" target="_blank"><button class="btn btn--large">Click to Reserve</button></a>
 </div>
 
 ## Student Accommodation
@@ -148,7 +148,7 @@ The Georgian Court Hotel and YWCA Hotel are conveniently located in the same blo
 Extra persons can *only* be accommodated in the Double;Double w/Private Bath at $15 CAD per night per person with a maximum of 4 people. Wifi, linens, and towels included.
 
 <div class="text-center"> 
-<a href="https://goo.gl/forms/hx5qKruufwnU9xro2"><button class="btn btn--large">Student Reservation Request Form</button></a>
+<a href="https://goo.gl/forms/hx5qKruufwnU9xro2" target="_blank"><button class="btn btn--large">Student Reservation Request Form</button></a>
 </div>
 
 ## Transportation
@@ -183,11 +183,9 @@ The following Google Map shows all of the hotels mentioned above along with the 
 
 ## Visa Information
 
-Since visa applications can take 1–4 months to be approved, we advise that you apply well in advance. 
+Since visa applications can take 1–4 months to be approved, we advise that you apply well in advance. If you require an invitation letter for your visa application, please click on the button below to fill out a request form.
 
-If you require an invitation letter for your visa application, please email the ACL Business Manager, <a href="mailto:acl@aclweb.org">Priscilla Rasmussen</a> with the following information: 
-
-- Your full name
-- Your address
-- If you are presenting, the title of the paper you are presenting as well as the venue of the presentation: Main Conference, or Workshop (give name of workshop), or Tutorial (give name of tutorial).
+<div class="text-center"> 
+<a href="https://goo.gl/forms/6qW50gBl0tPUtA482" target="_blank"><button class="btn btn--large">Visa Letter Request Form</button></a>
+</div>
 
