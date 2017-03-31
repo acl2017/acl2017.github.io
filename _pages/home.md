@@ -11,12 +11,12 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**January 25, 2017**. The NSF has [awarded](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1714855&HistoricalAwards=false) $15,000 to the [Student Research Workshop](https://sites.google.com/site/aclsrw2017/) to help subsidize travel, conference, and housing costs for students participating in the workshop. 
-{: .notice--info}
+**March 28, 2017**. Information on obtaining an [invitation letter for a visa](/participants#visa-information) is now available. If you require a visa to attend ACL, please start the process as soon as possible.
+{: .notice--info} 
 
-**January 17, 2017**. List of [accepted tutorials](/tutorials/) posted.
-{: .notice--info}
-
+**March 18, 2017**. Preliminary information about [registration](/registration/) and about [regular](/participants#regular-accommodation) as well as [student](/participants#student-accommodation) accommodation is available. Please book your rooms at the discounted rates as soon as possible. There are several other large events being held in Vancouver at the same time as ACL, and we expect the hotels to fill up.
+{: .notice}     
+ 
 <h2>Welcome!</h2>
 
 The 55th annual meeting of the Association for Computational Linguistics (ACL) will take place in Vancouver, Canada. ACL 2017 will be held at the [Westin Bayshore Hotel](http://www.starwoodhotels.com/westin/property/overview/index.html?propertyID=1080) in downtown Vancouver from July 30th through August 4th, 2017.
@@ -59,3 +59,8 @@ As in previous years, the program of the conference includes poster sessions, tu
         </tr>
     </tbody>
 </table>
+
+<h2>ACL 2017 Anti-Harassment Policy</h2>
+ACL 2017 adheres to the <a href="https://www.aclweb.org/adminwiki/index.php?title=Anti-Harassment_Policy">ACL Anti-Harassment Policy</a>. Any participant who experiences harassment or hostile behavior may contact any current member of the <a href="https://www.aclweb.org/portal/about">ACL Executive Committee</a> or contact <a href="mailto:acl@aclweb.org">Priscilla Rasmussen</a>, who is usually available at the registration desk of the conference. Please be assured that if you approach us, your concerns will be kept in strict confidence, and we will consult with you on any actions taken.
+
+

@@ -23,31 +23,111 @@ platinum:
     image_path: tenecent-logo.png
     alt: "Tenecent Logo"
     title: "Tenecent"
-  - image_path: blank-logo.png
+  - url: http://www.google.com
+    image_path: google-logo.png
+    alt: "Google Logo"
+    title: "Google"
+  - url: http://www.baidu.com
+    image_path: baidu-logo.png
+    alt: "Baidu Logo"
+    title: "Baidu"
+  - url: http://www.apple.com
+    image_path: apple-logo.png
+    alt: "Apple Logo"
+    title: "Apple"
+  - url: http://alibabagroup.com/en/global/home
+    image_path: alibaba-logo.png
+    alt: "Alibaba Logo"
+    title: "Alibaba"
+  - url: http://www.facebook.com
+    image_path: facebook-logo.png
+    alt: "Facebook Logo"
+    title: "Facebook"
   - image_path: blank-logo.png
 gold:
   - url: http://www.ebay.com
     image_path: ebay-logo.png
     alt: "Ebay Logo"
     title: "Ebay"
+  - url: http://www.microsoft.com
+    image_path: microsoft-logo.png
+    alt: "Microsoft Logo"
+    title: "Microsoft"
+  - url: http://www.research.ibm.com
+    image_path: ibm-logo.png
+    alt: "IBM Logo"
+    title: "IBM"
+  - url: https://www.sap.com/index.html
+    image_path: sap-logo.png
+    alt: "SAP Logo"
+    title: "SAP"
+  - url: https://www.elsevier.com
+    image_path: elsevier-logo.png
+    alt: "Elsevier Logo"
+    title: "Elsevier"
+  - url: http://www.maluuba.com
+    image_path: maluuba-logo.png
+    alt: "Maluuba Logo"
+    title: "Maluuba"
   - image_path: blank-logo.png
   - image_path: blank-logo.png
+silver:
+  - url: https://www.oracle.com
+    image_path: oracle-logo.png
+    alt: "Oracle Logo"
+    title: "Oracle"
+  - url: http://www.nuance.com/index.htm
+    image_path: nuance-logo.png
+    alt: "Nuance Logo"
+    title: "Nuance"
+  - url: http://www.sogou.com/
+    image_path: sogou-logo.png
+    alt: "Sogou Logo"
+    title: "Sogou"
+  - url: http://www.huawei.com/en/
+    image_path: huawei-logo.png
+    alt: "Huwaei Technologies Logo"
+    title: "Huwaei Technologies"
+  - url: http://www.adobe.com
+    image_path: adobe-logo.png
+    alt: "Adobe Logo"
+    title: "Adobe"
+  - url: http://www.duolingo.com
+    image_path: duolingo-logo.png
+    alt: "Duolingo Logo"
+    title: "Duolingo"
+  - url: http://www.cvte.com/en/
+    image_path: cvte-logo.png
+    alt: "CVTE Logo"
+    title: "CVTE"
   - image_path: blank-logo.png
 bronze:
   - url: https://yandex.com
     image_path: yandex-logo.png
     alt: "Yandex Logo"
     title: "Yandex"
-  - image_path: blank-logo.png
-  - image_path: blank-logo.png
+  - url: https://www.grammarly.com
+    image_path: grammarly-logo.png
+    alt: "Grammarly Logo"
+    title: "Grammarly"
+  - url: http://lab.toutiao.com/ 
+    image_path: toutiao-logo.png
+    alt: "Toutiao Logo"
+    title: "Toutiao"
   - image_path: blank-logo.png
 supporter:
-  - url: http://www.washington.edu
+  - url: http://www.compling.uw.edu
     image_path: uw-logo.png
     alt: "University of Washington Logo"
     title: "University of Washington"
-  - image_path: blank-logo.png
-  - image_path: blank-logo.png
+  - url: http://www.brandeis.edu/departments/computer-science/comp-linguistics/
+    image_path: brandeis-logo.png
+    alt: "Brandeis University Logo"
+    title: "Computational Linguistics@Brandeis University"
+  - url: http://datascience.columbia.edu
+    image_path: columbia-logo.png
+    alt: "Columbia University Logo"
+    title: "Data Science Institute@Columbia University"
   - image_path: blank-logo.png
 sidebar: 
     nav: "sponsors"
@@ -56,14 +136,45 @@ sidebar:
 
 {% include toc icon="gears" %}
 
-On this page, we provide an overview of why the Association for Computational Linguistics solicits sponsorships, a summary of the sponsorship benefits, and a list of the sponsors for the ACL 2017 conference.
+On this page, we provide a list of the sponsors for the ACL 2017 conference, an overview of why the Association for Computational Linguistics solicits sponsorships, and a summary of the sponsorship benefits.
+
+# Current Sponsors
+
+We gratefully acknowledge support provided by the following for the ACL 2017 conference:
+
+## Platinum Tier
+
+{% include gallery id="platinum" class="fourth" %}
+
+## Gold Tier
+
+{% include gallery id="gold" class="fourth" %}
+
+## Silver Tier
+
+{% include gallery id="silver" class="fourth" %}
+
+## Bronze Tier
+
+{% include gallery id="bronze" class="fourth" %}
+
+## Supporter Tier
+
+{% include gallery id="supporter" class="fourth" %}
+
+# Other Support
+
+![image-left](/images/nsf-logo.jpg){: .align-left}
+
+We acknowledge the generous support of the National Science Foundation which has [awarded](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1714855&HistoricalAwards=false) a $15,000 grant to the [ACL Student Research Workshop](https://sites.google.com/site/aclsrw2017/). The money will be used to subsidize housing, registration, and travel costs for US-based students who are selected to participate in the workshop. 
+<br/><br/>
 
 # Why Become a Sponsor?
 The Annual Meeting for the Association for Computational Linguistics (ACL) provides the pre-eminent forum for dissemination of the latest developments in computational linguistics and natural language processing.  The ACL, its regional chapter in Europe (EACL), and the Special Interest Group on  Linguistic data and corpus-based approaches to NLP (EMNLP) will host the following ACL-related conferences in 2017:
 
  1. EACL 2017 in Valencia, Spain (April 3 &ndash; 7)
  2. ACL-HLT 2017 in Vancouver, Canada (July 30 &ndash; August 4)
- 3. EMNLP 2017 in Copenhagen, Denmark, USA (September 7 &ndash; 11)
+ 3. EMNLP 2017 in Copenhagen, Denmark (September 7 &ndash; 11)
 
 In recent years, ACL conferences have enjoyed a growth spurt and now attract between 1,200 and 1,700 paying attendees, EACL conferences between 500 and 600, and EMNLP conferences between 700 and 850.
 
@@ -90,29 +201,3 @@ For contact information &amp; pricing details for all sponsorship tiers and pack
 <a href="/sponsors/benefits/"><button class="btn btn--large btn--inverse">Sponsorship Tiers &amp; Pricing</button></a>
 </div>
 <br/>
-
-# Current Sponsors
-
-We gratefully acknowledge support provided by the following for the ACL 2017 conference:
-
-## Platinum Tier
-
-{% include gallery id="platinum" class="fourth" %}
-
-## Gold Tier
-
-{% include gallery id="gold" class="fourth" %}
-
-## Bronze Tier
-
-{% include gallery id="bronze" class="fourth" %}
-
-## Supporter Tier
-
-{% include gallery id="supporter" class="fourth" %}
-
-# Other Support
-
-![image-left](/images/nsf-logo.jpg){: .align-left}
-
-We acknowledge the generous support of the National Science Foundation which has [awarded](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1714855&HistoricalAwards=false) a $15,000 grant to the [ACL Student Research Workshop](https://sites.google.com/site/aclsrw2017/). The money will be used to subsidize housing, registration, and travel costs for US-based students who are selected to participate in the workshop. 
