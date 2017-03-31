@@ -445,6 +445,9 @@ script: |
                         return false;
                     }
                 }
+                else {
+                    generatePDFfromTable();
+                }
             });
 
             $('body').on('click', 'table.paper-table tr#paper ', function(event, papersTriggered, fromSession) {
