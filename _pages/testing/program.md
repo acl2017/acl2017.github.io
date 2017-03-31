@@ -536,7 +536,7 @@ script: |
             <li>Note that if you are using Safari, you will need to use <em>Cmd-P</em> to print and <em>File > Save as ... </em>to download the schedule. Chrome and Firefox have buttons for printing and saving as part of their PDF rendering UI.</li>
             <li>Currently, users can only choose papers sessions and individual papers. However, we can certainly extend this to posters since people might want to pick those out in advance too.</li>
             <li>The generated PDF might have some blank rows at the bottom as padding since the PDF generation has been programmed to avoid rows being split across pages.</li>
-            <li>Please report any issues or problems you run into [here](https://github.com/acl2017/acl2017.github.io/issues). Click on the "New Issue" button at the top right.</li>
+            <li>Please report any issues or problems you run into <a href="https://github.com/acl2017/acl2017.github.io/issues">here</a>. Click on the "New Issue" button at the top right.</li>
         </ul>
     </div>
 </div>
