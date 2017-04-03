@@ -417,7 +417,7 @@ script: |
                         });
                     }
                     else {
-                        vex.dialog.alert('Nothing to generate. No papers were chosen and plenary sessions were excluded.')
+                        vex.dialog.alert('Nothing to generate. No papers were chosen and plenary sessions were excluded.');
                         return false;
                     }
                 }
