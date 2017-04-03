@@ -5,7 +5,7 @@ excerpt: "ACL 2017 conference program."
 permalink: /testing/program
 sidebar: false
 script: |
-    <!-- <script>vex.defaultOptions.className = 'vex-theme-wireframe'</script> -->
+    <script>vex.defaultOptions.className = 'vex-theme-wireframe'</script>
     <script type="text/javascript">
 
         sessionInfoHash = {};
@@ -32,78 +32,11 @@ script: |
         }
 
         function clearHiddenProgramTable() {
-            $('#hidden-program-table tbody').html('');
+            $("#hidden-program-table tbody").html("");
         }
 
         function populateHiddenProgramTable() {
-
-            // if we are including plenary information in the PDF
-            // then sort its keys too and merge the two sets of
-            // keys together before sorting
-            var sortedPaperTimes = includePlenaryInSchedule ? Object.keys(chosenPapersHash).concat(Object.keys(plenarySessionHash)) : Object.keys(chosenPapersHash);
-            sortedPaperTimes.sort(function(a, b) { return new Date(a) - new Date(b) });
-
-            // now iterate over these sorted papers and create the
-            // rows for the hidden table that will be used to 
-            // generate the PDF
-            var prevSession = null;
-            var prevDay = null;
-            var prevSessionLocation = null;
-            var latestEndingTime;
-            var output = [];
-            for(var i=0; i<sortedPaperTimes.length; i++) {
-                var key = sortedPaperTimes[i];
-                // if it's a plenary session
-                if (key in plenarySessionHash) {
-                    var plenarySession = plenarySessionHash[key]
-                    if (plenarySession.day == prevDay) {
-                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.title, plenarySession.location));
-                    }
-                    else {
-                        output.push(makeDayHeaderRow(plenarySession.day));
-                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.title, plenarySession.location));
-                    }
-                    prevSession = plenarySession.id;
-                    prevDay = plenarySession.day;
-                }
-                // if it's a paper ...
-                else if (key in chosenPapersHash) {
-
-                    var paper = chosenPapersHash[key];
-                    if (sessionInfoHash[paper.session].day == prevDay) {
-                        // if the day is the same, then we check the session
-                        // if the session is the same, then we just add:
-                        // - the paper info itself
-                        if (paper.session == prevSession) {
-                            output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
-                        }
-                        // if the day is the same but the session is not,
-                        // then we need to add:
-                        // - a new session header
-                        // - the paper info itself
-                        else {
-                            var session = sessionInfoHash[paper.session];
-                            output.push(makePaperSessionHeaderRow(paper.start, session.title, session.location));
-                            output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
-                        }
-                    }
-                    // if the day is NOT the same, we need to add:
-                    // - a new day header
-                    // - a new session header
-                    // - the paper info itself
-                    else {
-                        var session = sessionInfoHash[paper.session];
-                        output.push(makeDayHeaderRow(session.day));
-                        output.push(makePaperSessionHeaderRow(paper.start, session.title, session.location));
-                        output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
-                    }
-                    prevSession = paper.session;
-                    prevDay = sessionInfoHash[paper.session].day;
-                }
-            }
-
-            // append the output to the hidden table
-            $('#hidden-program-table tbody').append(output);
+            return true;    
         }
 
         function generatePDFfromTable() {
