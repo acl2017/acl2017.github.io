@@ -5,7 +5,7 @@ excerpt: "ACL 2017 conference program."
 permalink: /testing/program
 sidebar: false
 script: |
-    <script>vex.defaultOptions.className = 'vex-theme-wireframe'</script>
+    <!-- <script>vex.defaultOptions.className = 'vex-theme-wireframe'</script> -->
     <script type="text/javascript">
 
         sessionInfoHash = {};
