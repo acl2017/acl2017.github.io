@@ -410,17 +410,6 @@ script: |
                     includePlenaryInSchedule = $(this).prop('checked');
             });
 
-            $('body').on('click', 'a#notesCollapseLink', function(event) {
-                event.preventDefault();
-                if ($(this).text() == '[Hide Notes]') {
-                    $(this).text('[Read Notes]');
-                }
-                else {
-                    $(this).text('[Hide Notes]');
-                }
-                $('#testingNotes').slideToggle();
-            });
-
             $('body').on('click', 'a#generatePDFButton', function(event) {
                 // if we haven't chosen any papers, and we aren't including
                 // plenary sessions either, then raise an error. If we are
@@ -524,23 +513,22 @@ script: |
     <tbody></tbody>
 </table>
 
-<div id="testingInstructions">
+<div id="testingInstructions" style="font-size: smaller;">
     <p>Welcome, testers! Thank you for helping us test the ACL 2017 conference program page. For the first time, the program page will allow conference attendees to choose the sessions (or individual paper talks) they want to attend <em>and</em> generate a PDF of their customized schedule! </p>
 
-    <p>Click on the title of a session or anywhere in the cell containing the title to expand and collapse the session. Click on a talk to select it, click again to unselect it. You cannot select multiple talks for the same time slot.</p>
-
-    <strong>Important testing notes</strong> (PLEASE READ if you are here for the first time). <a href="#" id="notesCollapseLink">[Read Notes]</a>
-        <div id="testingNotes">
-        <ul>
-            <li>Since ACL 2017 doesn't have a program yet, we used the content from the NAACL 2016 conference for the purposes of testing.</li>
-            <li>The page has been tested on MacOS 10.12.3 on recent versions of Chrome, Firefox, and Safari browsers. It would be good to test on other OSes (Windows, Linux) and other browsers, although older IE versions (earlier than IE 11) will probably not work. </li>
-            <li>The page has also been tested on an iPhone simulator and works as expected. However, it'd be nice to test it on Android (**NOTE**: only Chrome on Android will work).</li>
-            <li>Note that if you are using Safari, you will need to use <em>Cmd-P</em> to print and <em>File > Save as ... </em>to download the schedule. Chrome and Firefox have buttons for printing and saving as part of their PDF rendering UI.</li>
-            <li>Currently, users can only choose papers sessions and individual papers. However, we can certainly extend this to posters since people might want to pick those out in advance too.</li>
-            <li>The generated PDF might have some blank rows at the bottom as padding since the PDF generation has been programmed to avoid rows being split across pages.</li>
-            <li>Please report any issues or problems you run into <a href="https://github.com/acl2017/acl2017.github.io/issues" target="_blank">here</a>. Click on the "New Issue" button at the top right.</li>
-        </ul>
-    </div>
+    <strong>Instructions &amp; Notes</strong>:
+    <ul>
+        <li>Click on the title of a session or anywhere in the cell containing the title to expand and collapse the session. </li>
+        <li>Click on a talk to select it, click again to unselect it. You cannot select multiple talks for the same time slot.</li>
+        <li>Click on the <em>Generate PDF</em> button at the bottom of the page to generate the PDF for your selected talks.</li>
+        <li>Since ACL 2017 doesn't have a program yet, we used the content from the NAACL 2016 conference for the purposes of testing.</li>
+        <li>The page has been tested on MacOS 10.12.3 on the most recent versions of Chrome, Firefox, and Safari browsers. We would like to test on other OSes (Windows, Linux) and other browsers, although older browsers (e.g., Internet Explorer <= v10) will likely not work. </li>
+        <li>The page has also been tested on an iPhone simulator and works as expected. However, it'd be nice to test it on Android (**NOTE**: only Chrome on Android will work).</li>
+        <li>Note that if you are using Safari, you will need to use <em>Cmd-P</em> to print and <em>File > Save as ... </em>to download the schedule. Chrome and Firefox have buttons for printing and saving as part of their PDF rendering UI.</li>
+        <li>Currently, users can only choose papers sessions and individual papers. However, we can certainly extend this to posters since people might want to pick those out in advance too.</li>
+        <li>The generated PDF might have some blank rows at the bottom as padding since the PDF generation has been programmed to avoid rows being split across pages.</li>
+        <li><strong>Please report any issues or problems you run into <a href="https://github.com/acl2017/acl2017.github.io/issues/new" target="_blank">here</a>. You will need a GitHub account.</strong></li>
+    </ul>
 </div>
 
 <div class="schedule">
