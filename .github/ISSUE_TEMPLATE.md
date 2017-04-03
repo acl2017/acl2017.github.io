@@ -15,7 +15,7 @@
 -->
 
 - **Platform:** 
-- **Operating system:** 
+- **Operating system (incl. full version):** 
 - **Browser:** 
 
 ---
