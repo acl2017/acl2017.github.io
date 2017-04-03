@@ -39,7 +39,12 @@ script: |
 
             /* if we are including plenary information in the PDF then sort its keys too and merge the two sets of keys together before sorting */
 
-            var sortedPaperTimes = includePlenaryInSchedule ? Object.keys(chosenPapersHash).concat(Object.keys(plenarySessionHash)) : Object.keys(chosenPapersHash);
+            var sortedPaperTimes;
+            if (includePlenaryInSchedule) {
+                sortedPaperTimes = Object.keys(chosenPapersHash).concat(Object.keys(plenarySessionHash)) }
+            else {
+                sortedPaperTimes = Object.keys(chosenPapersHash);
+            }
             sortedPaperTimes.sort(function(a, b) { return new Date(a) - new Date(b) });
 
             /* now iterate over these sorted papers and create the rows for the hidden table that will be used to generate the PDF */
@@ -48,9 +53,11 @@ script: |
             var prevSessionLocation = null;
             var latestEndingTime;
             var output = [];
-            for(var i=0; i<sortedPaperTimes.length; i++) {
+            for(var i=0; i<sortedPaperTimes.length; i++) {                
                 var key = sortedPaperTimes[i];
-                /* if it's a plenary session */
+                
+                /*  is it a plenary session */
+                
                 if (key in plenarySessionHash) {
                     var plenarySession = plenarySessionHash[key]
                     if (plenarySession.day == prevDay) {
