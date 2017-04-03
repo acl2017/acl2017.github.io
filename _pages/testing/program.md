@@ -54,12 +54,13 @@ script: |
             var latestEndingTime;
             var output = [];
             for(var i=0; i<sortedPaperTimes.length; i++) {                
+                
                 var key = sortedPaperTimes[i];
                 
                 /*  is it a plenary session */
                 
                 if (key in plenarySessionHash) {
-                    var plenarySession = plenarySessionHash[key]
+                    var plenarySession = plenarySessionHash[key];
                     if (plenarySession.day == prevDay) {
                         output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.title, plenarySession.location));
                     }
