@@ -428,7 +428,7 @@ script: |
 
             $('body').on('click', 'table.paper-table tr#paper ', function(event, papersTriggered, fromSession) {
                 event.preventDefault();
-                var paperTimeObj = $(this).children('td#paper-time')
+                var paperTimeObj = $(this).children('td#paper-time');
                 var paperTime = paperTimeObj.text().trim();
                 var paperInfo = getPaperInfoFromTime(paperTimeObj);
                 var paperObject = {};
