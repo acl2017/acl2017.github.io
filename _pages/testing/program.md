@@ -267,7 +267,7 @@ script: |
                 var sessionTitle = $(this).children('.session-title').text().trim();
                 var sessionLocation = $(this).children('span.session-location').text().trim();
                 var sessionTimeText = $(this).children('span.session-time').text().trim();
-                var sessionTimes = sessionTimeText.match(/\d+:\d+ [AP]M/g)
+                var sessionTimes = sessionTimeText.match(/\d+:\d+ [AP]M/g);
                 var sessionDay = $(this).prevAll('.day:first').text().trim();
                 var sessionStart = sessionTimes[0];
                 var sessionEnd = sessionTimes[1];
