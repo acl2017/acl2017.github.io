@@ -527,6 +527,8 @@ script: |
 <div id="testingInstructions">
     <p>Welcome, testers! Thank you for helping us test the ACL 2017 conference program page. For the first time, the program page will allow conference attendees to choose the sessions (or individual paper talks) they want to attend <em>and</em> generate a PDF of their customized schedule! </p>
 
+    <p>Click on the title of a session or anywhere in the cell containing the title to expand and collapse the session. Click on a talk to select it, click again to unselect it. You cannot select multiple talks for the same time slot.</p>
+
     <strong>Important testing notes</strong> (PLEASE READ if you are here for the first time). <a href="#" id="notesCollapseLink">[Read Notes]</a>
         <div id="testingNotes">
         <ul>
