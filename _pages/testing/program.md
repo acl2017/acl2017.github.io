@@ -23,8 +23,12 @@ script: |
 
         function inferAMPM(time) {
             var hour = time.split(':')[0];
-            var ans = (hour == 12 || hour <= 6) ? ' PM' : ' AM';
-            return ans;
+            if (hour == 12 || hour <= 6) {
+                return 'PM';
+            }
+            else {
+                return 'AM';
+            }
         }
 
         function generatePDFfromTable() {
