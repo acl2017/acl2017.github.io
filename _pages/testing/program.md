@@ -30,6 +30,98 @@ script: |
                 return 'AM';
             }
         }
+        
+        function generatePDFfromTable() {
+
+            // clear the hidden table before starting
+            clearHiddenProgramTable();
+
+            // now populate the hidden table with the currently 
+            // chosen papers
+            populateHiddenProgramTable();
+
+            var doc = new jsPDF('p', 'pt', 'letter');
+            var res = doc.autoTableHtmlToJson(document.getElementById("hidden-program-table"));
+            doc.autoTable(res.columns, res.data, {
+                pagebreak: 'avoid',
+                avoidRowSplit: true,
+                theme: 'grid',
+                startY: 70, 
+                showHeader: false,
+                addPageContent: function (data) {
+                    // HEADER only on the first page
+                    var pageNumber =doc.internal.getCurrentPageInfo().pageNumber;
+
+                    if (pageNumber == 1) {
+                        doc.setFontSize(16);
+                        doc.setFontStyle('normal');
+                        doc.text("ACL 2017 Schedule", (doc.internal.pageSize.width - (data.settings.margin.left*2))/2 - 30, 50);
+                    }
+
+                    // FOOTER on each page
+                    doc.setFont('courier');
+                    doc.setFontSize(8);
+                    doc.text('(Generated via http://acl2017.org/testing/program)', data.settings.margin.left, doc.internal.pageSize.height - 10);
+                },
+                styles: {
+                    font: 'times',
+                    overflow: 'linebreak'
+                },
+                columnStyles: {0: 
+                    {
+                        fontStyle: 'bold',
+                    },
+                    1: {
+                        columnWidth: 465
+                    }
+                },
+                drawCell: function(cell, data) {
+                    var cellClass = cell.raw.className;
+                    if (cellClass == 'header' || cellClass == 'day-header') {
+                        cell.width = 465;
+                        cell.styles.columnWidth = 465;
+                        cell.text = doc.splitTextToSize(cell.text.join(' '), 465, {fontSize: 12});
+                        // cell.text = cell.text.join(" ");
+                        // cell.textPos.x = 465/2 - 30;
+                    }
+                    if (cellClass == 'day-header') {
+                        cell.textPos.x = (465 - data.settings.margin.left)/2 + 60;
+                    }
+                    if (cellClass == 'plenary-header') {
+                        cell.width = 465;
+                        cell.styles.columnWidth = 465;
+                        cell.text = doc.splitTextToSize(cell.text.join(' '), 465, {fontSize: 12});
+                        // cell.text = cell.text.join(" ");
+                    }
+                    if (cellClass == "skip" || cellClass == 'day-skip') {
+                        doc.rect(data.settings.margin.left, data.row.y, data.table.width, 20, 'S');
+                    }
+                },
+                createdCell: function(cell, data) {
+                    var cellClass = cell.raw.className;
+                    if (cellClass == 'header') {
+                        cell.styles.fontStyle = 'italic';
+                        cell.styles.fontSize = 12;
+                    }
+                    else if (cellClass == 'day-header') {
+                        cell.styles.fontStyle = 'bold';
+                        cell.styles.fontSize = 12;
+                        cell.styles.fillColor = [189, 193, 196];
+                    }
+                    else if (cellClass == 'plenary-header') {
+                        cell.styles.fontStyle = 'italic';
+                        cell.styles.fontSize = 12;
+                    }
+                    else if (cellClass== 'day-skip') {
+                        cell.styles.fillColor = [189, 193, 196];
+                    }
+                    else {
+                        cell.styles.fontSize = 10;
+                    }
+                },
+            });
+            doc.output('dataurlnewwindow');
+        }
     </script>
 ---
 {% include base_path %}
