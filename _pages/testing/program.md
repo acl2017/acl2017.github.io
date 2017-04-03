@@ -37,9 +37,8 @@ script: |
 
         function populateHiddenProgramTable() {
 
-            // if we are including plenary information in the PDF
-            // then sort its keys too and merge the two sets of
-            // keys together before sorting
+            /* if we are including plenary information in the PDF then sort its keys too and merge the two sets of keys together before sorting */
+
             var sortedPaperTimes = includePlenaryInSchedule ? Object.keys(chosenPapersHash).concat(Object.keys(plenarySessionHash)) : Object.keys(chosenPapersHash);
             sortedPaperTimes.sort(function(a, b) { return new Date(a) - new Date(b) });
 
@@ -111,8 +110,7 @@ script: |
             // clear the hidden table before starting
             clearHiddenProgramTable();
 
-            // now populate the hidden table with the currently 
-            // chosen papers
+            // now populate the hidden table with the currently chosen papers
             populateHiddenProgramTable();
 
             var doc = new jsPDF('p', 'pt', 'letter');
