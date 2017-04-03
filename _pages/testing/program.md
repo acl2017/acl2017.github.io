@@ -99,7 +99,7 @@ script: |
                 }
             }
 
-            // append the output to the hidden table
+            /* append the output to the hidden table */
             $("#hidden-program-table tbody").append(output);
         }
 
