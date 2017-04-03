@@ -1,0 +1,272 @@
+/* ==========================================================================
+    CONFERENCE SCHEDULE
+   ========================================================================== */
+
+div.schedule {
+    max-width: 100%;
+}
+
+div#generatePDF {
+    padding-top: 20px;
+    max-width: 100%;
+}
+
+#hidden-program-table {
+    display: none;
+}
+
+a.session-selector {
+    color: #fff;
+    background-color: $success-color;
+    font-size: $type-size-8;
+    padding: 0.35em 0.45em;
+    font-family: $sans-serif;
+    font-weight: bold;
+    text-align: center;
+    @include breakpoint($medium) {
+      font-size: $type-size-7;
+    }
+    &.disabled {
+        background-color: $success-color;
+        /*pointer-events: none;*/
+        cursor: not-allowed;
+        filter: alpha(opacity=40);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        opacity: 0.40;
+    }
+}
+
+a.session-deselector {
+    color: #fff;
+    background-color: $danger-color;
+    font-size: $type-size-8;
+    padding: 0.35em 0.45em;
+    font-family: $sans-serif;
+    font-weight: bold;
+    text-align: center;
+    @include breakpoint($medium) {
+      font-size: $type-size-7;
+    }
+    &.disabled {
+        background-color: $danger-color;
+        /*pointer-events: none;*/
+        cursor: not-allowed;
+        filter: alpha(opacity=40);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        opacity: 0.40;
+    }
+}
+
+div#generatePDFForm {
+    @include span(12);
+    padding: 0.5em;
+    font-family: $serif;
+    text-align: center;
+    vertical-align: middle;
+    font-size: $type-size-6;
+    background-color: $lighter-gray;
+    border: 1px solid $light-gray;
+
+    a#generatePDFButton {
+        margin-top: 10px;
+        font-size: $type-size-5;
+
+        @include breakpoint($medium) {
+            font-size: $type-size-4;
+        }
+    }
+
+    input#includePlenaryCheckBox {
+        color: #f2f2f2;
+        width: 16px;
+        height: 16px;
+    }
+
+    span#checkBoxLabel {
+        font-size: $type-size-4;
+    }
+}
+
+div.day {
+    @include span(12);
+    padding: 0.5em;
+    font-family: $serif;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+    font-size: $type-size-4;
+    background-color: $lighter-gray;
+    border: 1px solid $light-gray;
+}
+
+div#testingInstructions {
+    font-size: $type-size-6;
+    padding: 10px;
+
+    @include breakpoint($medium) {
+        font-size: $type-size-5;
+    }
+
+    div#testingNotes {
+        float: left;
+    }
+
+}
+
+
+div.session {
+    display: inline;
+    padding: 0.5em;
+    padding-left: 1em;
+    border: 1px solid $light-gray;
+
+    &.session-tutorials, &.session-plenary {
+        @include span(12);
+    }
+
+    &.session-papers1, &.session-papers2 {
+        @include span(12 of 12);
+
+        @include breakpoint($medium) {
+            @include span(12 of 12);
+        }
+
+        @include breakpoint($medium-wide) {
+            @include span(12 of 12);
+        }
+
+        @include breakpoint($large) {
+            @include span(4 wide of 12 (gutter-override: 0));
+        }
+
+        @include breakpoint($x-large) {
+            @include span(4 wide of 12 (gutter-override: 0));
+        }
+    }
+
+    &.session-papers3 {
+        @include span(12 of 12);
+
+        @include breakpoint($medium) {
+            @include span(12 of 12);
+        }
+
+        @include breakpoint($medium-wide) {
+            @include span(12 of 12);
+        }
+
+        @include breakpoint($large) {
+            @include span(4 last (gutter-override: 0));
+        }
+
+        @include breakpoint($x-large) {
+            @include span(4 last (gutter-override: 0));
+        }
+    }
+
+    .session-title {
+        font-size: $type-size-5;
+        color: $text-color;
+    }
+
+
+    .session-time {
+        margin-right: 5px;
+
+        @include breakpoint($medium) {
+            margin-right: 10px;
+        }
+
+        font-size: $type-size-5;
+        font-style: italic;
+    }
+
+
+    .paper-session-details {
+        float: left;
+    }
+
+    hr.detail-separator {
+        border: 0;
+        height: 1px;
+        background: $light-gray;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .tutorial-session-details {
+        ul {
+            padding: 0px;
+            list-style-type: none;
+            line-height: 1em;
+        }
+    }
+
+    .session-abstract {
+        font-size: $type-size-6;
+    }
+
+    .paper-table {
+        border: 0px;
+        font-size: $type-size-6;
+        td {
+            border: 0px;
+        }
+    }
+
+    .tutorial-title {
+        font-size: $type-size-6;
+        font-weight: bold;
+    }
+
+    .paper-title  {
+        font-weight: bold;
+    }
+
+    .session-location {
+        float: right;
+        cursor: text;
+    }
+
+    .info-button {
+        cursor: text;
+    }
+
+    .session-people {
+        font-size: $type-size-5;
+    }
+
+    tr#paper {
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+    tr#paper.selected {
+        background-color: $lighter-gray2;
+    }
+
+    #expander {
+      display: inline-block;
+
+      margin-right: 5px;
+      width: 10px;
+      height: 10px;
+      @include breakpoint($medium) {
+        margin-right: 10px;
+        width: 12px;
+        height: 12px;
+      }
+      background: linear-gradient(to bottom, transparent 35%, $dark-gray 35%, $dark-gray 65%,  transparent 65%),
+        linear-gradient(to right, transparent 35%, $dark-gray 35%, $dark-gray 65%, transparent 65%);
+      border: 1px solid $gray;
+    }
+
+    #expander.expanded {
+      background: linear-gradient(to bottom, transparent 35%, $dark-gray 35%, $dark-gray 65%,  transparent 65%);
+    }
+
+}
+

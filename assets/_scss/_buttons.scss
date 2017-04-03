@@ -151,4 +151,48 @@
   &--small {
     font-size: $type-size-7;
   }
+
+  /* button for acl conference program location names */
+
+  &--location {
+
+    padding: 0.25em 0.35em;
+    font-size: $type-size-8;
+
+    @include breakpoint($medium) {
+          font-size: $type-size-7;
+    }
+  }
+
+  &--danger-small {
+    background-color: $danger-color;
+    padding: 0.25em 0.35em;
+    font-size: $type-size-8;
+    text-decoration: none;
+
+    &:hover {
+      background-color: mix(#000, $danger-color, 20%);
+    }
+
+    @include breakpoint($medium) {
+      font-size: $type-size-7;
+    }
+  }
+
+  &--success-small {
+
+    background-color: $success-color;
+    padding: 0.25em 0.35em;
+    font-size: $type-size-8;
+    text-decoration: none;
+
+    &:hover {
+      background-color: mix(#000, $success-color, 20%);
+    }
+
+    @include breakpoint($medium) {
+      font-size: $type-size-7;
+    }
+
+  }
 }
