@@ -14,23 +14,23 @@ script: |
         includePlenaryInSchedule = true;
 
         function padTime(str) {
-            return String('0' + str).slice(-2);
+            return String("0" + str).slice(-2);
         }
 
         function formatDate(dateObj) {
-            return dateObj.toLocaleDateString() + ' ' + padTime(dateObj.getHours()) + ':' + padTime(dateObj.getMinutes());
+            return dateObj.toLocaleDateString() + " " + padTime(dateObj.getHours()) + ":" + padTime(dateObj.getMinutes());
         }
 
         function inferAMPM(time) {
-            var hour = time.split(':')[0];
+            var hour = time.split(":")[0];
             if (hour == 12 || hour <= 6) {
-                return 'PM';
+                return "PM";
             }
             else {
-                return 'AM';
+                return "AM";
             }
         }
-        
+
         function clearHiddenProgramTable() {
             $('#hidden-program-table tbody').html('');
         }
