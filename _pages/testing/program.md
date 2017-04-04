@@ -481,15 +481,16 @@ script: |
 </table>
 
 <div id="testingInstructions" style="font-size: smaller;">
-    <p>Welcome, testers! Thank you for helping us test the ACL 2017 conference program page. For the first time, the program page will allow conference attendees to choose the sessions (or individual paper talks) they want to attend <em>and</em> generate a PDF of their customized schedule! </p>
+    <p>Welcome, testers! Thank you for helping us test the ACL 2017 conference program page. </p>
+    
+    <p>For the first time, the program page will allow conference attendees to choose the sessions (or individual paper talks) they want to attend <em>and</em> generate a PDF of their customized schedule! </p>
 
     <strong>Instructions &amp; Notes</strong>:
     <ul>
         <li>Click on the title of a session or anywhere in the cell containing the title to expand and collapse the session. </li>
         <li>Click on a paper to select it, click again to unselect it.</li>
-        <li>You can select papers from different sessions but not for the same time slot. </li>
         <li>Click on the <em>Generate PDF</em> button at the bottom of the page to generate the PDF for your selected talks.</li>
-        <li>You <em>cannot</em> select multiple papers for the same time slot. We think it defeats the purpose of having an easy-to-read, glanceable PDF. However, if you disagree, please let us know below.</li>
+        <li>You can mix and match papers from different sessions but you <em>cannot</em> select multiple papers for the same time slot. We think it defeats the purpose of having an easy-to-read, glanceable PDF. However, if you disagree, please let us know below.</li>
         <li>Currently, only paper sessions are supported. Tutorial and poster sesions are not. However, we can certainly extend this to posters since people might want to pick those out in advance too.</li>
         <li>Since ACL 2017 doesn't have a program yet, we used the content from the NAACL 2016 conference for the purposes of testing.</li>
         <li>The page has been tested on MacOS 10.12.3 on the most recent versions of Chrome, Firefox, and Safari browsers. We would like to test on other OSes (Windows, Linux) and other browsers, although older browsers (e.g., Internet Explorer <= v10) will likely not work. </li>
