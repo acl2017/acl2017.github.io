@@ -66,6 +66,7 @@ script: |
                         fontStyle: 'bold',
                     },
                     1: {
+                        textColor: 0,
                         columnWidth: 465
                     }
                 },
