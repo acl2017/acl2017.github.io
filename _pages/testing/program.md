@@ -488,7 +488,7 @@ script: |
 
     <strong>Instructions &amp; Notes</strong>:
     <ul>
-        <li>Click on the title of a session or anywhere in the cell containing the title to expand and collapse the session. </li>
+        <li>Click on the title of a session to expand and collapse the session. On a non-mobile browser, you can also click anywhere in the cell containing the session title.</li>
         <li>Click on a paper to select it, click again to unselect it.</li>
         <li>Click on the <em>Generate PDF</em> button at the bottom of the page to generate the PDF for your selected talks.</li>
         <li>You can mix and match papers from different sessions but you <em>cannot</em> select multiple papers for the same time slot. We think it defeats the purpose of having an easy-to-read, glanceable PDF. However, if you disagree, please let us know below.</li>
