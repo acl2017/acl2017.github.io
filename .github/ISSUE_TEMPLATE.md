@@ -16,7 +16,7 @@
 
 - **Platform:** 
 - **Operating system (incl. full version):** 
-- **Browser:** 
+- **Browser (incl. version):** 
 
 ---
 
