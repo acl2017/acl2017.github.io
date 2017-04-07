@@ -69,7 +69,10 @@ gold:
     image_path: maluuba-logo.png
     alt: "Maluuba Logo"
     title: "Maluuba"
-  - image_path: blank-logo.png
+  - url: http://www.recruit.ai
+    image_path: rit-logo.png
+    alt: "RIT Logo"
+    title: "RIT"
   - image_path: blank-logo.png
 silver:
   - url: https://www.oracle.com
