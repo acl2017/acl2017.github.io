@@ -33,7 +33,7 @@ All parts of the conference will take place at the Westin Bayshore Hotel on the 
 
 ### Things to Do &amp; See
 
-Enjoy views of the coastline, distant mountains, and Stanley Park, plus easy access to all of the best things to do in Vancouver.  Boasting one of the most spectacular coastal locations in the world, the snowcapped mountains and the Pacific Ocean come together to create a truly magnificent setting. In addition, you are moments from shopping at Robson Street and Pacific Centre Mall, and attractions like the Vancouver Aquarium and Granville Island. Find even more things to do in Vancouver at <a href="www.tourismvancouver.com">www.tourismvancouver.com</a> or visit the hotel's website.
+Enjoy views of the coastline, distant mountains, and Stanley Park, plus easy access to all of the best things to do in Vancouver.  Boasting one of the most spectacular coastal locations in the world, the snowcapped mountains and the Pacific Ocean come together to create a truly magnificent setting. In addition, you are moments from shopping at Robson Street and Pacific Centre Mall, and attractions like the Vancouver Aquarium and Granville Island. Find even more things to do in Vancouver at <a href="http://www.tourismvancouver.com">www.tourismvancouver.com</a> or visit the hotel's website.
 
 ## Regular Accommodation
 
