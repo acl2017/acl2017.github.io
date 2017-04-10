@@ -34,7 +34,7 @@ script: |
             /* now populate the hidden table with the currently chosen papers */
             populateHiddenProgramTable();
 
-            var doc = new jsPDF('p', 'pt', 'letter');
+            var doc = new jsPDF('l', 'pt', 'letter');
             var res = doc.autoTableHtmlToJson(document.getElementById("hidden-program-table"));
             doc.autoTable(res.columns, res.data, {
                 pagebreak: 'avoid',
@@ -44,7 +44,7 @@ script: |
                 showHeader: false,
                 addPageContent: function (data) {
                     /* HEADER only on the first page */
-                    var pageNumber =doc.internal.getCurrentPageInfo().pageNumber;
+                    var pageNumber = doc.internal.getCurrentPageInfo().pageNumber;
 
                     if (pageNumber == 1) {
                         doc.setFontSize(16);
@@ -61,64 +61,58 @@ script: |
                     font: 'times',
                     overflow: 'linebreak',
                     valign: 'middle',
-                    lineWidth: 0.4
+                    lineWidth: 0.4,
+                    fontSize: 11
                 },
-                columnStyles: {0: 
-                    {
-                        fontStyle: 'bold',
-                        halign: 'right'
-                    },
-                    1: {
-                        textColor: 0,
-                        columnWidth: 465
-                    }
+                 columnStyles: {
+                    0: { fontStyle: 'bold', halign: 'right', columnWidth: 70 },
+                    1: { columnWidth: 110 },
+                    2: { fontStyle: 'italic', textColor: [0, 0, 0], columnWidth: 530 }
                 },
                 drawCell: function(cell, data) {
                     var cellClass = cell.raw.className;
-                    if (cellClass == 'header' || cellClass == 'day-header') {
-                        cell.width = 465;
-                        cell.styles.columnWidth = 465;
-                        cell.text = doc.splitTextToSize(cell.text.join(' '), 465, {fontSize: 12});
+                    if (cellClass == 'info-day') {
+                        cell.text = doc.splitTextToSize(cell.text.join(' '), 530, {fontSize: 11});
+                        cell.textPos.x = (530 - data.settings.margin.left)/2 + 120;
                     }
-                    if (cellClass == 'day-header') {
-                        cell.textPos.x = (465 - data.settings.margin.left)/2 + 60;
-                    }
-                    if (cellClass == 'plenary-header') {
-                        cell.width = 465;
-                        cell.styles.columnWidth = 465;
-                        cell.text = doc.splitTextToSize(cell.text.join(' '), 465, {fontSize: 12});
-                    }
-                    if (cellClass == "skip" || cellClass == 'day-skip') {
-                        doc.rect(data.settings.margin.left, data.row.y, data.table.width, 20, 'S');
+                    else if (cellClass == 'info-plenary') {
+                        cell.text = doc.splitTextToSize(cell.text.join(' '), 530, {fontSize: 11});
                     }
                 },
                 createdCell: function(cell, data) {
                     var cellClass = cell.raw.className;
-                    if (cellClass == 'header') {
-                        cell.styles.fontStyle = 'italic';
-                        cell.styles.fontSize = 12;
-                    }
-                    else if (cellClass == 'day-header') {
+                    var cellText = cell.text[0];
+                    if (cellClass == 'info-day') {
                         cell.styles.fontStyle = 'bold';
                         cell.styles.fontSize = 12;
                         cell.styles.fillColor = [187, 187, 187];
                     }
-                    else if (cellClass == 'plenary-header') {
-                        cell.styles.fontStyle = 'italic';
-                        cell.styles.fontSize = 12;
-                        if (cell.text[0] == "Break" || cell.text[0] == "Lunch") {
+                    else if (cellClass == 'info-plenary') {
+                        cell.styles.fontSize = 11;
+                        if (cellText == "Break" || cellText == "Lunch" || cellText == "Breakfast") {
                             cell.styles.fillColor = [238, 238, 238];
                         }
                     }
-                    else if (cellClass == 'day-skip') {
-                        cell.styles.fillColor = [187, 187, 187];
+                    else if (cellClass == "location") {
+                        if (cellText == '') {
+                            var infoType = data.row.raw[2].getAttribute('class');
+                            if (infoType == "info-day") {
+                                cell.styles.fillColor = [187, 187, 187];
+                            }
+                            else if (infoType == "info-plenary") {
+                                cell.styles.fillColor = [238, 238, 238];
+                            }
+                        }
                     }
-                    else if (cellClass == "break-skip") {
+                    else if (cellClass == "time") {
+                        var infoType = data.row.raw[2].getAttribute('class');
+                        var infoText = data.row.raw[2].textContent;
+                        if (infoType == "info-day" && cellText == '') {
+                            cell.styles.fillColor = [187, 187, 187];
+                        }
+                        if (infoType == "info-plenary" && (infoText == "Break" || infoText == "Lunch" || infoText == "Breakfast")) {
                             cell.styles.fillColor = [238, 238, 238];
-                            cell.styles.fontSize = 10;
-                    }
-                    else {
-                        cell.styles.fontSize = 10;
+                        }
                     }
                 },
             });
@@ -145,32 +139,17 @@ script: |
         }
 
         function makeDayHeaderRow(day) {
-            return '<tr><td class="day-skip"></td><td class="day-header">' + day + '</td></tr>';
-        }
-
-        function makePaperSessionHeaderRow(title, location) {
-            return '<tr><td class="skip"></td><td class="header">' + title + ' [' + location + ']' + '</td></tr>';
+            return '<tr><td class="time"></td><td class="location"></td><td class="info-day">' + day + '</td></tr>';
         }
 
         function makePlenarySessionHeaderRow(start, end, title, location) {
             var startWithoutAMPM = start.slice(0, -3);
             var endWithoutAMPM = end.slice(0, -3);
-            var skipClassName = "skip";
-            if (title == "Break" || title == "Lunch") {
-                skipClassName = "break-skip";
-            }
-            if (location == '') {
-                ans = '<tr><td class="' + skipClassName + '">' + startWithoutAMPM + ' &ndash; ' + endWithoutAMPM + '</td><td class="plenary-header">' + title + '</td></tr>';
-            }
-            else {
-                ans =  '<tr><td class="' + skipClassName + '">' + startWithoutAMPM + ' &ndash; ' + endWithoutAMPM + '</td><td class="plenary-header">' + title + ' [' + location + ']' + '</td></tr>';
-            }
-            return ans;
+            return '<tr><td class="time">' + startWithoutAMPM + '&ndash;' + endWithoutAMPM + '</td><td class="location">' + location + '</td><td class="info-plenary">' + title + '</td></tr>';
         }
 
-
-        function makePaperRow(start, end, title) {
-            return '<tr><td>' + start + ' &ndash; ' + end + '</td><td>' + title + '</td></tr>';
+        function makePaperRow(start, end, location, session, title) {
+            return '<tr><td class="time">' + start + '&ndash;' + end + '</td><td class="location">' + location + '</td><td class="info-paper">' + title + ' [' + session + ']</td></tr>';
         }
 
         function clearHiddenProgramTable() {
@@ -211,24 +190,24 @@ script: |
                     if (sessionInfoHash[paper.session].day == prevDay) {
                         /* if the day is the same, then we check the session if the session is the same, then we just add: the paper info itself */
                         if (paper.session == prevSession) {
-                            output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
+                            output.push(makePaperRow(paper.start, paper.end, prevSessionLocation, prevSessionTitle, ASCIIFold(paper.title)));
                         }
                         /* if the day is the same but the session is not, then we need to add: a new session header, the paper info itself */
                         else {
                             var session = sessionInfoHash[paper.session];
-                            output.push(makePaperSessionHeaderRow(session.title, session.location));
-                            output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
+                            output.push(makePaperRow(paper.start, paper.end, session.location, session.title, ASCIIFold(paper.title)));
                         }
                     }
                     /* if the day is NOT the same, we need to add: a new day header, a new session header, the paper info itself */
                     else {
                         var session = sessionInfoHash[paper.session];
                         output.push(makeDayHeaderRow(session.day));
-                        output.push(makePaperSessionHeaderRow(session.title, session.location));
-                        output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
+                        output.push(makePaperRow(paper.start, paper.end, session.location, session.title, ASCIIFold(paper.title)));
                     }
                     prevSession = paper.session;
                     prevDay = sessionInfoHash[paper.session].day;
+                    prevSessionLocation = sessionInfoHash[paper.session].location;
+                    prevSessionTitle = sessionInfoHash[paper.session].title;
                 }
             }
 
@@ -499,7 +478,7 @@ script: |
 
 <table id="hidden-program-table">
     <thead>
-        <tr><th></th><th></th></tr>
+        <tr><th>time</th><th>location</th><th>info</th></tr>
     </thead>
     <tbody></tbody>
 </table>
@@ -1572,6 +1551,7 @@ script: |
     <div class="session session-expandable session-plenary" id="session-deep-learning-panel">
         <div id="expander"></div><a href="#" class="session-title">Panel Discussion: How Will Deep Learning Change Computational Linguistics?</a><br/>        
         <span class="session-time">1:15 PM &ndash; 2:15 PM</span><br/>
+        <span class="session-location btn btn--location">Grande Ballroom</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
             <div class="session-abstract">
@@ -2286,6 +2266,7 @@ script: |
         <a href="#" class="session-title">NAACL Business Meeting</a><br/>
         <span class="session-people"><strong>All attendees are encouraged to participate in the business meeting.</strong></span><br/>
         <span class="session-time">1:00 PM &ndash; 2:00 PM</span><br/>
+        <span class="session-location btn btn--location">Grande Ballroom A</span>
     </div>
     <div class="session session-expandable session-papers1" id="session-9a">
         <div id="expander"></div><a href="#" class="session-title">Argumentation &amp; Discourse Relations</a><br/>
@@ -2463,6 +2444,7 @@ script: |
     <div class="session session-plenary" id="session-closing">
         <span class="session-title">Closing Remarks</span><br/>        
         <span class="session-time">5:35 PM &ndash; 5:45 PM</span>
+        <span class="session-location btn btn--location">Grande Ballroom</span>
     </div>
     <div id="generatePDFForm">
         <div id="formContainer">
