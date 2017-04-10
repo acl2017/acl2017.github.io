@@ -59,11 +59,13 @@ script: |
                 },
                 styles: {
                     font: 'times',
-                    overflow: 'linebreak'
+                    overflow: 'linebreak',
+                    valign: 'middle'
                 },
                 columnStyles: {0: 
                     {
                         fontStyle: 'bold',
+                        halign: 'right'
                     },
                     1: {
                         textColor: 0,
@@ -84,9 +86,13 @@ script: |
                         cell.width = 465;
                         cell.styles.columnWidth = 465;
                         cell.text = doc.splitTextToSize(cell.text.join(' '), 465, {fontSize: 12});
+                        if (cell.text[0] == "Break") {
+                            cell.styles.fillColor = [221, 221, 221];
+                        }
                     }
                     if (cellClass == "skip" || cellClass == 'day-skip') {
                         doc.rect(data.settings.margin.left, data.row.y, data.table.width, 20, 'S');
+                        cell.styles.halign = "right";
                     }
                 },
                 createdCell: function(cell, data) {
@@ -98,14 +104,14 @@ script: |
                     else if (cellClass == 'day-header') {
                         cell.styles.fontStyle = 'bold';
                         cell.styles.fontSize = 12;
-                        cell.styles.fillColor = [189, 193, 196];
+                        cell.styles.fillColor = [187, 187, 187];
                     }
                     else if (cellClass == 'plenary-header') {
                         cell.styles.fontStyle = 'italic';
                         cell.styles.fontSize = 12;
                     }
                     else if (cellClass== 'day-skip') {
-                        cell.styles.fillColor = [189, 193, 196];
+                        cell.styles.fillColor = [187, 187, 187];
                     }
                     else {
                         cell.styles.fontSize = 10;
@@ -138,23 +144,25 @@ script: |
             return '<tr><td class="day-skip"></td><td class="day-header">' + day + '</td></tr>';
         }
 
-        function makePaperSessionHeaderRow(start, title, location) {
-                return '<tr><td class="skip"></td><td class="header">' + start + inferAMPM(start) + ', ' + location + ' [' + title + ']' + '</td></tr>';
+        function makePaperSessionHeaderRow(start, end, title, location) {
+                return '<tr><td class="skip">' + start + ' &ndash; ' + end + '</td><td class="header">' + location + ' [' + title + ']' + '</td></tr>';
         }
 
-        function makePlenarySessionHeaderRow(start, title, location) {
+        function makePlenarySessionHeaderRow(start, end, title, location) {
+            var startWithoutAMPM = start.slice(0, -3);
+            var endWithoutAMPM = end.slice(0, -3);
             if (location == '') {
-                ans = '<tr><td class="skip"></td><td class="plenary-header">' + start + ', ' + title + '</td></tr>';
+                ans = '<tr><td class="skip">' + startWithoutAMPM + ' &ndash; ' + endWithoutAMPM + '</td><td class="plenary-header">' + title + '</td></tr>';
             }
             else {
-                ans =  '<tr><td class="skip"></td><td class="plenary-header">' + start + ', ' + location + ', ' + title  + '</td></tr>';
+                ans =  '<tr><td class="skip">' + startWithoutAMPM + ' &ndash; ' + endWithoutAMPM + '</td><td class="plenary-header">' + location + ', ' + title  + '</td></tr>';
             }
             return ans;
         }
 
 
         function makePaperRow(start, end, title) {
-            return '<tr><td>' + start + '–' + end + '</td><td>' + title + '</td></tr>';
+            return '<tr><td>' + start + ' &ndash; ' + end + '</td><td>' + title + '</td></tr>';
         }
 
         function clearHiddenProgramTable() {
@@ -179,11 +187,11 @@ script: |
                 if (key in plenarySessionHash) {
                     var plenarySession = plenarySessionHash[key];
                     if (plenarySession.day == prevDay) {
-                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.title, plenarySession.location));
+                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.end, plenarySession.title, plenarySession.location));
                     }
                     else {
                         output.push(makeDayHeaderRow(plenarySession.day));
-                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.title, plenarySession.location));
+                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.end, plenarySession.title, plenarySession.location));
                     }
                     prevSession = plenarySession.id;
                     prevDay = plenarySession.day;
@@ -200,7 +208,7 @@ script: |
                         /* if the day is the same but the session is not, then we need to add: a new session header, the paper info itself */
                         else {
                             var session = sessionInfoHash[paper.session];
-                            output.push(makePaperSessionHeaderRow(paper.start, session.title, session.location));
+                            output.push(makePaperSessionHeaderRow(paper.start, paper.end, session.title, session.location));
                             output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
                         }
                     }
@@ -208,7 +216,7 @@ script: |
                     else {
                         var session = sessionInfoHash[paper.session];
                         output.push(makeDayHeaderRow(session.day));
-                        output.push(makePaperSessionHeaderRow(paper.start, session.title, session.location));
+                        output.push(makePaperSessionHeaderRow(paper.start, paper.end, session.title, session.location));
                         output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
                     }
                     prevSession = paper.session;
