@@ -148,8 +148,8 @@ script: |
             return '<tr><td class="day-skip"></td><td class="day-header">' + day + '</td></tr>';
         }
 
-        function makePaperSessionHeaderRow(start, end, title, location) {
-                return '<tr><td class="skip">' + start + ' &ndash; ' + end + '</td><td class="header">' + title + ' [' + location + ']' + '</td></tr>';
+        function makePaperSessionHeaderRow(title, location) {
+            return '<tr><td class="skip"></td><td class="header">' + title + ' [' + location + ']' + '</td></tr>';
         }
 
         function makePlenarySessionHeaderRow(start, end, title, location) {
@@ -216,7 +216,7 @@ script: |
                         /* if the day is the same but the session is not, then we need to add: a new session header, the paper info itself */
                         else {
                             var session = sessionInfoHash[paper.session];
-                            output.push(makePaperSessionHeaderRow(paper.start, paper.end, session.title, session.location));
+                            output.push(makePaperSessionHeaderRow(session.title, session.location));
                             output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
                         }
                     }
@@ -224,7 +224,7 @@ script: |
                     else {
                         var session = sessionInfoHash[paper.session];
                         output.push(makeDayHeaderRow(session.day));
-                        output.push(makePaperSessionHeaderRow(paper.start, paper.end, session.title, session.location));
+                        output.push(makePaperSessionHeaderRow(session.title, session.location));
                         output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
                     }
                     prevSession = paper.session;
@@ -249,16 +249,23 @@ script: |
 
             /* get all the paper sessions and save the day and location for each of the in a hash */
             var paperSessions = $("[id|='session']").filter(function() { 
-                return this.id.match(/session-\d[a-z]/);
+                return this.id.match(/session-\d[a-z]$/);
             });
             $(paperSessions).each(function() {
                 var sessionTitle = $(this).children('.session-title').text().trim();
+                var sessionTimeText = $(this).children('span.session-time').text().trim();                
                 var sessionLocation = $(this).children('span.session-location').text().trim();
                 var sessionDay = $(this).prevAll('.day:first').text().trim();
+                var sessionTimes = sessionTimeText.match(/\d+:\d+ [AP]M/g);
+                var sessionDay = $(this).prevAll('.day:first').text().trim();
+                var sessionStart = sessionTimes[0];
+                var sessionEnd = sessionTimes[1];
                 var session = {};
                 session.title = sessionTitle;
                 session.location = sessionLocation;
                 session.day = sessionDay;
+                session.start = sessionStart;
+                session.end = sessionEnd;
                 sessionInfoHash[$(this).attr('id')] = session;
             });
 
