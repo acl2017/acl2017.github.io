@@ -100,7 +100,7 @@ silver:
     alt: "Duolingo Logo"
     title: "Duolingo"
   - url: http://www.cvte.com/en/
-    image_path: cvte-logo.png
+    image_path: cvte-stacked-logo.png
     alt: "CVTE Logo"
     title: "CVTE"
   - image_path: blank-logo.png
