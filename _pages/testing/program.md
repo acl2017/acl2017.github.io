@@ -60,7 +60,8 @@ script: |
                 styles: {
                     font: 'times',
                     overflow: 'linebreak',
-                    valign: 'middle'
+                    valign: 'middle',
+                    lineWidth: 0.4
                 },
                 columnStyles: {0: 
                     {
@@ -105,12 +106,16 @@ script: |
                     else if (cellClass == 'plenary-header') {
                         cell.styles.fontStyle = 'italic';
                         cell.styles.fontSize = 12;
-                        if (cell.text[0] == "Break") {
+                        if (cell.text[0] == "Break" || cell.text[0] == "Lunch") {
                             cell.styles.fillColor = [238, 238, 238];
                         }
                     }
-                    else if (cellClass== 'day-skip') {
+                    else if (cellClass == 'day-skip') {
                         cell.styles.fillColor = [187, 187, 187];
+                    }
+                    else if (cellClass == "break-skip") {
+                            cell.styles.fillColor = [238, 238, 238];
+                            cell.styles.fontSize = 10;
                     }
                     else {
                         cell.styles.fontSize = 10;
@@ -144,17 +149,21 @@ script: |
         }
 
         function makePaperSessionHeaderRow(start, end, title, location) {
-                return '<tr><td class="skip">' + start + ' &ndash; ' + end + '</td><td class="header">' + location + ' [' + title + ']' + '</td></tr>';
+                return '<tr><td class="skip">' + start + ' &ndash; ' + end + '</td><td class="header">' + title + ' [' + location + ']' + '</td></tr>';
         }
 
         function makePlenarySessionHeaderRow(start, end, title, location) {
             var startWithoutAMPM = start.slice(0, -3);
             var endWithoutAMPM = end.slice(0, -3);
+            var skipClassName = "skip";
+            if (title == "Break" || title == "Lunch") {
+                skipClassName = "break-skip";
+            }
             if (location == '') {
-                ans = '<tr><td class="skip">' + startWithoutAMPM + ' &ndash; ' + endWithoutAMPM + '</td><td class="plenary-header">' + title + '</td></tr>';
+                ans = '<tr><td class="' + skipClassName + '">' + startWithoutAMPM + ' &ndash; ' + endWithoutAMPM + '</td><td class="plenary-header">' + title + '</td></tr>';
             }
             else {
-                ans =  '<tr><td class="skip">' + startWithoutAMPM + ' &ndash; ' + endWithoutAMPM + '</td><td class="plenary-header">' + location + ', ' + title  + '</td></tr>';
+                ans =  '<tr><td class="' + skipClassName + '">' + startWithoutAMPM + ' &ndash; ' + endWithoutAMPM + '</td><td class="plenary-header">' + title + ' [' + location + ']' + '</td></tr>';
             }
             return ans;
         }
