@@ -86,13 +86,9 @@ script: |
                         cell.width = 465;
                         cell.styles.columnWidth = 465;
                         cell.text = doc.splitTextToSize(cell.text.join(' '), 465, {fontSize: 12});
-                        if (cell.text[0] == "Break") {
-                            cell.styles.fillColor = [221, 221, 221];
-                        }
                     }
                     if (cellClass == "skip" || cellClass == 'day-skip') {
                         doc.rect(data.settings.margin.left, data.row.y, data.table.width, 20, 'S');
-                        cell.styles.halign = "right";
                     }
                 },
                 createdCell: function(cell, data) {
@@ -109,6 +105,9 @@ script: |
                     else if (cellClass == 'plenary-header') {
                         cell.styles.fontStyle = 'italic';
                         cell.styles.fontSize = 12;
+                        if (cell.text[0] == "Break") {
+                            cell.styles.fillColor = [238, 238, 238];
+                        }
                     }
                     else if (cellClass== 'day-skip') {
                         cell.styles.fillColor = [187, 187, 187];
