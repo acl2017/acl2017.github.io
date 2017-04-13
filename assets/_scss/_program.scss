@@ -242,10 +242,18 @@ div.session {
     tr#paper {
         cursor: pointer;
         background-color: #fff;
-    }
+        &.selected {
+            background-color: $lighter-gray2;
+        }
 
-    tr#paper.selected {
-        background-color: $lighter-gray2;
+        @include breakpoint($large) {
+            &.hovered {
+                background-color: yellow;
+            }
+            &.hovered.selected {
+                background-color: #4EEE94;
+            }
+        }
     }
 
     #expander {

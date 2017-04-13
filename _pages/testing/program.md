@@ -35,13 +35,25 @@ script: |
             populateHiddenProgramTable();
 
             var doc = new jsPDF('l', 'pt', 'letter');
-            var res = doc.autoTableHtmlToJson(document.getElementById("hidden-program-table"));
-            doc.autoTable(res.columns, res.data, {
+            doc.autoTable({
+                fromHtml: "#hidden-program-table",
                 pagebreak: 'avoid',
                 avoidRowSplit: true,
                 theme: 'grid',
                 startY: 70, 
-                showHeader: false,
+                showHead: false,
+                styles: {
+                    font: 'times',
+                    overflow: 'linebreak',
+                    valign: 'middle',
+                    lineWidth: 0.4,
+                    fontSize: 11
+                },
+                 columnStyles: {
+                    0: { fontStyle: 'bold', halign: 'right', cellWidth: 70 },
+                    1: { cellWidth: 110 },
+                    2: { fontStyle: 'italic', cellWidth: 530 }
+                },
                 addPageContent: function (data) {
                     /* HEADER only on the first page */
                     var pageNumber = doc.internal.getCurrentPageInfo().pageNumber;
@@ -57,31 +69,21 @@ script: |
                     doc.setFontSize(8);
                     doc.text('(Generated via http://acl2017.org/testing/program)', data.settings.margin.left, doc.internal.pageSize.height - 10);
                 },
-                styles: {
-                    font: 'times',
-                    overflow: 'linebreak',
-                    valign: 'middle',
-                    lineWidth: 0.4,
-                    fontSize: 11
-                },
-                 columnStyles: {
-                    0: { fontStyle: 'bold', halign: 'right', columnWidth: 70 },
-                    1: { columnWidth: 110 },
-                    2: { fontStyle: 'italic', textColor: [0, 0, 0], columnWidth: 530 }
-                },
                 drawCell: function(cell, data) {
-                    var cellClass = cell.raw.className;
+                    var cellClass = cell.raw.content.className;
+                    /* center the day header */
                     if (cellClass == 'info-day') {
-                        cell.text = doc.splitTextToSize(cell.text.join(' '), 530, {fontSize: 11});
                         cell.textPos.x = (530 - data.settings.margin.left)/2 + 120;
                     }
+                    /* split long plenary session text */
                     else if (cellClass == 'info-plenary') {
                         cell.text = doc.splitTextToSize(cell.text.join(' '), 530, {fontSize: 11});
                     }
                 },
                 createdCell: function(cell, data) {
-                    var cellClass = cell.raw.className;
+                    var cellClass = cell.raw.content.className;
                     var cellText = cell.text[0];
+                    /* */
                     if (cellClass == 'info-day') {
                         cell.styles.fontStyle = 'bold';
                         cell.styles.fontSize = 12;
@@ -93,9 +95,12 @@ script: |
                             cell.styles.fillColor = [238, 238, 238];
                         }
                     }
+                    else if (cellClass == "info-conflict-paper") {
+                        cell.styles.fillColor = [255, 0, 0];
+                    }
                     else if (cellClass == "location") {
                         if (cellText == '') {
-                            var infoType = data.row.raw[2].getAttribute('class');
+                            var infoType = data.row.raw[2].content.className;
                             if (infoType == "info-day") {
                                 cell.styles.fillColor = [187, 187, 187];
                             }
@@ -105,8 +110,8 @@ script: |
                         }
                     }
                     else if (cellClass == "time") {
-                        var infoType = data.row.raw[2].getAttribute('class');
-                        var infoText = data.row.raw[2].textContent;
+                        var infoType = data.row.raw[2].content.className;
+                        var infoText = data.row.raw[2].content.textContent;
                         if (infoType == "info-day" && cellText == '') {
                             cell.styles.fillColor = [187, 187, 187];
                         }
@@ -138,22 +143,83 @@ script: |
             return [new Date(exactPaperStartingTime).toJSON(), paperSlotStart, paperSlotEnd, paperTitle, paperSession.attr('id')];
         }
 
+        function getConflicts(paperObject) {
+
+            /* first get the conflicting sessions */
+            var sessionId = paperObject.parents('.session').attr('id').match(/session-\d/)[0];
+            var parallelSessions = paperObject.parents('.session').siblings().filter(function() { return this.id.match(sessionId); })
+            
+            /* now get the conflicting papers from those sessions */
+            var paperTime = paperObject.children('td#paper-time')[0].textContent;
+            return $(parallelSessions).find('table.paper-table tr#paper').filter(function(index) { return this.children[0].textContent == paperTime });
+
+        }
+
         function makeDayHeaderRow(day) {
             return '<tr><td class="time"></td><td class="location"></td><td class="info-day">' + day + '</td></tr>';
         }
 
-        function makePlenarySessionHeaderRow(start, end, title, location) {
-            var startWithoutAMPM = start.slice(0, -3);
-            var endWithoutAMPM = end.slice(0, -3);
-            return '<tr><td class="time">' + startWithoutAMPM + '&ndash;' + endWithoutAMPM + '</td><td class="location">' + location + '</td><td class="info-plenary">' + title + '</td></tr>';
+        function makePlenarySessionHeaderRow(session) {
+            var startWithoutAMPM = session.start.slice(0, -3);
+            var endWithoutAMPM = session.end.slice(0, -3);
+            return '<tr><td class="time">' + startWithoutAMPM + '&ndash;' + endWithoutAMPM + '</td><td class="location">' + session.location + '</td><td class="info-plenary">' + session.title + '</td></tr>';
         }
 
-        function makePaperRow(start, end, location, session, title) {
-            return '<tr><td class="time">' + start + '&ndash;' + end + '</td><td class="location">' + location + '</td><td class="info-paper">' + title + ' [' + session + ']</td></tr>';
+        function makePaperRow(start, end, title, session) {
+            return '<tr><td class="time">' + start + '&ndash;' + end + '</td><td class="location">' + session.location + '</td><td class="info-paper">' + title + ' [' + session.title + ']</td></tr>';
+        }
+
+        function makeConflictingPapersRow(start, end, sessions, titles) {
+            var numConflicts = titles.length;
+            rows = ['<tr><td rowspan=' + numConflicts + ' class="time">' + start + '&ndash;' + end + '</td><td class="location">' + sessions[0].location + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>']
+            for (var i=1; i<numConflicts; i++) {
+                var session = sessions[i];
+                var title = titles[i];
+                rows.push('<tr><td></td><td class="location">' + session.location + '</td><td class="info-paper">' + title + ' [' + session.title + ']</td></tr>')
+            }
+            return rows;
         }
 
         function clearHiddenProgramTable() {
             $('#hidden-program-table tbody').html('');
+        }
+
+        function addToChosen(timeKey, paperObject) {
+            if (timeKey in chosenPapersHash) {
+                var papers = chosenPapersHash[timeKey];
+                papers.push(paperObject)
+                chosenPapersHash[timeKey] = papers;
+            }
+            else {
+                chosenPapersHash[timeKey] = [paperObject];
+            }
+        }
+
+        function removeFromChosen(timeKey, paperObject) {
+            if (timeKey in chosenPapersHash) {
+                var papers = chosenPapersHash[timeKey];
+                var paperIndex = papers.map(function(paper) { return paper.title; }).indexOf(paperObject.title);
+                if (paperIndex !== -1) {
+                    var removedPaper = papers.splice(paperIndex, 1);
+                    delete removedPaper;
+                    if (papers.length == 0) {
+                        delete chosenPapersHash[timeKey];
+                    }
+                    else {
+                        chosenPapersHash[timeKey] = papers;
+                    }
+                }
+            }
+        }
+
+        function isChosen(timeKey, paperObject) {
+            var ans = false;
+            if (timeKey in chosenPapersHash) {
+                var papers = chosenPapersHash[timeKey];
+                var paperIndex = papers.map(function(paper) { return paper.title; }).indexOf(paperObject.title);
+                ans = paperIndex !== -1;
+            }
+            return ans;
         }
 
         function populateHiddenProgramTable() {
@@ -163,9 +229,7 @@ script: |
             sortedPaperTimes.sort(function(a, b) { return new Date(a) - new Date(b) });
 
             /* now iterate over these sorted papers and create the rows for the hidden table that will be used to generate the PDF */
-            var prevSession = null;
             var prevDay = null;
-            var prevSessionLocation = null;
             var latestEndingTime;
             var output = [];
             for(var i=0; i<sortedPaperTimes.length; i++) {
@@ -174,40 +238,42 @@ script: |
                 if (key in plenarySessionHash) {
                     var plenarySession = plenarySessionHash[key];
                     if (plenarySession.day == prevDay) {
-                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.end, plenarySession.title, plenarySession.location));
+                        output.push(makePlenarySessionHeaderRow(plenarySession));
                     }
                     else {
                         output.push(makeDayHeaderRow(plenarySession.day));
-                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.end, plenarySession.title, plenarySession.location));
+                        output.push(makePlenarySessionHeaderRow(plenarySession));
                     }
-                    prevSession = plenarySession.id;
                     prevDay = plenarySession.day;
                 }
-                /* if it's a paper */
+                /* if it's a paper or list of papers */
                 else if (key in chosenPapersHash) {
 
-                    var paper = chosenPapersHash[key];
-                    if (sessionInfoHash[paper.session].day == prevDay) {
-                        /* if the day is the same, then we check the session if the session is the same, then we just add: the paper info itself */
-                        if (paper.session == prevSession) {
-                            output.push(makePaperRow(paper.start, paper.end, prevSessionLocation, prevSessionTitle, ASCIIFold(paper.title)));
+                    /* get the papers for this time slot */
+                    var papers = chosenPapersHash[key];
+
+                    /* if there are multiple papers for this time slot that means that they are conflicting papers and so are automatically on the same day but in different sessions */
+                    if (papers.length > 1) {
+                        var sessions = papers.map(function(paper) { return sessionInfoHash[paper.session]; });
+                        sessionDay = sessions[0].day;
+                        if (sessionDay != prevDay) {
+                            output.push(makeDayHeaderRow(sessionDay));
                         }
-                        /* if the day is the same but the session is not, then we need to add: a new session header, the paper info itself */
-                        else {
-                            var session = sessionInfoHash[paper.session];
-                            output.push(makePaperRow(paper.start, paper.end, session.location, session.title, ASCIIFold(paper.title)));
+                        var titles = papers.map(function(paper) { return ASCIIFold(paper.title); });
+                        output = output.concat(makeConflictingPapersRow(papers[0].start, papers[0].end, sessions, titles));
+                        prevDay = sessionDay;
+                    }
+                    /* otherwise we have a single paper in this time slot */
+                    else {                        
+                        var paper = papers[0];
+                        var paperSession = sessionInfoHash[paper.session];
+                        /* if the day is NOT the same, add a new day header and then the paper row, otherwise just the paper row */
+                        if (paperSession.day != prevDay) {
+                            output.push(makeDayHeaderRow(paperSession.day));
                         }
+                        output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title), paperSession));
+                        prevDay = paperSession.day;
                     }
-                    /* if the day is NOT the same, we need to add: a new day header, a new session header, the paper info itself */
-                    else {
-                        var session = sessionInfoHash[paper.session];
-                        output.push(makeDayHeaderRow(session.day));
-                        output.push(makePaperRow(paper.start, paper.end, session.location, session.title, ASCIIFold(paper.title)));
-                    }
-                    prevSession = paper.session;
-                    prevDay = sessionInfoHash[paper.session].day;
-                    prevSessionLocation = sessionInfoHash[paper.session].location;
-                    prevSessionTitle = sessionInfoHash[paper.session].title;
                 }
             }
 
@@ -276,37 +342,19 @@ script: |
                 }
 
                 /* if we are choosing the entire session, then basically "click" on all of the not-selected papers */
-                var papersTriggered = [];
                 var sessionPapers = $(this).siblings('table.paper-table').find('tr#paper');
                 var unselectedPapers = sessionPapers.not('.selected');
-                unselectedPapers.trigger('click', [papersTriggered, true]);
+                unselectedPapers.trigger('click', true);
 
                 /* now find out how many papers are selected after the trigger */
                 var selectedPapers = sessionPapers.filter('.selected');
 
-                /* if we triggered no papers */
-                if (papersTriggered.length == 0) { 
-                    /* if there were already papers selected and we just didn't add to them, then the message should be about additional papers */
-                    if (unselectedPapers.length < sessionPapers.length) {
-                        vex.dialog.alert('No additional papers were chosen since you have conflicts for those time slots.')
-                    }
-                    /* if there were no papers selected when we clicked then the message should be about all papers */
-                    else {
-                        vex.dialog.alert('No papers were chosen since you have conflicts for all the time slots.')
-                    }
-                }
-                /* if we trigged some papers */
-                else {
-                    /* if there were already papers selected and we added some new ones (but not all) to them, then the message should be about additional papers */
-                    if ((unselectedPapers.length < sessionPapers.length) && (papersTriggered.length + selectedPapers.length < sessionPapers.length)) {
-                        var verb = papersTriggered.length == 1 ? 'was' : 'were';
-                        vex.dialog.alert('Only ' +  papersTriggered.length +  ' additional paper(s) ' + verb + ' chosen. You have conflicts for the remaining time slots.')
-                    }
-                    /* if there were no papers selected and we added some new ones (but not all), then the message should be about all newly added papers, not just the additional ones */
-                    if ((unselectedPapers.length == sessionPapers.length) && (papersTriggered.length + selectedPapers.length < sessionPapers.length)) {
-                        var verb = selectedPapers.length == 1 ? 'was' : 'were';
-                        vex.dialog.alert('Only ' +  selectedPapers.length +  ' paper(s) ' + verb + ' chosen. You have conflicts for the remaining time slots.')
-                    }
+                /* disable myself (the choose all button) */
+                $(this).addClass('disabled');
+
+                /* if we didn't have any papers selected earlier, then enable the remove all button */
+                if (unselectedPapers.length == sessionPapers.length) {
+                    $(this).siblings('.session-deselector').removeClass('disabled');
                 }
 
                 /* this is not really a link */
@@ -322,10 +370,20 @@ script: |
                 }
 
                 /* otherwise, if we are removing the entire session, then basically "click" on all of the already selected papers */
-                var papersTriggered = [];
                 var sessionPapers = $(this).siblings('table.paper-table').find('tr#paper');
                 var selectedPapers = sessionPapers.filter('.selected');
-                selectedPapers.trigger('click', [papersTriggered, true]);
+                selectedPapers.trigger('click', true);
+
+                /* disable myself (the remove all button) */
+                $(this).addClass('disabled');
+
+                /* enable the choose all button */
+                $(this).siblings('session-deselector').removeClass('disabled');
+
+                /* if all the papers were selected earlier, then enable the choose all button */
+                if (selectedPapers.length == sessionPapers.length) {
+                    $(this).siblings('.session-selector').removeClass('disabled');                    
+                }
 
                 /* this is not really a link */
                 event.preventDefault();
@@ -346,6 +404,21 @@ script: |
                 event.preventDefault();
                 $(this).children('[class$="-details"]').slideToggle(300);
                 $(this).children('#expander').toggleClass('expanded');
+            });
+
+            /* when we mouse over a paper, highlight the conflicting papers */
+            $('table.paper-table tr#paper').mouseover(function(event) {
+                var conflictingPapers = getConflicts($(this));
+                $(this).addClass('hovered');
+                $(conflictingPapers).addClass('hovered');
+            });
+
+            /* when we mouse out, remove all highlights */
+            $('table.paper-table tr#paper').mouseout(function(event) {
+                var conflictingPapers = getConflicts($(this));
+                $(this).removeClass('hovered');
+                $(conflictingPapers).removeClass('hovered');
+
             });
 
             $('body').on('click', 'a.inline-location', function(event) {
@@ -411,8 +484,10 @@ script: |
                 }
             });
 
-            $('body').on('click', 'table.paper-table tr#paper ', function(event, papersTriggered, fromSession) {
+            $('body').on('click', 'table.paper-table tr#paper', function(event, fromSession) {
                 event.preventDefault();
+                $(this).removeClass('hovered');
+                getConflicts($(this)).removeClass('hovered');
                 var paperTimeObj = $(this).children('td#paper-time');
                 var paperTime = paperTimeObj.text().trim();
                 var paperInfo = getPaperInfoFromTime(paperTimeObj);
@@ -424,13 +499,15 @@ script: |
                 paperObject.session = paperInfo[4];
                 paperObject.exactStartingTime = exactStartingTime;
                 paperObject.title = paperTitle;
-                if (exactStartingTime in chosenPapersHash) {
 
-                    /* if we are unselecting an already selected paper */
-                    if (chosenPapersHash[exactStartingTime].title == paperTitle) {
-                        $(this).removeClass('selected');
-                        delete chosenPapersHash[exactStartingTime];
+                /* if we are clicking on an already selected paper */
+                if (isChosen(exactStartingTime, paperObject)) {
+                    $(this).removeClass('selected');
+                    removeFromChosen(exactStartingTime, paperObject);
 
+                    /* if we are not being triggered at the session level, then we need to handle the state of the session level button ourselves */
+                    if (!fromSession) {
+        
                         /* we also need to enable the choose button */
                         $(this).parents('table.paper-table').siblings('.session-selector').removeClass('disabled');
 
@@ -440,32 +517,25 @@ script: |
                             $(this).parents('table.paper-table').siblings('.session-deselector').addClass('disabled');
                         }
                     }
-                    else {
-                        if (!fromSession) {
-                            vex.dialog.alert('You have already chosen a paper for this time slot.');
-                        }
-                        return false;
-                    }
                 }
                 else {
                     /* if we are selecting a previously unselected paper */
-                    chosenPapersHash[exactStartingTime] = paperObject;
+                    addToChosen(exactStartingTime, paperObject);
                     $(this).addClass('selected');
 
-                    /* we also need to enable the remove button */
-                    $(this).parents('table.paper-table').siblings('.session-deselector').removeClass('disabled');
+                    /* if we are not being triggered at the session level, then we need to handle the state of the session level button ourselves */
+                    if (!fromSession) {
 
-                    if (fromSession) {
-                        papersTriggered.push(1);
+                        /* we also need to enable the remove button */
+                        $(this).parents('table.paper-table').siblings('.session-deselector').removeClass('disabled');
+
+                        /* and disable the choose button if all the papers are now selected anyway */
+                        var sessionPapers = $(this).siblings('tr#paper');
+                        var selectedPapers = sessionPapers.filter('.selected');
+                        if (sessionPapers.length == selectedPapers.length) {
+                            $(this).parents('table.paper-table').siblings('.session-selector').addClass('disabled');
+                        }
                     }
-
-                    /* and disable the choose button if all the papers are now selected anyway */
-                    var sessionPapers = $(this).siblings('tr#paper');
-                    var selectedPapers = sessionPapers.filter('.selected');
-                    if (sessionPapers.length == selectedPapers.length) {
-                        $(this).parents('table.paper-table').siblings('.session-selector').addClass('disabled');
-                    }
-
                 }
             });
         });
@@ -987,9 +1057,11 @@ script: |
         <div class="paper-session-details">
             <hr class="detail-separator"/>
             <div class="session-abstract">
+
                 <p>Chair: Joel Tetreault</p>
 
                 <p>Prior to the poster session, TACL and long-paper poster presenters will be given one minute each to pitch their paper. The poster session will immediately follow these presentations along with a buffet dinner.</p>
+                
             </div>
         </div>
     </div>
