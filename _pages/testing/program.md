@@ -10,6 +10,8 @@ script: |
 
         sessionInfoHash = {};
         chosenPapersHash = {};
+        chosenTutorialsHash = {};
+        chosenPostersHash = {};
         plenarySessionHash = {};
         includePlenaryInSchedule = true;
 
@@ -143,6 +145,22 @@ script: |
             return [new Date(exactPaperStartingTime).toJSON(), paperSlotStart, paperSlotEnd, paperTitle, paperSession.attr('id')];
         }
 
+        function getTutorialInfoFromTime(tutorialTimeObj) {
+
+            /* get the paper session and day */
+            var tutorialSession = tutorialTimeObj.parents('.session');
+            var sessionDay = tutorialSession.prevAll('.day:first').text().trim();
+
+            /* get the paper slot and the starting and ending times */
+            var tutorialTimeText = tutorialTimeObj.text().trim();
+            var tutorialTimes = tutorialTimeText.split(' ');
+            var tutorialSlotStart = tutorialTimes[0];
+            var tutorialSlotEnd = tutorialTimes[3];
+            var tutorialSlotAMPM = inferAMPM(tutorialSlotStart);
+            var exactTutorialStartingTime = sessionDay + ', 2017 ' + tutorialSlotStart + tutorialSlotAMPM;
+            return [new Date(exactTutorialStartingTime).toJSON(), tutorialSlotStart, tutorialSlotEnd, tutorialSession.attr('id')];
+        }
+
         function getConflicts(paperObject) {
 
             /* first get the conflicting sessions */
@@ -165,67 +183,110 @@ script: |
             return '<tr><td class="time">' + startWithoutAMPM + '&ndash;' + endWithoutAMPM + '</td><td class="location">' + session.location + '</td><td class="info-plenary">' + session.title + '</td></tr>';
         }
 
-        function makePaperRow(start, end, title, session) {
-            return '<tr><td class="time">' + start + '&ndash;' + end + '</td><td class="location">' + session.location + '</td><td class="info-paper">' + title + ' [' + session.title + ']</td></tr>';
+        function makePaperRows(start, end, titles, sessions) {
+            var ans;
+            if (titles.length == 1) {
+                ans = ['<tr><td class="time">' + start + '&ndash;' + end + '</td><td class="location">' + sessions[0].location + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>'];
+            }
+            else {
+                var numConflicts = titles.length;
+                rows = ['<tr><td rowspan=' + numConflicts + ' class="time">' + start + '&ndash;' + end + '</td><td class="location">' + sessions[0].location + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>']
+                for (var i=1; i<numConflicts; i++) {
+                    var session = sessions[i];
+                    var title = titles[i];
+                    rows.push('<tr><td></td><td class="location">' + session.location + '</td><td class="info-paper">' + title + ' [' + session.title + ']</td></tr>')
+                }
+                ans = rows;
+            }
+            return ans;
         }
 
-        function makeConflictingPapersRow(start, end, sessions, titles) {
-            var numConflicts = titles.length;
-            rows = ['<tr><td rowspan=' + numConflicts + ' class="time">' + start + '&ndash;' + end + '</td><td class="location">' + sessions[0].location + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>']
-            for (var i=1; i<numConflicts; i++) {
-                var session = sessions[i];
-                var title = titles[i];
-                rows.push('<tr><td></td><td class="location">' + session.location + '</td><td class="info-paper">' + title + ' [' + session.title + ']</td></tr>')
+
+        function makeTutorialRows(start, end, titles, locations, sessions) {
+            var ans;
+            if (titles.length == 1) {
+                ans = ['<tr><td class="time">' + start + '&ndash;' + end + '</td><td class="location">' + location[0] + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>'];
             }
-            return rows;
+            else {
+                var numConflicts = titles.length;
+                rows = ['<tr><td rowspan=' + numConflicts + ' class="time">' + start + '&ndash;' + end + '</td><td class="location">' + locations[0] + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>']
+                for (var i=1; i<numConflicts; i++) {
+                    var session = sessions[i];
+                    var title = titles[i];
+                    var location = locations[i];
+                    rows.push('<tr><td></td><td class="location">' + location + '</td><td class="info-paper">' + title + ' [' + session.title + ']</td></tr>')
+                }
+                ans = rows;
+            }
+            return ans;
         }
 
         function clearHiddenProgramTable() {
             $('#hidden-program-table tbody').html('');
         }
 
-        function addToChosen(timeKey, paperObject) {
-            if (timeKey in chosenPapersHash) {
-                var papers = chosenPapersHash[timeKey];
-                papers.push(paperObject)
-                chosenPapersHash[timeKey] = papers;
+        function getChosenHashFromType(type) {
+            var chosenHash;
+            if (type == 'paper') {
+                chosenHash = chosenPapersHash;
+            }
+            else if (type == 'tutorial') {
+                chosenHash = chosenTutorialsHash;
+            }
+            else if (type == 'poster') {
+                chosenHash = chosenPostersHash;
+            }
+            return chosenHash;
+        }
+
+        function addToChosen(timeKey, item, type) {
+            var chosenHash = getChosenHashFromType(type);
+            if (timeKey in chosenHash) {
+                var items = chosenHash[timeKey];
+                items.push(item)
+                chosenHash[timeKey] = items;
             }
             else {
-                chosenPapersHash[timeKey] = [paperObject];
+                chosenHash[timeKey] = [item];
             }
         }
 
-        function removeFromChosen(timeKey, paperObject) {
-            if (timeKey in chosenPapersHash) {
-                var papers = chosenPapersHash[timeKey];
-                var paperIndex = papers.map(function(paper) { return paper.title; }).indexOf(paperObject.title);
-                if (paperIndex !== -1) {
-                    var removedPaper = papers.splice(paperIndex, 1);
-                    delete removedPaper;
-                    if (papers.length == 0) {
-                        delete chosenPapersHash[timeKey];
+        function removeFromChosen(timeKey, item, type) {
+            var chosenHash = getChosenHashFromType(type);            
+            if (timeKey in chosenHash) {
+                var items = chosenHash[timeKey];
+                var itemIndex = items.map(function(item) { return item.title; }).indexOf(item.title);
+                if (itemIndex !== -1) {
+                    var removedItem = items.splice(itemIndex, 1);
+                    delete removedItem;
+                    if (items.length == 0) {
+                        delete chosenHash[timeKey];
                     }
                     else {
-                        chosenPapersHash[timeKey] = papers;
+                        chosenHash[timeKey] = items;
                     }
                 }
             }
         }
 
-        function isChosen(timeKey, paperObject) {
+        function isChosen(timeKey, item, type) {
             var ans = false;
-            if (timeKey in chosenPapersHash) {
-                var papers = chosenPapersHash[timeKey];
-                var paperIndex = papers.map(function(paper) { return paper.title; }).indexOf(paperObject.title);
-                ans = paperIndex !== -1;
+            var chosenHash = getChosenHashFromType(type);
+            if (timeKey in chosenHash) {
+                var items = chosenHash[timeKey];
+                var itemIndex = items.map(function(item) { return item.title; }).indexOf(item.title);
+                ans = itemIndex !== -1;
             }
             return ans;
         }
 
         function populateHiddenProgramTable() {
 
+            /* concatenate the tutorial, poster and paper keys */
+            var nonPlenaryKeys = Object.keys(chosenPapersHash).concat(Object.keys(chosenTutorialsHash)).concat(Object.keys(chosenPostersHash));
+
             /* if we are including plenary information in the PDF then sort its keys too and merge the two sets of keys together before sorting */
-            var sortedPaperTimes = includePlenaryInSchedule ? Object.keys(chosenPapersHash).concat(Object.keys(plenarySessionHash)) : Object.keys(chosenPapersHash);
+            var sortedPaperTimes = includePlenaryInSchedule ? nonPlenaryKeys.concat(Object.keys(plenarySessionHash)) : nonPlenaryKeys;
             sortedPaperTimes.sort(function(a, b) { return new Date(a) - new Date(b) });
 
             /* now iterate over these sorted papers and create the rows for the hidden table that will be used to generate the PDF */
@@ -246,34 +307,32 @@ script: |
                     }
                     prevDay = plenarySession.day;
                 }
+                /* if it's tutorial or a list of tutorials */
+                else if (key in chosenTutorialsHash) {
+
+                    /* get the tutorials */
+                    var tutorials = chosenTutorialsHash[key];
+                    var titles = tutorials.map(function(tutorial) { return ASCIIFold(tutorial.title); });
+                    var locations = tutorials.map(function(tutorial) { return tutorial.location ; })
+                    var sessions = tutorials.map(function(tutorial) { return sessionInfoHash[tutorial.session]; });
+                    var sessionDay = sessions[0].day;
+                    if (sessionDay != prevDay) {
+                        output.push(makeDayHeaderRow(sessionDay));
+                    }
+                    output = output.concat(makeTutorialRows(tutorials[0].start, tutorials[0].end, titles, locations, sessions));
+                    prevDay = sessionDay;
+                }
                 /* if it's a paper or list of papers */
                 else if (key in chosenPapersHash) {
-
-                    /* get the papers for this time slot */
                     var papers = chosenPapersHash[key];
-
-                    /* if there are multiple papers for this time slot that means that they are conflicting papers and so are automatically on the same day but in different sessions */
-                    if (papers.length > 1) {
-                        var sessions = papers.map(function(paper) { return sessionInfoHash[paper.session]; });
-                        sessionDay = sessions[0].day;
-                        if (sessionDay != prevDay) {
-                            output.push(makeDayHeaderRow(sessionDay));
-                        }
-                        var titles = papers.map(function(paper) { return ASCIIFold(paper.title); });
-                        output = output.concat(makeConflictingPapersRow(papers[0].start, papers[0].end, sessions, titles));
-                        prevDay = sessionDay;
+                    var titles = papers.map(function(paper) { return ASCIIFold(paper.title); });
+                    var sessions = papers.map(function(paper) { return sessionInfoHash[paper.session]; });
+                    var sessionDay = sessions[0].day;
+                    if (sessionDay != prevDay) {
+                        output.push(makeDayHeaderRow(sessionDay));
                     }
-                    /* otherwise we have a single paper in this time slot */
-                    else {                        
-                        var paper = papers[0];
-                        var paperSession = sessionInfoHash[paper.session];
-                        /* if the day is NOT the same, add a new day header and then the paper row, otherwise just the paper row */
-                        if (paperSession.day != prevDay) {
-                            output.push(makeDayHeaderRow(paperSession.day));
-                        }
-                        output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title), paperSession));
-                        prevDay = paperSession.day;
-                    }
+                    output = output.concat(makePaperRows(papers[0].start, papers[0].end, titles, sessions));
+                    prevDay = sessionDay;
                 }
             }
 
@@ -292,7 +351,17 @@ script: |
             /* hide the testing notes */
             $('div#testingNotes').hide();
 
-            /* get all the paper sessions and save the day and location for each of the in a hash */
+            /* get all the tutorial sessions and save the day and location for each of them in a hash */
+            $('.session-tutorials').each(function() {
+                var sessionTitle = $(this).children('.session-title').text().trim();
+                var sessionDay = $(this).prevAll('.day:first').text().trim();
+                var session = {};
+                session.title = sessionTitle;
+                session.day = sessionDay;
+                sessionInfoHash[$(this).attr('id')] = session;
+            });
+
+            /* get all the paper sessions and save the day and location for each of them in a hash */
             var paperSessions = $("[id|='session']").filter(function() { 
                 return this.id.match(/session-\d[a-z]$/);
             });
@@ -407,14 +476,14 @@ script: |
             });
 
             /* when we mouse over a paper, highlight the conflicting papers */
-            $('table.paper-table tr#paper').mouseover(function(event) {
+            $('body').on('mouseover', 'table.paper-table tr#paper', function(event) {
                 var conflictingPapers = getConflicts($(this));
                 $(this).addClass('hovered');
                 $(conflictingPapers).addClass('hovered');
             });
 
             /* when we mouse out, remove all highlights */
-            $('table.paper-table tr#paper').mouseout(function(event) {
+            $('body').on('mouseout', 'table.paper-table tr#paper', function(event) {
                 var conflictingPapers = getConflicts($(this));
                 $(this).removeClass('hovered');
                 $(conflictingPapers).removeClass('hovered');
@@ -445,7 +514,7 @@ script: |
                 event.stopPropagation();
             });
 
-            $('body').on('click', '.tutorial-session-details ul', function(event) {
+            $('body').on('click', 'table.tutorial-table', function(event) {
                 event.stopPropagation();
             });
 
@@ -460,7 +529,8 @@ script: |
             $('body').on('click', 'a#generatePDFButton', function(event) {
                 /* if we haven't chosen any papers, and we aren't including plenary sessions either, then raise an error. If we are including plenary sessions and no papers, then confirm. */
                 event.preventDefault();
-                if (Object.keys(chosenPapersHash).length == 0) {
+                var numChosenItems = Object.keys(chosenPapersHash).length + Object.keys(chosenTutorialsHash).length + Object.keys(chosenPostersHash).length;
+                if (numChosenItems == 0) {
                     if (includePlenaryInSchedule) {
                         vex.dialog.confirm({
                             message: "The PDF will contain only the plenary sessions since no papers were chosen. Proceed?",
@@ -484,26 +554,49 @@ script: |
                 }
             });
 
+            $('body').on('click', 'table.tutorial-table tr#tutorial', function(event) {
+                event.preventDefault();
+                var tutorialTimeObj = $(this).parents('.session-tutorials').children('.session-time');
+                var tutorialTitle = $(this)
+                var tutorialInfo = getTutorialInfoFromTime(tutorialTimeObj);
+                var tutorialObject = {};
+                var exactStartingTime = tutorialInfo[0];
+                tutorialObject.start = tutorialInfo[1];
+                tutorialObject.end = tutorialInfo[2];
+                tutorialObject.title = $(this).find('.tutorial-title').text();
+                tutorialObject.session = tutorialInfo[3];
+                tutorialObject.location = $(this).find('.inline-location').text();
+                tutorialObject.exactStartingTime = exactStartingTime;
+
+                /* if we are clicking on an already selected tutorial */
+                if (isChosen(exactStartingTime, tutorialObject, 'tutorial')) {
+                    $(this).removeClass('selected');
+                    removeFromChosen(exactStartingTime, tutorialObject, 'tutorial');
+                }
+                else {
+                    addToChosen(exactStartingTime, tutorialObject, 'tutorial');
+                    $(this).addClass('selected');                    
+                }
+            });
+
             $('body').on('click', 'table.paper-table tr#paper', function(event, fromSession) {
                 event.preventDefault();
                 $(this).removeClass('hovered');
                 getConflicts($(this)).removeClass('hovered');
                 var paperTimeObj = $(this).children('td#paper-time');
-                var paperTime = paperTimeObj.text().trim();
                 var paperInfo = getPaperInfoFromTime(paperTimeObj);
                 var paperObject = {};
-                var exactStartingTime = paperInfo[0];
+                var exactStartingTime = paperInfo[0]
                 paperObject.start = paperInfo[1];
                 paperObject.end = paperInfo[2];
-                var paperTitle = paperInfo[3];
+                paperObject.title = paperInfo[3];
                 paperObject.session = paperInfo[4];
                 paperObject.exactStartingTime = exactStartingTime;
-                paperObject.title = paperTitle;
 
                 /* if we are clicking on an already selected paper */
-                if (isChosen(exactStartingTime, paperObject)) {
+                if (isChosen(exactStartingTime, paperObject, 'paper')) {
                     $(this).removeClass('selected');
-                    removeFromChosen(exactStartingTime, paperObject);
+                    removeFromChosen(exactStartingTime, paperObject, 'paper');
 
                     /* if we are not being triggered at the session level, then we need to handle the state of the session level button ourselves */
                     if (!fromSession) {
@@ -520,7 +613,7 @@ script: |
                 }
                 else {
                     /* if we are selecting a previously unselected paper */
-                    addToChosen(exactStartingTime, paperObject);
+                    addToChosen(exactStartingTime, paperObject, 'paper');
                     $(this).addClass('selected');
 
                     /* if we are not being triggered at the session level, then we need to handle the state of the session level button ourselves */
@@ -581,19 +674,23 @@ script: |
         <span class="session-time">9:30 AM &ndash; 12:30 PM</span><br/>
         <div class="tutorial-session-details">
             <hr class="detail-separator"/>
-            <ul>
-                <li>
-                    <span class="tutorial-title">[T1] English Resource Semantics</span><br/>
-                    <a href="#" class="btn btn--location inline-location">Executive 3AB</a>
-                </li>
-                <li>
-                 <span class="tutorial-title">[T2] Multilingual Multimodal Language Processing Using Neural Networks</span><br/>
-                 <a href="#" class="btn btn--location inline-location">Spinnaker</a>
-             </li>
-             <li>
-                <span class="tutorial-title">[T3] Question Answering with Knowledge Base, Web and Beyond</span><br/>
-                <a href="#" class="btn btn--location inline-location">Marina 3</a></li>
-            </ul>      
+            <table class="tutorial-table">
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T1] English Resource Semantics</span><br/><span class="btn btn--location inline-location">Executive 3AB</span>
+                    </td>
+                </tr>
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T2] Multilingual Multimodal Language Processing Using Neural Networks</span><br/><span href="#" class="btn btn--location inline-location">Spinnaker</span>
+                    </td>
+                </tr>
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T3] Question Answering with Knowledge Base, Web and Beyond</span><br/><span href="#" class="btn btn--location inline-location">Marina 3</span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="session session-plenary" id="session-lunch-1">
@@ -601,23 +698,27 @@ script: |
         <span class="session-time">12:30 PM &ndash; 2:00 PM</span>
     </div>
     <div class="session session-expandable session-tutorials" id="session-afternoon-tutorials">
-        <div id="expander"></div><a href="#" class="session-title">Afternoon Tutorials</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Afternoon Tutorials</a><br/>
         <span class="session-time">2:00 PM &ndash; 5:00 PM</span>
         <div class="tutorial-session-details">
             <hr class="detail-separator"/>
-            <ul>
-                <li>
-                    <span class="tutorial-title">[T4] Recent Progress in Deep Learning for NLP</span><br/>
-                    <a href="#" class="btn btn--location inline-location">Spinnaker</a>
-                </li>
-                <li>
-                 <span class="tutorial-title">[T5] Scalable Statistical Relational Learning for NLP</span><br/>
-                 <a href="#" class="btn btn--location inline-location">Marina 3</a>
-             </li>
-             <li>
-                <span class="tutorial-title">[T6] Statistical Machine Translation between Related Languages</span><br/>
-                <a href="#" class="btn btn--location inline-location">Executive 3AB</a></li>
-            </ul>      
+            <table class="tutorial-table">
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T4] Recent Progress in Deep Learning for NLP</span><br/><span href="#" class="btn btn--location inline-location">Spinnaker</span>
+                    </td>
+                </tr>
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T5] Scalable Statistical Relational Learning for NLP</span><br/><span href="#" class="btn btn--location inline-location">Marina 3</span>
+                    </td>
+                </tr>
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T6] Statistical Machine Translation between Related Languages</span><br/><span href="#" class="btn btn--location inline-location">Executive 3AB</span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="session session-plenary" id="session-reception">

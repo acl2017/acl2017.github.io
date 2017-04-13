@@ -209,6 +209,18 @@ div.session {
         font-size: $type-size-6;
     }
 
+    .tutorial-table {
+        border: 1px;
+        font-size: $type-size-5;
+        td {
+            border: 0px;
+        }
+    }
+
+    td#tutorial-location {
+        cursor: text;
+    }
+
     .paper-table {
         border: 0px;
         font-size: $type-size-6;
@@ -231,6 +243,10 @@ div.session {
         cursor: text;
     }
 
+    .inline-location {
+        cursor: text;
+    }
+
     .info-button {
         cursor: text;
     }
@@ -238,6 +254,15 @@ div.session {
     .session-people {
         font-size: $type-size-5;
     }
+
+    tr#tutorial {
+        cursor: pointer;
+        background-color: #fff;
+        &.selected {
+            background-color: $lighter-gray2;
+        }
+    }
+
 
     tr#paper {
         cursor: pointer;
