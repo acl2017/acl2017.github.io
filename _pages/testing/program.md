@@ -205,7 +205,7 @@ script: |
         function makeTutorialRows(start, end, titles, locations, sessions) {
             var ans;
             if (titles.length == 1) {
-                ans = ['<tr><td class="time">' + start + '&ndash;' + end + '</td><td class="location">' + location[0] + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>'];
+                ans = ['<tr><td class="time">' + start + '&ndash;' + end + '</td><td class="location">' + locations[0] + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>'];
             }
             else {
                 var numConflicts = titles.length;
