@@ -181,7 +181,7 @@ script: |
 
             /* first get the conflicting sessions */
             var sessionId = paperObject.parents('.session').attr('id').match(/session-\d/)[0];
-            var parallelSessions = paperObject.parents('.session').siblings().filter(function() { return this.id.match(sessionId); })
+            var parallelSessions = paperObject.parents('.session').siblings().filter(function() { return this.id.match(sessionId); });
             
             /* now get the conflicting papers from those sessions */
             var paperTime = paperObject.children('td#paper-time')[0].textContent;
