@@ -634,7 +634,6 @@ script: |
             $('body').on('click', 'table.poster-table tr#poster', function(event) {
                 event.preventDefault();
                 var posterTimeObj = $(this).parents('.session-posters').children('.session-time');
-                var posterTitle = $(this)
                 var posterInfo = getPosterInfoFromTime(posterTimeObj);
                 var posterObject = {};
                 var exactStartingTime = posterInfo[0];
