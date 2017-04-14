@@ -236,10 +236,11 @@ script: |
             return ans;
         }
 
-        function makePosterRows(start, end, titles, types, sessions) {
-            var ans;
+        function makePosterRows(titles, types, sessions) {
             var numPosters = titles.length;
-            rows = ['<tr><td rowspan=' + (numPosters + 1) + ' class="time">' + start + '&ndash;' + end + '</td><td rowspan=' + (numPosters + 1) + ' class="location">' + sessions[0].location + '</td><td class="info-paper">' + sessions[0].title +  '</td></tr>'];
+            var startWithoutAMPM = sessions[0].start.slice(0, -3);
+            var endWithoutAMPM = sessions[0].end.slice(0, -3);
+            rows = ['<tr><td rowspan=' + (numPosters + 1) + ' class="time">' + startWithoutAMPM + '&ndash;' + endWithoutAMPM + '</td><td rowspan=' + (numPosters + 1) + ' class="location">' + sessions[0].location + '</td><td class="info-paper">' + sessions[0].title +  '</td></tr>'];
             for (var i=0; i<numPosters; i++) {
                 var title = titles[i];
                 var type = types[i];
@@ -309,6 +310,30 @@ script: |
 
         function populateHiddenProgramTable() {
 
+            /* if no posters were selected from either or both of the two poster sessions, we still want a row showing the main plenary poster session information for the unchosen session(s) */
+            var posterSessionKeys = Object.keys(chosenPostersHash);
+            if (posterSessionKeys.length == 0) {
+                var sessionNames = ['session-poster-1', 'session-poster-2'];
+                for (var i=0; i<sessionNames.length; i++) {
+                    var session = sessionInfoHash[sessionNames[i]];
+                    var exactSessionStartingTime = session.day + ', 2017 ' + session.start;
+                    var newPlenaryKey = new Date(exactSessionStartingTime).toJSON();
+                    if (!(newPlenaryKey in plenarySessionHash)) {
+                        plenarySessionHash[newPlenaryKey] = session;
+                    }
+                }
+            }
+            else if (posterSessionKeys.length == 1) {
+                var posters = chosenPostersHash[posterSessionKeys[0]];
+                var usedSession = posters[0].session;
+                var unusedSession = usedSession == 'session-poster-1' ? sessionInfoHash['session-poster-2'] : sessionInfoHash['session-poster-1'];
+                var exactSessionStartingTime = unusedSession.day + ', 2017 ' + unusedSession.start;
+                var newPlenaryKey = new Date(exactSessionStartingTime).toJSON();
+                if (!(newPlenaryKey in plenarySessionHash)) {
+                    plenarySessionHash[newPlenaryKey] = unusedSession;
+                }
+            }
+
             /* concatenate the tutorial, poster and paper keys */
             var nonPlenaryKeys = Object.keys(chosenPapersHash).concat(Object.keys(chosenTutorialsHash)).concat(Object.keys(chosenPostersHash));
 
@@ -320,6 +345,8 @@ script: |
             var prevDay = null;
             var latestEndingTime;
             var output = [];
+
+            /* now iterate over the chosen items */
             for(var i=0; i<sortedPaperTimes.length; i++) {
                 var key = sortedPaperTimes[i];
                 /* if it's a plenary session */
@@ -366,7 +393,7 @@ script: |
                     if (sessionDay != prevDay) {
                         output.push(makeDayHeaderRow(sessionDay));
                     }
-                    output = output.concat(makePosterRows(posters[0].start, posters[0].end, titles, types, sessions));
+                    output = output.concat(makePosterRows(titles, types, sessions));
                     prevDay = sessionDay;
                 }
 
@@ -419,6 +446,12 @@ script: |
                 session.title = $(this).children('.session-title').text().trim();
                 session.day = $(this).prevAll('.day:first').text().trim();
                 session.location = $(this).children('span.session-location').text().trim();
+                var sessionTimeText = $(this).children('span.session-time').text().trim();                
+                var sessionTimes = sessionTimeText.match(/\d+:\d+ [AP]M/g);
+                var sessionStart = sessionTimes[0];
+                var sessionEnd = sessionTimes[1];
+                session.start = sessionStart;
+                session.end = sessionEnd;
                 sessionInfoHash[$(this).attr('id')] = session;
             });
 
@@ -656,7 +689,11 @@ script: |
                 }
                 else {
                     addToChosen(exactStartingTime, posterObject, 'poster');
-                    $(this).addClass('selected');     
+                    $(this).addClass('selected');
+                    var key = new Date(exactStartingTime).toJSON();
+                    if (key in plenarySessionHash) {
+                        delete plenarySessionHash[key];
+                    }
                 }
             });
 
