@@ -224,7 +224,7 @@ script: |
             }
             else {
                 var numConflicts = titles.length;
-                rows = ['<tr><td rowspan=' + numConflicts + ' class="time">' + start + '&ndash;' + end + '</td><td class="location">' + locations[0] + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>']
+                rows = ['<tr><td rowspan=' + numConflicts + ' class="time">' + start + '&ndash;' + end + '</td><td class="location">' + locations[0] + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>'];
                 for (var i=1; i<numConflicts; i++) {
                     var session = sessions[i];
                     var title = titles[i];
@@ -243,7 +243,7 @@ script: |
             for (var i=0; i<numPosters; i++) {
                 var title = titles[i];
                 var type = types[i];
-                rows.push('<tr><td></td><td></td><td class="info-poster">' + title + ' [' + type + ']</td></tr>')
+                rows.push('<tr><td></td><td></td><td class="info-poster">' + title + ' [' + type + ']</td></tr>');
             }
             return rows;
         }
