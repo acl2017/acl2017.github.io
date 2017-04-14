@@ -10,6 +10,8 @@ script: |
 
         sessionInfoHash = {};
         chosenPapersHash = {};
+        chosenTutorialsHash = {};
+        chosenPostersHash = {};
         plenarySessionHash = {};
         includePlenaryInSchedule = true;
 
@@ -34,17 +36,29 @@ script: |
             /* now populate the hidden table with the currently chosen papers */
             populateHiddenProgramTable();
 
-            var doc = new jsPDF('p', 'pt', 'letter');
-            var res = doc.autoTableHtmlToJson(document.getElementById("hidden-program-table"));
-            doc.autoTable(res.columns, res.data, {
+            var doc = new jsPDF('l', 'pt', 'letter');
+            doc.autoTable({
+                fromHtml: "#hidden-program-table",
                 pagebreak: 'avoid',
                 avoidRowSplit: true,
                 theme: 'grid',
                 startY: 70, 
-                showHeader: false,
+                showHead: false,
+                styles: {
+                    font: 'times',
+                    overflow: 'linebreak',
+                    valign: 'middle',
+                    lineWidth: 0.4,
+                    fontSize: 11
+                },
+                 columnStyles: {
+                    0: { fontStyle: 'bold', halign: 'right', cellWidth: 70 },
+                    1: { cellWidth: 110 },
+                    2: { fontStyle: 'italic', cellWidth: 530 }
+                },
                 addPageContent: function (data) {
                     /* HEADER only on the first page */
-                    var pageNumber =doc.internal.getCurrentPageInfo().pageNumber;
+                    var pageNumber = doc.internal.getCurrentPageInfo().pageNumber;
 
                     if (pageNumber == 1) {
                         doc.setFontSize(16);
@@ -57,58 +71,55 @@ script: |
                     doc.setFontSize(8);
                     doc.text('(Generated via http://acl2017.org/testing/program)', data.settings.margin.left, doc.internal.pageSize.height - 10);
                 },
-                styles: {
-                    font: 'times',
-                    overflow: 'linebreak'
-                },
-                columnStyles: {0: 
-                    {
-                        fontStyle: 'bold',
-                    },
-                    1: {
-                        textColor: 0,
-                        columnWidth: 465
-                    }
-                },
                 drawCell: function(cell, data) {
-                    var cellClass = cell.raw.className;
-                    if (cellClass == 'header' || cellClass == 'day-header') {
-                        cell.width = 465;
-                        cell.styles.columnWidth = 465;
-                        cell.text = doc.splitTextToSize(cell.text.join(' '), 465, {fontSize: 12});
+                    var cellClass = cell.raw.content.className;
+                    /* center the day header */
+                    if (cellClass == 'info-day') {
+                        cell.textPos.x = (530 - data.settings.margin.left)/2 + 120;
                     }
-                    if (cellClass == 'day-header') {
-                        cell.textPos.x = (465 - data.settings.margin.left)/2 + 60;
-                    }
-                    if (cellClass == 'plenary-header') {
-                        cell.width = 465;
-                        cell.styles.columnWidth = 465;
-                        cell.text = doc.splitTextToSize(cell.text.join(' '), 465, {fontSize: 12});
-                    }
-                    if (cellClass == "skip" || cellClass == 'day-skip') {
-                        doc.rect(data.settings.margin.left, data.row.y, data.table.width, 20, 'S');
+                    /* split long plenary session text */
+                    else if (cellClass == 'info-plenary') {
+                        cell.text = doc.splitTextToSize(cell.text.join(' '), 530, {fontSize: 11});
                     }
                 },
                 createdCell: function(cell, data) {
-                    var cellClass = cell.raw.className;
-                    if (cellClass == 'header') {
-                        cell.styles.fontStyle = 'italic';
-                        cell.styles.fontSize = 12;
-                    }
-                    else if (cellClass == 'day-header') {
+                    var cellClass = cell.raw.content.className;
+                    var cellText = cell.text[0];
+                    /* */
+                    if (cellClass == 'info-day') {
                         cell.styles.fontStyle = 'bold';
                         cell.styles.fontSize = 12;
-                        cell.styles.fillColor = [189, 193, 196];
+                        cell.styles.fillColor = [187, 187, 187];
                     }
-                    else if (cellClass == 'plenary-header') {
-                        cell.styles.fontStyle = 'italic';
-                        cell.styles.fontSize = 12;
+                    else if (cellClass == 'info-plenary') {
+                        cell.styles.fontSize = 11;
+                        if (cellText == "Break" || cellText == "Lunch" || cellText == "Breakfast") {
+                            cell.styles.fillColor = [238, 238, 238];
+                        }
                     }
-                    else if (cellClass== 'day-skip') {
-                        cell.styles.fillColor = [189, 193, 196];
+                    else if (cellClass == 'info-poster') {
+                        cell.styles.fontSize = 9;
                     }
-                    else {
-                        cell.styles.fontSize = 10;
+                    else if (cellClass == "location") {
+                        if (cellText == '') {
+                            var infoType = data.row.raw[2].content.className;
+                            if (infoType == "info-day") {
+                                cell.styles.fillColor = [187, 187, 187];
+                            }
+                            else if (infoType == "info-plenary") {
+                                cell.styles.fillColor = [238, 238, 238];
+                            }
+                        }
+                    }
+                    else if (cellClass == "time") {
+                        var infoType = data.row.raw[2].content.className;
+                        var infoText = data.row.raw[2].content.textContent;
+                        if (infoType == "info-day" && cellText == '') {
+                            cell.styles.fillColor = [187, 187, 187];
+                        }
+                        if (infoType == "info-plenary" && (infoText == "Break" || infoText == "Lunch" || infoText == "Breakfast")) {
+                            cell.styles.fillColor = [238, 238, 238];
+                        }
                     }
                 },
             });
@@ -134,43 +145,179 @@ script: |
             return [new Date(exactPaperStartingTime).toJSON(), paperSlotStart, paperSlotEnd, paperTitle, paperSession.attr('id')];
         }
 
+        function getTutorialInfoFromTime(tutorialTimeObj) {
+
+            /* get the tutorial session and day */
+            var tutorialSession = tutorialTimeObj.parents('.session');
+            var sessionDay = tutorialSession.prevAll('.day:first').text().trim();
+
+            /* get the tutorial slot and the starting and ending times */
+            var tutorialTimeText = tutorialTimeObj.text().trim();
+            var tutorialTimes = tutorialTimeText.split(' ');
+            var tutorialSlotStart = tutorialTimes[0];
+            var tutorialSlotEnd = tutorialTimes[3];
+            var tutorialSlotAMPM = inferAMPM(tutorialSlotStart);
+            var exactTutorialStartingTime = sessionDay + ', 2017 ' + tutorialSlotStart + tutorialSlotAMPM;
+            return [new Date(exactTutorialStartingTime).toJSON(), tutorialSlotStart, tutorialSlotEnd, tutorialSession.attr('id')];
+        }
+
+        function getPosterInfoFromTime(posterTimeObj) {
+
+            /* get the poster session and day */
+            var posterSession = posterTimeObj.parents('.session');
+            var sessionDay = posterSession.prevAll('.day:first').text().trim();
+
+            /* get the poster slot and the starting and ending times */
+            var posterTimeText = posterTimeObj.text().trim();
+            var posterTimes = posterTimeText.split(' ');
+            var posterSlotStart = posterTimes[0];
+            var posterSlotEnd = posterTimes[3];
+            var posterSlotAMPM = inferAMPM(posterSlotStart);
+            var exactPosterStartingTime = sessionDay + ', 2017 ' + posterSlotStart + posterSlotAMPM;
+            return [new Date(exactPosterStartingTime).toJSON(), posterSlotStart, posterSlotEnd, posterSession.attr('id')];
+        }
+
+        function getConflicts(paperObject) {
+
+            /* first get the conflicting sessions */
+            var sessionId = paperObject.parents('.session').attr('id').match(/session-\d/)[0];
+            var parallelSessions = paperObject.parents('.session').siblings().filter(function() { return this.id.match(sessionId); })
+            
+            /* now get the conflicting papers from those sessions */
+            var paperTime = paperObject.children('td#paper-time')[0].textContent;
+            return $(parallelSessions).find('table.paper-table tr#paper').filter(function(index) { return this.children[0].textContent == paperTime });
+
+        }
+
         function makeDayHeaderRow(day) {
-            return '<tr><td class="day-skip"></td><td class="day-header">' + day + '</td></tr>';
+            return '<tr><td class="time"></td><td class="location"></td><td class="info-day">' + day + '</td></tr>';
         }
 
-        function makePaperSessionHeaderRow(start, title, location) {
-                return '<tr><td class="skip"></td><td class="header">' + start + inferAMPM(start) + ', ' + location + ' [' + title + ']' + '</td></tr>';
+        function makePlenarySessionHeaderRow(session) {
+            var startWithoutAMPM = session.start.slice(0, -3);
+            var endWithoutAMPM = session.end.slice(0, -3);
+            return '<tr><td class="time">' + startWithoutAMPM + '&ndash;' + endWithoutAMPM + '</td><td class="location">' + session.location + '</td><td class="info-plenary">' + session.title + '</td></tr>';
         }
 
-        function makePlenarySessionHeaderRow(start, title, location) {
-            if (location == '') {
-                ans = '<tr><td class="skip"></td><td class="plenary-header">' + start + ', ' + title + '</td></tr>';
+        function makePaperRows(start, end, titles, sessions) {
+            var ans;
+            if (titles.length == 1) {
+                ans = ['<tr><td class="time">' + start + '&ndash;' + end + '</td><td class="location">' + sessions[0].location + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>'];
             }
             else {
-                ans =  '<tr><td class="skip"></td><td class="plenary-header">' + start + ', ' + location + ', ' + title  + '</td></tr>';
+                var numConflicts = titles.length;
+                rows = ['<tr><td rowspan=' + numConflicts + ' class="time">' + start + '&ndash;' + end + '</td><td class="location">' + sessions[0].location + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>']
+                for (var i=1; i<numConflicts; i++) {
+                    var session = sessions[i];
+                    var title = titles[i];
+                    rows.push('<tr><td></td><td class="location">' + session.location + '</td><td class="info-paper">' + title + ' [' + session.title + ']</td></tr>')
+                }
+                ans = rows;
             }
             return ans;
         }
 
+        function makeTutorialRows(start, end, titles, locations, sessions) {
+            var ans;
+            if (titles.length == 1) {
+                ans = ['<tr><td class="time">' + start + '&ndash;' + end + '</td><td class="location">' + locations[0] + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>'];
+            }
+            else {
+                var numConflicts = titles.length;
+                rows = ['<tr><td rowspan=' + numConflicts + ' class="time">' + start + '&ndash;' + end + '</td><td class="location">' + locations[0] + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>']
+                for (var i=1; i<numConflicts; i++) {
+                    var session = sessions[i];
+                    var title = titles[i];
+                    var location = locations[i];
+                    rows.push('<tr><td></td><td class="location">' + location + '</td><td class="info-paper">' + title + ' [' + session.title + ']</td></tr>')
+                }
+                ans = rows;
+            }
+            return ans;
+        }
 
-        function makePaperRow(start, end, title) {
-            return '<tr><td>' + start + '–' + end + '</td><td>' + title + '</td></tr>';
+        function makePosterRows(start, end, titles, types, sessions) {
+            var ans;
+            var numPosters = titles.length;
+            rows = ['<tr><td rowspan=' + (numPosters + 1) + ' class="time">' + start + '&ndash;' + end + '</td><td rowspan=' + (numPosters + 1) + ' class="location">' + sessions[0].location + '</td><td class="info-paper">' + sessions[0].title +  '</td></tr>'];
+            for (var i=0; i<numPosters; i++) {
+                var title = titles[i];
+                var type = types[i];
+                rows.push('<tr><td></td><td></td><td class="info-poster">' + title + ' [' + type + ']</td></tr>')
+            }
+            return rows;
         }
 
         function clearHiddenProgramTable() {
             $('#hidden-program-table tbody').html('');
         }
 
+        function getChosenHashFromType(type) {
+            var chosenHash;
+            if (type == 'paper') {
+                chosenHash = chosenPapersHash;
+            }
+            else if (type == 'tutorial') {
+                chosenHash = chosenTutorialsHash;
+            }
+            else if (type == 'poster') {
+                chosenHash = chosenPostersHash;
+            }
+            return chosenHash;
+        }
+
+        function addToChosen(timeKey, item, type) {
+            var chosenHash = getChosenHashFromType(type);
+            if (timeKey in chosenHash) {
+                var items = chosenHash[timeKey];
+                items.push(item)
+                chosenHash[timeKey] = items;
+            }
+            else {
+                chosenHash[timeKey] = [item];
+            }
+        }
+
+        function removeFromChosen(timeKey, item, type) {
+            var chosenHash = getChosenHashFromType(type);            
+            if (timeKey in chosenHash) {
+                var items = chosenHash[timeKey];
+                var itemIndex = items.map(function(item) { return item.title; }).indexOf(item.title);
+                if (itemIndex !== -1) {
+                    var removedItem = items.splice(itemIndex, 1);
+                    delete removedItem;
+                    if (items.length == 0) {
+                        delete chosenHash[timeKey];
+                    }
+                    else {
+                        chosenHash[timeKey] = items;
+                    }
+                }
+            }
+        }
+
+        function isChosen(timeKey, item, type) {
+            var ans = false;
+            var chosenHash = getChosenHashFromType(type);
+            if (timeKey in chosenHash) {
+                var items = chosenHash[timeKey];
+                var itemIndex = items.map(function(item) { return item.title; }).indexOf(item.title);
+                ans = itemIndex !== -1;
+            }
+            return ans;
+        }
+
         function populateHiddenProgramTable() {
 
+            /* concatenate the tutorial, poster and paper keys */
+            var nonPlenaryKeys = Object.keys(chosenPapersHash).concat(Object.keys(chosenTutorialsHash)).concat(Object.keys(chosenPostersHash));
+
             /* if we are including plenary information in the PDF then sort its keys too and merge the two sets of keys together before sorting */
-            var sortedPaperTimes = includePlenaryInSchedule ? Object.keys(chosenPapersHash).concat(Object.keys(plenarySessionHash)) : Object.keys(chosenPapersHash);
+            var sortedPaperTimes = includePlenaryInSchedule ? nonPlenaryKeys.concat(Object.keys(plenarySessionHash)) : nonPlenaryKeys;
             sortedPaperTimes.sort(function(a, b) { return new Date(a) - new Date(b) });
 
             /* now iterate over these sorted papers and create the rows for the hidden table that will be used to generate the PDF */
-            var prevSession = null;
             var prevDay = null;
-            var prevSessionLocation = null;
             var latestEndingTime;
             var output = [];
             for(var i=0; i<sortedPaperTimes.length; i++) {
@@ -179,40 +326,62 @@ script: |
                 if (key in plenarySessionHash) {
                     var plenarySession = plenarySessionHash[key];
                     if (plenarySession.day == prevDay) {
-                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.title, plenarySession.location));
+                        output.push(makePlenarySessionHeaderRow(plenarySession));
                     }
                     else {
                         output.push(makeDayHeaderRow(plenarySession.day));
-                        output.push(makePlenarySessionHeaderRow(plenarySession.start, plenarySession.title, plenarySession.location));
+                        output.push(makePlenarySessionHeaderRow(plenarySession));
                     }
-                    prevSession = plenarySession.id;
                     prevDay = plenarySession.day;
                 }
-                /* if it's a paper */
-                else if (key in chosenPapersHash) {
+                /* if it's tutorials */
+                else if (key in chosenTutorialsHash) {
 
-                    var paper = chosenPapersHash[key];
-                    if (sessionInfoHash[paper.session].day == prevDay) {
-                        /* if the day is the same, then we check the session if the session is the same, then we just add: the paper info itself */
-                        if (paper.session == prevSession) {
-                            output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
-                        }
-                        /* if the day is the same but the session is not, then we need to add: a new session header, the paper info itself */
-                        else {
-                            var session = sessionInfoHash[paper.session];
-                            output.push(makePaperSessionHeaderRow(paper.start, session.title, session.location));
-                            output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
-                        }
+                    /* get the tutorials */
+                    var tutorials = chosenTutorialsHash[key];
+                    var titles = tutorials.map(function(tutorial) { return ASCIIFold(tutorial.title); });
+                    var locations = tutorials.map(function(tutorial) { return tutorial.location ; })
+                    var sessions = tutorials.map(function(tutorial) { return sessionInfoHash[tutorial.session]; });
+                    var sessionDay = sessions[0].day;
+                    if (sessionDay != prevDay) {
+                        output.push(makeDayHeaderRow(sessionDay));
                     }
-                    /* if the day is NOT the same, we need to add: a new day header, a new session header, the paper info itself */
-                    else {
-                        var session = sessionInfoHash[paper.session];
-                        output.push(makeDayHeaderRow(session.day));
-                        output.push(makePaperSessionHeaderRow(paper.start, session.title, session.location));
-                        output.push(makePaperRow(paper.start, paper.end, ASCIIFold(paper.title)));
+                    output = output.concat(makeTutorialRows(tutorials[0].start, tutorials[0].end, titles, locations, sessions));
+                    prevDay = sessionDay;
+                }
+                /* if it's posters */
+                else if (key in chosenPostersHash) {
+
+                    /* get the posters */
+                    var posters = chosenPostersHash[key];
+                    var titles = posters.map(function(poster) { return ASCIIFold(poster.title); });
+                    var types = posters.map(function(poster) { return poster.type; });
+                    var sessions = [sessionInfoHash[posters[0].session]];
+                    var sessionDay = sessions[0].day;
+                    if (sessionDay != prevDay) {
+                        output.push(makeDayHeaderRow(sessionDay));
                     }
-                    prevSession = paper.session;
-                    prevDay = sessionInfoHash[paper.session].day;
+                    output = output.concat(makePosterRows(posters[0].start, posters[0].end, titles, types, sessions));
+                    prevDay = sessionDay;
+                }
+
+                /* if it's papers  */
+                else if (key in chosenPapersHash) {
+                    var papers = chosenPapersHash[key];
+                    /* sort papers by location for easier reading */
+                    papers.sort(function(a, b) {
+                        var aLocation = sessionInfoHash[a.session].location;
+                        var bLocation = sessionInfoHash[b.session].location;
+                        return aLocation.localeCompare(bLocation);
+                    });
+                    var titles = papers.map(function(paper) { return ASCIIFold(paper.title); });
+                    var sessions = papers.map(function(paper) { return sessionInfoHash[paper.session]; });
+                    var sessionDay = sessions[0].day;
+                    if (sessionDay != prevDay) {
+                        output.push(makeDayHeaderRow(sessionDay));
+                    }
+                    output = output.concat(makePaperRows(papers[0].start, papers[0].end, titles, sessions));
+                    prevDay = sessionDay;
                 }
             }
 
@@ -231,38 +400,55 @@ script: |
             /* hide the testing notes */
             $('div#testingNotes').hide();
 
-            /* get all the paper sessions and save the day and location for each of the in a hash */
+            /* get all the tutorial sessions and save the day and location for each of them in a hash */
+            $('.session-tutorials').each(function() {
+                var session = {};
+                session.title = $(this).children('.session-title').text().trim();
+                session.day = $(this).prevAll('.day:first').text().trim();
+                sessionInfoHash[$(this).attr('id')] = session;
+            });
+
+            /* get all the poster sessions and save the day and location for each of them in a hash */
+            $('.session-posters').each(function() {
+                var session = {};
+                session.title = $(this).children('.session-title').text().trim();
+                session.day = $(this).prevAll('.day:first').text().trim();
+                session.location = $(this).children('span.session-location').text().trim();
+                sessionInfoHash[$(this).attr('id')] = session;
+            });
+
+            /* get all the paper sessions and save the day and location for each of them in a hash */
             var paperSessions = $("[id|='session']").filter(function() { 
-                return this.id.match(/session-\d[a-z]/);
+                return this.id.match(/session-\d[a-z]$/);
             });
             $(paperSessions).each(function() {
-                var sessionTitle = $(this).children('.session-title').text().trim();
-                var sessionLocation = $(this).children('span.session-location').text().trim();
-                var sessionDay = $(this).prevAll('.day:first').text().trim();
                 var session = {};
-                session.title = sessionTitle;
-                session.location = sessionLocation;
-                session.day = sessionDay;
+                session.title = $(this).children('.session-title').text().trim();
+                session.location = $(this).children('span.session-location').text().trim();
+                session.day = $(this).prevAll('.day:first').text().trim();
+                var sessionTimeText = $(this).children('span.session-time').text().trim();                
+                var sessionTimes = sessionTimeText.match(/\d+:\d+ [AP]M/g);
+                var sessionStart = sessionTimes[0];
+                var sessionEnd = sessionTimes[1];
+                session.start = sessionStart;
+                session.end = sessionEnd;
                 sessionInfoHash[$(this).attr('id')] = session;
             });
 
             /* also save the plenary session info in another hash since we may need to add this to the pdf. Use the exact starting time as the hash key */
              $('.session-plenary').each(function() {
-                var sessionTitle = $(this).children('.session-title').text().trim();
-                var sessionLocation = $(this).children('span.session-location').text().trim();
+                var session = {};
+                session.title = $(this).children('.session-title').text().trim();
+                session.location = $(this).children('span.session-location').text().trim();
+                session.day = $(this).prevAll('.day:first').text().trim();
+                session.id = $(this).attr('id');
                 var sessionTimeText = $(this).children('span.session-time').text().trim();
                 var sessionTimes = sessionTimeText.match(/\d+:\d+ [AP]M/g);
-                var sessionDay = $(this).prevAll('.day:first').text().trim();
                 var sessionStart = sessionTimes[0];
                 var sessionEnd = sessionTimes[1];
-                var exactSessionStartingTime = sessionDay + ', 2017 ' + sessionStart;
-                var session = {};
-                session.title = sessionTitle;
-                session.location = sessionLocation;
-                session.day = sessionDay;
                 session.start = sessionStart;
                 session.end = sessionEnd;
-                session.id = $(this).attr('id');
+                var exactSessionStartingTime = session.day + ', 2017 ' + sessionStart;
                 plenarySessionHash[new Date(exactSessionStartingTime).toJSON()] = session;
              });
 
@@ -274,37 +460,19 @@ script: |
                 }
 
                 /* if we are choosing the entire session, then basically "click" on all of the not-selected papers */
-                var papersTriggered = [];
                 var sessionPapers = $(this).siblings('table.paper-table').find('tr#paper');
                 var unselectedPapers = sessionPapers.not('.selected');
-                unselectedPapers.trigger('click', [papersTriggered, true]);
+                unselectedPapers.trigger('click', true);
 
                 /* now find out how many papers are selected after the trigger */
                 var selectedPapers = sessionPapers.filter('.selected');
 
-                /* if we triggered no papers */
-                if (papersTriggered.length == 0) { 
-                    /* if there were already papers selected and we just didn't add to them, then the message should be about additional papers */
-                    if (unselectedPapers.length < sessionPapers.length) {
-                        vex.dialog.alert('No additional papers were chosen since you have conflicts for those time slots.')
-                    }
-                    /* if there were no papers selected when we clicked then the message should be about all papers */
-                    else {
-                        vex.dialog.alert('No papers were chosen since you have conflicts for all the time slots.')
-                    }
-                }
-                /* if we trigged some papers */
-                else {
-                    /* if there were already papers selected and we added some new ones (but not all) to them, then the message should be about additional papers */
-                    if ((unselectedPapers.length < sessionPapers.length) && (papersTriggered.length + selectedPapers.length < sessionPapers.length)) {
-                        var verb = papersTriggered.length == 1 ? 'was' : 'were';
-                        vex.dialog.alert('Only ' +  papersTriggered.length +  ' additional paper(s) ' + verb + ' chosen. You have conflicts for the remaining time slots.')
-                    }
-                    /* if there were no papers selected and we added some new ones (but not all), then the message should be about all newly added papers, not just the additional ones */
-                    if ((unselectedPapers.length == sessionPapers.length) && (papersTriggered.length + selectedPapers.length < sessionPapers.length)) {
-                        var verb = selectedPapers.length == 1 ? 'was' : 'were';
-                        vex.dialog.alert('Only ' +  selectedPapers.length +  ' paper(s) ' + verb + ' chosen. You have conflicts for the remaining time slots.')
-                    }
+                /* disable myself (the choose all button) */
+                $(this).addClass('disabled');
+
+                /* if we didn't have any papers selected earlier, then enable the remove all button */
+                if (unselectedPapers.length == sessionPapers.length) {
+                    $(this).siblings('.session-deselector').removeClass('disabled');
                 }
 
                 /* this is not really a link */
@@ -320,10 +488,20 @@ script: |
                 }
 
                 /* otherwise, if we are removing the entire session, then basically "click" on all of the already selected papers */
-                var papersTriggered = [];
                 var sessionPapers = $(this).siblings('table.paper-table').find('tr#paper');
                 var selectedPapers = sessionPapers.filter('.selected');
-                selectedPapers.trigger('click', [papersTriggered, true]);
+                selectedPapers.trigger('click', true);
+
+                /* disable myself (the remove all button) */
+                $(this).addClass('disabled');
+
+                /* enable the choose all button */
+                $(this).siblings('session-deselector').removeClass('disabled');
+
+                /* if all the papers were selected earlier, then enable the choose all button */
+                if (selectedPapers.length == sessionPapers.length) {
+                    $(this).siblings('.session-selector').removeClass('disabled');                    
+                }
 
                 /* this is not really a link */
                 event.preventDefault();
@@ -344,6 +522,21 @@ script: |
                 event.preventDefault();
                 $(this).children('[class$="-details"]').slideToggle(300);
                 $(this).children('#expander').toggleClass('expanded');
+            });
+
+            /* when we mouse over a paper, highlight the conflicting papers */
+            $('body').on('mouseover', 'table.paper-table tr#paper', function(event) {
+                var conflictingPapers = getConflicts($(this));
+                $(this).addClass('hovered');
+                $(conflictingPapers).addClass('hovered');
+            });
+
+            /* when we mouse out, remove all highlights */
+            $('body').on('mouseout', 'table.paper-table tr#paper', function(event) {
+                var conflictingPapers = getConflicts($(this));
+                $(this).removeClass('hovered');
+                $(conflictingPapers).removeClass('hovered');
+
             });
 
             $('body').on('click', 'a.inline-location', function(event) {
@@ -370,7 +563,11 @@ script: |
                 event.stopPropagation();
             });
 
-            $('body').on('click', '.tutorial-session-details ul', function(event) {
+            $('body').on('click', 'table.tutorial-table', function(event) {
+                event.stopPropagation();
+            });
+
+            $('body').on('click', 'table.poster-table', function(event) {
                 event.stopPropagation();
             });
 
@@ -385,10 +582,11 @@ script: |
             $('body').on('click', 'a#generatePDFButton', function(event) {
                 /* if we haven't chosen any papers, and we aren't including plenary sessions either, then raise an error. If we are including plenary sessions and no papers, then confirm. */
                 event.preventDefault();
-                if (Object.keys(chosenPapersHash).length == 0) {
+                var numChosenItems = Object.keys(chosenPapersHash).length + Object.keys(chosenTutorialsHash).length + Object.keys(chosenPostersHash).length;
+                if (numChosenItems == 0) {
                     if (includePlenaryInSchedule) {
                         vex.dialog.confirm({
-                            message: "The PDF will contain only the plenary sessions since no papers were chosen. Proceed?",
+                            message: "The PDF will contain only the plenary sessions since nothing was chosen. Proceed?",
                             callback: function (value) {
                                 if (value) {
                                     generatePDFfromTable();
@@ -400,7 +598,7 @@ script: |
                         });
                     }
                     else {
-                        vex.dialog.alert('Nothing to generate. No papers were chosen and plenary sessions were excluded.');
+                        vex.dialog.alert('Nothing to generate. Nothing was chosen and plenary sessions were excluded.');
                         return false;
                     }
                 }
@@ -409,26 +607,78 @@ script: |
                 }
             });
 
-            $('body').on('click', 'table.paper-table tr#paper ', function(event, papersTriggered, fromSession) {
+            $('body').on('click', 'table.tutorial-table tr#tutorial', function(event) {
                 event.preventDefault();
+                var tutorialTimeObj = $(this).parents('.session-tutorials').children('.session-time');
+                var tutorialTitle = $(this)
+                var tutorialInfo = getTutorialInfoFromTime(tutorialTimeObj);
+                var tutorialObject = {};
+                var exactStartingTime = tutorialInfo[0];
+                tutorialObject.start = tutorialInfo[1];
+                tutorialObject.end = tutorialInfo[2];
+                tutorialObject.title = $(this).find('.tutorial-title').text();
+                tutorialObject.session = tutorialInfo[3];
+                tutorialObject.location = $(this).find('.inline-location').text();
+                tutorialObject.exactStartingTime = exactStartingTime;
+
+                /* if we are clicking on an already selected tutorial */
+                if (isChosen(exactStartingTime, tutorialObject, 'tutorial')) {
+                    $(this).removeClass('selected');
+                    removeFromChosen(exactStartingTime, tutorialObject, 'tutorial');
+                }
+                else {
+                    addToChosen(exactStartingTime, tutorialObject, 'tutorial');
+                    $(this).addClass('selected');                    
+                }
+            });
+
+            $('body').on('click', 'table.poster-table tr#poster', function(event) {
+                event.preventDefault();
+                var posterTimeObj = $(this).parents('.session-posters').children('.session-time');
+                var posterTitle = $(this)
+                var posterInfo = getPosterInfoFromTime(posterTimeObj);
+                var posterObject = {};
+                var exactStartingTime = posterInfo[0];
+                posterObject.start = posterInfo[1];
+                posterObject.end = posterInfo[2];
+                posterObject.title = $(this).find('.poster-title').text().trim();
+                posterObject.type = $(this).parents('.poster-table').prevAll('.poster-type:first').text().trim();
+                posterObject.session = posterInfo[3];
+                posterObject.exactStartingTime = exactStartingTime;
+
+                /* if we are clicking on an already selected poster */
+                if (isChosen(exactStartingTime, posterObject, 'poster')) {
+                    $(this).removeClass('selected');
+                    removeFromChosen(exactStartingTime, posterObject, 'poster');
+                }
+                else {
+                    addToChosen(exactStartingTime, posterObject, 'poster');
+                    $(this).addClass('selected');     
+                }
+            });
+
+            $('body').on('click', 'table.paper-table tr#paper', function(event, fromSession) {
+                event.preventDefault();
+                $(this).removeClass('hovered');
+                getConflicts($(this)).removeClass('hovered');
                 var paperTimeObj = $(this).children('td#paper-time');
-                var paperTime = paperTimeObj.text().trim();
                 var paperInfo = getPaperInfoFromTime(paperTimeObj);
                 var paperObject = {};
-                var exactStartingTime = paperInfo[0];
+                var exactStartingTime = paperInfo[0]
                 paperObject.start = paperInfo[1];
                 paperObject.end = paperInfo[2];
-                var paperTitle = paperInfo[3];
+                paperObject.title = paperInfo[3];
                 paperObject.session = paperInfo[4];
                 paperObject.exactStartingTime = exactStartingTime;
-                paperObject.title = paperTitle;
-                if (exactStartingTime in chosenPapersHash) {
 
-                    /* if we are unselecting an already selected paper */
-                    if (chosenPapersHash[exactStartingTime].title == paperTitle) {
-                        $(this).removeClass('selected');
-                        delete chosenPapersHash[exactStartingTime];
+                /* if we are clicking on an already selected paper */
+                if (isChosen(exactStartingTime, paperObject, 'paper')) {
+                    $(this).removeClass('selected');
+                    removeFromChosen(exactStartingTime, paperObject, 'paper');
 
+                    /* if we are not being triggered at the session level, then we need to handle the state of the session level button ourselves */
+                    if (!fromSession) {
+        
                         /* we also need to enable the choose button */
                         $(this).parents('table.paper-table').siblings('.session-selector').removeClass('disabled');
 
@@ -438,32 +688,25 @@ script: |
                             $(this).parents('table.paper-table').siblings('.session-deselector').addClass('disabled');
                         }
                     }
-                    else {
-                        if (!fromSession) {
-                            vex.dialog.alert('You have already chosen a paper for this time slot.');
-                        }
-                        return false;
-                    }
                 }
                 else {
                     /* if we are selecting a previously unselected paper */
-                    chosenPapersHash[exactStartingTime] = paperObject;
+                    addToChosen(exactStartingTime, paperObject, 'paper');
                     $(this).addClass('selected');
 
-                    /* we also need to enable the remove button */
-                    $(this).parents('table.paper-table').siblings('.session-deselector').removeClass('disabled');
+                    /* if we are not being triggered at the session level, then we need to handle the state of the session level button ourselves */
+                    if (!fromSession) {
 
-                    if (fromSession) {
-                        papersTriggered.push(1);
+                        /* we also need to enable the remove button */
+                        $(this).parents('table.paper-table').siblings('.session-deselector').removeClass('disabled');
+
+                        /* and disable the choose button if all the papers are now selected anyway */
+                        var sessionPapers = $(this).siblings('tr#paper');
+                        var selectedPapers = sessionPapers.filter('.selected');
+                        if (sessionPapers.length == selectedPapers.length) {
+                            $(this).parents('table.paper-table').siblings('.session-selector').addClass('disabled');
+                        }
                     }
-
-                    /* and disable the choose button if all the papers are now selected anyway */
-                    var sessionPapers = $(this).siblings('tr#paper');
-                    var selectedPapers = sessionPapers.filter('.selected');
-                    if (sessionPapers.length == selectedPapers.length) {
-                        $(this).parents('table.paper-table').siblings('.session-selector').addClass('disabled');
-                    }
-
                 }
             });
         });
@@ -476,7 +719,7 @@ script: |
 
 <table id="hidden-program-table">
     <thead>
-        <tr><th></th><th></th></tr>
+        <tr><th>time</th><th>location</th><th>info</th></tr>
     </thead>
     <tbody></tbody>
 </table>
@@ -489,10 +732,11 @@ script: |
     <strong>Instructions &amp; Notes</strong>:
     <ul>
         <li>Click on the title of a session to expand and collapse the session. On a non-mobile browser, you can also click anywhere in the cell containing the session title.</li>
-        <li>Click on a paper to select it, click again to unselect it.</li>
+        <li>Click on a tutorial/paper/poster to select it, click again to unselect it.</li>
+        <li>You can select more than one paper for a time slot.</li>
+        <li>When you hover on a paper for a time slot, it is highlighted in yellow along with the conflicting papers to make the comparison easier. This only works on non-mobile devices where parallel sessions are displayed adjacent to each other.</li>
+        <li>If papers are already selected for a time slot, hovering highlights them in green.</li>
         <li>Click on the <em>Generate PDF</em> button at the bottom of the page to generate the PDF for your selected talks.</li>
-        <li>You can mix and match papers from different sessions but you <em>cannot</em> select multiple papers for the same time slot. We think it defeats the purpose of having an easy-to-read, glanceable PDF. However, if you disagree, please let us know below.</li>
-        <li>Currently, only paper sessions are supported. Tutorial and poster sesions are not. However, we can certainly extend this to posters since people might want to pick those out in advance too.</li>
         <li>Since ACL 2017 doesn't have a program yet, we used the content from the NAACL 2016 conference for the purposes of testing.</li>
         <li>The page has been tested on MacOS 10.12.3 on the most recent versions of Chrome, Firefox, and Safari browsers. We would like to test on other OSes (Windows, Linux) and other browsers, although older browsers (e.g., Internet Explorer <= v10) will likely not work. </li>
         <li>The page has also been tested on an iPhone simulator and works as expected. However, it'd be nice to test it on Android (<strong>NOTE</strong>: only Chrome on Android will work).</li>
@@ -509,19 +753,23 @@ script: |
         <span class="session-time">9:30 AM &ndash; 12:30 PM</span><br/>
         <div class="tutorial-session-details">
             <hr class="detail-separator"/>
-            <ul>
-                <li>
-                    <span class="tutorial-title">[T1] English Resource Semantics</span><br/>
-                    <a href="#" class="btn btn--location inline-location">Executive 3AB</a>
-                </li>
-                <li>
-                 <span class="tutorial-title">[T2] Multilingual Multimodal Language Processing Using Neural Networks</span><br/>
-                 <a href="#" class="btn btn--location inline-location">Spinnaker</a>
-             </li>
-             <li>
-                <span class="tutorial-title">[T3] Question Answering with Knowledge Base, Web and Beyond</span><br/>
-                <a href="#" class="btn btn--location inline-location">Marina 3</a></li>
-            </ul>      
+            <table class="tutorial-table">
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T1] English Resource Semantics</span><br/><span class="btn btn--location inline-location">Executive 3AB</span>
+                    </td>
+                </tr>
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T2] Multilingual Multimodal Language Processing Using Neural Networks</span><br/><span href="#" class="btn btn--location inline-location">Spinnaker</span>
+                    </td>
+                </tr>
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T3] Question Answering with Knowledge Base, Web and Beyond</span><br/><span href="#" class="btn btn--location inline-location">Marina 3</span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="session session-plenary" id="session-lunch-1">
@@ -529,23 +777,27 @@ script: |
         <span class="session-time">12:30 PM &ndash; 2:00 PM</span>
     </div>
     <div class="session session-expandable session-tutorials" id="session-afternoon-tutorials">
-        <div id="expander"></div><a href="#" class="session-title">Afternoon Tutorials</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Afternoon Tutorials</a><br/>
         <span class="session-time">2:00 PM &ndash; 5:00 PM</span>
         <div class="tutorial-session-details">
             <hr class="detail-separator"/>
-            <ul>
-                <li>
-                    <span class="tutorial-title">[T4] Recent Progress in Deep Learning for NLP</span><br/>
-                    <a href="#" class="btn btn--location inline-location">Spinnaker</a>
-                </li>
-                <li>
-                 <span class="tutorial-title">[T5] Scalable Statistical Relational Learning for NLP</span><br/>
-                 <a href="#" class="btn btn--location inline-location">Marina 3</a>
-             </li>
-             <li>
-                <span class="tutorial-title">[T6] Statistical Machine Translation between Related Languages</span><br/>
-                <a href="#" class="btn btn--location inline-location">Executive 3AB</a></li>
-            </ul>      
+            <table class="tutorial-table">
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T4] Recent Progress in Deep Learning for NLP</span><br/><span href="#" class="btn btn--location inline-location">Spinnaker</span>
+                    </td>
+                </tr>
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T5] Scalable Statistical Relational Learning for NLP</span><br/><span href="#" class="btn btn--location inline-location">Marina 3</span>
+                    </td>
+                </tr>
+                <tr id="tutorial">
+                    <td>
+                        <span class="tutorial-title">[T6] Statistical Machine Translation between Related Languages</span><br/><span href="#" class="btn btn--location inline-location">Executive 3AB</span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="session session-plenary" id="session-reception">
@@ -985,279 +1237,281 @@ script: |
         <div class="paper-session-details">
             <hr class="detail-separator"/>
             <div class="session-abstract">
+
                 <p>Chair: Joel Tetreault</p>
 
                 <p>Prior to the poster session, TACL and long-paper poster presenters will be given one minute each to pitch their paper. The poster session will immediately follow these presentations along with a buffet dinner.</p>
+                
             </div>
         </div>
     </div>
-    <div class="session session-expandable session-plenary" id="session-poster-1">
+    <div class="session session-expandable session-posters" id="session-poster-1">
         <div id="expander"></div><a href="#" class="session-title">Posters, Demos &amp; Dinner</a><br/>        
         <span class="session-time">6:00 PM &ndash; 8:00 PM</span>
         <span class="session-location btn btn--location">Pavilion</span>
-        <div class="paper-session-details">
+        <div class="poster-session-details">
             <hr class="detail-separator"/>
-            <span class="info-button btn btn--small">Main Conference</span>
-            <table class="paper-table">
+            <span class="info-button btn btn--small poster-type">Main Conference</span>
+            <table class="poster-table">
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">A Recurrent Neural Networks Approach for Estimating the Quality of Machine Translation Output. </span><em>Hyun Kim and Jong-Hyeok Lee</em>
+                        <span class="poster-title">A Recurrent Neural Networks Approach for Estimating the Quality of Machine Translation Output. </span><em>Hyun Kim and Jong-Hyeok Lee</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Agreement on Target-bidirectional Neural Machine Translation. </span><em>Lemao Liu, Masao Utiyama, Andrew Finch and Eiichiro Sumita</em>
+                        <span class="poster-title">Agreement on Target-bidirectional Neural Machine Translation. </span><em>Lemao Liu, Masao Utiyama, Andrew Finch and Eiichiro Sumita</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">An Unsupervised Model of Orthographic Variation for Historical Document Transcription. </span><em>Dan Garrette and Hannah Alpert-Abrams</em>
+                        <span class="poster-title">An Unsupervised Model of Orthographic Variation for Historical Document Transcription. </span><em>Dan Garrette and Hannah Alpert-Abrams</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Bidirectional RNN for Medical Event Detection in Electronic Health Records. </span><em>Abhyuday Jagannatha and Hong Yu</em>
+                        <span class="poster-title">Bidirectional RNN for Medical Event Detection in Electronic Health Records. </span><em>Abhyuday Jagannatha and Hong Yu</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Breaking the Closed World Assumption in Text Classification. </span><em>Geli Fei and Bing Liu</em>
+                        <span class="poster-title">Breaking the Closed World Assumption in Text Classification. </span><em>Geli Fei and Bing Liu</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Building Chinese Affective Resources in Valence-Arousal Dimensions. </span><em>Liang-Chih Yu, Lung-Hao Lee, Shuai Hao, Jin Wang, Yunchao He, Jun Hu, K. Robert Lai and Xuejie Zhang</em>
+                        <span class="poster-title">Building Chinese Affective Resources in Valence-Arousal Dimensions. </span><em>Liang-Chih Yu, Lung-Hao Lee, Shuai Hao, Jin Wang, Yunchao He, Jun Hu, K. Robert Lai and Xuejie Zhang</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Combining Recurrent and Convolutional Neural Networks for Relation Classification. </span><em>Ngoc Thang Vu, Heike Adel, Pankaj Gupta and Hinrich Schütze</em>
+                        <span class="poster-title">Combining Recurrent and Convolutional Neural Networks for Relation Classification. </span><em>Ngoc Thang Vu, Heike Adel, Pankaj Gupta and Hinrich Schütze</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Conversational Markers of Constructive Discussions. </span><em>Vlad Niculae and Cristian Danescu-Niculescu-Mizil</em>
+                        <span class="poster-title">Conversational Markers of Constructive Discussions. </span><em>Vlad Niculae and Cristian Danescu-Niculescu-Mizil</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Cross-lingual Wikification Using Multilingual Embeddings. </span><em>Chen-Tse Tsai and Dan Roth</em>
+                        <span class="poster-title">Cross-lingual Wikification Using Multilingual Embeddings. </span><em>Chen-Tse Tsai and Dan Roth</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Deconstructing Complex Search Tasks: a Bayesian Nonparametric Approach for Extracting Sub-tasks. </span><em>Rishabh Mehrotra, Prasanta Bhattacharya and Emine Yilmaz</em>
+                        <span class="poster-title">Deconstructing Complex Search Tasks: a Bayesian Nonparametric Approach for Extracting Sub-tasks. </span><em>Rishabh Mehrotra, Prasanta Bhattacharya and Emine Yilmaz</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Expectation-Regulated Neural Model for Event Mention Extraction. </span><em>Ching-Yun Chang, Zhiyang Teng and Yue Zhang</em>
+                        <span class="poster-title">Expectation-Regulated Neural Model for Event Mention Extraction. </span><em>Ching-Yun Chang, Zhiyang Teng and Yue Zhang</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Grammatical error correction using neural machine translation. </span><em>Zheng Yuan and Ted Briscoe</em>
+                        <span class="poster-title">Grammatical error correction using neural machine translation. </span><em>Zheng Yuan and Ted Briscoe</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Improved Neural Network-based Multi-label Classification with Better Initialization Leveraging Label Co-occurrence. </span><em>Gakuto Kurata, Bing Xiang and Bowen Zhou</em>
+                        <span class="poster-title">Improved Neural Network-based Multi-label Classification with Better Initialization Leveraging Label Co-occurrence. </span><em>Gakuto Kurata, Bing Xiang and Bowen Zhou</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Improving event prediction by representing script participants. </span><em>Simon Ahrendt and Vera Demberg</em>
+                        <span class="poster-title">Improving event prediction by representing script participants. </span><em>Simon Ahrendt and Vera Demberg</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Individual Variation in the Choice of Referential Form. </span><em>Thiago Castro Ferreira, Emiel Krahmer and Sander Wubben</em>
+                        <span class="poster-title">Individual Variation in the Choice of Referential Form. </span><em>Thiago Castro Ferreira, Emiel Krahmer and Sander Wubben</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Inferring Psycholinguistic Properties of Words. </span><em>Gustavo Paetzold and Lucia Specia</em>
+                        <span class="poster-title">Inferring Psycholinguistic Properties of Words. </span><em>Gustavo Paetzold and Lucia Specia</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Intra-Topic Variability Normalization based on Linear Projection for Topic Classification. </span><em>Quan Liu, Wu Guo, Zhen-Hua Ling, Hui Jiang and Yu Hu</em>
+                        <span class="poster-title">Intra-Topic Variability Normalization based on Linear Projection for Topic Classification. </span><em>Quan Liu, Wu Guo, Zhen-Hua Ling, Hui Jiang and Yu Hu</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Joint Learning Templates and Slots for Event Schema Induction. </span><em>Lei Sha, Sujian Li, Baobao Chang, Zhifang Sui and Zhifang Sui</em>
+                        <span class="poster-title">Joint Learning Templates and Slots for Event Schema Induction. </span><em>Lei Sha, Sujian Li, Baobao Chang, Zhifang Sui and Zhifang Sui</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Large-scale Multitask Learning for Machine Translation Quality Estimation. </span><em>Kashif Shah and Lucia Specia</em>
+                        <span class="poster-title">Large-scale Multitask Learning for Machine Translation Quality Estimation. </span><em>Kashif Shah and Lucia Specia</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Learning Distributed Word Representations For Bidirectional LSTM Recurrent Neural Network. </span><em>Peilu Wang, Yao Qian, Frank Soong, Lei He and Hai Zhao</em>
+                        <span class="poster-title">Learning Distributed Word Representations For Bidirectional LSTM Recurrent Neural Network. </span><em>Peilu Wang, Yao Qian, Frank Soong, Lei He and Hai Zhao</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Leverage Financial News to Predict Stock Price Movements Using Word Embeddings and Deep Neural Networks. </span><em>Yangtuo Peng and Hui Jiang</em>
+                        <span class="poster-title">Leverage Financial News to Predict Stock Price Movements Using Word Embeddings and Deep Neural Networks. </span><em>Yangtuo Peng and Hui Jiang</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Multimodal Semantic Learning from Child-Directed Input. </span><em>Angeliki Lazaridou, Grzegorz Chrupała, Raquel Fernandez and Marco Baroni</em>
+                        <span class="poster-title">Multimodal Semantic Learning from Child-Directed Input. </span><em>Angeliki Lazaridou, Grzegorz Chrupała, Raquel Fernandez and Marco Baroni</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Online Multilingual Topic Models with Multi-Level Hyperpriors. </span><em>Kriste Krstovski, David Smith and Michael J. Kurtz</em>
+                        <span class="poster-title">Online Multilingual Topic Models with Multi-Level Hyperpriors. </span><em>Kriste Krstovski, David Smith and Michael J. Kurtz</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Psycholinguistic Features for Deceptive Role Detection in Werewolf. </span><em>Codruta Girlea, Roxana Girju and Eyal Amir</em>
+                        <span class="poster-title">Psycholinguistic Features for Deceptive Role Detection in Werewolf. </span><em>Codruta Girlea, Roxana Girju and Eyal Amir</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Recurrent Support Vector Machines For Slot Tagging In Spoken Language Understanding. </span><em>Yangyang Shi, Kaisheng Yao, Hu Chen, Dong Yu, Yi-Cheng Pan and Mei-Yuh Hwang</em>
+                        <span class="poster-title">Recurrent Support Vector Machines For Slot Tagging In Spoken Language Understanding. </span><em>Yangyang Shi, Kaisheng Yao, Hu Chen, Dong Yu, Yi-Cheng Pan and Mei-Yuh Hwang</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">STransE: a novel embedding model of entities and relationships in knowledge bases. </span><em>Dat Quoc Nguyen, Kairit Sirts, Lizhen Qu and Mark Johnson</em>
+                        <span class="poster-title">STransE: a novel embedding model of entities and relationships in knowledge bases. </span><em>Dat Quoc Nguyen, Kairit Sirts, Lizhen Qu and Mark Johnson</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Sequential Short-Text Classification with Recurrent and Convolutional Neural Networks. </span><em>Ji Young Lee and Franck Dernoncourt</em>
+                        <span class="poster-title">Sequential Short-Text Classification with Recurrent and Convolutional Neural Networks. </span><em>Ji Young Lee and Franck Dernoncourt</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Shift-Reduce CCG Parsing using Neural Network Models. </span><em>Bharat Ram Ambati, Tejaswini Deoskar and Mark Steedman</em>
+                        <span class="poster-title">Shift-Reduce CCG Parsing using Neural Network Models. </span><em>Bharat Ram Ambati, Tejaswini Deoskar and Mark Steedman</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Structured Prediction with Output Embeddings for Semantic Image Annotation. </span><em>Ariadna Quattoni, Arnau Ramisa, Pranava Swaroop Madhyastha, Edgar Simo-Serra and Francesc Moreno-Noguer</em>
+                        <span class="poster-title">Structured Prediction with Output Embeddings for Semantic Image Annotation. </span><em>Ariadna Quattoni, Arnau Ramisa, Pranava Swaroop Madhyastha, Edgar Simo-Serra and Francesc Moreno-Noguer</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Symmetric Patterns and Coordinations: Fast and Enhanced Representations of Verbs and Adjectives. </span><em>Roy Schwartz, Roi Reichart and Ari Rappoport</em>
+                        <span class="poster-title">Symmetric Patterns and Coordinations: Fast and Enhanced Representations of Verbs and Adjectives. </span><em>Roy Schwartz, Roi Reichart and Ari Rappoport</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">The Sensitivity of Topic Coherence Evaluation to Topic Cardinality. </span><em>Jey Han Lau and Timothy Baldwin</em>
+                        <span class="poster-title">The Sensitivity of Topic Coherence Evaluation to Topic Cardinality. </span><em>Jey Han Lau and Timothy Baldwin</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Transition-Based Syntactic Linearization with Lookahead Features. </span><em>Ratish Puduppully, Yue Zhang and Manish Shrivastava</em>
+                        <span class="poster-title">Transition-Based Syntactic Linearization with Lookahead Features. </span><em>Ratish Puduppully, Yue Zhang and Manish Shrivastava</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Vision and Feature Norms: Improving automatic feature norm learning through cross-modal maps. </span><em>Luana Bulat, Douwe Kiela and Stephen Clark</em>
-                    </td>
-                </tr>
-            </table>
-            <span class="info-button btn btn--small">Student Research Workshop</span>
-            <table class="paper-table">
-                <tr id="poster">
-                    <td>
-                        <span class="paper-title">An End-to-end Approach to Learning Semantic Frames with Feedforward Neural Network. </span><em>Yukun Feng, Yipei Xu and Dong Yu</em>
-                    </td>
-                </tr>
-                <tr id="poster">
-                    <td>
-                        <span class="paper-title">Analogy-based detection of morphological and semantic relations with word embeddings: what works and what doesn't. </span><em>Anna Gladkova, Aleksandr Drozd and Satoshi Matsuoka</em>
-                    </td>
-                </tr>
-                <tr id="poster">
-                    <td>
-                        <span class="paper-title">Argument Identification in Chinese Editorials. </span><em>Marisa Chow</em>
-                    </td>
-                </tr>
-                <tr id="poster">
-                    <td>
-                        <span class="paper-title">Automatic tagging and retrieval of E-Commerce products based on visual features. </span><em>Vasu Sharma and Harish Karnick</em>
-                    </td>
-                </tr>
-                <tr id="poster">
-                    <td>
-                        <span class="paper-title">Combining syntactic patterns and Wikipedia's hierarchy of hyperlinks to extract relations: The case of meronymy extraction. </span><em>Debela Tesfaye Gemechu, Michael Zock and Solomon Teferra</em>
-                    </td>
-                </tr>
-                <tr id="poster">
-                    <td>
-                        <span class="paper-title">Data-driven Paraphrasing and Stylistic Harmonization. </span><em>Gerold Hintz</em>
-                    </td>
-                </tr>
-                <tr id="poster">
-                    <td>
-                        <span class="paper-title">Detecting 'Smart' Spammers on Social Network: A Topic Model Approach. </span><em>Linqing Liu, Yao Lu, Ye Luo, Renxian Zhang, Laurent Itti and Jianwei Lu</em>
-                    </td>
-                </tr>
-                <tr id="poster">
-                    <td>
-                        <span class="paper-title">Developing language technology tools and resources for a resource-poor language: Sindhi. </span><em>Raveesh Motlani</em>
+                        <span class="poster-title">Vision and Feature Norms: Improving automatic feature norm learning through cross-modal maps. </span><em>Luana Bulat, Douwe Kiela and Stephen Clark</em>
                     </td>
                 </tr>
             </table>
-            <span class="info-button btn btn--small">System Demonstrations</span>
-            <table class="paper-table">
+            <span class="info-button btn btn--small poster-type">Student Research Workshop</span>
+            <table class="poster-table">
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">rstWeb - A Browser-based Annotation Interface for Rhetorical Structure Theory and Discourse Relations. </span><em>Amir Zeldes</em>
+                        <span class="poster-title">An End-to-end Approach to Learning Semantic Frames with Feedforward Neural Network. </span><em>Yukun Feng, Yipei Xu and Dong Yu</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Instant Feedback for Increasing the Presence of Solutions in Peer Reviews. </span><em>Huy Nguyen, Wenting Xiong and Diane Litman</em>
+                        <span class="poster-title">Analogy-based detection of morphological and semantic relations with word embeddings: what works and what doesn't. </span><em>Anna Gladkova, Aleksandr Drozd and Satoshi Matsuoka</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Farasa: A Fast and Furious Segmenter for Arabic. </span><em>Ahmed Abdelali, Kareem Darwish, Nadir Durrani and Hamdy Mubarak</em>
+                        <span class="poster-title">Argument Identification in Chinese Editorials. </span><em>Marisa Chow</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">iAppraise: A Manual Machine Translation Evaluation Environment Supporting Eye-tracking. </span><em>Ahmed Abdelali, Nadir Durrani and Francisco Guzmán</em>
+                        <span class="poster-title">Automatic tagging and retrieval of E-Commerce products based on visual features. </span><em>Vasu Sharma and Harish Karnick</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Linguistica 5: Unsupervised Learning of Linguistic Structure. </span><em>Jackson Lee and John Goldsmith</em>
+                        <span class="poster-title">Combining syntactic patterns and Wikipedia's hierarchy of hyperlinks to extract relations: The case of meronymy extraction. </span><em>Debela Tesfaye Gemechu, Michael Zock and Solomon Teferra</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">TransRead: Designing a Bilingual Reading Experience with Machine Translation Technologies. </span><em>François Yvon, Yong Xu, Marianna Apidianaki, Clément Pillias and Pierre Cubaud</em>
+                        <span class="poster-title">Data-driven Paraphrasing and Stylistic Harmonization. </span><em>Gerold Hintz</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">New Dimensions in Testimony Demonstration. </span><em>Ron Artstein, Alesia Gainer, Kallirroi Georgila, Anton Leuski, Ari Shapiro and David Traum</em>
+                        <span class="poster-title">Detecting 'Smart' Spammers on Social Network: A Topic Model Approach. </span><em>Linqing Liu, Yao Lu, Ye Luo, Renxian Zhang, Laurent Itti and Jianwei Lu</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">ArgRewrite: A Web-based Revision Assistant for Argumentative Writings. </span><em>Fan Zhang, Rebecca Hwa, Diane Litman and Homa B. Hashemi</em>
+                        <span class="poster-title">Developing language technology tools and resources for a resource-poor language: Sindhi. </span><em>Raveesh Motlani</em>
+                    </td>
+                </tr>
+            </table>
+            <span class="info-button btn btn--small poster-type">System Demonstrations</span>
+            <table class="poster-table">
+                <tr id="poster">
+                    <td>
+                        <span class="poster-title">rstWeb - A Browser-based Annotation Interface for Rhetorical Structure Theory and Discourse Relations. </span><em>Amir Zeldes</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Scaling Up Word Clustering. </span><em>Jon Dehdari, Liling Tan and Josef van Genabith</em>
+                        <span class="poster-title">Instant Feedback for Increasing the Presence of Solutions in Peer Reviews. </span><em>Huy Nguyen, Wenting Xiong and Diane Litman</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Task Completion Platform: A self-serve multi-domain goal oriented dialogue platform. </span><em>Paul Crook, Alex Marin, Vipul Agarwal, Khushboo Aggarwal, Tasos Anastasakos, Ravi Bikkula, Daniel Boies, Asli Celikyilmaz, Senthilkumar Chandramohan, Zhaleh Feizollahi, Roman Holenstein, Minwoo Jeong, Omar Khan, Young-Bum Kim, Elizabeth Krawczyk, Xiaohu Liu, Danko Panic, Vasiliy Radostev, Nikhil Ramesh, Jean-Phillipe Robichaud, Alexandre Rochette, Logan Stromberg and Ruhi Sarikaya</em>
+                        <span class="poster-title">Farasa: A Fast and Furious Segmenter for Arabic. </span><em>Ahmed Abdelali, Kareem Darwish, Nadir Durrani and Hamdy Mubarak</em>
+                    </td>
+                </tr>
+                <tr id="poster">
+                    <td>
+                        <span class="poster-title">iAppraise: A Manual Machine Translation Evaluation Environment Supporting Eye-tracking. </span><em>Ahmed Abdelali, Nadir Durrani and Francisco Guzmán</em>
+                    </td>
+                </tr>
+                <tr id="poster">
+                    <td>
+                        <span class="poster-title">Linguistica 5: Unsupervised Learning of Linguistic Structure. </span><em>Jackson Lee and John Goldsmith</em>
+                    </td>
+                </tr>
+                <tr id="poster">
+                    <td>
+                        <span class="poster-title">TransRead: Designing a Bilingual Reading Experience with Machine Translation Technologies. </span><em>François Yvon, Yong Xu, Marianna Apidianaki, Clément Pillias and Pierre Cubaud</em>
+                    </td>
+                </tr>
+                <tr id="poster">
+                    <td>
+                        <span class="poster-title">New Dimensions in Testimony Demonstration. </span><em>Ron Artstein, Alesia Gainer, Kallirroi Georgila, Anton Leuski, Ari Shapiro and David Traum</em>
+                    </td>
+                </tr>
+                <tr id="poster">
+                    <td>
+                        <span class="poster-title">ArgRewrite: A Web-based Revision Assistant for Argumentative Writings. </span><em>Fan Zhang, Rebecca Hwa, Diane Litman and Homa B. Hashemi</em>
+                    </td>
+                </tr>
+                <tr id="poster">
+                    <td>
+                        <span class="poster-title">Scaling Up Word Clustering. </span><em>Jon Dehdari, Liling Tan and Josef van Genabith</em>
+                    </td>
+                </tr>
+                <tr id="poster">
+                    <td>
+                        <span class="poster-title">Task Completion Platform: A self-serve multi-domain goal oriented dialogue platform. </span><em>Paul Crook, Alex Marin, Vipul Agarwal, Khushboo Aggarwal, Tasos Anastasakos, Ravi Bikkula, Daniel Boies, Asli Celikyilmaz, Senthilkumar Chandramohan, Zhaleh Feizollahi, Roman Holenstein, Minwoo Jeong, Omar Khan, Young-Bum Kim, Elizabeth Krawczyk, Xiaohu Liu, Danko Panic, Vasiliy Radostev, Nikhil Ramesh, Jean-Phillipe Robichaud, Alexandre Rochette, Logan Stromberg and Ruhi Sarikaya</em>
                     </td>
                 </tr>
             </table>
@@ -1549,6 +1803,7 @@ script: |
     <div class="session session-expandable session-plenary" id="session-deep-learning-panel">
         <div id="expander"></div><a href="#" class="session-title">Panel Discussion: How Will Deep Learning Change Computational Linguistics?</a><br/>        
         <span class="session-time">1:15 PM &ndash; 2:15 PM</span><br/>
+        <span class="session-location btn btn--location">Grande Ballroom</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
             <div class="session-abstract">
@@ -1802,278 +2057,278 @@ script: |
             </div>
         </div>
     </div>
-    <div class="session session-expandable session-plenary" id="session-poster-2">
+    <div class="session session-expandable session-posters" id="session-poster-2">
         <div id="expander"></div><a href="#" class="session-title">Posters, Demos &amp; Dinner</a><br/>        
         <span class="session-time">6:00 PM &ndash; 8:00 PM</span>
         <span class="session-location btn btn--location">Pavilion</span>
-        <div class="paper-session-details">
+        <div class="poster-session-details">
             <hr class="detail-separator"/>
-            <span class="info-button btn btn--small">Main Conference</span>
-            <table class="paper-table">
+            <span class="info-button btn btn--small poster-type">Main Conference</span>
+            <table class="poster-table">
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Assessing Relative Sentence Complexity using an Incremental CCG Parser. </span><em>Bharat Ram Ambati, Siva Reddy and Mark Steedman</em>
+                        <span class="poster-title">Assessing Relative Sentence Complexity using an Incremental CCG Parser. </span><em>Bharat Ram Ambati, Siva Reddy and Mark Steedman</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Automatic Prediction of Linguistic Decline in Writings of Subjects with Degenerative Dementia. </span><em>Davy Weissenbacher, Travis A. Johnson, Laura Wojtulewicz, Amylou Dueck, Dona Locke, Richard Caselli and Graciela Gonzalez</em>
+                        <span class="poster-title">Automatic Prediction of Linguistic Decline in Writings of Subjects with Degenerative Dementia. </span><em>Davy Weissenbacher, Travis A. Johnson, Laura Wojtulewicz, Amylou Dueck, Dona Locke, Richard Caselli and Graciela Gonzalez</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Automatically Inferring Implicit Properties in Similes. </span><em>Ashequl Qadir, Ellen Riloff and Marilyn Walker</em>
+                        <span class="poster-title">Automatically Inferring Implicit Properties in Similes. </span><em>Ashequl Qadir, Ellen Riloff and Marilyn Walker</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">BIRA: Improved Predictive Exchange Word Clustering. </span><em>Jon Dehdari, Liling Tan and Josef van Genabith</em>
+                        <span class="poster-title">BIRA: Improved Predictive Exchange Word Clustering. </span><em>Jon Dehdari, Liling Tan and Josef van Genabith</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Bootstrapping Translation Detection and Sentence Extraction from Comparable Corpora. </span><em>Kriste Krstovski and David Smith</em>
+                        <span class="poster-title">Bootstrapping Translation Detection and Sentence Extraction from Comparable Corpora. </span><em>Kriste Krstovski and David Smith</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Capturing Semantic Similarity for Entity Linking with Convolutional Neural Networks. </span><em>Matthew Francis-Landau, Greg Durrett and Dan Klein</em>
+                        <span class="poster-title">Capturing Semantic Similarity for Entity Linking with Convolutional Neural Networks. </span><em>Matthew Francis-Landau, Greg Durrett and Dan Klein</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Consensus Maximization Fusion of Probabilistic Information Extractors. </span><em>Miguel Rodriguez, Sean Goldberg and Daisy Zhe Wang</em>
+                        <span class="poster-title">Consensus Maximization Fusion of Probabilistic Information Extractors. </span><em>Miguel Rodriguez, Sean Goldberg and Daisy Zhe Wang</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Cross-genre Event Extraction with Knowledge Enrichment. </span><em>Hao Li and Heng Ji</em>
+                        <span class="poster-title">Cross-genre Event Extraction with Knowledge Enrichment. </span><em>Hao Li and Heng Ji</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Deep Lexical Segmentation and Syntactic Parsing in the Easy-First Dependency Framework. </span><em>Matthieu Constant, Joseph Le Roux and Nadi Tomeh</em>
+                        <span class="poster-title">Deep Lexical Segmentation and Syntactic Parsing in the Easy-First Dependency Framework. </span><em>Matthieu Constant, Joseph Le Roux and Nadi Tomeh</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Discriminative Reranking for Grammatical Error Correction with Statistical Machine Translation. </span><em>Tomoya Mizumoto and Yuji Matsumoto</em>
+                        <span class="poster-title">Discriminative Reranking for Grammatical Error Correction with Statistical Machine Translation. </span><em>Tomoya Mizumoto and Yuji Matsumoto</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Emergent: a novel data-set for stance classification. </span><em>William Ferreira and Andreas Vlachos</em>
+                        <span class="poster-title">Emergent: a novel data-set for stance classification. </span><em>William Ferreira and Andreas Vlachos</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Eyes Don't Lie: Predicting Machine Translation Quality Using Eye Movement. </span><em>Hassan Sajjad, Francisco Guzmán, Nadir Durrani, Ahmed Abdelali, Houda Bouamor, Irina Temnikova and Stephan Vogel</em>
+                        <span class="poster-title">Eyes Don't Lie: Predicting Machine Translation Quality Using Eye Movement. </span><em>Hassan Sajjad, Francisco Guzmán, Nadir Durrani, Ahmed Abdelali, Houda Bouamor, Irina Temnikova and Stephan Vogel</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Fast and Easy Short Answer Grading with High Accuracy. </span><em>Md Arafat Sultan, Cristobal Salazar and Tamara Sumner</em>
+                        <span class="poster-title">Fast and Easy Short Answer Grading with High Accuracy. </span><em>Md Arafat Sultan, Cristobal Salazar and Tamara Sumner</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Frustratingly Easy Cross-Lingual Transfer for Transition-Based Dependency Parsing. </span><em>Ophélie Lacroix, Lauriane Aufrant, Guillaume Wisniewski and François Yvon</em>
+                        <span class="poster-title">Frustratingly Easy Cross-Lingual Transfer for Transition-Based Dependency Parsing. </span><em>Ophélie Lacroix, Lauriane Aufrant, Guillaume Wisniewski and François Yvon</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Geolocation for Twitter: Timing Matters. </span><em>Mark Dredze, Miles Osborne and Prabhanjan Kambadur</em>
+                        <span class="poster-title">Geolocation for Twitter: Timing Matters. </span><em>Mark Dredze, Miles Osborne and Prabhanjan Kambadur</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Incorporating Side Information into Recurrent Neural Network Language Models. </span><em>Cong Duy Vu Hoang, Trevor Cohn and Gholamreza Haffari</em>
+                        <span class="poster-title">Incorporating Side Information into Recurrent Neural Network Language Models. </span><em>Cong Duy Vu Hoang, Trevor Cohn and Gholamreza Haffari</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Integrating Morphological Desegmentation into Phrase-based Decoding. </span><em>Mohammad Salameh, Colin Cherry and Grzegorz Kondrak</em>
+                        <span class="poster-title">Integrating Morphological Desegmentation into Phrase-based Decoding. </span><em>Mohammad Salameh, Colin Cherry and Grzegorz Kondrak</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Interlocking Phrases in Phrase-based Statistical Machine Translation. </span><em>Ye Kyaw Thu, Andrew Finch and Eiichiro Sumita</em>
+                        <span class="poster-title">Interlocking Phrases in Phrase-based Statistical Machine Translation. </span><em>Ye Kyaw Thu, Andrew Finch and Eiichiro Sumita</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">K-Embeddings: Learning Conceptual Embeddings for Words using Context. </span><em>Thuy Vu and D. Stott Parker</em>
+                        <span class="poster-title">K-Embeddings: Learning Conceptual Embeddings for Words using Context. </span><em>Thuy Vu and D. Stott Parker</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Learning Composition Models for Phrase Embeddings. </span><em>Mo Yu and Mark Dredze</em>
+                        <span class="poster-title">Learning Composition Models for Phrase Embeddings. </span><em>Mo Yu and Mark Dredze</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Learning a POS tagger for AAVE-like language. </span><em>Anna Jørgensen, Dirk Hovy and Anders Søgaard</em>
+                        <span class="poster-title">Learning a POS tagger for AAVE-like language. </span><em>Anna Jørgensen, Dirk Hovy and Anders Søgaard</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Learning to Recognize Ancillary Information for Automatic Paraphrase Identification. </span><em>Simone Filice and Alessandro Moschitti</em>
+                        <span class="poster-title">Learning to Recognize Ancillary Information for Automatic Paraphrase Identification. </span><em>Simone Filice and Alessandro Moschitti</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">MAWPS: A Math Word Problem Repository. </span><em>Rik Koncel-Kedziorski, Subhro Roy, Aida Amini, Nate Kushman and Hannaneh Hajishirzi</em>
+                        <span class="poster-title">MAWPS: A Math Word Problem Repository. </span><em>Rik Koncel-Kedziorski, Subhro Roy, Aida Amini, Nate Kushman and Hannaneh Hajishirzi</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Making Dependency Labeling Simple, Fast and Accurate. </span><em>Tianxiao Shen, Tao Lei and Regina Barzilay</em>
+                        <span class="poster-title">Making Dependency Labeling Simple, Fast and Accurate. </span><em>Tianxiao Shen, Tao Lei and Regina Barzilay</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">PIC a Different Word: A Simple Model for Lexical Substitution in Context. </span><em>Stephen Roller and Katrin Erk</em>
+                        <span class="poster-title">PIC a Different Word: A Simple Model for Lexical Substitution in Context. </span><em>Stephen Roller and Katrin Erk</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">PRIMT: A Pick-Revise Framework for Interactive Machine Translation. </span><em>Shanbo Cheng, Shujian Huang, Huadong Chen, Xin-Yu Dai and Jiajun Chen</em>
+                        <span class="poster-title">PRIMT: A Pick-Revise Framework for Interactive Machine Translation. </span><em>Shanbo Cheng, Shujian Huang, Huadong Chen, Xin-Yu Dai and Jiajun Chen</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Patterns of Wisdom: Discourse-Level Style in Multi-Sentence Quotations. </span><em>Kyle Booten and Marti A. Hearst</em>
+                        <span class="poster-title">Patterns of Wisdom: Discourse-Level Style in Multi-Sentence Quotations. </span><em>Kyle Booten and Marti A. Hearst</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Right-truncatable Neural Word Embeddings. </span><em>Jun Suzuki and Masaaki Nagata</em>
+                        <span class="poster-title">Right-truncatable Neural Word Embeddings. </span><em>Jun Suzuki and Masaaki Nagata</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Sentiment Composition of Words with Opposing Polarities. </span><em>Svetlana Kiritchenko and Saif Mohammad</em>
+                        <span class="poster-title">Sentiment Composition of Words with Opposing Polarities. </span><em>Svetlana Kiritchenko and Saif Mohammad</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Simple, Fast Noise-Contrastive Estimation for Large RNN Vocabularies. </span><em>Barret Zoph, Ashish Vaswani, Jonathan May and Kevin Knight</em>
+                        <span class="poster-title">Simple, Fast Noise-Contrastive Estimation for Large RNN Vocabularies. </span><em>Barret Zoph, Ashish Vaswani, Jonathan May and Kevin Knight</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Sparse Bilingual Word Representations for Cross-lingual Lexical Entailment. </span><em>Yogarshi Vyas and Marine Carpuat</em>
+                        <span class="poster-title">Sparse Bilingual Word Representations for Cross-lingual Lexical Entailment. </span><em>Yogarshi Vyas and Marine Carpuat</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">The Instantiation Discourse Relation: A Corpus Analysis of Its Properties and Improved Detection. </span><em>Junyi Jessy Li and Ani Nenkova</em>
+                        <span class="poster-title">The Instantiation Discourse Relation: A Corpus Analysis of Its Properties and Improved Detection. </span><em>Junyi Jessy Li and Ani Nenkova</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Visual Storytelling. </span><em>Ting-Hao Huang, Francis Ferraro, Nasrin Mostafazadeh, Ishan Misra, Jacob Devlin, Aishwarya Agrawal, Ross Girshick, Xiaodong He, Pushmeet Kohli, Dhruv Batra, Larry Zitnick, Devi Parikh, Lucy Vanderwende, Michel Galley and Margaret Mitchell</em>
+                        <span class="poster-title">Visual Storytelling. </span><em>Ting-Hao Huang, Francis Ferraro, Nasrin Mostafazadeh, Ishan Misra, Jacob Devlin, Aishwarya Agrawal, Ross Girshick, Xiaodong He, Pushmeet Kohli, Dhruv Batra, Larry Zitnick, Devi Parikh, Lucy Vanderwende, Michel Galley and Margaret Mitchell</em>
                     </td>
                 </tr>
             </table>
-            <span class="info-button btn btn--small">Student Research Workshop</span>
-            <table class="paper-table">
+            <span class="info-button btn btn--small poster-type">Student Research Workshop</span>
+            <table class="poster-table">
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Effects of Communicative Pressures on Novice L2 Learners' Use of Optional Formal Devices. </span><em>Yoav Binoun, Francesca Delogu, Clayton Greenberg, Mindaugas Mozuraitis and Matthew Crocker</em>
+                        <span class="poster-title">Effects of Communicative Pressures on Novice L2 Learners' Use of Optional Formal Devices. </span><em>Yoav Binoun, Francesca Delogu, Clayton Greenberg, Mindaugas Mozuraitis and Matthew Crocker</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Explicit Argument Identification for Discourse Parsing In Hindi: A Hybrid Pipeline. </span><em>Rohit Jain and Dipti Sharma</em>
+                        <span class="poster-title">Explicit Argument Identification for Discourse Parsing In Hindi: A Hybrid Pipeline. </span><em>Rohit Jain and Dipti Sharma</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Exploring Fine-Grained Emotion Detection in Tweets. </span><em>Jasy Suet Yan Liew and Howard Turtle</em>
+                        <span class="poster-title">Exploring Fine-Grained Emotion Detection in Tweets. </span><em>Jasy Suet Yan Liew and Howard Turtle</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Extraction of Bilingual Technical Terms for Chinese-Japanese Patent Translation. </span><em>Wei Yang, Jinghui Yan and Yves Lepage</em>
+                        <span class="poster-title">Extraction of Bilingual Technical Terms for Chinese-Japanese Patent Translation. </span><em>Wei Yang, Jinghui Yan and Yves Lepage</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Hateful Symbols or Hateful People? Predictive Features for Hate Speech Detection on Twitter. </span><em>Zeerak Waseem and Dirk Hovy</em>
+                        <span class="poster-title">Hateful Symbols or Hateful People? Predictive Features for Hate Speech Detection on Twitter. </span><em>Zeerak Waseem and Dirk Hovy</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Non-decreasing Sub-modular Function for Comprehensible Summarization. </span><em>Litton JKurisinkel, Pruthwik Mishra, Vigneshwaran Muralidaran, Vasudeva Varma and Dipti Misra Sharma</em>
+                        <span class="poster-title">Non-decreasing Sub-modular Function for Comprehensible Summarization. </span><em>Litton JKurisinkel, Pruthwik Mishra, Vigneshwaran Muralidaran, Vasudeva Varma and Dipti Misra Sharma</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Phylogenetic simulations over constraint-based grammar formalisms. </span><em>Andrew Lamont and Jonathan Washington</em>
+                        <span class="poster-title">Phylogenetic simulations over constraint-based grammar formalisms. </span><em>Andrew Lamont and Jonathan Washington</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Question Answering over Knowledge Base using Weakly Supervised Memory Networks. </span><em>Sarthak Jain</em>
+                        <span class="poster-title">Question Answering over Knowledge Base using Weakly Supervised Memory Networks. </span><em>Sarthak Jain</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Using Related Languages to Enhance Statistical Language Models. </span><em>Anna Currey, Alina Karakanta and Jon Dehdari</em>
+                        <span class="poster-title">Using Related Languages to Enhance Statistical Language Models. </span><em>Anna Currey, Alina Karakanta and Jon Dehdari</em>
                     </td>
                 </tr>            
             </table>
-            <span class="info-button btn btn--small">System Demonstrations</span>
-            <table class="paper-table">
+            <span class="info-button btn btn--small poster-type">System Demonstrations</span>
+            <table class="poster-table">
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Illinois Math Solver: Math Reasoning on the Web. </span><em>Subhro Roy and Dan Roth</em>
+                        <span class="poster-title">Illinois Math Solver: Math Reasoning on the Web. </span><em>Subhro Roy and Dan Roth</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">LingoTurk: managing crowdsourced tasks for psycholinguistics. </span><em>Florian Pusse, Asad Sayeed and Vera Demberg</em>
+                        <span class="poster-title">LingoTurk: managing crowdsourced tasks for psycholinguistics. </span><em>Florian Pusse, Asad Sayeed and Vera Demberg</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Sentential Paraphrasing as Black-Box Machine Translation. </span><em>Courtney Napoles, Chris Callison-Burch and Matt Post</em>
+                        <span class="poster-title">Sentential Paraphrasing as Black-Box Machine Translation. </span><em>Courtney Napoles, Chris Callison-Burch and Matt Post</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">A Tag-based English Math Word Problem Solver with Understanding, Reasoning and Explanation. </span><em>Chao-Chun Liang, Kuang-Yi Hsu, Chien-Tsung Huang, Chung-Min Li, Shen-Yu Miao and Keh-Yih Su</em>
+                        <span class="poster-title">A Tag-based English Math Word Problem Solver with Understanding, Reasoning and Explanation. </span><em>Chao-Chun Liang, Kuang-Yi Hsu, Chien-Tsung Huang, Chung-Min Li, Shen-Yu Miao and Keh-Yih Su</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Cross-media Event Extraction and Recommendation. </span><em>Di Lu, Clare Voss, Fangbo Tao, Xiang Ren, Rachel Guan, Rostyslav Korolov, Tongtao Zhang, Dongang Wang, Hongzhi Li, Taylor Cassidy, Heng Ji, Shih-fu Chang, Jiawei Han, William Wallace, James Hendler, Mei Si and Lance Kaplan</em>
+                        <span class="poster-title">Cross-media Event Extraction and Recommendation. </span><em>Di Lu, Clare Voss, Fangbo Tao, Xiang Ren, Rachel Guan, Rostyslav Korolov, Tongtao Zhang, Dongang Wang, Hongzhi Li, Taylor Cassidy, Heng Ji, Shih-fu Chang, Jiawei Han, William Wallace, James Hendler, Mei Si and Lance Kaplan</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">SODA: Service Oriented Domain Adaptation Architecture for Microblog Categorization. </span><em>Himanshu Sharad Bhatt, Sandipan Dandapat, Peddamuthu Balaji, Shourya Roy, Sharmistha Jat and Deepali Semwal</em>
+                        <span class="poster-title">SODA: Service Oriented Domain Adaptation Architecture for Microblog Categorization. </span><em>Himanshu Sharad Bhatt, Sandipan Dandapat, Peddamuthu Balaji, Shourya Roy, Sharmistha Jat and Deepali Semwal</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Lecture Translator - Speech translation framework for simultaneous lecture translation. </span><em>Markus Müller, Thai Son Nguyen, Jan Niehues, Eunah Cho, Bastian Krüger, Thanh-Le Ha, Kevin Kilgour, Matthias Sperber, Mohammed Mediani, Sebastian Stüker and Alex Waibel</em>
+                        <span class="poster-title">Lecture Translator - Speech translation framework for simultaneous lecture translation. </span><em>Markus Müller, Thai Son Nguyen, Jan Niehues, Eunah Cho, Bastian Krüger, Thanh-Le Ha, Kevin Kilgour, Matthias Sperber, Mohammed Mediani, Sebastian Stüker and Alex Waibel</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Zara The Supergirl: An Empathetic Personality Recognition System. </span><em>Pascale Fung, Anik Dey, Farhad Bin Siddique, Ruixi Lin, Yang Yang, Yan Wan and Ho Yin Ricky Chan</em>
+                        <span class="poster-title">Zara The Supergirl: An Empathetic Personality Recognition System. </span><em>Pascale Fung, Anik Dey, Farhad Bin Siddique, Ruixi Lin, Yang Yang, Yan Wan and Ho Yin Ricky Chan</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">Kathaa: A Visual Programming Framework for NLP Applications. </span><em>Sharada Prasanna Mohanty, Nehal J Wani, Manish Srivastava and Dipti Misra Sharma</em>
+                        <span class="poster-title">Kathaa: A Visual Programming Framework for NLP Applications. </span><em>Sharada Prasanna Mohanty, Nehal J Wani, Manish Srivastava and Dipti Misra Sharma</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="paper-title">"Why Should I Trust You?": Explaining the Predictions of Any Classifier. </span><em>Marco Ribeiro, Sameer Singh and Carlos Guestrin</em>
+                        <span class="poster-title">"Why Should I Trust You?": Explaining the Predictions of Any Classifier. </span><em>Marco Ribeiro, Sameer Singh and Carlos Guestrin</em>
                     </td>
                 </tr>
             </table>
@@ -2263,6 +2518,7 @@ script: |
         <a href="#" class="session-title">NAACL Business Meeting</a><br/>
         <span class="session-people"><strong>All attendees are encouraged to participate in the business meeting.</strong></span><br/>
         <span class="session-time">1:00 PM &ndash; 2:00 PM</span><br/>
+        <span class="session-location btn btn--location">Grande Ballroom A</span>
     </div>
     <div class="session session-expandable session-papers1" id="session-9a">
         <div id="expander"></div><a href="#" class="session-title">Argumentation &amp; Discourse Relations</a><br/>
@@ -2440,6 +2696,7 @@ script: |
     <div class="session session-plenary" id="session-closing">
         <span class="session-title">Closing Remarks</span><br/>        
         <span class="session-time">5:35 PM &ndash; 5:45 PM</span>
+        <span class="session-location btn btn--location">Grande Ballroom</span>
     </div>
     <div id="generatePDFForm">
         <div id="formContainer">

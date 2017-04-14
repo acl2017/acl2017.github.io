@@ -115,14 +115,13 @@ div#testingInstructions {
 
 }
 
-
 div.session {
     display: inline;
     padding: 0.5em;
     padding-left: 1em;
     border: 1px solid $light-gray;
 
-    &.session-tutorials, &.session-plenary {
+    &.session-tutorials, &.session-plenary, &.session-posters {
         @include span(12);
     }
 
@@ -197,16 +196,28 @@ div.session {
     }
 
 
-    .tutorial-session-details {
-        ul {
-            padding: 0px;
-            list-style-type: none;
-            line-height: 1em;
+    .session-abstract {
+        font-size: $type-size-6;
+    }
+
+    .tutorial-table {
+        border: 1px;
+        font-size: $type-size-5;
+        td {
+            border: 0px;
         }
     }
 
-    .session-abstract {
+    .poster-table {
+        border: 1px;
         font-size: $type-size-6;
+        td {
+            border: 0px;
+        }
+    }
+
+    td#tutorial-location {
+        cursor: text;
     }
 
     .paper-table {
@@ -222,12 +233,16 @@ div.session {
         font-weight: bold;
     }
 
-    .paper-title  {
+    .paper-title, .poster-title  {
         font-weight: bold;
     }
 
     .session-location {
         float: right;
+        cursor: text;
+    }
+
+    .inline-location {
         cursor: text;
     }
 
@@ -239,13 +254,30 @@ div.session {
         font-size: $type-size-5;
     }
 
+    tr#tutorial, tr#poster {
+        cursor: pointer;
+        background-color: #fff;
+        &.selected {
+            background-color: $lighter-gray2;
+        }
+    }
+
+
     tr#paper {
         cursor: pointer;
         background-color: #fff;
-    }
+        &.selected {
+            background-color: $lighter-gray2;
+        }
 
-    tr#paper.selected {
-        background-color: $lighter-gray2;
+        @include breakpoint($large) {
+            &.hovered {
+                background-color: yellow;
+            }
+            &.hovered.selected {
+                background-color: #4EEE94;
+            }
+        }
     }
 
     #expander {
