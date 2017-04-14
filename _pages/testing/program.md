@@ -586,7 +586,7 @@ script: |
                 if (numChosenItems == 0) {
                     if (includePlenaryInSchedule) {
                         vex.dialog.confirm({
-                            message: "The PDF will contain only the plenary sessions since no papers were chosen. Proceed?",
+                            message: "The PDF will contain only the plenary sessions since nothing was chosen. Proceed?",
                             callback: function (value) {
                                 if (value) {
                                     generatePDFfromTable();
@@ -598,7 +598,7 @@ script: |
                         });
                     }
                     else {
-                        vex.dialog.alert('Nothing to generate. No papers were chosen and plenary sessions were excluded.');
+                        vex.dialog.alert('Nothing to generate. Nothing was chosen and plenary sessions were excluded.');
                         return false;
                     }
                 }
@@ -732,10 +732,11 @@ script: |
     <strong>Instructions &amp; Notes</strong>:
     <ul>
         <li>Click on the title of a session to expand and collapse the session. On a non-mobile browser, you can also click anywhere in the cell containing the session title.</li>
-        <li>Click on a paper to select it, click again to unselect it.</li>
+        <li>Click on a tutorial/paper/poster to select it, click again to unselect it.</li>
+        <li>You can select more than one paper for a time slot.</li>
+        <li>When you hover on a paper for a time slot, it is highlighted in yellow along with the conflicting papers to make the comparison easier. This only works on non-mobile devices where parallel sessions are displayed adjacent to each other.</li>
+        <li>If papers are already selected for a time slot, hovering highlights them in green.</li>
         <li>Click on the <em>Generate PDF</em> button at the bottom of the page to generate the PDF for your selected talks.</li>
-        <li>You can mix and match papers from different sessions but you <em>cannot</em> select multiple papers for the same time slot. We think it defeats the purpose of having an easy-to-read, glanceable PDF. However, if you disagree, please let us know below.</li>
-        <li>Currently, only paper sessions are supported. Tutorial and poster sesions are not. However, we can certainly extend this to posters since people might want to pick those out in advance too.</li>
         <li>Since ACL 2017 doesn't have a program yet, we used the content from the NAACL 2016 conference for the purposes of testing.</li>
         <li>The page has been tested on MacOS 10.12.3 on the most recent versions of Chrome, Firefox, and Safari browsers. We would like to test on other OSes (Windows, Linux) and other browsers, although older browsers (e.g., Internet Explorer <= v10) will likely not work. </li>
         <li>The page has also been tested on an iPhone simulator and works as expected. However, it'd be nice to test it on Android (<strong>NOTE</strong>: only Chrome on Android will work).</li>
