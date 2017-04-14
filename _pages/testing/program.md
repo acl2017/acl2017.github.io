@@ -662,7 +662,7 @@ script: |
                 var paperTimeObj = $(this).children('td#paper-time');
                 var paperInfo = getPaperInfoFromTime(paperTimeObj);
                 var paperObject = {};
-                var exactStartingTime = paperInfo[0]
+                var exactStartingTime = paperInfo[0];
                 paperObject.start = paperInfo[1];
                 paperObject.end = paperInfo[2];
                 paperObject.title = paperInfo[3];
