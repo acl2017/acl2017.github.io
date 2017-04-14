@@ -270,7 +270,7 @@ script: |
             var chosenHash = getChosenHashFromType(type);
             if (timeKey in chosenHash) {
                 var items = chosenHash[timeKey];
-                items.push(item)
+                items.push(item);
                 chosenHash[timeKey] = items;
             }
             else {
