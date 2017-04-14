@@ -610,7 +610,6 @@ script: |
             $('body').on('click', 'table.tutorial-table tr#tutorial', function(event) {
                 event.preventDefault();
                 var tutorialTimeObj = $(this).parents('.session-tutorials').children('.session-time');
-                var tutorialTitle = $(this)
                 var tutorialInfo = getTutorialInfoFromTime(tutorialTimeObj);
                 var tutorialObject = {};
                 var exactStartingTime = tutorialInfo[0];
