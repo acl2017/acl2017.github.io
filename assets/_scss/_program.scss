@@ -115,14 +115,13 @@ div#testingInstructions {
 
 }
 
-
 div.session {
     display: inline;
     padding: 0.5em;
     padding-left: 1em;
     border: 1px solid $light-gray;
 
-    &.session-tutorials, &.session-plenary {
+    &.session-tutorials, &.session-plenary, &.session-posters {
         @include span(12);
     }
 
@@ -197,14 +196,6 @@ div.session {
     }
 
 
-    .tutorial-session-details {
-        ul {
-            padding: 0px;
-            list-style-type: none;
-            line-height: 1em;
-        }
-    }
-
     .session-abstract {
         font-size: $type-size-6;
     }
@@ -212,6 +203,14 @@ div.session {
     .tutorial-table {
         border: 1px;
         font-size: $type-size-5;
+        td {
+            border: 0px;
+        }
+    }
+
+    .poster-table {
+        border: 1px;
+        font-size: $type-size-6;
         td {
             border: 0px;
         }
@@ -234,7 +233,7 @@ div.session {
         font-weight: bold;
     }
 
-    .paper-title  {
+    .paper-title, .poster-title  {
         font-weight: bold;
     }
 
@@ -255,7 +254,7 @@ div.session {
         font-size: $type-size-5;
     }
 
-    tr#tutorial {
+    tr#tutorial, tr#poster {
         cursor: pointer;
         background-color: #fff;
         &.selected {
