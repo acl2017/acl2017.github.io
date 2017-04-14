@@ -340,7 +340,7 @@ script: |
                     /* get the tutorials */
                     var tutorials = chosenTutorialsHash[key];
                     var titles = tutorials.map(function(tutorial) { return ASCIIFold(tutorial.title); });
-                    var locations = tutorials.map(function(tutorial) { return tutorial.location ; })
+                    var locations = tutorials.map(function(tutorial) { return tutorial.location ; });
                     var sessions = tutorials.map(function(tutorial) { return sessionInfoHash[tutorial.session]; });
                     var sessionDay = sessions[0].day;
                     if (sessionDay != prevDay) {
