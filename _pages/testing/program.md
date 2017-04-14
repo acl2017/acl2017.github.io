@@ -354,6 +354,11 @@ script: |
 
                     /* get the posters */
                     var posters = chosenPostersHash[key];
+
+                    /* sort posters by their type for easier reading */
+                    posters.sort(function(a, b) {
+                        return a.type.localeCompare(b.type);
+                    });
                     var titles = posters.map(function(poster) { return ASCIIFold(poster.title); });
                     var types = posters.map(function(poster) { return poster.type; });
                     var sessions = [sessionInfoHash[posters[0].session]];
