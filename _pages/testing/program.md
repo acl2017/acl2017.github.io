@@ -206,7 +206,7 @@ script: |
             }
             else {
                 var numConflicts = titles.length;
-                rows = ['<tr><td rowspan=' + numConflicts + ' class="time">' + start + '&ndash;' + end + '</td><td class="location">' + sessions[0].location + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>']
+                rows = ['<tr><td rowspan=' + numConflicts + ' class="time">' + start + '&ndash;' + end + '</td><td class="location">' + sessions[0].location + '</td><td class="info-paper">' + titles[0] + ' [' + sessions[0].title + ']</td></tr>'];
                 for (var i=1; i<numConflicts; i++) {
                     var session = sessions[i];
                     var title = titles[i];
