@@ -91,6 +91,7 @@ Please complete [this form](https://goo.gl/forms/hx5qKruufwnU9xro2) to make your
 The Georgian Court Hotel and YWCA Hotel are conveniently located in the same block, which makes it easier to share costs when traveling to the Conference Hotel if you do not care to walk. These hotels are about 2.09km (1.3 miles) &mdash; a 15-20 minute walk &mdash; from the Conference Hotel.
 
 ### Westin Bayshore Vancouver 
+<span style="color: red; font-weight: bold; font-size: larger; border: 2px solid red; padding: 3px;">SOLD OUT</span>
 
 - [1601 Bayshore Drive, Vancouver, BC V6G 2V4](https://www.google.com/maps/place/The+Westin+Bayshore,+Vancouver/@49.2921193,-123.1313515,17z/data=!3m1!4b1!4m5!3m4!1s0x54867188a23819af:0xaf6eaf737c65b77f!8m2!3d49.2921158!4d-123.1291628); +1-604-682-3377
 - Conference Hotel.
@@ -99,6 +100,8 @@ The Georgian Court Hotel and YWCA Hotel are conveniently located in the same blo
 - Single/Double Room: $199 CAD.
 
 ### Georgian Court Hotel
+<span style="color: red; font-weight: bold; font-size: larger; border: 2px solid red; padding: 3px;">SOLD OUT</span>
+
 - [773 Beatty Street (at Robson St.) Vancouver, BC V6B 2M4](https://www.google.com/maps/place/Georgian+Court+Hotel/@49.2782574,-123.1157609,17z/data=!3m1!4b1!4m5!3m4!1s0x5486717c493daa35:0x506892125292ed1c!8m2!3d49.2782539!4d-123.1135722); +1-604-682-5555; +1-800-663-1155 (toll-free)
 - Single/Double Room: $199 CAD.
 - $30 CAD surcharge for each person beyond double (4 people maximum).
