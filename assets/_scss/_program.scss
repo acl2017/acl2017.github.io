@@ -228,13 +228,25 @@ div.session {
         }
     }
 
-    .tutorial-title {
-        font-size: $type-size-6;
+    .tutorial-table {
+        border: 0px;
+        td {
+            border: 0px;
+        }
+    }
+
+    .paper-title, .poster-title {
         font-weight: bold;
     }
 
-    .paper-title, .poster-title  {
+    .tutorial-title  {
         font-weight: bold;
+        font-size: $type-size-6;
+    }
+
+    .tutorial-instructors  {
+        font-style: italic;
+        font-size: $type-size-6;
     }
 
     .session-location {

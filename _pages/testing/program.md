@@ -427,7 +427,7 @@ script: |
             $('.session-deselector').addClass('disabled');
 
             /* the include plenary checkbox is checked on startup */
-            $('input#includePlenaryCheckBox').prop('checked', true);
+            $('input#includePlenaryCheckBox').prop('checked', includePlenaryInSchedule);
 
             /* hide the testing notes */
             $('div#testingNotes').hide();
@@ -654,6 +654,8 @@ script: |
                 tutorialObject.start = tutorialInfo[1];
                 tutorialObject.end = tutorialInfo[2];
                 tutorialObject.title = $(this).find('.tutorial-title').text();
+                var instructors = $(this).find('.tutorial-instructors').text();
+                tutorialObject.title += ' ' + instructors;
                 tutorialObject.session = tutorialInfo[3];
                 tutorialObject.location = $(this).find('.inline-location').text();
                 tutorialObject.exactStartingTime = exactStartingTime;
@@ -677,7 +679,9 @@ script: |
                 var exactStartingTime = posterInfo[0];
                 posterObject.start = posterInfo[1];
                 posterObject.end = posterInfo[2];
-                posterObject.title = $(this).find('.poster-title').text().trim();
+                var posterTitleObject = $(this).find('.poster-title');
+                posterObject.title = posterTitleObject.text().trim();
+                posterObject.title += ' ' + posterTitleObject.siblings().text();
                 posterObject.type = $(this).parents('.poster-table').prevAll('.poster-type:first').text().trim();
                 posterObject.session = posterInfo[3];
                 posterObject.exactStartingTime = exactStartingTime;
@@ -797,17 +801,17 @@ script: |
             <table class="tutorial-table">
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T1] English Resource Semantics</span><br/><span class="btn btn--location inline-location">Executive 3AB</span>
+                        <span class="tutorial-title">[T1] English Resource Semantics. </span><span class="tutorial-instructors">Dan Flickinger, Emily M. Bender, and Woodley Packard.</span><br/><span class="inline-location btn btn--location">Executive 3AB</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T2] Multilingual Multimodal Language Processing Using Neural Networks</span><br/><span href="#" class="btn btn--location inline-location">Spinnaker</span>
+                        <span class="tutorial-title">[T2] Multilingual Multimodal Language Processing Using Neural Networks. </span><span class="tutorial-instructors">Mitesh M Khapra and Sarath Chandar.</span><br/><span href="#" class="btn btn--location inline-location">Spinnaker</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T3] Question Answering with Knowledge Base, Web and Beyond</span><br/><span href="#" class="btn btn--location inline-location">Marina 3</span>
+                        <span class="tutorial-title">[T3] Question Answering with Knowledge Base, Web and Beyond. </span><span class="tutorial-instructors">Scott Wen-tau Yih and Hao Ma.</span><br/><span href="#" class="btn btn--location inline-location">Marina 3</span>
                     </td>
                 </tr>
             </table>
@@ -825,17 +829,17 @@ script: |
             <table class="tutorial-table">
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T4] Recent Progress in Deep Learning for NLP</span><br/><span href="#" class="btn btn--location inline-location">Spinnaker</span>
+                        <span class="tutorial-title">[T4] Recent Progress in Deep Learning for NLP. </span><span class="tutorial-instructors">Zhengdong Lu and Hang Li.</span><br/><span href="#" class="btn btn--location inline-location">Spinnaker</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T5] Scalable Statistical Relational Learning for NLP</span><br/><span href="#" class="btn btn--location inline-location">Marina 3</span>
+                        <span class="tutorial-title">[T5] Scalable Statistical Relational Learning for NLP. </span><span class="tutorial-instructors">William Yang Wang and William W. Cohen.</span><br/><span href="#" class="btn btn--location inline-location">Marina 3</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T6] Statistical Machine Translation between Related Languages</span><br/><span href="#" class="btn btn--location inline-location">Executive 3AB</span>
+                        <span class="tutorial-title">[T6] Statistical Machine Translation between Related Languages. </span><span class="tutorial-instructors">Pushpak Bhattacharyya, Mitesh Khapra, and Anoop Kunchukuttan.</span><br/><span href="#" class="btn btn--location inline-location">Executive 3AB</span>
                     </td>
                 </tr>
             </table>
