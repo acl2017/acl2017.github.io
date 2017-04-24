@@ -178,6 +178,12 @@ With over 50,000 amazing aquatic creatures, the Vancouver Aquarium Marine Scienc
 
 The Vancouver Aquarium is a self-supporting, non-profit society dedicated to effecting the conservation of aquatic life through display and interpretation, education, research and direct action. Our event will help to achieve a positive effect on the marine world and directly contribute to their conservation, research and education programs.
 
+## On-site Childcare
+
+For the first time ever, ACL will be offering on-site childcare at the conference hotel.  We have hired a professional childcare service, KiddieCorp, which has experience providing childcare at conventions.  Childcare will be available from 9 AM until 5 PM on the tutorial and workshop days, and from 8 AM until 6 PM during the main conference.  The childcare room will be located close to the conference rooms, and has space for up to 23 children.  We will also have a room available for nursing, or for mothers who need to pump.
+
+The cost of the childcare is partially subsidized by the ACL.  The cost for general registrants will be $10.00 USD per hour per child.   For students registrants the cost will be $5.00 USD per hour per child. Availability is limited, so we encourage you to sign up soon.  The childcare registration is being handled by  KiddieCorp.  For more information, and to sign up for childcare services, please use [this form](https://form.jotform.com/KiddieCorp/ACLKids).
+
 ## Conference Map
 
 The following Google Map shows all of the hotels mentioned above along with the Aquarium. 
