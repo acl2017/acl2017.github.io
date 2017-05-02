@@ -52,7 +52,7 @@ Charley Chan, Bloomberg
 Christian Federmann, Microsoft
 
 <h3>Student Volunteer Coordinator</h3>
-Kostadin Cholakov, Humboldt-Universität zu Berlin
+Maryam Siahbani, University of the Fraser Valley
 
 <h3>Webmaster &amp; Appmaster</h3>
 Nitin Madnani, Educational Testing Service
