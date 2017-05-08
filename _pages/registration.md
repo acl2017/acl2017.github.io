@@ -10,7 +10,7 @@ sidebar: false
 
 {% include toc icon="gears" %}
 
-We plan to open conference registration in early to mid-April.  Here are some details to help you plan your trip in advance.
+We plan to open conference registration in mid-May.  Here are some details to help you plan your trip in advance.
 
 ## Important Dates
 
