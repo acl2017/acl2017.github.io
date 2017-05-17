@@ -131,7 +131,10 @@ supporter:
     image_path: columbia-logo.png
     alt: "Columbia University Logo"
     title: "Data Science Institute@Columbia University"
-  - image_path: blank-logo.png
+  - url: http://datascience.nyu.edu
+    image_path: nyu-logo.png
+    alt: "NYU Logo"
+    title: "Center for Data Science@NYU"
 sidebar: 
     nav: "sponsors"
 ---
