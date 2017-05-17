@@ -12,11 +12,12 @@ sidebar: false
 
 **Important**: The ACL Executive Board, in a continuing effort to improve, ensure, and protect equity and diversity in our community, would appreciate your help in getting more accurate information about the makeup of our community. As a first pilot experiment, we will be asking about gender in the registration form this year. The information collected in this way will be anonymized by the ACL business manager before it is passed on to the executive committees of ACL, NAACL, and EACL. Only aggregate statistics will be stored, and the information will only be presented in such a way that it is not possible to identify individuals (excluding categories with fewer than 10 individuals). We hope that you are willing to share this information with us, but it is of course completely voluntary.
 
-Click on the button below to register for the conference. More details about the conference registration are provided in the sections below.
+Click on the button below to register for the conference. More details about the conference registration are provided in the sections below. For the first time, the conference will also have [on-site childcare](/registration#children-and-family) through KiddieCorp subsidized by ACL. 
 
 <div class="text-center"> 
 <a href="https://aclweb.org/conference/acl-2017-conference-registration/" target="_blank"><button class="btn btn--large">Register Now</button></a>
 </div>
+
 
 ## Important Dates
 
@@ -49,7 +50,17 @@ Please note that:
 
 As in previous years, your conference registration includes the main conference sessions, poster sessions, and demonstration sessions. Workshops and tutorials are not included. Also included are a Welcome Reception Sunday evening, breakfasts, mid-morning and mid-afternoon coffee breaks each day, and full dinners at both of the poster/demo sessions on Monday and Tuesday evenings.  
 
-Be sure to plan to attend the [Social Event](/participants#social-event), an evening of desserts, beverages and music to take place Tuesday, August 1st, following the poster session, at the Vancouver Aquarium following the Tuesday evening poster session (also included)! 
+Be sure to attend the [social event](/participants#social-event), an evening of desserts, beverages and music to take place Tuesday, August 1st, following the poster session, at the Vancouver Aquarium following the Tuesday evening poster session (also included)! 
+
+## Children and Family
+
+ACL will be offering subsidized on-site childcare for the first time at ACL 2017. We have hired a professional childcare company, KiddieCorp, to provide this service. Regular conference participants will be charged $10 USD per hour per child. Student participants will be charged $5. 
+
+<div class="text-center"> 
+<a href="https://form.jotform.com/KiddieCorp/ACLKids" target="_blank"><button class="btn btn--large">Sign Up For Childcare</button></a>
+</div><br/>
+
+In addition to childcare, we invite you to bring your children, spouses and loved ones to the [social event](/participants#social-event) at the conference. On the registration form there is a section where you can purchase additional meals or additional tickets to the social event for your family members.  The social event for this year is an evening at the Vancouver Aquarium Marine.  It’s a family friendly venue, and we hope to see you and your family there!
 
 ## Registration Fees
 
