@@ -10,7 +10,13 @@ sidebar: false
 
 {% include toc icon="gears" %}
 
-We plan to open conference registration in mid-May.  Here are some details to help you plan your trip in advance.
+**Important**: The ACL Executive Board, in a continuing effort to improve, ensure, and protect equity and diversity in our community, would appreciate your help in getting more accurate information about the makeup of our community. As a first pilot experiment, we will be asking about gender in the registration form this year. The information collected in this way will be anonymized by the ACL business manager before it is passed on to the executive committees of ACL, NAACL, and EACL. Only aggregate statistics will be stored, and the information will only be presented in such a way that it is not possible to identify individuals (excluding categories with fewer than 10 individuals). We hope that you are willing to share this information with us, but it is of course completely voluntary.
+
+Click on the button below to register for the conference. More details about the conference registration are provided in the sections below.
+
+<div class="text-center"> 
+<a href="https://aclweb.org/conference/acl-2017-conference-registration/" target="_blank"><button class="btn btn--large">Register Now</button></a>
+</div>
 
 ## Important Dates
 
@@ -19,12 +25,12 @@ We plan to open conference registration in mid-May.  Here are some details to he
         <tr>
             <td>Early online registration ends</td>
             <td>Friday</td>
-            <td>June 9, 2017 11:59 PM EDT</td>
+            <td>June 23, 2017 11:59 PM EDT</td>
         </tr>
         <tr>
             <td>Late online registration ends</td>
             <td>Friday</td> 
-            <td>July 14, 2017 11:59 PM EDT</td>
+            <td>July 21, 2017 11:59 PM EDT</td>
         </tr>
         <tr>
             <td>On-site registration opens</td>
@@ -36,8 +42,8 @@ We plan to open conference registration in mid-May.  Here are some details to he
 
 Please note that:
 
-- Registration prices will increase starting Saturday, June 10th, 2017 once early online registration has ended. 
-- After the July 14th deadline for late online registration, you can *only* register on-site at the conference venue starting July 30th, 2017.
+- Registration prices will increase starting Saturday, June 24th, 2017 once early online registration has ended. 
+- After the July 21st deadline for late online registration, you can *only* register on-site at the conference venue starting July 30th, 2017.
 
 ## What's included
 
@@ -45,9 +51,9 @@ As in previous years, your conference registration includes the main conference 
 
 Be sure to plan to attend the [Social Event](/participants#social-event), an evening of desserts, beverages and music to take place Tuesday, August 1st, following the poster session, at the Vancouver Aquarium following the Tuesday evening poster session (also included)! 
 
-## Estimated Fees
+## Registration Fees
 
-We expect registration fees to be similar to those at ACL 2016, although the fees have not yet been set and may increase somewhat.  Below are the fees (in USD) charged for ACL 2016 that may be used as an approximation for planning your travel budget.
+The table below shows the registration fees.
 
 <table style="font-size: medium;">
     <thead>
