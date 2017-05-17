@@ -11,8 +11,11 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**April 24, 2017**. ACL will be offering [on-site childcare](/participants#on-site-childcare) at the conference hotel.  It will be provided by a professional childcare service, KiddieCorp, and partially subsidized by ACL.  The cost will be $10.00 USD per hour for general registrants and $5.00 USD per hour for student registrants.  Availability is limited.  Please sign up using [this form from KiddieCorp](https://form.jotform.com/KiddieCorp/ACLKids). 
+**May 17, 2017**. Conference registration is now open! Early registration ends on June 23rd. Click [here](/registration) to register now.
 {: .notice--info} 
+
+April 24, 2017. ACL will be offering [on-site childcare](/participants#on-site-childcare) at the conference hotel.  It will be provided by a professional childcare service, KiddieCorp, and partially subsidized by ACL.  The cost will be $10.00 USD per hour for general registrants and $5.00 USD per hour for student registrants.  Availability is limited.  Please sign up using [this form from KiddieCorp](https://form.jotform.com/KiddieCorp/ACLKids). 
+{: .notice} 
 
 **April 5, 2017**. The list of accepted papers and system demonstrations has been [posted](https://chairs-blog.acl2017.org/2017/04/05/accepted-papers-and-demonstrations/) on the PC blog.
 {: .notice} 
