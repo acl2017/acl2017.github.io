@@ -35,7 +35,7 @@ Click on the button below to register for the conference. More details about the
         </tr>
         <tr>
             <td>On-site registration opens</td>
-            <td>Thursday</td>
+            <td>Sunday</td>
             <td>July 30, 2017</td>
         </tr>
     </tbody>
