@@ -43,7 +43,14 @@ platinum:
     image_path: facebook-logo.png
     alt: "Facebook Logo"
     title: "Facebook"
-  - image_path: blank-logo.png
+  - url: http://www.bloomberg.com
+    image_path: bloomberg-logo.png
+    alt: "Bloomberg Logo"
+    title: "Bloomberg"
+  - url: http://www.samsung.com
+    image_path: samsung-logo.png
+    alt: "Samsung Logo"
+    title: "Samsung"
 gold:
   - url: http://www.ebay.com
     image_path: ebay-logo.png
