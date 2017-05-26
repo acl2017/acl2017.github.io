@@ -142,6 +142,10 @@ supporter:
     image_path: nyu-logo.png
     alt: "NYU Logo"
     title: "Center for Data Science@NYU"
+  - url: http://newsela.com
+    image_path: newsela-logo.png
+    alt: "Newsela Logo"
+    title: "Newsela"
 sidebar: 
     nav: "sponsors"
 ---
