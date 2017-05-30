@@ -74,7 +74,7 @@ Links to reservation pages and more details for each of the hotels are provided 
 - Complimentary wifi in all guest rooms.
 - Single/Double Traditional Room: $289 CAD, Single/Double View Room: $344 CAD.
 - Valet and self-parking are available.
-- ACL discounted rates are available through Tuesday, May 30, 2017 at 5pm local time.
+- ACL discounted rates are available through Friday, June 9, 2017 at 5pm local time.
 
 <div class="text-center"> 
 <a href="https://www.starwoodmeeting.com/events/start.action?id=1701194750&key=89F9058" target="_blank"><button class="btn btn--large">Click to Reserve</button></a>
