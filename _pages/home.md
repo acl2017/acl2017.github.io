@@ -12,7 +12,11 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 <h2>News</h2>
 
 **May 23, 2017**. We are looking for student volunteers to help out during the conference. In return for one day of service, you will be given complementary registration for the main conference. Please apply [here](https://docs.google.com/forms/d/e/1FAIpQLSc1G01Dz0reifSFMCIX6lfAKd1Nm7eMW3X1FcN-CByyON_3kg/viewform?usp=sf_link). The application deadline is June 9.
+**June 2, 2017**. Thanks to the support of the Don and Betty Walker Scholarship, limited funding is available for supporting student travel, registration and accommodation. Please apply [here](https://goo.gl/forms/2tQIbWzpwsniDSdK2) by June 20th. Decisions will be announced on June 23rd. Direct all questions to the [Student Research Workshop organizers](mailto:acl-srw-2017@googlegroups.com).
 {: .notice--info} 
+
+**May 23, 2017**. We are looking for student volunteers to help out during the conference. In return for one day of service, you will be given complementary registration for the main conference. Please apply [here](https://docs.google.com/forms/d/e/1FAIpQLSc1G01Dz0reifSFMCIX6lfAKd1Nm7eMW3X1FcN-CByyON_3kg/viewform?usp=sf_link).  The application deadline is June 23.
+{: .notice}
 
 **May 17, 2017**. Conference registration is now open! Early registration ends on June 23rd. Click [here](/registration) to register now.
 {: .notice} 

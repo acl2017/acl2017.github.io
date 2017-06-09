@@ -80,7 +80,14 @@ gold:
     image_path: rit-logo.png
     alt: "RIT Logo"
     title: "RIT"
-  - image_path: blank-logo.png
+  - url: http://www.kpmg.com
+    image_path: kpmg-logo.png
+    alt: "KPMG Logo"
+    title: "KPMG"
+  - url: http://www.navercorp.com/en/index.nhn
+    image_path: naver-logo.png
+    alt: "Naver Line Logo"
+    title: "Naver | Line"
 silver:
   - url: https://www.oracle.com
     image_path: oracle-logo.png
@@ -110,7 +117,10 @@ silver:
     image_path: cvte-stacked-logo.png
     alt: "CVTE Logo"
     title: "CVTE"
-  - image_path: blank-logo.png
+  - url: http://www.bosch.com
+    image_path: bosch-logo.png
+    alt: "Bosch Logo"
+    title: "Bosch"
 bronze:
   - url: https://yandex.com
     image_path: yandex-logo.png
