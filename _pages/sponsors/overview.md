@@ -84,6 +84,10 @@ gold:
     image_path: kpmg-logo.png
     alt: "KPMG Logo"
     title: "KPMG"
+  - url: http://www.navercorp.com/en/index.nhn
+    image_path: naver-logo.png
+    alt: "Naver Line Logo"
+    title: "Naver | Line"
 silver:
   - url: https://www.oracle.com
     image_path: oracle-logo.png
