@@ -60,7 +60,7 @@ a.session-deselector {
 }
 
 div#generatePDFForm {
-    @include span(12);
+    @include span(20);
     padding: 0.5em;
     font-family: $serif;
     text-align: center;
@@ -90,7 +90,7 @@ div#generatePDFForm {
 }
 
 div.day {
-    @include span(12);
+    @include span(20);
     padding: 0.5em;
     font-family: $serif;
     font-weight: bold;
@@ -122,45 +122,102 @@ div.session {
     border: 1px solid $light-gray;
 
     &.session-tutorials, &.session-plenary, &.session-posters {
-        @include span(12);
+        @include span(20);
     }
 
-    &.session-papers1, &.session-papers2 {
-        @include span(12 of 12);
+    &.session-outstanding-papers1 {
+        @include span(20 of 20);
 
         @include breakpoint($medium) {
-            @include span(12 of 12);
+            @include span(20 of 20);
         }
 
         @include breakpoint($medium-wide) {
-            @include span(12 of 12);
+            @include span(20 of 20);
         }
 
         @include breakpoint($large) {
-            @include span(4 wide of 12 (gutter-override: 0));
+            @include span(20 of 20);
         }
 
         @include breakpoint($x-large) {
-            @include span(4 wide of 12 (gutter-override: 0));
+            @include span(10 wide of 20 (gutter-override: 0));
+        }
+
+        @include breakpoint($xx-large) {
+            @include span(10 wide of 20 (gutter-override: 0));
         }
     }
 
-    &.session-papers3 {
-        @include span(12 of 12);
+    &.session-outstanding-papers2 {
+        @include span(20 of 20);
 
         @include breakpoint($medium) {
-            @include span(12 of 12);
+            @include span(20 of 20);
         }
 
         @include breakpoint($medium-wide) {
-            @include span(12 of 12);
+            @include span(20 of 20);
         }
 
         @include breakpoint($large) {
+            @include span(20 of 20);
+        }
+
+        @include breakpoint($x-large) {
+            @include span(10 last (gutter-override: 0));
+        }
+
+        @include breakpoint($xx-large) {
+            @include span(10 last (gutter-override: 0));
+        }
+    }
+
+
+    &.session-papers1, &.session-papers2, &.session-papers3, &.session-papers4 {
+        @include span(20 of 20);
+
+        @include breakpoint($medium) {
+            @include span(20 of 20);
+        }
+
+        @include breakpoint($medium-wide) {
+            @include span(20 of 20);
+        }
+
+        @include breakpoint($large) {
+            @include span(20 of 20);
+        }
+
+        @include breakpoint($x-large) {
+            @include span(4 wide of 20 (gutter-override: 0));
+        }
+
+        @include breakpoint($xx-large) {
+            @include span(4 wide of 20 (gutter-override: 0));
+        }
+    }
+
+    &.session-papers5 {
+        @include span(20 of 20);
+
+        @include breakpoint($medium) {
+            @include span(20 of 20);
+        }
+
+        @include breakpoint($medium-wide) {
+            @include span(20 of 20);
+        }
+
+        @include breakpoint($large) {
+            @include span(20 of 20);
+        }
+
+        @include breakpoint($x-large) {
             @include span(4 last (gutter-override: 0));
         }
 
-        @include breakpoint($x-large) {
+        @include breakpoint($xx-large) {
             @include span(4 last (gutter-override: 0));
         }
     }
@@ -170,13 +227,9 @@ div.session {
         color: $text-color;
     }
 
-
     .session-time {
         margin-right: 5px;
-
-        @include breakpoint($medium) {
-            margin-right: 10px;
-        }
+        float: left;
 
         font-size: $type-size-5;
         font-style: italic;
@@ -184,6 +237,10 @@ div.session {
 
 
     .paper-session-details {
+        float: left;
+    }
+
+    .poster-session-details {
         float: left;
     }
 
@@ -238,7 +295,7 @@ div.session {
     }
 
     .session-location {
-        float: right;
+        float: left;
         cursor: text;
     }
 
@@ -270,7 +327,7 @@ div.session {
             background-color: $lighter-gray2;
         }
 
-        @include breakpoint($large) {
+        @include breakpoint($x-large) {
             &.hovered {
                 background-color: yellow;
             }
@@ -278,6 +335,10 @@ div.session {
                 background-color: #4EEE94;
             }
         }
+    }
+
+    td#paper-time {
+        font-size: $type-size-4;
     }
 
     #expander {
