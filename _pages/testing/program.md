@@ -310,6 +310,21 @@ script: |
             return ans;
         }
 
+        function toggleSession(sessionObj) {
+            $(sessionObj).children('[class$="-details"]').slideToggle(300);
+            $(sessionObj).children('#expander').toggleClass('expanded');
+        }
+
+        function openSession(sessionObj) {
+            $(sessionObj).children('[class$="-details"]').slideDown(300);
+            $(sessionObj).children('#expander').addClass('expanded');
+        }
+
+        function closeSession(sessionObj) {
+            $(sessionObj).children('[class$="-details"]').slideUp(300);
+            $(sessionObj).children('#expander').removeClass('expanded');
+        }
+
         function populateHiddenProgramTable() {
 
             /* if no posters were selected from either or both of the two poster sessions, we still want a row showing the main plenary poster session information for the unchosen session(s) */
@@ -551,17 +566,32 @@ script: |
             /* hide all of the session details when starting up */
             $('[class$="-details"]').hide();
 
-            $('body').on('click', 'div.session-expandable', function(event) {
+            $('body').on('click', 'div.session-expandable .session-title', function(event) {
                 event.preventDefault();
-                $(this).children('[class$="-details"]').slideToggle(300);
-                $(this).children('#expander').toggleClass('expanded');
-            });
+                event.stopPropagation();
+                var sessionObj = $(this).parent();
 
 
-            $('body').on('click', 'div.session-title', function(event) {
-                event.preventDefault();
-                $(this).children('[class$="-details"]').slideToggle(300);
-                $(this).children('#expander').toggleClass('expanded');
+                /* if we had the shift key pressed, then expand ALL unexpanded
+                // sessions including myself */
+                if (event.shiftKey) {
+                    var sessionId = $(sessionObj).attr('id').match(/session-\d/)[0];
+                    var parallelSessions = $(sessionObj).siblings().addBack().filter(function() { return this.id.match(sessionId); });
+
+                    var unexpandedParallelSessions = $(parallelSessions).filter(function() { return !$(this).children('#expander').hasClass('expanded'); })
+
+                    /* if all sessions are already expanded, then shift-clicking should close all of them */
+                    if (unexpandedParallelSessions.length == 0) {
+                        $.map(parallelSessions, closeSession);
+                    }
+                    else {
+                        $.map(unexpandedParallelSessions, openSession);
+                    }
+                } 
+                /* for a regular click, just toggle the individual session */
+                else {
+                    toggleSession(sessionObj);
+                }
             });
 
             /* when we mouse over a paper, highlight the conflicting papers */
