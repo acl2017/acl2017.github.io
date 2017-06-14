@@ -125,7 +125,7 @@ div.session {
         @include span(20);
     }
 
-    &.session-outstanding-papers1 {
+    &.session-papers-outstanding1 {
         @include span(20 of 20);
 
         @include breakpoint($medium) {
@@ -149,7 +149,7 @@ div.session {
         }
     }
 
-    &.session-outstanding-papers2 {
+    &.session-papers-outstanding2 {
         @include span(20 of 20);
 
         @include breakpoint($medium) {

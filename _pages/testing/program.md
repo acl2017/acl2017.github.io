@@ -566,15 +566,14 @@ script: |
             /* hide all of the session details when starting up */
             $('[class$="-details"]').hide();
 
+            // expand sessions when their title is clicked
             $('body').on('click', 'div.session-expandable .session-title', function(event) {
                 event.preventDefault();
                 event.stopPropagation();
                 var sessionObj = $(this).parent();
 
-
-                /* if we had the shift key pressed, then expand ALL unexpanded
-                // sessions including myself */
-                if (event.shiftKey) {
+                /* if we had the shift key pressed, then expand ALL unexpanded parallel sessions including myself (only for papers) */
+                if (event.shiftKey && sessionObj.attr('class').match('session-papers')) {
                     var sessionId = $(sessionObj).attr('id').match(/session-\d/)[0];
                     var parallelSessions = $(sessionObj).siblings().addBack().filter(function() { return this.id.match(sessionId); });
 
@@ -3390,7 +3389,7 @@ script: |
         <span class="session-title">Break</span><br/>        
         <span class="session-time">10:10 AM &ndash; 10:40 AM</span>
     </div>
-        <div class="session session-expandable session-outstanding-papers1" id="session-7a">
+        <div class="session session-expandable session-papers-outstanding1" id="session-7a">
         <div id="expander"></div><a href="#" class="session-title">Outstanding Papers 1</a><br/>
             <span class="session-time">10:40 AM &ndash; 12:15 PM</span>
             <br/>
@@ -3443,7 +3442,7 @@ script: |
                 </table>
             </div>
     </div>
-    <div class="session session-expandable session-outstanding-papers2" id="session-7b">
+    <div class="session session-expandable session-papers-outstanding2" id="session-7b">
         <div id="expander"></div><a href="#" class="session-title">Outstanding Papers 2</a><br/>
             <span class="session-time">10:40 AM &ndash; 12:15 PM</span>
             <br/>
