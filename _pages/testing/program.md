@@ -3509,7 +3509,7 @@ script: |
         <span class="session-title">Break</span><br/>        
         <span class="session-time">2:30 PM &ndash; 3:00 PM</span>
     </div>
-    <div class="session session-expandable session-outstanding-papers1" id="session-8a">
+    <div class="session session-expandable session-papers-outstanding1" id="session-8a">
         <div id="expander"></div><a href="#" class="session-title">Outstanding Papers 3</a><br/>
             <span class="session-time">3:00 PM &ndash; 4:40 PM</span>
             <br/>
@@ -3556,7 +3556,7 @@ script: |
                 </table>
             </div>
     </div>    
-    <div class="session session-expandable session-outstanding-papers2" id="session-8b">
+    <div class="session session-expandable session-papers-outstanding2" id="session-8b">
         <div id="expander"></div><a href="#" class="session-title">Outstanding Papers 4</a><br/>
             <span class="session-time">3:00 PM &ndash; 4:40 PM</span>
             <br/>
