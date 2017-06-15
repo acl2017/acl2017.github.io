@@ -1391,13 +1391,13 @@ script: |
                         </td>
                     </tr>
                     <tr id="paper">
-                        <td id="paper-time">4:23-4:41</td>
+                        <td id="paper-time">4:04-4:22</td>
                         <td>
                             <span class="paper-title">Time Expression Analysis and Recognition Using Syntactic Token Types and General Heuristic Rules. </span><em>Xiaoshi Zhong, Aixin Sun and Erik Cambria</em>
                         </td>
                     </tr>
                     <tr id="paper">
-                        <td id="paper-time">4:42-5:00</td>
+                        <td id="paper-time">4:23-4:41</td>
                         <td>
                             <span class="paper-title">Learning with Noise: Enhance Distantly Supervised Relation Extraction with Dynamic Transition Matrix. </span><em>Bingfeng Luo, Yansong Feng, Zheng Wang, Zhanxing Zhu, Songfang Huang, Rui Yan and Dongyan Zhao</em>
                         </td>
