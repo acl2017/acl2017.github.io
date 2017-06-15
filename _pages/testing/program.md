@@ -9,6 +9,7 @@ script: |
     <script type="text/javascript">
 
         sessionInfoHash = {};
+        paperInfoHash = {};
         chosenPapersHash = {};
         chosenTutorialsHash = {};
         chosenPostersHash = {};
@@ -126,25 +127,6 @@ script: |
             doc.output('dataurlnewwindow');
         }
 
-        function getPaperInfoFromTime(paperTimeObj) {
-
-            /* get the paper session and day */
-            var paperSession = paperTimeObj.parents('.session');
-            var sessionDay = paperSession.prevAll('.day:first').text().trim();
-
-            /* get the paper title */
-            var paperTitle = paperTimeObj.siblings('td').text().trim();
-
-            /* get the paper slot and the starting and ending times */
-            var paperTimeText = paperTimeObj.text().trim();
-            var paperTimes = paperTimeText.split('-');
-            var paperSlotStart = paperTimes[0];
-            var paperSlotEnd = paperTimes[1];
-            var paperSlotAMPM = inferAMPM(paperSlotStart);
-            var exactPaperStartingTime = sessionDay + ', 2017 ' + paperSlotStart + paperSlotAMPM;
-            return [new Date(exactPaperStartingTime).toJSON(), paperSlotStart, paperSlotEnd, paperTitle, paperSession.attr('id')];
-        }
-
         function getTutorialInfoFromTime(tutorialTimeObj) {
 
             /* get the tutorial session and day */
@@ -158,7 +140,7 @@ script: |
             var tutorialSlotEnd = tutorialTimes[3];
             var tutorialSlotAMPM = inferAMPM(tutorialSlotStart);
             var exactTutorialStartingTime = sessionDay + ', 2017 ' + tutorialSlotStart + tutorialSlotAMPM;
-            return [new Date(exactTutorialStartingTime).toJSON(), tutorialSlotStart, tutorialSlotEnd, tutorialSession.attr('id')];
+            return [new Date(exactTutorialStartingTime).getTime(), tutorialSlotStart, tutorialSlotEnd, tutorialSession.attr('id')];
         }
 
         function getPosterInfoFromTime(posterTimeObj) {
@@ -174,10 +156,31 @@ script: |
             var posterSlotEnd = posterTimes[3];
             var posterSlotAMPM = inferAMPM(posterSlotStart);
             var exactPosterStartingTime = sessionDay + ', 2017 ' + posterSlotStart + posterSlotAMPM;
-            return [new Date(exactPosterStartingTime).toJSON(), posterSlotStart, posterSlotEnd, posterSession.attr('id')];
+            return [new Date(exactPosterStartingTime).getTime(), posterSlotStart, posterSlotEnd, posterSession.attr('id')];
+        }
+
+        function isOverlapping(thisPaperRange, otherPaperRange) {
+            var thisStart = thisPaperRange[0];
+            var thisEnd = thisPaperRange[1];
+            var otherStart = otherPaperRange[0];
+            var otherEnd = otherPaperRange[1];
+            return ((thisStart <= otherEnd) && (thisEnd >= otherStart));
         }
 
         function getConflicts(paperObject) {
+
+            /* first get the parallel sessions */
+            var sessionId = paperObject.parents('.session').attr('id').match(/session-\d/)[0];
+            var parallelSessions = paperObject.parents('.session').siblings().filter(function() { return this.id.match(sessionId); });
+            
+            var thisPaperRange = paperInfoHash[paperObject.attr('paper-id')].slice(0, 2);
+            return $(parallelSessions).find('table.paper-table tr#paper').filter(function(index) {
+                    var otherPaperRange =  paperInfoHash[$(this).attr('paper-id')].slice(0, 2);
+                    return isOverlapping(thisPaperRange, otherPaperRange) 
+                });
+        }
+
+        function getConflicts2(paperObject) {
 
             /* most of the time, conflicts are simply based on papers having the same exact time slot but this is not always true */
 
@@ -334,7 +337,7 @@ script: |
                 for (var i=0; i<sessionNames.length; i++) {
                     var session = sessionInfoHash[sessionNames[i]];
                     var exactSessionStartingTime = session.day + ', 2017 ' + session.start;
-                    var newPlenaryKey = new Date(exactSessionStartingTime).toJSON();
+                    var newPlenaryKey = new Date(exactSessionStartingTime).getTime();
                     if (!(newPlenaryKey in plenarySessionHash)) {
                         plenarySessionHash[newPlenaryKey] = session;
                     }
@@ -345,7 +348,7 @@ script: |
                 var usedSession = posters[0].session;
                 var unusedSession = usedSession == 'session-poster-1' ? sessionInfoHash['session-poster-2'] : sessionInfoHash['session-poster-1'];
                 var exactSessionStartingTime = unusedSession.day + ', 2017 ' + unusedSession.start;
-                var newPlenaryKey = new Date(exactSessionStartingTime).toJSON();
+                var newPlenaryKey = new Date(exactSessionStartingTime).getTime();
                 if (!(newPlenaryKey in plenarySessionHash)) {
                     plenarySessionHash[newPlenaryKey] = unusedSession;
                 }
@@ -356,7 +359,7 @@ script: |
 
             /* if we are including plenary information in the PDF then sort its keys too and merge the two sets of keys together before sorting */
             var sortedPaperTimes = includePlenaryInSchedule ? nonPlenaryKeys.concat(Object.keys(plenarySessionHash)) : nonPlenaryKeys;
-            sortedPaperTimes.sort(function(a, b) { return new Date(a) - new Date(b) });
+            sortedPaperTimes.sort(function(a, b) { return a - b });
 
             /* now iterate over these sorted papers and create the rows for the hidden table that will be used to generate the PDF */
             var prevDay = null;
@@ -490,6 +493,31 @@ script: |
                 sessionInfoHash[$(this).attr('id')] = session;
             });
 
+            /* iterate over all the papers and store all their info in a hash since we need that info whenever we click and hover and lookups will be faster than re-computing the info at each event */
+            $('tr#paper').each(function() {
+                var paperID = $(this).attr('paper-id');
+
+                /* get the paper session and day */
+                var paperSession = $(this).parents('.session');
+                var sessionDay = paperSession.prevAll('.day:first').text().trim();
+
+                /* get the paper time and title */
+                var paperTimeObj = $(this).children('#paper-time');
+                var paperTitle = paperTimeObj.siblings('td').text().trim();
+
+                /* get the paper slot and the starting and ending times */
+                var paperTimeText = paperTimeObj.text().trim();
+                var paperTimes = paperTimeText.split('-');
+                var paperSlotStart = paperTimes[0];
+                var paperSlotEnd = paperTimes[1];
+                var paperSlotStartAMPM = inferAMPM(paperSlotStart);
+                var paperSlotEndAMPM = inferAMPM(paperSlotEnd);
+                var exactPaperStartingTime = sessionDay + ', 2017 ' + paperSlotStart + paperSlotStartAMPM;
+                var exactPaperEndingTime = sessionDay + ', 2017 ' + paperSlotEnd + paperSlotEndAMPM;
+
+                paperInfoHash[paperID] = [new Date(exactPaperStartingTime).getTime(), new Date(exactPaperEndingTime).getTime(), paperSlotStart, paperSlotEnd, paperTitle, paperSession.attr('id')];
+            });
+
             /* also save the plenary session info in another hash since we may need to add this to the pdf. Use the exact starting time as the hash key */
              $('.session-plenary').each(function() {
                 var session = {};
@@ -504,7 +532,7 @@ script: |
                 session.start = sessionStart;
                 session.end = sessionEnd;
                 var exactSessionStartingTime = session.day + ', 2017 ' + sessionStart;
-                plenarySessionHash[new Date(exactSessionStartingTime).toJSON()] = session;
+                plenarySessionHash[new Date(exactSessionStartingTime).getTime()] = session;
              });
 
             $('body').on('click', 'a.session-selector', function(event) {
@@ -721,7 +749,7 @@ script: |
                 else {
                     addToChosen(exactStartingTime, posterObject, 'poster');
                     $(this).addClass('selected');
-                    var key = new Date(exactStartingTime).toJSON();
+                    var key = new Date(exactStartingTime).getTime();
                     if (key in plenarySessionHash) {
                         delete plenarySessionHash[key];
                     }
@@ -732,14 +760,15 @@ script: |
                 event.preventDefault();
                 $(this).removeClass('hovered');
                 getConflicts($(this)).removeClass('hovered');
+                var paperID = $(this).attr('paper-id');
                 var paperTimeObj = $(this).children('td#paper-time');
-                var paperInfo = getPaperInfoFromTime(paperTimeObj);
+                var paperInfo = paperInfoHash[paperID];
                 var paperObject = {};
                 var exactStartingTime = paperInfo[0];
-                paperObject.start = paperInfo[1];
-                paperObject.end = paperInfo[2];
-                paperObject.title = paperInfo[3];
-                paperObject.session = paperInfo[4];
+                paperObject.start = paperInfo[2];
+                paperObject.end = paperInfo[3];
+                paperObject.title = paperInfo[4];
+                paperObject.session = paperInfo[5];
                 paperObject.exactStartingTime = exactStartingTime;
 
                 /* if we are clicking on an already selected paper */
@@ -850,7 +879,7 @@ script: |
     </div>
     <div class="session session-expandable session-tutorials" id="session-afternoon-tutorials">
         <div id="expander"></div><a href="#" class="session-title">Afternoon Tutorials</a><br/>
-        <span class="session-time">9:30 AM &ndash; 12:30 PM</span><br/>
+        <span class="session-time">2:00 PM &ndash; 5:30 PM</span><br/>
         <div class="tutorial-session-details">
             <hr class="detail-separator"/>
             <table class="tutorial-table">
@@ -906,31 +935,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="1">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
                             <span class="paper-title">Adversarial Multi-task Learning for Text Classification. </span><em>Pengfei Liu, Xipeng Qiu and Xuanjing Huang</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="2">
                         <td id="paper-time">10:49-11:07</td>
                         <td>
                             <span class="paper-title">Neural End-to-End Learning for Computational Argumentation Mining. </span><em>Steffen Eger, Johannes Daxenberger and Iryna Gurevych</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="3">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
                             <span class="paper-title">Neural Symbolic Machines: Learning Semantic Parsers on Freebase with Weak Supervision. </span><em>Chen Liang, Jonathan Berant, Quoc Le, Kenneth D. Forbus and Ni Lao</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="4">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
                             <span class="paper-title">Neural Relation Extraction with Multi-lingual Attention. </span><em>Yankai Lin, Zhiyuan Liu and Maosong Sun</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="5">
                         <td id="paper-time">11:46-11:58</td>
                         <td>
                             <span class="paper-title">Classifying Temporal Relations by Bidirectional LSTM over Dependency Paths. </span><em>Fei Cheng and Yusuke Miyao</em>
@@ -953,31 +982,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="6">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
                             <span class="paper-title">Inducing Symbolic Meaning Representations for Semantic Parsing. </span><em>Jianpeng Cheng, Siva Reddy, Vijay Saraswat and Mirella Lapata</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="7">
                         <td id="paper-time">10:49-11:07</td>
                         <td>
                             <span class="paper-title">Morph-fitting: Fine-Tuning Word Vector Spaces with Simple Language-Specific Rules. </span><em>Ivan Vulić, Nikola Mrkšić, Roi Reichart, Diarmuid Ó Séaghdha, Steve Young and Anna Korhonen</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="8">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
                             <span class="paper-title">Skip-Gram – Zipf + Uniform = Vector Additivity. </span><em>Alex Gittens, Dimitris Achlioptas and Michael W. Mahoney</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="9">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
                             <span class="paper-title">The State of the Art in Semantic Representation. </span><em>Omri Abend and Ari Rappoport</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="10">
                         <td id="paper-time">11:46-11:58</td>
                         <td>
                             <span class="paper-title">AMR-to-text Generation with Synchronous Node Replacement Grammar. </span><em>Linfeng Song, Xiaochang Peng, Yue Zhang, Zhiguo Wang and Daniel Gildea</em>
@@ -1000,31 +1029,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="11">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
                             <span class="paper-title">Joint Learning for Coreference Resolution. </span><em>Jing Lu and Vincent Ng</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="12">
                         <td id="paper-time">10:49-11:07</td>
                         <td>
                             <span class="paper-title">Generating and Exploiting Large-scale Pseudo Training Data for Zero Pronoun Resolution. </span><em>Ting Liu, Yiming Cui, Qingyu Yin, Wei-Nan Zhang, Shijin Wang and Guoping Hu</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="13">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
                             <span class="paper-title">Discourse Mode Identification in Essays. </span><em>Wei Song</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="14">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
                             <span class="paper-title">Winning on the Merits: The Joint Effects of Content and Style on Debate Outcomes. </span><em>Lu Wang, Nick Beauchamp, Sarah Shugars, Kechen Qin</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="15">
                         <td id="paper-time">11:46-11:58</td>
                         <td>
                             <span class="paper-title">Lexical Features in Coreference Resolution: To be Used With Caution. </span><em>Nafise Sadat Moosavi and Michael Strube</em>
@@ -1047,31 +1076,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="16">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
                             <span class="paper-title">A Convolutional Encoder Model for Neural Machine Translation. </span><em>Jonas Gehring, Michael Auli, David Grangier and Yann Dauphin</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="17">
                         <td id="paper-time">10:49-11:07</td>
                         <td>
                             <span class="paper-title">Deep Neural Machine Translation with Linear Associative Unit. </span><em>Mingxuan Wang, Zhengdong Lu, Jie Zhou and Qun Liu</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="18">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
                             <span class="paper-title">A Polynomial-Time Dynamic Programming Algorithm for Phrase-Based Decoding with a Fixed Distortion Limit. </span><em>Yin-Wen Chang and Michael Collins</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="19">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
                             <span class="paper-title">Context Gates for Neural Machine Translation. </span><em>Zhaopeng Tu, Yang Liu, Zhengdong Lu, Xiaohua Liu, and Hang Li</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="20">
                         <td id="paper-time">11:46-11:58</td>
                         <td>
                             <span class="paper-title">Alternative Objective Functions for Training MT Evaluation Metrics. </span><em>Miloš Stanojević and Khalil Sima’an</em>
@@ -1094,31 +1123,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="21">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
                             <span class="paper-title">Neural AMR: Sequence-to-Sequence Models for Parsing and Generation. </span><em>Ioannis Konstas, Srinivasan Iyer, Mark Yatskar, Yejin Choi and Luke Zettlemoyer</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="22">
                         <td id="paper-time">10:49-11:07</td>
                         <td>
                             <span class="paper-title">Program Induction for Rationale Generation: Learning to Solve and Explain Algebraic Word Problems. </span><em>Wang Ling, Dani Yogatama, Chris Dyer and Phil Blunsom</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="23">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
                             <span class="paper-title">Automatically Generating Rhythmic Verse with Neural Networks. </span><em>Jack Hopkins and Douwe Kiela</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="24">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
                             <span class="paper-title">Creating Training Corpora for Micro-Planners. </span><em>Claire Gardent, Anastasia Shimorina, Shashi Narayan and Laura Perez-Beltrachini</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="25">
                         <td id="paper-time">11:46-11:58</td>
                         <td>
                             <span class="paper-title">A Principled Framework for Evaluating Summarizers: Comparing Models of Summary Quality against Human Judgments. </span><em>Maxime Peyrard and Judith Eckle-Kohler</em>
@@ -1145,31 +1174,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="26">
                         <td id="paper-time">1:40-1:58</td>
                         <td>
                             <span class="paper-title">Gated Self-Matching Networks for Reading Comprehension and Question Answering. </span><em>Wenhui Wang, Nan Yang, Furu Wei, Baobao Chang and Ming Zhou</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="27">
                         <td id="paper-time">1:59-2:17</td>
                         <td>
                             <span class="paper-title">Generating Natural Answer by Incorporating Copying and Retrieving Mechanisms in Sequence-to-Sequence Learning. </span><em>Shizhu He, Kang Liu and Jun Zhao</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="28">
                         <td id="paper-time">2:18-2:36</td>
                         <td>
                             <span class="paper-title">Coarse-to-Fine Question Answering for Long Documents. </span><em>Eunsol Choi, Daniel Hewlett, Illia Polosukhin, Alexandre Lacoste, Jakob Uszkoreit and Jonathan Berant</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="29">
                         <td id="paper-time">2:37-2:55</td>
                         <td>
                             <span class="paper-title">An End-to-End Model for Question Answering over Knowledge Base with Cross-Attention Combining Global Knowledge. </span><em>Yanchao Hao, Yuanzhe Zhang, Shizhu He, Kang Liu and Jun Zhao</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="30">
                         <td id="paper-time">2:56-3:14</td>
                         <td>
                             <span class="paper-title">Domain-Targeted, High Precision Knowledge Extraction. </span><em>Bhavana Dalvi, Niket Tandon, Peter Clark</em>
@@ -1192,31 +1221,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="31">
                         <td id="paper-time">1:40-1:58</td>
                         <td>
                             <span class="paper-title">Translating Neuralese. </span><em>Jacob Andreas, Anca Dragan and Dan Klein</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="32">
                         <td id="paper-time">1:59-2:17</td>
                         <td>
                             <span class="paper-title">Combining distributional and referential information for naming objects through cross-modal mapping and direct word prediction. </span><em>Sina Zarrieß and David Schlangen</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="33">
                         <td id="paper-time">2:18-2:36</td>
                         <td>
                             <span class="paper-title">FOIL it! Find One mismatch between Image and Language caption. </span><em>Ravi Shekhar, Sandro Pezzelle, Yauhen Klimovich, Aurélie Herbelot, Moin Nabi, Enver Sangineto and Raffaella Bernardi</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="34">
                         <td id="paper-time">2:37-2:55</td>
                         <td>
                             <span class="paper-title">Verb Physics: Relative Physical Knowledge of Actions and Objects. </span><em>Maxwell Forbes and Yejin Choi</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="35">
                         <td id="paper-time">2:56-3:14</td>
                         <td>
                             <span class="paper-title">Visually Grounded and Textual Semantic Models Differentially Decode Brain Activity Associated with Concrete and Abstract Nouns. </span><em>Andrew J. Anderson, Douwe Kiela, Stephen Clark, Massimo Poesio</em>
@@ -1239,31 +1268,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="36">
                         <td id="paper-time">1:40-1:58</td>
                         <td>
                             <span class="paper-title">A* CCG Parsing with a Supertag and Dependency Factored Model. </span><em>Masashi Yoshikawa, Hiroshi Noji and Yuji Matsumoto</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="37">
                         <td id="paper-time">1:59-2:17</td>
                         <td>
                             <span class="paper-title">A Full Non-Monotonic Transition System for Unrestricted Non-Projective Parsing. </span><em>Daniel Fernández-González and Carlos Gómez-Rodríguez</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="38">
                         <td id="paper-time">2:18-2:36</td>
                         <td>
                             <span class="paper-title">Aggregating and Predicting Sequence Labels from Crowd Annotations. </span><em>An Thanh Nguyen, Byron Wallace, Junyi Jessy Li, Ani Nenkova and Matthew Lease</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="39">
                         <td id="paper-time">2:37-2:55</td>
                         <td>
                             <span class="paper-title">Fine-Grained Prediction of Syntactic Typology: Discovering Latent Structure with Supervised Learning. </span><em>Dingquan Wang and Jason Eisner</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="40">
                         <td id="paper-time">2:56-3:14</td>
                         <td>
                             <span class="paper-title">Learning to Prune: Exploring the Frontier of Fast and Accurate Parsing. </span><em>Tim Vieira, Jason Eisner</em>
@@ -1286,31 +1315,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="41">
                         <td id="paper-time">1:40-1:58</td>
                         <td>
                             <span class="paper-title">Multi-space Variational Encoder-Decoders for Semi-supervised Labeled Sequence Transduction. </span><em>Chunting Zhou and Graham Neubig</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="42">
                         <td id="paper-time">1:59-2:17</td>
                         <td>
                             <span class="paper-title">Scalable Bayesian Learning of Recurrent Neural Networks for Language Modeling. </span><em>Zhe Gan, Chunyuan Li, Changyou Chen, Yunchen Pu, Qinliang Su and Lawrence Carin</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="43">
                         <td id="paper-time">2:18-2:36</td>
                         <td>
                             <span class="paper-title">Learning attention for historical text normalization by learning to pronounce. </span><em>Marcel Bollmann, Joachim Bingel and Anders Søgaard</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="44">
                         <td id="paper-time">2:37-2:55</td>
                         <td>
                             <span class="paper-title">Deep Learning in Semantic Kernel Spaces. </span><em>Danilo Croce, Simone Filice, Giuseppe Castellucci and Roberto Basili</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="45">
                         <td id="paper-time">2:56-3:14</td>
                         <td>
                             <span class="paper-title">Topically Driven Neural Language Model. </span><em>Jey Han Lau, Timothy Baldwin and Trevor Cohn</em>
@@ -1333,31 +1362,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="46">
                         <td id="paper-time">1:40-1:58</td>
                         <td>
                             <span class="paper-title">Handling Cold-Start Problem in Review Spam Detection by Jointly Embedding Texts and Behaviors. </span><em>Xuepeng Wang, Jun Zhao and Kang Liu</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="47">
                         <td id="paper-time">1:59-2:17</td>
                         <td>
                             <span class="paper-title">Learning Cognitive Features from Gaze Data for Sentiment and Sarcasm Classification using Convolutional Neural Network. </span><em>Abhijit Mishra, Kuntal Dey and Pushpak Bhattacharyya</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="48">
                         <td id="paper-time">2:18-2:36</td>
                         <td>
                             <span class="paper-title">An Unsupervised Neural Attention Model for Aspect Extraction. </span><em>Ruidan He, Wee Sun Lee, Hwee Tou Ng and Daniel Dahlmeier</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="49">
                         <td id="paper-time">2:37-2:55</td>
                         <td>
                             <span class="paper-title">Other Topics You May Also Agree or Disagree: Modeling Inter-Topic Preferences using Tweets and Matrix Factorization. </span><em>Akira Sasaki, Kazuaki Hanawa, Naoaki Okazaki and Kentaro Inui</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="50">
                         <td id="paper-time">2:56-3:14</td>
                         <td>
                             <span class="paper-title">Overcoming Language Variation in Sentiment Analysis with Social Attention. </span><em>Yi Yang, Jacob Eisenstein</em>
@@ -1384,31 +1413,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="51">
                         <td id="paper-time">3:45-4:03</td>
                         <td>
                             <span class="paper-title">Automatically Labeled Data Generation for Large Scale Event Extraction. </span><em>Yubo Chen, Kang Liu and Jun Zhao</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="52">
                         <td id="paper-time">4:04-4:22</td>
                         <td>
                             <span class="paper-title">Time Expression Analysis and Recognition Using Syntactic Token Types and General Heuristic Rules. </span><em>Xiaoshi Zhong, Aixin Sun and Erik Cambria</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="53">
                         <td id="paper-time">4:23-4:41</td>
                         <td>
                             <span class="paper-title">Learning with Noise: Enhance Distantly Supervised Relation Extraction with Dynamic Transition Matrix. </span><em>Bingfeng Luo, Yansong Feng, Zheng Wang, Zhanxing Zhu, Songfang Huang, Rui Yan and Dongyan Zhao</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="54">
                         <td id="paper-time">4:42-5:00</td>
                         <td>
                             <span class="paper-title">Ordinal Common-sense Inference. </span><em>Sheng Zhang, Rachel Rudinger, Kevin Duh, Benjamin Van Durme</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="55">
                         <td id="paper-time">5:00-5:12</td>
                         <td>
                             <span class="paper-title">Vector space models for evaluating semantic fluency in autism. </span><em>Emily Prud’hommeaux, Jan van Santen and Douglas Gliner</em>
@@ -1431,31 +1460,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="56">
                         <td id="paper-time">3:45-4:03</td>
                         <td>
                             <span class="paper-title">A Syntactic Neural Model for General-Purpose Code Generation. </span><em>Pengcheng Yin and Graham Neubig</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="57">
                         <td id="paper-time">4:04-4:22</td>
                         <td>
                             <span class="paper-title">Learning bilingual word embeddings with (almost) no bilingual data. </span><em>Mikel Artetxe, Gorka Labaka and Eneko Agirre</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="58">
                         <td id="paper-time">4:23-4:41</td>
                         <td>
                             <span class="paper-title">Abstract Meaning Representation Parsing using LSTM Recurrent Neural Networks. </span><em>William Foland and James H. Martin</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="59">
                         <td id="paper-time">4:42-5:00</td>
                         <td>
                             <span class="paper-title">Deep Semantic Role Labeling: What Works and What’s Next. </span><em>Luheng He, Kenton Lee, Mike Lewis and Luke Zettlemoyer</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="60">
                         <td id="paper-time">5:00-5:12</td>
                         <td>
                             <span class="paper-title">Neural Architectures for Multilingual Semantic Parsing. </span><em>Raymond Hendy Susanto and Wei Lu</em>
@@ -1478,31 +1507,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="61">
                         <td id="paper-time">3:45-4:03</td>
                         <td>
                             <span class="paper-title">Towards End-to-End Reinforcement Learning of Dialogue Agents for Information Access. </span><em>Bhuwan Dhingra, Lihong Li, Xiujun Li, Jianfeng Gao, Yun-Nung Chen, Faisal Ahmed and Li Deng</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="62">
                         <td id="paper-time">4:04-4:22</td>
                         <td>
                             <span class="paper-title">Sequential Matching Network: A New Architecture for Multi-turn Response Selection in Retrieval-based Chatbots. </span><em>Yu Wu, Wei Wu, Chen Xing, Ming Zhou and Zhoujun Li</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="63">
                         <td id="paper-time">4:23-4:41</td>
                         <td>
                             <span class="paper-title">Learning Word-Like Units from Joint Audio-Visual Analysis. </span><em>David Harwath and James Glass</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="64">
                         <td id="paper-time">4:42-5:00</td>
                         <td>
                             <span class="paper-title">Joint CTC-attention End-to-end Speech Recognition. </span><em>Shinji Watanabe, Takaaki Hori and John Hershey</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="65">
                         <td id="paper-time">5:00-5:12</td>
                         <td>
                             <span class="paper-title">Incorporating Uncertainty into Deep Learning for Spoken Language Assessment. </span><em>Andrey Malinin, Anton Ragni, Kate Knill and Mark Gales</em>
@@ -1525,31 +1554,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="66">
                         <td id="paper-time">3:45-4:03</td>
                         <td>
                             <span class="paper-title">Found in Translation: Reconstructing Phylogenetic Language Trees from Translations. </span><em>Ella Rabinovich, Noam Ordan and Shuly Wintner</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="67">
                         <td id="paper-time">4:04-4:22</td>
                         <td>
                             <span class="paper-title">Predicting Native Language from Gaze. </span><em>Yevgeni Berzak, Chie Nakamura, Suzanne Flynn and Boris Katz</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="68">
                         <td id="paper-time">4:23-4:41</td>
                         <td>
                             <span class="paper-title">Decoding Anagrammed Texts Written in an Unknown Language and Script. </span><em>Bradley Hauer and Grzegorz Kondrak</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="69">
                         <td id="paper-time">4:42-5:00</td>
                         <td>
                             <span class="paper-title">Sparse Coding of Neural Word Embeddings for Multilingual Sequence Labeling. </span><em>Gábor Berend</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="70">
                         <td id="paper-time">5:00-5:12</td>
                         <td>
                             <span class="paper-title">Incorporating Dialectal Variability for Socially Equitable Language Identification. </span><em>David Jurgens, Yulia Tsvetkov and Dan Jurafsky</em>
@@ -1572,31 +1601,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="71">
                         <td id="paper-time">3:45-4:03</td>
                         <td>
                             <span class="paper-title">MORSE: Semantic-ally Drive-n MORpheme SEgment-er. </span><em>Tarek Sakakini, Suma Bhat and Pramod Viswanath</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="72">
                         <td id="paper-time">4:04-4:22</td>
                         <td>
                             <span class="paper-title">A Generative Model of Phonotactics. </span><em>Richard Futrell, Adam Albright, Peter Graff, and Timothy J. O’Donnell</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="73">
                         <td id="paper-time">4:23-4:41</td>
                         <td>
                             <span class="paper-title">Joint Semantic Synthesis and Morphological Analysis of the Derived Word. </span><em>Ryan Cotterell and Hinrich Schütze</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="74">
                         <td id="paper-time">4:42-5:00</td>
                         <td>
                             <span class="paper-title">Unsupervised Learning of Morphological Forests. </span><em>Jiaming Luo, Karthik, Narasimhan</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="75">
                         <td id="paper-time">5:00-5:12</td>
                         <td>
                             <span class="paper-title">Evaluation of Compound Splitting with Textual Entailment. </span><em>Glorianna Jagfeld, Patrick Ziering and Lonneke van der Plas</em>
@@ -2213,31 +2242,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="76">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
                             <span class="paper-title">Deep Pyramid Convolutional Neural Networks for Text Categorization. </span><em>Rie Johnson and Tong Zhang</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="77">
                         <td id="paper-time">10:49-11:07</td>
                         <td>
                             <span class="paper-title">Improved Neural Relation Detection for Knowledge Base Question Answering. </span><em>Mo Yu, Wenpeng Yin, Kazi Saidul Hasan, Cicero dos Santos, Bing Xiang and Bowen Zhou</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="78">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
                             <span class="paper-title">Deep Keyphrase Generation. </span><em>Rui Meng, Daqing He, Sanqiang Zhao and Shuguang Han</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="79">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
                             <span class="paper-title">Attention-over-Attention Neural Networks for Reading Comprehension. </span><em>Yiming Cui, Zhipeng Chen, si wei, Shijin Wang, Ting Liu and Guoping Hu</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="80">
                         <td id="paper-time">11:46-12:04</td>
                         <td>
                             <span class="paper-title">Cross-Sentence N-ary Relation Extraction with Graph LSTMs. </span><em>Nanyun Peng, Hoifung Poon, Chris Quirk, Kristina Toutanova, Wen-Tau Yih</em>
@@ -2260,31 +2289,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="81">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
                             <span class="paper-title">Alignment at Work: Using Language to Distinguish the Internalization and Self-Regulation Components of Cultural Fit in Organizations. </span><em>Gabriel Doyle, Amir Goldberg, Sameer Srivastava and Michael Frank</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="82">
                         <td id="paper-time">10:49-11:07</td>
                         <td>
                             <span class="paper-title">Representations of language in a model of visually grounded speech signal. </span><em>Grzegorz Chrupała, Lieke Gelderloos and Afra Alishahi</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="83">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
                             <span class="paper-title">Spectral Analysis of Information Density in Dialogue Predicts Collaborative Task Performance. </span><em>Yang Xu and David Reitter</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="84">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
                             <span class="paper-title">Modeling Semantic Expectation: Using Script Knowledge for Referent Prediction. </span><em>Ashutosh Modi, Ivan Titov, Vera Demberg, Asad Sayeed, Manfred Pinkal</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="85">
                         <td id="paper-time">11:46-11:58</td>
                         <td>
                             <span class="paper-title">A Survey on Action Recognition Datasets and Tasks for Still Images. </span><em>Spandana Gella and Frank Keller</em>
@@ -2307,31 +2336,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="86">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
                             <span class="paper-title">Affect-LM: A Neural Language Model for Customizable Affective Text Generation. </span><em>Sayan Ghosh, Mathieu Chollet, Eugene Laksana, Stefan Scherer and Louis-Philippe Morency</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="87">
                         <td id="paper-time">10:49-11:07</td>
                         <td>
                             <span class="paper-title">Domain Attention with an Ensemble of Experts. </span><em>Young-Bum Kim, Karl Stratos and Dongchan Kim</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="88">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
                             <span class="paper-title">Learning Discourse-level Diversity for Neural Dialog Models using Conditional Variational Autoencoders. </span><em>Tiancheng Zhao, Ran Zhao and Maxine Eskenazi</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="89">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
                             <span class="paper-title">Hybrid Code Networks: practical and efficient end-to-end dialog control with supervised and reinforcement learning. </span><em>Jason D Williams, Kavosh Asadi and Geoffrey Zweig</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="90">
                         <td id="paper-time">11:46-12:04</td>
                         <td>
                             <span class="paper-title">Generating Contrastive Referring Expressions. </span><em>Martin Villalba, Christoph Teichmann and Alexander Koller</em>
@@ -2354,31 +2383,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="91">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
                             <span class="paper-title">Modeling Source Syntax for Neural Machine Translation. </span><em>Junhui Li, Deyi Xiong, Zhaopeng Tu, Muhua Zhu and Guodong Zhou</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="92">
                         <td id="paper-time">10:49-11:07</td>
                         <td>
                             <span class="paper-title">Sequence-to-Dependency Neural Machine Translation. </span><em>Shuangzhi Wu, Dongdong Zhang, Nan Yang, Mu Li and Ming Zhou</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="93">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
                             <span class="paper-title">Head-Lexicalized Bidirectional Tree LSTMs. </span><em>Zhiyang Teng and Yue Zhang</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="94">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
                             <span class="paper-title">Pushing the Limits of Translation Quality Estimation. </span><em>André F. T. Martins, Marcin Junczys-Dowmunt, Fabio N. Kepler, Ramón Astudillo, Chris Hokamp, Roman Grundkiewicz</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="95">
                         <td id="paper-time">11:46-11:58</td>
                         <td>
                             <span class="paper-title">Learning to Parse and Translate Improves Neural Machine Translation. </span><em>Akiko Eriguchi, Yoshimasa Tsuruoka and Kyunghyun Cho</em>
@@ -2401,31 +2430,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="96">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
                             <span class="paper-title">Detect Rumors in Microblog Posts Using Propagation Structure via Kernel Learning. </span><em>Ma Jing, Wei Gao and Kam-Fai Wong</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="97">
                         <td id="paper-time">10:49-11:07</td>
                         <td>
                             <span class="paper-title">EmoNet: Fine-Grained Emotion Detection with Gated Recurrent Neural Networks. </span><em>Muhammad Abdul-Mageed and Lyle Ungar</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="98">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
                             <span class="paper-title">Beyond Binary Labels: Political Ideology Prediction of Twitter Users. </span><em>Daniel Preoţiuc-Pietro, Ye Liu, Daniel Hopkins and Lyle Ungar</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="99">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
                             <span class="paper-title">Leveraging Behavioral and Social Information for Weakly Supervised Collective Classification of Political Discourse on Twitter. </span><em>Kristen Johnson and Dan Goldwasser</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="100">
                         <td id="paper-time">11:46-11:58</td>
                         <td>
                             <span class="paper-title">On the Distribution of Lexical Features in Social Media. </span><em>Fatemeh Almodaresi, Lyle Ungar, Vivek Kulkarni, Mohsen Zakeri, Salvatore Giorgi and H. Andrew Schwartz</em>
@@ -2453,31 +2482,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="101">
                         <td id="paper-time">1:30-1:42</td>
                         <td>
                             <span class="paper-title">Exploring Neural Text Simplification Models. </span><em>Sergiu Nisioi, Sanja Štajner, Simone Paolo Ponzetto and Liviu P. Dinu</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="102">
                         <td id="paper-time">1:43-2:01</td>
                         <td>
                             <span class="paper-title">A Nested Attention Neural Hybrid Model for Grammatical Error Correction. </span><em>Jianshu Ji, Qinlong Wang, Kristina Toutanova, Yongen Gong, Steven Truong and Jianfeng Gao</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="103">
                         <td id="paper-time">2:02-2:20</td>
                         <td>
                             <span class="paper-title">TextFlow: A Text Similarity Measure based on Continuous Sequences. </span><em>Yassine Mrabet, Halil Kilicoglu and Dina Demner-Fushman</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="104">
                         <td id="paper-time">2:21-2:39</td>
                         <td>
                             <span class="paper-title">Friendships, Rivalries, and Trysts: Characterizing Relations between Ideas in Texts. </span><em>Chenhao Tan, Dallas Card and Noah A. Smith</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="105">
                         <td id="paper-time">2:40-2:52</td>
                         <td>
                             <span class="paper-title">On the Challenges of Translating NLP Research into Commercial Products. </span><em>Daniel Dahlmeier</em>
@@ -2500,31 +2529,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="106">
                         <td id="paper-time">1:30-1:48</td>
                         <td>
                             <span class="paper-title">Polish evaluation dataset for compositional distributional semantics models. </span><em>Alina Wróblewska and Katarzyna Krasnowska-Kieraś</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="107">
                         <td id="paper-time">1:49-2:07</td>
                         <td>
                             <span class="paper-title">Automatic Annotation and Evaluation of Error Types for Grammatical Error Correction. </span><em>Christopher Bryant, Mariano Felice and Ted Briscoe</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="108">
                         <td id="paper-time">2:08-2:26</td>
                         <td>
                             <span class="paper-title">Evaluation Metrics for Reading Comprehension: Prerequisite Skills and Readability. </span><em>Saku Sugawara, Yusuke Kido, Hikaru Yokono and Akiko Aizawa</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="109">
                         <td id="paper-time">2:27-2:39</td>
                         <td>
                             <span class="paper-title">Sentence Alignment Methods for Improving Text Simplification Systems. </span><em>Sanja Štajner, Marc Franco-Salvador, Simone Paolo Ponzetto, Paolo Rosso and Heiner Stuckenschmidt</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="110">
                         <td id="paper-time">2:40-2:52</td>
                         <td>
                             <span class="paper-title">Understanding Task Design Trade-offs in Crowdsourced Paraphrase Collection. </span><em>Youxuan Jiang, Jonathan K. Kummerfeld and Walter S. Lasecki</em>
@@ -2547,31 +2576,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="111">
                         <td id="paper-time">1:30-1:48</td>
                         <td>
                             <span class="paper-title">A Minimal Span-Based Neural Constituent Parser. </span><em>Mitchell Stern, Jacob Andreas and Dan Klein</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="112">
                         <td id="paper-time">1:49-2:07</td>
                         <td>
                             <span class="paper-title">Semantic Dependency Parsing via Book Embedding. </span><em>Weiwei Sun, Junjie Cao and Xiaojun Wan</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="113">
                         <td id="paper-time">2:08-2:26</td>
                         <td>
                             <span class="paper-title">Neural Word Segmentation with Rich Pretraining. </span><em>Jie Yang, Yue Zhang and Fei Dong</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="114">
                         <td id="paper-time">2:27-2:39</td>
                         <td>
                             <span class="paper-title">Arc-swift: A Novel Transition System for Dependency Parsing. </span><em>Peng Qi and Christopher D. Manning</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="115">
                         <td id="paper-time">2:40-2:52</td>
                         <td>
                             <span class="paper-title">A Generative Parser with a Discriminative Recognition Algorithm. </span><em>Jianpeng Cheng, Adam Lopez and Mirella Lapata</em>
@@ -2594,31 +2623,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="116">
                         <td id="paper-time">1:30-1:48</td>
                         <td>
                             <span class="paper-title">Neural Machine Translation via Binary Code Prediction. </span><em>Yusuke Oda, Philip Arthur, Graham Neubig, Koichiro Yoshino and Satoshi Nakamura</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="117">
                         <td id="paper-time">1:49-2:07</td>
                         <td>
                             <span class="paper-title">What do Neural Machine Translation Models Learn about Morphology?. </span><em>Yonatan Belinkov, Nadir Durrani, Fahim Dalvi, Hassan Sajjad and James Glass</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="118">
                         <td id="paper-time">2:08-2:26</td>
                         <td>
                             <span class="paper-title">Fully Character-Level Neural Machine Translation without Explicit Segmentation. </span><em>Jason Lee, Kyunghyun Cho, Thomas Hofmann</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="119">
                         <td id="paper-time">2:27-2:39</td>
                         <td>
                             <span class="paper-title">Hybrid Neural Network Alignment and Lexicon Model in Direct HMM for Statistical Machine Translation. </span><em>Weiyue Wang, Derui Zhu and Hermann Ney</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="120">
                         <td id="paper-time">2:40-2:52</td>
                         <td>
                             <span class="paper-title">Towards String-To-Tree Neural Machine Translation. </span><em>Roee Aharoni and Yoav Goldberg</em>
@@ -2641,31 +2670,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="121">
                         <td id="paper-time">1:30-1:48</td>
                         <td>
                             <span class="paper-title">Modeling Contextual Relationship Among Utterances in Multimodal Sentiment Analysis. </span><em>Soujanya Poria, Devamanyu Hazarika, Navonil Majumder and Erik Cambria</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="122">
                         <td id="paper-time">1:49-2:07</td>
                         <td>
                             <span class="paper-title">A Multidimensional Lexicon for Interpersonal Stancetaking. </span><em>Umashanthi Pavalanathan, Jim Fitzpatrick, Scott Kiesling and Jacob Eisenstein</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="123">
                         <td id="paper-time">2:08-2:20</td>
                         <td>
                             <span class="paper-title">Learning Lexical-Functional Patterns for First-Person Affect. </span><em>Lena Reed, Jiaqi Wu, Shereen Oraby, Pranav Anand and Marilyn Walker</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="124">
                         <td id="paper-time">2:21-2:33</td>
                         <td>
                             <span class="paper-title">Supervised Aspect Extraction with Knowledge Retention. </span><em>Lei Shu, Hu Xu and Bing Liu</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="125">
                         <td id="paper-time">2:34-2:46</td>
                         <td>
                             <span class="paper-title">Exploiting Domain Knowledge via Grouped Weight Sharing with Application to Text Categorization. </span><em>Ye Zhang, Matthew Lease and Byron C. Wallace</em>
@@ -2692,31 +2721,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="126">
                         <td id="paper-time">3:25-3:43</td>
                         <td>
                             <span class="paper-title">Tandem Anchoring: a Multiword Anchor Approach for Interactive Topic Modeling. </span><em>Jeffrey Lund, Connor Cook, Kevin Seppi and Jordan Boyd-Graber</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="127">
                         <td id="paper-time">3:44-4:02</td>
                         <td>
                             <span class="paper-title">Comparing Apples to Apples: Learning Semantics of Common Entities Through a Novel Comprehension Task. </span><em>Omid Bakhshandeh and James Allen</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="128">
                         <td id="paper-time">4:03-4:21</td>
                         <td>
                             <span class="paper-title">Going out on a limb : Joint Extraction of Entity Mentions and Relations without Dependency Trees. </span><em>Arzoo Katiyar and Claire Cardie</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="129">
                         <td id="paper-time">4:22-4:40</td>
                         <td>
                             <span class="paper-title">Evaluating Visual Representations for Topic Understanding and Their Effects on Manually Generated Labels. </span><em>Alison Smith, Tak Yeon Lee, Forough-Poursabzi Sangdeh, Jordan Boyd-Graber, Niklas Elmqvist, Leah Findlater</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="130">
                         <td id="paper-time">4:41-4:53</td>
                         <td>
                             <span class="paper-title">Separating Reranking Effects from Model Combination Effects in Generative Neural Constituency Parsers. </span><em>Daniel Fried, Mitchell Stern and Dan Klein</em>
@@ -2739,31 +2768,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="131">
                         <td id="paper-time">3:25-3:43</td>
                         <td>
                             <span class="paper-title">Naturalizing a Programming Language via Interactive Learning. </span><em>Sida I. Wang, Sam Ginn, Percy Liang and Christopher D. Manning</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="132">
                         <td id="paper-time">3:44-4:02</td>
                         <td>
                             <span class="paper-title">Semantic Word Clusters Using Signed Spectral Clustering. </span><em>Joao Sedoc, Jean Gallier, Dean Foster and Lyle Ungar</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="133">
                         <td id="paper-time">4:03-4:21</td>
                         <td>
                             <span class="paper-title">An Interpretable Knowledge Transfer Model for Knowledge Base Completion. </span><em>Qizhe Xie, Xuezhe Ma, Zihang Dai and Eduard Hovy</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="134">
                         <td id="paper-time">4:22-4:40</td>
                         <td>
                             <span class="paper-title">Learning a Neural Semantic Parser from User Feedback. </span><em>Srinivasan Iyer, Ioannis Konstas, Alvin Cheung, Jayant Krishnamurthy and Luke Zettlemoyer</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="135">
                         <td id="paper-time">4:41-4:59</td>
                         <td>
                             <span class="paper-title">Enriching Word Vectors with Subword Information. </span><em>Piotr Bojanowski, Edouard Grave, Armand Joulin and Tomas Mikolov</em>
@@ -2786,31 +2815,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="136">
                         <td id="paper-time">3:25-3:43</td>
                         <td>
                             <span class="paper-title">Joint Modeling of Content and Discourse Relations in Dialogues. </span><em>Kechen Qin, Lu Wang, Joseph Kim and Julie Shah</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="137">
                         <td id="paper-time">3:44-4:02</td>
                         <td>
                             <span class="paper-title">Argument Mining with Structured SVMs and RNNs. </span><em>Vlad Niculae, Claire Cardie and Joonsuk Park</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="138">
                         <td id="paper-time">4:03-4:21</td>
                         <td>
                             <span class="paper-title">Neural Discourse Structure for Text Categorization. </span><em>Yangfeng Ji and Noah A. Smith</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="139">
                         <td id="paper-time">4:22-4:40</td>
                         <td>
                             <span class="paper-title">Adversarial Connective-exploiting Networks for Implicit Discourse Relation Classification. </span><em>Lianhui Qin, Zhisong Zhang, Hai Zhao, Eric Xing and Zhiting Hu</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="140">
                         <td id="paper-time">4:41-4:59</td>
                         <td>
                             <span class="paper-title">Don’t understand a measure? Learn it: Structured Prediction for Coreference Resolution optimizing its measures. </span><em>Iryna Haponchyk and Alessandro Moschitti</em>
@@ -2833,31 +2862,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="141">
                         <td id="paper-time">3:25-3:43</td>
                         <td>
                             <span class="paper-title">Bayesian Modeling of Lexical Resources for Low-Resource Settings. </span><em>Nicholas Andrews, Jason Eisner, Mark Dredze and Benjamin Van Durme</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="142">
                         <td id="paper-time">3:44-4:02</td>
                         <td>
                             <span class="paper-title">Semi-Supervised QA with Generative Domain-Adaptive Nets. </span><em>Zhilin Yang, Junjie Hu, Ruslan Salakhutdinov and William Cohen</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="143">
                         <td id="paper-time">4:03-4:21</td>
                         <td>
                             <span class="paper-title">From Language to Programs: Bridging Reinforcement Learning and Maximum Marginal Likelihood. </span><em>Kelvin Guu, Panupong Pasupat, Evan Liu and Percy Liang</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="144">
                         <td id="paper-time">4:22-4:34</td>
                         <td>
                             <span class="paper-title">Information-Theory Interpretation of the Skip-Gram Negative-Sampling Objective Function. </span><em>Oren Melamud and Jacob Goldberger</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="145">
                         <td id="paper-time">4:35-4:47</td>
                         <td>
                             <span class="paper-title">Implicitly-Defined Neural Networks for Sequence Labeling. </span><em>Michaeel Kazi and Brian Thompson</em>
@@ -2880,31 +2909,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="146">
                         <td id="paper-time">3:25-3:43</td>
                         <td>
                             <span class="paper-title">Diversity driven attention model for query-based abstractive summarization. </span><em>Preksha Nema, Mitesh M. Khapra, Balaraman Ravindran and Anirban Laha</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="147">
                         <td id="paper-time">3:44-4:02</td>
                         <td>
                             <span class="paper-title">Get To The Point: Summarization with Pointer-Generator Networks. </span><em>Abigail See, Peter J. Liu and Christopher D. Manning</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="148">
                         <td id="paper-time">4:03-4:21</td>
                         <td>
                             <span class="paper-title">Supervised Learning of Automatic Pyramid for Optimization-Based Multi-Document Summarization. </span><em>Maxime Peyrard and Judith Eckle-Kohler</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="149">
                         <td id="paper-time">4:22-4:40</td>
                         <td>
                             <span class="paper-title">Selective Encoding for Abstractive Sentence Summarization. </span><em>Qingyu Zhou, Nan Yang, Furu Wei and Ming Zhou</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="150">
                         <td id="paper-time">4:41-4:59</td>
                         <td>
                             <span class="paper-title">PositionRank: An Unsupervised Approach to Keyphrase Extraction from Scholarly Documents. </span><em>Corina Florescu and Cornelia Caragea</em>
@@ -3403,37 +3432,37 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="151">
                         <td id="paper-time">10:40-10:58</td>
                         <td>
                             <span class="paper-title">Towards an Automatic Turing Test: Learning to Evaluate Dialogue Responses. </span><em>Ryan Lowe, Michael Noseworthy, Iulian Vlad Serban, Nicolas Angelard-Gontier, Yoshua Bengio and Joelle Pineau</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="152">
                         <td id="paper-time">10:59-11:17</td>
                         <td>
                             <span class="paper-title">A Transition-Based Directed Acyclic Graph Parser for UCCA. </span><em>Daniel Hershcovich, Omri Abend and Ari Rappoport</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="153">
                         <td id="paper-time">11:18-11:36</td>
                         <td>
                             <span class="paper-title">Abstract Syntax Networks for Code Generation and Semantic Parsing. </span><em>Maxim Rabinovich, Mitchell Stern and Dan Klein</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="154">
                         <td id="paper-time">11:37-11:49</td>
                         <td>
                             <span class="paper-title">The Role of Prosody and Speech Register in Word Segmentation: A Computational Modelling Perspective. </span><em>Bogdan Ludusan, Reiko Mazuka, Mathieu Bernard, Alejandrina Cristia and Emmanuel Dupoux</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="155">
                         <td id="paper-time">11:50-12:02</td>
                         <td>
                             <span class="paper-title">A Two-stage Parsing Method for Text-level Discourse Analysis. </span><em>Yizhong Wang and Sujian Li</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="156">
                         <td id="paper-time">12:03-12:15</td>
                         <td>
                             <span class="paper-title">Error-repair Dependency Parsing for Ungrammatical Texts. </span><em>Keisuke Sakaguchi, Matt Post and Benjamin Van Durme</em>
@@ -3456,37 +3485,37 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="157">
                         <td id="paper-time">10:40-10:58</td>
                         <td>
                             <span class="paper-title">Visualizing and Understanding Neural Machine Translation. </span><em>Yanzhuo Ding, Yang Liu, Huanbo Luan and Maosong Sun</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="158">
                         <td id="paper-time">10:59-11:17</td>
                         <td>
                             <span class="paper-title">Detecting annotation noise in automatically labelled data. </span><em>Ines Rehbein and Josef Ruppenhofer</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="159">
                         <td id="paper-time">11:18-11:30</td>
                         <td>
                             <span class="paper-title">Attention Strategies for Multi-Source Sequence-to-Sequence Learning. </span><em>Jindřich Libovický and Jindřich Helcl</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="160">
                         <td id="paper-time">11:31-11:43</td>
                         <td>
                             <span class="paper-title">Understanding and Detecting Diverse Supporting Arguments on Controversial Issues. </span><em>Xinyu Hua and Lu Wang</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="161">
                         <td id="paper-time">11:44-11:56</td>
                         <td>
                             <span class="paper-title">A Neural Model for User Geolocation and Lexical Dialectology. </span><em>Afshin Rahimi, Trevor Cohn and Timothy Baldwin</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="162">
                         <td id="paper-time">11:57-12:09</td>
                         <td>
                             <span class="paper-title">A Corpus of Compositional Language for Visual Reasoning. </span><em>Alane Suhr, Mike Lewis, James Yeh and Yoav Artzi</em>
@@ -3523,31 +3552,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="163">
                         <td id="paper-time">3:00-3:18</td>
                         <td>
                             <span class="paper-title">Abstractive Document Summarization with a Graph-Based Attentional Neural Model. </span><em>Jiwei Tan and Xiaojun Wan</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="164">
                         <td id="paper-time">3:19-3:37</td>
                         <td>
                             <span class="paper-title">Probabilistic Typology: Deep Generative Models of Vowel Inventories. </span><em>Ryan Cotterell and Jason Eisner</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="165">
                         <td id="paper-time">3:38-3:56</td>
                         <td>
                             <span class="paper-title">Adversarial Multi-Criteria Learning for Chinese Word Segmentation. </span><em>Xinchi Chen, Zhan Shi, Xipeng Qiu and Xuanjing Huang</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="166">
                         <td id="paper-time">3:57-4:15</td>
                         <td>
                             <span class="paper-title">Neural Joint Model for Transition-based Chinese Syntactic Analysis. </span><em>Shuhei Kurita, Daisuke Kawahara and Sadao Kurohashi</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="167">
                         <td id="paper-time">4:16-4:34</td>
                         <td>
                             <span class="paper-title">Robust Incremental Neural Semantic Graph Parsing. </span><em>Jan Buys and Phil Blunsom</em>
@@ -3570,31 +3599,31 @@ script: |
                     <tr>
                         <td colspan="2">Chair: XXX</td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="168">
                         <td id="paper-time">3:00-3:18</td>
                         <td>
                             <span class="paper-title">Joint Extraction of Entities and Relations Based on a Novel Tagging Scheme. </span><em>Suncong Zheng, Feng Wang and Hongyun Bao</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="169">
                         <td id="paper-time">3:19-3:37</td>
                         <td>
                             <span class="paper-title">A FOFE-based Local Detection Approach for Named Entity Recognition and Mention Detection. </span><em>Mingbin Xu, Hui Jiang and Sedtawut Watcharawittayakul</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="170">
                         <td id="paper-time">3:38-3:56</td>
                         <td>
                             <span class="paper-title">Vancouver Welcomes You! Minimalist Location Metonymy Resolution. </span><em>Milan Gritta, Mohammad Taher Pilehvar, Nut Limsopatham and Nigel Collier</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="171">
                         <td id="paper-time">3:57-4:15</td>
                         <td>
                             <span class="paper-title">Unifying Text, Metadata, and User Network Representations with a Neural Network for Geolocation Prediction. </span><em>Yasuhide Miura, Motoki Taniguchi, Tomoki Taniguchi and Tomoko Ohkuma</em>
                         </td>
                     </tr>
-                    <tr id="paper">
+                    <tr id="paper" paper-id="172">
                         <td id="paper-time">4:16-4:34</td>
                         <td>
                             <span class="paper-title">Multi-Task Video Captioning with Visual and Textual Entailment. </span><em>Ramakanth Pasunuru and Mohit Bansal</em>
