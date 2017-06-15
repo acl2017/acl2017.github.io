@@ -1612,7 +1612,7 @@ script: |
         <span class="session-location btn btn--location">Pavilion</span>
         <div class="poster-session-details">
             <hr class="detail-separator"/>
-            <h4 style="text-decoration: underline;">Long Papers</h4>
+            <h4 class="poster-type" style="text-decoration: underline;">Long Papers</h4>
             <table class="poster-table">
                 <tr id="poster">
                     <td>
@@ -1835,7 +1835,7 @@ script: |
                     </td>
                 </tr>
             </table>
-            <h4 style="text-decoration: underline;">Short Papers</h4>
+            <h4 class="poster-type" style="text-decoration: underline;">Short Papers</h4>
             <table class="poster-table">
                 <tr id="poster">
                     <td>
@@ -2058,7 +2058,7 @@ script: |
                     </td>
                 </tr>
             </table>
-            <h4 style="text-decoration: underline;">Student Research Workshop</h4>
+            <h4 class="poster-type" style="text-decoration: underline;">Student Research Workshop</h4>
             <table class="poster-table">
                 <tr id="poster">
                     <td>
@@ -2919,7 +2919,7 @@ script: |
         <span class="session-location btn btn--location">Pavilion</span>
         <div class="poster-session-details">
             <hr class="detail-separator"/>
-            <h4 style="text-decoration: underline;">Long Papers</h4>
+            <h4 class="poster-type" style="text-decoration: underline;">Long Papers</h4>
             <table class="poster-table">
                 <tr id="poster">
                     <td>
@@ -3092,7 +3092,7 @@ script: |
                     </td>
                 </tr>
             </table>
-            <h4 style="text-decoration: underline;">Short Papers</h4>
+            <h4 class="poster-type" style="text-decoration: underline;">Short Papers</h4>
             <table class="poster-table">
                 <tr id="poster">
                     <td>
@@ -3240,7 +3240,7 @@ script: |
                     </td>
                 </tr>
             </table>
-            <h4 style="text-decoration: underline;">System Demonstrations</h4>
+            <h4 class="poster-type" style="text-decoration: underline;">System Demonstrations</h4>
             <table class="poster-table">
                 <tr id="poster">
                     <td>
