@@ -26,7 +26,7 @@ Click on the button below to register for the conference. More details about the
         <tr>
             <td>Early online registration ends</td>
             <td>Friday</td>
-            <td>June 23, 2017 11:59 PM EDT</td>
+            <td>June 24, 2017 11:59 PM EDT</td>
         </tr>
         <tr>
             <td>Late online registration ends</td>
@@ -43,7 +43,7 @@ Click on the button below to register for the conference. More details about the
 
 Please note that:
 
-- Registration prices will increase starting Saturday, June 24th, 2017 once early online registration has ended. 
+- Registration prices will increase starting Sunday, June 25th, 2017 once early online registration has ended. 
 - After the July 21st deadline for late online registration, you can *only* register on-site at the conference venue starting July 30th, 2017.
 
 ## What's included
