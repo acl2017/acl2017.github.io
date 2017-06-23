@@ -36,12 +36,14 @@ All parts of the conference will take place at the Westin Bayshore Hotel on the 
 Enjoy views of the coastline, distant mountains, and Stanley Park, plus easy access to all of the best things to do in Vancouver.  Boasting one of the most spectacular coastal locations in the world, the snowcapped mountains and the Pacific Ocean come together to create a truly magnificent setting. In addition, you are moments from shopping at Robson Street and Pacific Centre Mall, and attractions like the Vancouver Aquarium and Granville Island. Find even more things to do in Vancouver at <a href="http://www.tourismvancouver.com">www.tourismvancouver.com</a> or visit the hotel's website.
 
 ## Regular Accommodation
+<span style="color: red; font-weight: bold; font-size: larger; border: 2px solid red; padding: 3px;">EVERYTHING SOLD OUT</span>
 
 We have secured accommodation for regular participants at ACL discounted rates at three conveniently located hotels in Vancouver: [Westin Bayshore Vancouver](#westin-bayshore-vancouver) (the conference hotel, with the largest block of rooms), the [Marriott Vancouver Pinnacle Downtown](#marriott-vancouver-pinnacle-downtown) (a spillover hotel with 50 guest rooms), and the [Sheraton Vancouver Wall Centre](#sheraton-vancouver-wall-centre) (another spillover hotel with 60 guest rooms). 
 
 Links to reservation pages and more details for each of the hotels are provided below.
 
 ### Westin Bayshore Vancouver 
+<span style="color: red; font-weight: bold; font-size: larger; border: 2px solid red; padding: 3px;">SOLD OUT</span>
 
 - [1601 Bayshore Drive, Vancouver, BC V6G 2V4](https://www.google.com/maps/place/The+Westin+Bayshore,+Vancouver/@49.2921193,-123.1313515,17z/data=!3m1!4b1!4m5!3m4!1s0x54867188a23819af:0xaf6eaf737c65b77f!8m2!3d49.2921158!4d-123.1291628); +1-604-682-3377
 - Conference Hotel. 
@@ -49,36 +51,39 @@ Links to reservation pages and more details for each of the hotels are provided 
 - Complimentary wifi in all guest rooms.
 - Single/Double Room: $279 CAD, Triple Room: $309 CAD, Quad Room: $339 CAD.
 - Self Parking: $38 CAD per night, Valet Parking: $42 CAD per night. Prices include taxes.
-- ACL discounted rates are available through Friday, July 7, 2017 at 5pm local time.
+- ACL discounted rates are <span style="text-decoration: line-through;">available through Friday, July 7, 2017 at 5pm local time</span> <span style="color: red;">SOLD OUT</span>.
 
-<div class="text-center"> 
-<a href="https://www.starwoodmeeting.com/events/start.action?id=1611213443&key=1B2786E7" target="_blank"><button class="btn btn--large">Click to Reserve</button></a>
+<!-- <div class="text-center"> 
+<a href="https://www.starwoodmeeting.com/events/start.action?id=1611213443&key=1B2786E7" target="_blank"><button class="btn btn--large btn--danger">Click to Reserve</button></a>
 </div>
-
+ -->
 
 ### Marriott Vancouver Pinnacle Downtown
+<span style="color: red; font-weight: bold; font-size: larger; border: 2px solid red; padding: 3px;">SOLD OUT</span>
 
 - [1128 West Hastings Street, Vancouver, BC V6E 4R5](https://www.google.com/maps/place/Vancouver+Marriott+Pinnacle+Downtown+Hotel/@49.2879135,-123.1230467,17z/data=!4m12!1m6!3m5!1s0x54867183efc86e0d:0x368976848d4c1998!2sVancouver+Marriott+Pinnacle+Downtown+Hotel!8m2!3d49.28791!4d-123.120858!3m4!1s0x54867183efc86e0d:0x368976848d4c1998!8m2!3d49.28791!4d-123.120858); +1-604-684-1128
 - Located 9.3 miles NE  of the airport.  This hotel does not provide shuttle service.
 - Single/Double Room: $309 CAD.
-- ACL discounted rates are available through Thursday, June 15, 2017 at 5pm local time.
+- ACL discounted rates are <span style="text-decoration: line-through;">available through Thursday, June 15, 2017 at 5pm local time</span> <span style="color: red;">SOLD OUT</span>.
 
-<div class="text-center"> 
+<!-- <div class="text-center"> 
 <a href="https://aws.passkey.com/e/49043562" target="_blank"><button class="btn btn--large">Click to Reserve</button></a>
 </div>
-
+ -->
 
 ### Sheraton Vancouver Wall Centre
+<span style="color: red; font-weight: bold; font-size: larger; border: 2px solid red; padding: 3px;">SOLD OUT</span>
 
 - [1088 Burrard Street, Vancouver, BC V6Z 2R9](https://www.google.com/maps/place/Sheraton+Vancouver+Wall+Centre/@49.2801799,-123.1288822,17z/data=!3m1!4b1!4m5!3m4!1s0x548673d526270ceb:0x3392fb600a9680c1!8m2!3d49.2801764!4d-123.1266935); +1-604-331-1000
 - Complimentary wifi in all guest rooms.
 - Single/Double Traditional Room: $289 CAD, Single/Double View Room: $344 CAD.
 - Valet and self-parking are available.
-- ACL discounted rates are available through Friday, June 9, 2017 at 5pm local time.
+- ACL discounted rates are <span style="text-decoration: line-through;">available through Friday, June 9, 2017 at 5pm local time</span> <span style="color: red;">SOLD OUT</span>.
 
-<div class="text-center"> 
+<!-- <div class="text-center"> 
 <a href="https://www.starwoodmeeting.com/events/start.action?id=1701194750&key=89F9058" target="_blank"><button class="btn btn--large">Click to Reserve</button></a>
 </div>
+ -->
 
 ## Student Accommodation
 <span style="color: red; font-weight: bold; font-size: larger; border: 2px solid red; padding: 3px;">EVERYTHING SOLD OUT</span>
