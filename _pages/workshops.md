@@ -28,7 +28,7 @@ Please refer to each individual event's website for its paper deadlines and othe
 ### Sunday, July 30, 2017
 
 <br/>
-<a href="http://www.winlp.org/winlp-workshop/" class="btn btn--small">W4</a>&nbsp;&nbsp;[WiNLP: Women in Natural Language Processing](http://www.winlp.org/winlp-workshop/)
+<a href="http://www.winlp.org/winlp-workshop/" class="btn btn--small">W4</a>&nbsp;&nbsp;[WiNLP: Women &amp; Underrepresented Minorities in Natural Language Processing](http://www.winlp.org/winlp-workshop/)
 
 ### Thursday, August 3, 2017
 
