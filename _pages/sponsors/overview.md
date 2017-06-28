@@ -88,6 +88,12 @@ gold:
     image_path: naver-logo.png
     alt: "Naver Line Logo"
     title: "Naver | Line"
+  - url: http://www.nec.com/
+    image_path: nec-logo.png
+    alt: "NEC Logo"
+    title: "NEC"
+  - image_path: blank-logo.png
+  - image_path: blank-logo.png
 silver:
   - url: https://www.oracle.com
     image_path: oracle-logo.png
