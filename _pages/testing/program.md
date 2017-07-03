@@ -452,6 +452,14 @@ script: |
             /* hide the testing notes */
             $('div#testingNotes').hide();
 
+            /* show the floorplan when any location is clicked */
+            $('span.session-location').magnificPopup({
+                items: {
+                    src: '/images/westin-floor-plan.png'
+                },
+                type: 'image'
+            });
+            
             /* get all the tutorial sessions and save the day and location for each of them in a hash */
             $('.session-tutorials').each(function() {
                 var session = {};
@@ -594,7 +602,7 @@ script: |
             /* hide all of the session details when starting up */
             $('[class$="-details"]').hide();
 
-            // expand sessions when their title is clicked
+            /* expand sessions when their title is clicked */
             $('body').on('click', 'div.session-expandable .session-title', function(event) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -1638,7 +1646,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Posters &amp; Dinner</a><br/>        
         <span class="session-time">6:20 PM &ndash; 9:50 PM</span>
         <br/>
-        <span class="session-location btn btn--location">Pavilion</span>
+        <span class="session-location btn btn--location">Bayshore Grand Foyer/Stanley Park Foyer/Cypress</span>
         <div class="poster-session-details">
             <hr class="detail-separator"/>
             <h4 class="poster-type" style="text-decoration: underline;">Long Papers</h4>
@@ -2466,7 +2474,7 @@ script: |
     <div class="session session-plenary" id="session-lunch-arxiv">
         <span class="session-title">Bring your Own Lunch and Discuss: Double Blind Reviewing &amp; arXiv</span><br/>
         <span class="session-time">12:05 PM &ndash; 1:30 PM</span><br/>
-        <span class="session-location btn btn--location">Grande Ballroom</span>
+        <span class="session-location btn btn--location">Salons E/F</span>
     </div>
     <div class="session session-expandable session-papers1" id="session-5a">
         <div id="expander"></div><a href="#" class="session-title">Multidisciplinary</a><br/>
@@ -2945,7 +2953,7 @@ script: |
     <div class="session session-expandable session-posters" id="session-poster-2">
         <div id="expander"></div><a href="#" class="session-title">Posters, Demos &amp; Dinner</a><br/>        
         <span class="session-time">5:45 PM &ndash; 7:45 PM</span><br/>
-        <span class="session-location btn btn--location">Pavilion</span>
+        <span class="session-location btn btn--location">Bayshore Grand Foyer/Stanley Park Foyer/Cypress</span>
         <div class="poster-session-details">
             <hr class="detail-separator"/>
             <h4 class="poster-type" style="text-decoration: underline;">Long Papers</h4>
@@ -3534,7 +3542,7 @@ script: |
         <a href="#" class="session-title">ACL Business Meeting</a><br/>
         <span class="session-people"><strong>All attendees are encouraged to participate in the business meeting.</strong></span><br/>
         <span class="session-time">1:00 PM &ndash; 2:30 PM</span><br/>
-        <span class="session-location btn btn--location">Grande Ballroom A</span>
+        <span class="session-location btn btn--location">Salons D/E/F</span>
     </div>
     <div class="session session-plenary" id="session-break-6">
         <span class="session-title">Break</span><br/>        
