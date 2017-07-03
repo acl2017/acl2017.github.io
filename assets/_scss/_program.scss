@@ -331,6 +331,9 @@ div.session {
             &.hovered {
                 background-color: yellow;
             }
+            &.conflicted {
+                background-color: #FF9999;
+            }
             &.hovered.selected {
                 background-color: #4EEE94;
             }

@@ -625,14 +625,14 @@ script: |
             $('body').on('mouseover', 'table.paper-table tr#paper', function(event) {
                 var conflictingPapers = getConflicts($(this));
                 $(this).addClass('hovered');
-                $(conflictingPapers).addClass('hovered');
+                $(conflictingPapers).addClass('conflicted');
             });
 
             /* when we mouse out, remove all highlights */
             $('body').on('mouseout', 'table.paper-table tr#paper', function(event) {
                 var conflictingPapers = getConflicts($(this));
                 $(this).removeClass('hovered');
-                $(conflictingPapers).removeClass('hovered');
+                $(conflictingPapers).removeClass('conflicted');
 
             });
 
@@ -759,7 +759,7 @@ script: |
             $('body').on('click', 'table.paper-table tr#paper', function(event, fromSession) {
                 event.preventDefault();
                 $(this).removeClass('hovered');
-                getConflicts($(this)).removeClass('hovered');
+                getConflicts($(this)).removeClass('conflicted');
                 var paperID = $(this).attr('paper-id');
                 var paperTimeObj = $(this).children('td#paper-time');
                 var paperInfo = paperInfoHash[paperID];
@@ -857,17 +857,17 @@ script: |
             <table class="tutorial-table">
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T1] Natural Language Processing for Precision Medicine </span><br/><span class="btn btn--location inline-location">Executive 3AB</span>
+                        <span class="tutorial-title">[T1] Natural Language Processing for Precision Medicine </span><br/><span class="btn btn--location inline-location">Mackenzie</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T2] Multimodal Machine Learning </span><br/><span href="#" class="btn btn--location inline-location">Spinnaker</span>
+                        <span class="tutorial-title">[T2] Multimodal Machine Learning </span><br/><span href="#" class="btn btn--location inline-location">Salon 1</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T3] Deep Learning for Semantic Composition </span><br/><span href="#" class="btn btn--location inline-location">Marina 3</span>
+                        <span class="tutorial-title">[T3] Deep Learning for Semantic Composition </span><br/><span href="#" class="btn btn--location inline-location">Salons B/C</span>
                     </td>
                 </tr>
             </table>
@@ -885,17 +885,17 @@ script: |
             <table class="tutorial-table">
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T4] Deep Learning for Dialogue Systems </span><br/><span class="btn btn--location inline-location">Executive 3AB</span>
+                        <span class="tutorial-title">[T4] Deep Learning for Dialogue Systems </span><br/><span class="btn btn--location inline-location">Salons B/C</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T5] Beyond Words: Deep Learning for Multi-word Expressions and Collocations </span><br/><span href="#" class="btn btn--location inline-location">Spinnaker</span>
+                        <span class="tutorial-title">[T5] Beyond Words: Deep Learning for Multi-word Expressions and Collocations </span><br/><span href="#" class="btn btn--location inline-location">Salon 1</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T6] Making Better Use of the Crowd</span><br/><span href="#" class="btn btn--location inline-location">Marina 3</span>
+                        <span class="tutorial-title">[T6] Making Better Use of the Crowd</span><br/><span href="#" class="btn btn--location inline-location">Mackenzie</span>
                     </td>
                 </tr>
             </table>
@@ -915,7 +915,7 @@ script: |
         <span class="session-title">Welcome Session / Presidential Address</span><br/>        
         <span class="session-people">Chris Callison-Burch, Regina Barzilay, Min-Yen Kan, and Marti Hearst</span><br/>
         <span class="session-time">9:00 AM &ndash; 10:00 AM</span><br/>
-        <span class="session-location btn btn--location">Grande Ballroom</span>
+        <span class="session-location btn btn--location">Bayshore Grande Ballroom</span>
     </div>
     <div class="session session-plenary" id="session-break-1">
         <span class="session-title">Break</span><br/>        
@@ -925,7 +925,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Information Extraction 1</a><br/>
             <span class="session-time">10:30 AM &ndash; 12:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons B/C</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-1a-selector">
@@ -972,7 +972,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Semantics 1</a><br/>
             <span class="session-time">10:30 AM &ndash; 12:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons E/F</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-1b-selector">
@@ -1019,7 +1019,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Discourse 1</a><br/>
             <span class="session-time">10:30 AM &ndash; 12:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon D</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-1c-selector">
@@ -1066,7 +1066,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Machine Translation 1</a><br/>
             <span class="session-time">10:30 AM &ndash; 12:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon 1</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-1d-selector">
@@ -1113,7 +1113,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Generation</a><br/>
             <span class="session-time">10:30 AM &ndash; 12:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons 2/3</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-1e-selector">
@@ -1164,7 +1164,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Question Answering</a><br/>
             <span class="session-time">1:40 PM &ndash; 3:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons B/C</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-2a-selector">
@@ -1211,7 +1211,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Vision 1</a><br/>
             <span class="session-time">1:40 PM &ndash; 3:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons E/F</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-2b-selector">
@@ -1258,7 +1258,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Syntax 1</a><br/>
             <span class="session-time">1:40 PM &ndash; 3:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon D</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-2c-selector">
@@ -1305,7 +1305,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Machine Learning 1</a><br/>
             <span class="session-time">1:40 PM &ndash; 3:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon 1</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-2d-selector">
@@ -1352,7 +1352,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Sentiment 1</a><br/>
             <span class="session-time">1:40 PM &ndash; 3:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons 2/3</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-2e-selector">
@@ -1403,7 +1403,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Information Extraction 2</a><br/>
             <span class="session-time">3:45 PM &ndash; 5:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons B/C</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-3a-selector">
@@ -1438,7 +1438,7 @@ script: |
                         </td>
                     </tr>
                     <tr id="paper" paper-id="55">
-                        <td id="paper-time">5:00-5:12</td>
+                        <td id="paper-time">5:01-5:13</td>
                         <td>
                             <span class="paper-title">Vector space models for evaluating semantic fluency in autism. </span><em>Emily Prud’hommeaux, Jan van Santen and Douglas Gliner</em>
                         </td>
@@ -1450,7 +1450,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Semantics 2</a><br/>
             <span class="session-time">3:45 PM &ndash; 5:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons E/F</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-3b-selector">
@@ -1485,7 +1485,7 @@ script: |
                         </td>
                     </tr>
                     <tr id="paper" paper-id="60">
-                        <td id="paper-time">5:00-5:12</td>
+                        <td id="paper-time">5:01-5:13</td>
                         <td>
                             <span class="paper-title">Neural Architectures for Multilingual Semantic Parsing. </span><em>Raymond Hendy Susanto and Wei Lu</em>
                         </td>
@@ -1497,7 +1497,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Speech / Dialogue 1</a><br/>
             <span class="session-time">3:45 PM &ndash; 5:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon D</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-3c-selector">
@@ -1532,7 +1532,7 @@ script: |
                         </td>
                     </tr>
                     <tr id="paper" paper-id="65">
-                        <td id="paper-time">5:00-5:12</td>
+                        <td id="paper-time">5:01-5:13</td>
                         <td>
                             <span class="paper-title">Incorporating Uncertainty into Deep Learning for Spoken Language Assessment. </span><em>Andrey Malinin, Anton Ragni, Kate Knill and Mark Gales</em>
                         </td>
@@ -1544,7 +1544,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Multilingual</a><br/>
             <span class="session-time">3:45 PM &ndash; 5:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon 1</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-3d-selector">
@@ -1579,7 +1579,7 @@ script: |
                         </td>
                     </tr>
                     <tr id="paper" paper-id="70">
-                        <td id="paper-time">5:00-5:12</td>
+                        <td id="paper-time">5:01-5:13</td>
                         <td>
                             <span class="paper-title">Incorporating Dialectal Variability for Socially Equitable Language Identification. </span><em>David Jurgens, Yulia Tsvetkov and Dan Jurafsky</em>
                         </td>
@@ -1591,7 +1591,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Phonology</a><br/>
             <span class="session-time">3:45 PM &ndash; 5:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons 2/3</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-3e-selector">
@@ -1626,7 +1626,7 @@ script: |
                         </td>
                     </tr>
                     <tr id="paper" paper-id="75">
-                        <td id="paper-time">5:00-5:12</td>
+                        <td id="paper-time">5:01-5:13</td>
                         <td>
                             <span class="paper-title">Evaluation of Compound Splitting with Textual Entailment. </span><em>Glorianna Jagfeld, Patrick Ziering and Lonneke van der Plas</em>
                         </td>
@@ -1636,7 +1636,7 @@ script: |
     </div>        
     <div class="session session-expandable session-posters" id="session-poster-1">
         <div id="expander"></div><a href="#" class="session-title">Posters &amp; Dinner</a><br/>        
-        <span class="session-time">6:00 PM &ndash; 9:30 PM</span>
+        <span class="session-time">6:20 PM &ndash; 9:50 PM</span>
         <br/>
         <span class="session-location btn btn--location">Pavilion</span>
         <div class="poster-session-details">
@@ -2212,15 +2212,15 @@ script: |
         <span class="session-title">Breakfast</span><br/>        
         <span class="session-time">7:30 AM &ndash; 8:45 AM</span>
     </div>
-    <div class="session session-expandable session-plenary" id="session-invited-speaker1">
-        <div id="expander"></div><a href="#" class="session-title">Invited Talk</a><br/>        
-        <span class="session-people">Invited Speaker 1</span><br/>
+    <div class="session session-expandable session-plenary" id="session-invited-noah">
+        <div id="expander"></div><a href="#" class="session-title">Invited Talk: Squashing Computational Linguistics</a><br/>        
+        <span class="session-people">Noah Smith (University of Washington)</span><br/>
         <span class="session-time">9:00 AM &ndash; 10:10 AM</span><br/>
-        <span class="session-location btn btn--location">Grande Ballroom</span>
+        <span class="session-location btn btn--location">Bayshore Grand Ballroom</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
             <div class="session-abstract">
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+                <p>The computational linguistics and natural language processing community is experiencing an episode of deep fascination with representation learning.  Like many other presenters at this conference, I will describe new ways to use representation learning in models of natural language.  Noting that a data-driven model always assumes a theory (not necessarily a good one), I will argue for the benefits of language-appropriate inductive bias for representation-learning-infused models of language.  Such bias often comes in the form of assumptions baked into a model, constraints on an inference algorithm, or linguistic analysis applied to data.  Indeed, many decades of research in linguistics (including computational linguistics) put our community in a strong position to identify promising inductive biases.  The new models, in turn, may allow us to explore previously unavailable forms of bias, and to produce findings of interest to linguistics.  I will focus on new models of documents and of sentential semantic structures, and I will emphasize abstract, reusable components and their assumptions rather than applications.</p>
             </div>
         </div>
     </div>
@@ -2232,7 +2232,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Information Extraction 3</a><br/>
             <span class="session-time">10:30 AM &ndash; 12:05 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons B/C</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-4a-selector">
@@ -2279,7 +2279,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Vision 2</a><br/>
             <span class="session-time">10:30 AM &ndash; 12:05 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons E/F</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-4b-selector">
@@ -2326,7 +2326,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Dialogue 2</a><br/>
             <span class="session-time">10:30 AM &ndash; 12:05 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon D</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-4c-selector">
@@ -2373,7 +2373,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Machine Translation 2</a><br/>
             <span class="session-time">10:30 AM &ndash; 12:05 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon 1</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-4d-selector">
@@ -2420,7 +2420,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Social Media</a><br/>
             <span class="session-time">10:30 AM &ndash; 12:05 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons 2/3</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-4e-selector">
@@ -2472,7 +2472,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Multidisciplinary</a><br/>
             <span class="session-time">1:30 PM &ndash; 3:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons B/C</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-5a-selector">
@@ -2519,7 +2519,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Languages &amp; Resources</a><br/>
             <span class="session-time">1:30 PM &ndash; 3:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons E/F</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-5b-selector">
@@ -2566,7 +2566,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Syntax 2</a><br/>
             <span class="session-time">1:30 PM &ndash; 3:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon D</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-5c-selector">
@@ -2613,7 +2613,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Machine Translation 3</a><br/>
             <span class="session-time">1:30 PM &ndash; 3:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon 1</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-5d-selector">
@@ -2657,10 +2657,10 @@ script: |
             </div>
     </div>
     <div class="session session-expandable session-papers5" id="session-5e">
-        <div id="expander"></div><a href="#" class="session-title">Sentiment 3</a><br/>
+        <div id="expander"></div><a href="#" class="session-title">Sentiment 2</a><br/>
             <span class="session-time">1:30 PM &ndash; 3:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons 2/3</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-5e-selector">
@@ -2711,7 +2711,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Information Extraction 4</a><br/>
             <span class="session-time">3:25 PM &ndash; 5:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons B/C</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-6a-selector">
@@ -2755,10 +2755,10 @@ script: |
             </div>
     </div>
     <div class="session session-expandable session-papers2" id="session-6b">
-        <div id="expander"></div><a href="#" class="session-title">Semantics 2</a><br/>
+        <div id="expander"></div><a href="#" class="session-title">Semantics 3</a><br/>
             <span class="session-time">3:25 PM &ndash; 5:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons E/F</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-6b-selector">
@@ -2805,7 +2805,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Discourse 2 / Dialogue 3</a><br/>
             <span class="session-time">3:25 PM &ndash; 5:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon D</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-6c-selector">
@@ -2852,7 +2852,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Machine Learning 2</a><br/>
             <span class="session-time">3:25 PM &ndash; 5:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salon 1</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-6d-selector">
@@ -2899,7 +2899,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Summarization</a><br/>
             <span class="session-time">3:25 PM &ndash; 5:00 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons 2/3</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-6e-selector">
@@ -2944,7 +2944,7 @@ script: |
     </div>
     <div class="session session-expandable session-posters" id="session-poster-2">
         <div id="expander"></div><a href="#" class="session-title">Posters, Demos &amp; Dinner</a><br/>        
-        <span class="session-time">5:40 PM &ndash; 7:40 PM</span><br/>
+        <span class="session-time">5:45 PM &ndash; 7:45 PM</span><br/>
         <span class="session-location btn btn--location">Pavilion</span>
         <div class="poster-session-details">
             <hr class="detail-separator"/>
@@ -3380,7 +3380,7 @@ script: |
         </div>
     </div>
     <div class="session session-expandable session-plenary" id="session-social">
-        <div id="expander"></div><a href="#" class="session-title">Social Event</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Social Event (Vancouver Aquarium)</a><br/>        
         <span class="session-time">7:00 PM &ndash; 10:00 PM</span><br/>
         <span class="session-location btn btn--location">Vancouver Aquarium</span>
         <div class="paper-session-details">
@@ -3402,15 +3402,17 @@ script: |
         <span class="session-title">Breakfast</span><br/>        
         <span class="session-time">7:30 AM &ndash; 8:45 AM</span>
     </div>
-        <div class="session session-expandable session-plenary" id="session-invited-speaker2">
-        <div id="expander"></div><a href="#" class="session-title">Invited Talk</a><br/>        
-        <span class="session-people">Invited Speaker 2</span><br/>
+        <div class="session session-expandable session-plenary" id="session-invited-mirella">
+        <div id="expander"></div><a href="#" class="session-title">Invited Talk: Translating from Multiple Modalities to Text and Back</a><br/>
+        <span class="session-people">Mirella Lapata (University of Edinburgh)</span><br/>
         <span class="session-time">9:00 AM &ndash; 10:10 AM</span><br/>
-        <span class="session-location btn btn--location">Grande Ballroom</span>
+        <span class="session-location btn btn--location">Bayshore Grand Ballroom</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
             <div class="session-abstract">
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+                <p>Recent years have witnessed the development of a wide range of computational tools that process and generate natural language text. Many of these have become familiar to mainstream computer users in the from of web search, question answering, sentiment analysis, and notably machine translation. The accessibility of the web could be further enhanced with applications that not only translate between different languages (e.g., from English to French) but also within the same language, between different modalities, or different data formats. The web is rife with non-linguistic data (e.g., video, images, source code) that cannot be indexed or searched since most retrieval tools operate over textual data.</p>
+
+                <p>In this talk I will argue that in order to render electronic data more accessible to individuals and computers alike, new types of translation models need to be developed.  I will focus on three examples, text simplification, source code generation, and movie summarization. I will illustrate how recent advances in deep learning can be extended in order to induce general representations for different modalities and learn how to translate between these and natural language.</p>
             </div>
         </div>
     </div>
@@ -3422,7 +3424,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Outstanding Papers 1</a><br/>
             <span class="session-time">10:40 AM &ndash; 12:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons A/B/C</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-7a-selector">
@@ -3475,7 +3477,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Outstanding Papers 2</a><br/>
             <span class="session-time">10:40 AM &ndash; 12:15 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons D/E/F</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-7b-selector">
@@ -3635,12 +3637,12 @@ script: |
     <div class="session session-plenary" id="session-lifetime-achievement">
         <span class="session-title">Lifetime Achivement Award</span><br/>        
         <span class="session-time">4:45 PM &ndash; 5:45 PM</span><br/>
-        <span class="session-location btn btn--location">Grande Ballroom</span>
+        <span class="session-location btn btn--location">Bayshore Grande Ballroom</span>
     </div>
     <div class="session session-plenary" id="session-lifetime-achievement">
         <span class="session-title">Closing Session &amp; Awards</span><br/>        
         <span class="session-time">5:45 PM &ndash; 6:00 PM</span><br/>
-        <span class="session-location btn btn--location">Grande Ballroom</span>
+        <span class="session-location btn btn--location">Bayshore Grande Ballroom</span>
     </div>
     <div id="generatePDFForm">
         <div id="formContainer">
