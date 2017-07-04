@@ -2570,7 +2570,7 @@ script: |
                 </table>
             </div>
     </div>
-<div class="session session-expandable session-papers3" id="session-5c">
+    <div class="session session-expandable session-papers3" id="session-5c">
         <div id="expander"></div><a href="#" class="session-title">Syntax 2</a><br/>
             <span class="session-time">1:30 PM &ndash; 3:00 PM</span>
             <br/>
