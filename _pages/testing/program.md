@@ -2472,7 +2472,7 @@ script: |
             </div>
     </div>    
     <div class="session session-plenary" id="session-lunch-arxiv">
-        <span class="session-title">Bring your Own Lunch and Discuss: Double Blind Reviewing &amp; arXiv</span><br/>
+        <span class="session-title">Bring Lunch and Discuss: Double Blind Reviewing &amp; arXiv</span><br/>
         <span class="session-time">12:05 PM &ndash; 1:30 PM</span><br/>
         <span class="session-location btn btn--location">Salons E/F</span>
     </div>
@@ -3401,7 +3401,7 @@ script: |
 
                 <p>Bring your Flower Power to our SoCal Beach Party! After the main dinner and Poster Session, join us on the Bayview Lawn adjacent to the Pavilion for desserts, coffee, tea, and drinks (cash bar). A Beach Boys style band will entertain you when you are not busy in the VW Bus Photo Booth, talking amongst your friends and colleagues, or playing with the beach balls.</p>
 
-                <p>Learn more about the social event <a class="info-link" target="_blank" href="http://naacl.org/naacl-hlt-2016/social_event.html">here</a>.</p>
+                <p>Learn more about the social event <a class="info-link" target="_blank" href="http://acl2017.org/participants/#social-event">here</a>.</p>
             </div>
         </div>
     </div>
@@ -3647,7 +3647,7 @@ script: |
         <span class="session-time">4:45 PM &ndash; 5:45 PM</span><br/>
         <span class="session-location btn btn--location">Bayshore Grande Ballroom</span>
     </div>
-    <div class="session session-plenary" id="session-lifetime-achievement">
+    <div class="session session-plenary" id="session-closing-awards">
         <span class="session-title">Closing Session &amp; Awards</span><br/>        
         <span class="session-time">5:45 PM &ndash; 6:00 PM</span><br/>
         <span class="session-location btn btn--location">Bayshore Grande Ballroom</span>
