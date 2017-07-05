@@ -202,7 +202,8 @@ d = {'Session Title': session_title,
 rows.append(d)
 
 # 8. Other plenary sessions: Welcome/LTA/Closing/Business Meeting
-for plenary_session_id in ["welcome", "business-meeting", "lifetime-achievement", "closing-awards"]:
+for plenary_session_id in ["reception", "welcome", "business-meeting",
+                           "lifetime-achievement", "closing-awards"]:
     plenary_session_html = soup.find(id="session-{}".format(plenary_session_id))
     session_title = plenary_session_html.find(class_="session-title").text
     raw_day = plenary_session_html.find_previous_sibling(class_="day").text
@@ -223,7 +224,7 @@ for plenary_session_id in ["welcome", "business-meeting", "lifetime-achievement"
          'Room/Location': session_location,
          'Schedule Track (Optional)': '',
          'Description (Optional)': session_description,
-         'Allow Checkin (Optional)': 'True',
+         'Allow Checkin (Optional)': 'False',
          'Checkin Begin (Optional)': '',
          'Limit Spaces? (Optional)': '',
          'Allow Waitlist (Optional)': 'False'}
