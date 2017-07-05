@@ -912,7 +912,7 @@ script: |
     <div class="session session-plenary" id="session-reception">
         <span class="session-title">Welcome Reception</span><br/>     
         <span class="session-time">6:00 PM &ndash; 9:00 PM</span><br/>
-        <span class="session-location btn btn--location">Grande Foyer &amp; Terrace</span>
+        <span class="session-location btn btn--location">Bayshore Grand Ballroom</span>
     </div>
     <div class="day" id="second-day">Monday, July 31</div>
     <div class="session session-plenary" id="session-breakfast-1">
