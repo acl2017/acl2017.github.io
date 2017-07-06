@@ -909,12 +909,18 @@ script: |
             </table>
         </div>
     </div>
-    <div class="session session-plenary" id="session-reception">
-        <span class="session-title">Welcome Reception</span><br/>     
+    <div class="session session-expandable session-plenary" id="session-reception">
+        <div id="expander"></div><a href="#" class="session-title">Welcome Reception</a><br/>        
         <span class="session-time">6:00 PM &ndash; 9:00 PM</span><br/>
         <span class="session-location btn btn--location">Bayshore Grand Ballroom</span>
+        <div class="paper-session-details">
+            <hr class="detail-separator"/>
+            <div class="session-abstract">
+                <p>Catch up with your colleagues at the Welcome Reception!  It will be held immediately following the tutorials at the Westin Bayshore Hotel, Sunday, July 30th, in the Bayshore Grand Ballroom (the conference venue).  Refreshments and a light dinner will be provided and a cash bar will be available.</p>
+            </div>
+        </div>
     </div>
-    <div class="day" id="second-day">Monday, July 31</div>
+<div class="day" id="second-day">Monday, July 31</div>
     <div class="session session-plenary" id="session-breakfast-1">
         <span class="session-title">Breakfast</span><br/>        
         <span class="session-time">7:30 AM &ndash; 8:45 AM</span>

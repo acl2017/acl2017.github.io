@@ -214,6 +214,8 @@ for plenary_session_id in ["reception", "welcome", "business-meeting",
 
     if plenary_session_id == "business-meeting":
         session_description = "<strong>All attendees are encouraged to participate in the business meeting.</strong>"
+    elif plenary_session_id == "reception":
+        session_description= "<p>Catch up with your colleagues at the Welcome Reception!  It will be held immediately following the tutorials at the Westin Bayshore Hotel, Sunday, July 30th, in the Bayshore Grand Ballroom (the conference venue).  Refreshments and a light dinner will be provided and a cash bar will be available.</p>"
     else:
         session_description = ""
 
