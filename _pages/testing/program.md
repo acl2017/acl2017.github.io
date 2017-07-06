@@ -2277,7 +2277,7 @@ script: |
                     <tr id="paper" paper-id="79">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
-                            <span class="paper-title">Attention-over-Attention Neural Networks for Reading Comprehension. </span><em>Yiming Cui, Zhipeng Chen, si wei, Shijin Wang, Ting Liu and Guoping Hu</em>
+                            <span class="paper-title">Attention-over-Attention Neural Networks for Reading Comprehension. </span><em>Yiming Cui, Zhipeng Chen, Si wei, Shijin Wang, Ting Liu and Guoping Hu</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="80">
