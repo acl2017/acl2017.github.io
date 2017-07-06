@@ -65,6 +65,9 @@ for session_id in paper_session_ids:
 
         # and now the authors, one by one
         for author_name in author_list:
+            if not author_name or not re.match(r'^[A-Z]', author_name):
+                import ipdb
+                ipdb.set_trace()
             if author_name not in all_authors:
                 d = {'Name': author_name,
                      "Sub-Title (i.e. Location, Table/Booth, or Title/Sponsorship Level)": '',
@@ -104,6 +107,9 @@ for poster_session_id in ['poster-1', 'poster-2']:
 
         # and now the authors, one by one
         for author_name in author_list:
+            if not author_name or not re.match(r'^[A-Z]', author_name):
+                import ipdb
+                ipdb.set_trace()
             if author_name not in all_authors:
                 d = {'Name': author_name,
                      "Sub-Title (i.e. Location, Table/Booth, or Title/Sponsorship Level)": '',
