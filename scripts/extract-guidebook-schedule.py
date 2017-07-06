@@ -173,7 +173,7 @@ for invited_talk_html in soup.find_all(id=re.compile("session-invited")):
          'Room/Location': session_location,
          'Schedule Track (Optional)': '',
          'Description (Optional)': session_description,
-         'Allow Checkin (Optional)': 'True',
+         'Allow Checkin (Optional)': 'False',
          'Checkin Begin (Optional)': '',
          'Limit Spaces? (Optional)': '',
          'Allow Waitlist (Optional)': 'False'}
@@ -195,7 +195,7 @@ d = {'Session Title': session_title,
      'Room/Location': session_location,
      'Schedule Track (Optional)': '',
      'Description (Optional)': session_description,
-     'Allow Checkin (Optional)': 'True',
+     'Allow Checkin (Optional)': 'False',
      'Checkin Begin (Optional)': '',
      'Limit Spaces? (Optional)': '',
      'Allow Waitlist (Optional)': 'False'}
