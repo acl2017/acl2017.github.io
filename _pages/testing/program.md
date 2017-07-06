@@ -1839,7 +1839,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Linguistically Regularized LSTM for Sentiment Classification. </span><em>Qiao Qian, Minlie Huang and xiaoyan zhu</em>
+                        <span class="poster-title">Linguistically Regularized LSTM for Sentiment Classification. </span><em>Qiao Qian, Minlie Huang and Xiaoyan Zhu</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1917,7 +1917,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Improving Implicit Discourse Relation Recognition with Discourse-specific Word Embeddings. </span><em>Changxing Wu, xiaodong shi, Yidong Chen, jinsong su and Boli Wang</em>
+                        <span class="poster-title">Improving Implicit Discourse Relation Recognition with Discourse-specific Word Embeddings. </span><em>Changxing Wu, Xiaodong Shi, Yidong Chen, Jinsong Su and Boli Wang</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3249,7 +3249,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Determining Whether and When People Participate in the Events They Tweet About. </span><em>krishna sanagavarapu, Alakananda Vempala and Eduardo Blanco</em>
+                        <span class="poster-title">Determining Whether and When People Participate in the Events They Tweet About. </span><em>Krishna Sanagavarapu, Alakananda Vempala and Eduardo Blanco</em>
                     </td>
                 </tr>
                 <tr id="poster">
