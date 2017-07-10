@@ -11,11 +11,12 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**June 23, 2017**. All hotel rooms offering ACL special rates are now SOLD OUT for both [regular](/participants#regular-accommodation) &amp; [student](/participants#student-accommodation) attendees. 
+**July 10, 2017**. The ACL program is now [available](/program). For the first time, it allows attendees to choose the sessions (and individual papers and posters) they want to attend and generate a PDF of their customized schedule!
 {: .notice--info} 
 
-**June 23, 2017**. Early registration has been extended by 24 hours. The new deadline is  11:59pm EDT on June 24, 2017. Click [here](/registration) to register now.
-{: .notice--info} 
+
+**June 23, 2017**. All hotel rooms offering ACL special rates are now SOLD OUT for both [regular](/participants#regular-accommodation) &amp; [student](/participants#student-accommodation) attendees. 
+{: .notice} 
 
 **June 2, 2017**. Thanks to the support of the Don and Betty Walker Scholarship, limited funding is available for supporting student travel, registration and accommodation. Please apply [here](https://goo.gl/forms/2tQIbWzpwsniDSdK2) by June 20th. Decisions will be announced on June 23rd. Direct all questions to the [Student Research Workshop organizers](mailto:acl-srw-2017@googlegroups.com).
 {: .notice} 
