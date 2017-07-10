@@ -2,7 +2,7 @@
 title: Conference Program
 layout: schedule
 excerpt: "ACL 2017 conference program."
-permalink: /testing/program
+permalink: /program
 sidebar: false
 script: |
     <script>vex.defaultOptions.className = 'vex-theme-wireframe'</script>
