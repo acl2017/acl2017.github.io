@@ -386,6 +386,12 @@ script: |
 
                     /* get the tutorials */
                     var tutorials = chosenTutorialsHash[key];
+
+                    /* sort the tutorials by title instead of selection order */
+                    tutorials.sort(function(a, b) {
+                        return a.title.localeCompare(b.title);
+                    });
+
                     var titles = tutorials.map(function(tutorial) { return ASCIIFold(tutorial.title); });
                     var locations = tutorials.map(function(tutorial) { return tutorial.location ; });
                     var sessions = tutorials.map(function(tutorial) { return sessionInfoHash[tutorial.session]; });
@@ -861,17 +867,17 @@ script: |
             <table class="tutorial-table">
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T1] Natural Language Processing for Precision Medicine </span><br/><span class="btn btn--location inline-location">Mackenzie</span>
+                        <span class="tutorial-title"><strong>[T1] Natural Language Processing for Precision Medicine.</strong> Hoifung Poon, Chris Quirk, Kristina Toutanova, and Wen-tau Yih.</span> <br/><span class="btn btn--location inline-location">Mackenzie</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T2] Multimodal Machine Learning </span><br/><span href="#" class="btn btn--location inline-location">Salon 1</span>
+                        <span class="tutorial-title"><strong>[T2] Multimodal Machine Learning.</strong> Louis-Philippe Morency and Tadas Baltrusaitis.</span><br/><span href="#" class="btn btn--location inline-location">Salon 1</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T3] Deep Learning for Semantic Composition </span><br/><span href="#" class="btn btn--location inline-location">Salons A/B</span>
+                        <span class="tutorial-title"><strong>[T3] Deep Learning for Semantic Composition.</strong> Xiaodan Zhu and Edward Grefenstette. </span><br/><span href="#" class="btn btn--location inline-location">Salons A/B</span>
                     </td>
                 </tr>
             </table>
@@ -889,17 +895,17 @@ script: |
             <table class="tutorial-table">
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T4] Deep Learning for Dialogue Systems </span><br/><span class="btn btn--location inline-location">Salons A/B</span>
+                        <span class="tutorial-title"><strong>[T4] Deep Learning for Dialogue Systems.</strong> Yun-Nung Chen, Asli Celikyilmaz, and Dilek Hakkani-Tur. </span><br/><span class="btn btn--location inline-location">Salons A/B</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T5] Beyond Words: Deep Learning for Multi-word Expressions and Collocations </span><br/><span href="#" class="btn btn--location inline-location">Salon 1</span>
+                        <span class="tutorial-title"><strong>[T5] Beyond Words: Deep Learning for Multi-word Expressions and Collocations.</strong> Valia Kordoni. </span><br/><span href="#" class="btn btn--location inline-location">Salon 1</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T6] Making Better Use of the Crowd</span><br/><span href="#" class="btn btn--location inline-location">Mackenzie</span>
+                        <span class="tutorial-title"><strong>[T6] Making Better Use of the Crowd.</strong> Jennifer Wortman Vaughan. </span><br/><span href="#" class="btn btn--location inline-location">Mackenzie</span>
                     </td>
                 </tr>
             </table>
