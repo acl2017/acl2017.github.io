@@ -835,24 +835,23 @@ script: |
 </table>
 
 <div id="testingInstructions" style="font-size: smaller;">
-    <p>Welcome, testers! Thank you for helping us test the ACL 2017 conference program page. </p>
-    
-    <p>For the first time, the program page will allow conference attendees to choose the sessions (or individual paper talks) they want to attend <em>and</em> generate a PDF of their customized schedule! </p>
+        <p>Welcome! For the first time, the program page will allow conference attendees to choose the sessions (and individual papers and posters) they want to attend <em>and</em> generate a PDF of their customized schedule! </p>
 
-    <strong>Instructions &amp; Notes</strong>:
+        <p>This page should work on modern browsers on all operating systems (Internet Explorer <= v10 will likely not work.) On mobile devices, Safari on iOS and Chrome on Android are the only browsers known to work. Please read the instructions below.</p>
+
+    <strong>Instructions</strong>:
     <ul>
-        <li>Click on the title of a session to expand and collapse the session. On a non-mobile browser, you can also click anywhere in the cell containing the session title.</li>
-        <li>Click on a tutorial/paper/poster to select it, click again to unselect it.</li>
+        <li>Click/Tap on the title of a session to expand and collapse the session. </li>
+        <li>Click/Tap on a tutorial/paper/poster to select it, click/tap again to unselect it.</li>
         <li>You can select more than one paper for a time slot.</li>
-        <li>When you hover on a paper for a time slot, it is highlighted in yellow along with the conflicting papers to make the comparison easier. This only works on non-mobile devices where parallel sessions are displayed adjacent to each other.</li>
-        <li>If papers are already selected for a time slot, hovering highlights them in green.</li>
         <li>Click on the <em>Generate PDF</em> button at the bottom of the page to generate the PDF for your selected talks.</li>
-        <li>Since ACL 2017 doesn't have a program yet, we used the content from the NAACL 2016 conference for the purposes of testing.</li>
-        <li>The page has been tested on MacOS 10.12.3 on the most recent versions of Chrome, Firefox, and Safari browsers. We would like to test on other OSes (Windows, Linux) and other browsers, although older browsers (e.g., Internet Explorer <= v10) will likely not work. </li>
-        <li>The page has also been tested on an iPhone simulator and works as expected. However, it'd be nice to test it on Android (<strong>NOTE</strong>: only Chrome on Android will work).</li>
-        <li>Note that if you are using Safari, you will need to use <em>Cmd-P</em> to print and <em>File > Save as ... </em>to download the schedule. Chrome and Firefox have buttons for printing and saving as part of their PDF rendering UI.</li>
+        <li>To expand all parallel sessions at the same time, hold down the Shift key and click on any of the sessions. Shift-clicking is contextual, i.e., if there are any collapsed sessions, it will expand all of them. If all of the sessions are expanded, Shift-clicking will collapse all of them.</li>
+        <li>When you hover on a paper for a time slot, it is highlighted in yellow and its conflicting papers are highlighted in red for an easier comparison. This only works on non-mobile devices where parallel sessions are displayed adjacent to each other.</li>
+        <li>If papers have already been selected for a time slot, hovering on them or on paprers that conflict with them highlights them in green.</li>
+        <li>If you are using Safari, you will need to use <em>Cmd-P</em> to print and <em>File > Save as ... </em>to download the schedule. Chrome and Firefox have buttons for printing and saving as part of their PDF rendering UI.</li>
         <li>The generated PDF might have some blank rows at the bottom as padding since the PDF generation has been programmed to avoid rows being split across pages.</li>
         <li>While saving the generated PDF on mobile devices, its name cannot be changed.</li>
+        <li>This page does not show any paper/poster abstracts. To see abstracts, please refer to <a href="https://chairs-blog.acl2017.org/2017/06/04/preliminary-paper-details/">this page</a>.</li>
         <li><strong>Please report any issues or problems you run into <a href="https://github.com/acl2017/acl2017.github.io/issues/new" target="_blank">here</a>. You will need a GitHub account.</strong></li>
     </ul>
 </div>
