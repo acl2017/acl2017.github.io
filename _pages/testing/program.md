@@ -875,7 +875,7 @@ script: |
                 </tr>
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T3] Deep Learning for Semantic Composition </span><br/><span href="#" class="btn btn--location inline-location">Salons B/C</span>
+                        <span class="tutorial-title">[T3] Deep Learning for Semantic Composition </span><br/><span href="#" class="btn btn--location inline-location">Salons A/B</span>
                     </td>
                 </tr>
             </table>
@@ -893,7 +893,7 @@ script: |
             <table class="tutorial-table">
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title">[T4] Deep Learning for Dialogue Systems </span><br/><span class="btn btn--location inline-location">Salons B/C</span>
+                        <span class="tutorial-title">[T4] Deep Learning for Dialogue Systems </span><br/><span class="btn btn--location inline-location">Salons A/B</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
