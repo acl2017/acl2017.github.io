@@ -848,7 +848,7 @@ script: |
         <li>Click on the <em>Generate PDF</em> button at the bottom of the page to generate the PDF for your selected talks.</li>
         <li>To expand all parallel sessions at the same time, hold down the Shift key and click on any of the sessions. Shift-clicking is contextual, i.e., if there are any collapsed sessions, it will expand all of them. If all of the sessions are expanded, Shift-clicking will collapse all of them.</li>
         <li>Clicking/Tapping on any of the location buttons will show the conference floor plan.</li>
-        <li>On non-mobile devices, when you hover on a paper for a time slot, it is highlighted in yellow and its conflicting papers are highlighted in red for an easier comparison. This only works on non-mobile devices where parallel sessions are displayed adjacent to each other.</li>
+        <li>When you hover on a paper for a time slot, it is highlighted in yellow and its conflicting papers are highlighted in red for an easier comparison. This only works on non-mobile devices where parallel sessions are displayed adjacent to each other.</li>
         <li>If papers have already been selected for a time slot, hovering on them or on papers that conflict with them highlights them in green.</li>
         <li>If you are using Safari, you will need to use <em>Cmd-P</em> to print and <em>File > Save as ... </em>to download the schedule. Chrome and Firefox have buttons for printing and saving as part of their PDF rendering UI.</li>
         <li>The generated PDF might have some blank rows at the bottom as padding since the PDF generation has been programmed to avoid rows being split across pages.</li>
