@@ -38,7 +38,6 @@ The following tutorials have been accepted for ACL 2017 and will be held on Sund
 <p>In this tutorial, we will cover the fundamentals and the state-of-the-art research on neural network-based modeling for semantic composition, which aims to learn distributed representation for different granularities of text, e.g., phrases, sentences, or even documents, from their sub-component meaning representation, e.g., word embedding.</p>
 </div>
 
-
 ## Afternoon
 
 <span class="btn btn--small">T4</span>&nbsp;&nbsp;<strong>Deep Learning for Dialogue Systems</strong><br/>
@@ -66,3 +65,4 @@ The natural language processing community was early to embrace crowdsourcing as 
 
 <p>In this tutorial, I will begin with a showcase of innovative uses of crowdsourcing that go beyond data collection and annotation. I will discuss applications to natural language processing and machine learning, hybrid intelligence or “human in the loop” AI systems that leverage the complementary strengths of humans and machines in order to achieve more than either could achieve alone, and large scale studies of human behavior online. I will then spend the majority of the tutorial diving into recent research aimed at understanding who crowdworkers are, how they behave, and what this should teach us about best practices for interacting with the crowd.</p>
 </div>
+
