@@ -452,8 +452,12 @@ script: |
             /* hide the testing notes */
             $('div#testingNotes').hide();
 
+            $('span.session-location, span.inline-location').on('click', function(event) {
+                event.stopPropagation();
+            });
+
             /* show the floorplan when any location is clicked */
-            $('span.session-location').magnificPopup({
+            $('span.session-location, span.inline-location').magnificPopup({
                 items: {
                     src: '/images/westin-floor-plan.png'
                 },
@@ -642,14 +646,6 @@ script: |
                 $(this).removeClass('hovered');
                 $(conflictingPapers).removeClass('conflicted');
 
-            });
-
-            $('body').on('click', 'a.inline-location', function(event) {
-                return false;
-            });
-
-            $('body').on('click', 'span.session-location', function(event) {
-                return false;
             });
 
             $('body').on('click', 'a.info-button', function(event) {
