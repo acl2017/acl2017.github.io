@@ -850,6 +850,7 @@ script: |
         <li>Clicking/Tapping on any of the location buttons will show the conference floor plan.</li>
         <li>When you hover on a paper for a time slot, it is highlighted in yellow and its conflicting papers are highlighted in red for an easier comparison. This only works on non-mobile devices where parallel sessions are displayed adjacent to each other.</li>
         <li>If papers have already been selected for a time slot, hovering on them or on papers that conflict with them highlights them in green.</li>
+        <li>Since parallel sessions can have different combinations of long and short papers, the conflicting papers will depend on the paper you hover on.</li>
         <li>If you are using Safari, you will need to use <em>Cmd-P</em> to print and <em>File > Save as ... </em>to download the schedule. Chrome and Firefox have buttons for printing and saving as part of their PDF rendering UI.</li>
         <li>The generated PDF might have some blank rows at the bottom as padding since the PDF generation has been programmed to avoid rows being split across pages.</li>
         <li>While saving the generated PDF on mobile devices, its name cannot be changed.</li>
