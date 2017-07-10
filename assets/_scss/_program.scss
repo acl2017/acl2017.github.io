@@ -298,10 +298,6 @@ div.session {
         float: left;
     }
 
-    .inline-location {
-        cursor: text;
-    }
-
     .info-button {
         cursor: text;
     }
@@ -334,6 +330,9 @@ div.session {
                 background-color: #FF9999;
             }
             &.hovered.selected {
+                background-color: #4EEE94;
+            }
+            &.conflicted.selected {
                 background-color: #4EEE94;
             }
         }
