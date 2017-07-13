@@ -869,7 +869,7 @@ script: |
             <table class="tutorial-table">
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title"><strong>[T1] Natural Language Processing for Precision Medicine.</strong> Hoifung Poon, Chris Quirk, Kristina Toutanova and Wen-tau Yih.</span> <br/><span class="btn btn--location inline-location">Mackenzie</span>
+                        <span class="tutorial-title"><strong>[T1] Natural Language Processing for Precision Medicine.</strong> Hoifung Poon, Chris Quirk, Kristina Toutanova and Scott Wen-tau Yih.</span> <br/><span class="btn btn--location inline-location">Mackenzie</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
@@ -2287,7 +2287,7 @@ script: |
                     <tr id="paper" paper-id="80">
                         <td id="paper-time">11:46-12:04</td>
                         <td>
-                            <span class="paper-title">[TACL] Cross-Sentence N-ary Relation Extraction with Graph LSTMs. </span><em>Nanyun Peng, Hoifung Poon, Chris Quirk, Kristina Toutanova, Scott Wen-tau Yih</em>
+                            <span class="paper-title">[TACL] Cross-Sentence N-ary Relation Extraction with Graph LSTMs. </span><em>Nanyun Peng, Hoifung Poon, Chris Quirk, Kristina Toutanova and Scott Wen-tau Yih</em>
                         </td>
                     </tr>
                 </table>
@@ -3242,7 +3242,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">GRepresenting Sentences as Low-Rank Subspaces. </span><em>Jiaqi Mu, Suma Bhat and Pramod Viswanath</em>
+                        <span class="poster-title">Representing Sentences as Low-Rank Subspaces. </span><em>Jiaqi Mu, Suma Bhat and Pramod Viswanath</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3574,7 +3574,7 @@ script: |
                     <tr id="paper" paper-id="163">
                         <td id="paper-time">3:00-3:18</td>
                         <td>
-                            <span class="paper-title">Abstractive Document Summarization with a Graph-Based Attentional Neural Model. </span><em>JJiwei Tan, Xiaojun Wan and Jianguo Xiao</em>
+                            <span class="paper-title">Abstractive Document Summarization with a Graph-Based Attentional Neural Model. </span><em>Jiwei Tan, Xiaojun Wan and Jianguo Xiao</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="164">
