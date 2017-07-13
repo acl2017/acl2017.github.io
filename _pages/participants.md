@@ -35,6 +35,32 @@ All parts of the conference will take place at the Westin Bayshore Hotel on the 
 
 Enjoy views of the coastline, distant mountains, and Stanley Park, plus easy access to all of the best things to do in Vancouver.  Boasting one of the most spectacular coastal locations in the world, the snowcapped mountains and the Pacific Ocean come together to create a truly magnificent setting. In addition, you are moments from shopping at Robson Street and Pacific Centre Mall, and attractions like the Vancouver Aquarium and Granville Island. Find even more things to do in Vancouver at <a href="http://www.tourismvancouver.com">www.tourismvancouver.com</a> or visit the hotel's website.
 
+## Presenter Information
+
+### Oral Presentations
+
+Due to the overwhelming number of high quality papers, we have needed
+to shorten oral presentation timings.
+
+Long paper talks are given 14 minutes plus 4 minutes for questions
+Short papers are given 10 minutes plus 2 minutes for questions
+The session chairs will moderate the sessions and ensure timing is
+adhered to.  Papers are spaced apart with a 1 minute interval to
+provide some time for transitioning between presenters.
+
+### Posters
+
+We are using the same provider as in previous years (e.g., at NAACL 2016).
+
+Poster boards are 4 by 8 feet (121 x 242 cm) in size, and they can
+accommodate 2' x 3' or A0 sized posters in both landscape and portrait
+formats, or 4'x6' in landscape format.
+
+The extra space on the side of the poster is intended for the audience
+to listen to the poster presenter).  There will be one poster per side
+of the board.  Posters are likely to be arranged by subject area, so
+presenters may be co-located near other posters on similar topics.
+
 ## Regular Accommodation
 <span style="color: red; font-weight: bold; font-size: larger; border: 2px solid red; padding: 3px;">EVERYTHING SOLD OUT</span>
 
