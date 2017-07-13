@@ -869,7 +869,7 @@ script: |
             <table class="tutorial-table">
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title"><strong>[T1] Natural Language Processing for Precision Medicine.</strong> Hoifung Poon, Chris Quirk, Kristina Toutanova, and Wen-tau Yih.</span> <br/><span class="btn btn--location inline-location">Mackenzie</span>
+                        <span class="tutorial-title"><strong>[T1] Natural Language Processing for Precision Medicine.</strong> Hoifung Poon, Chris Quirk, Kristina Toutanova and Wen-tau Yih.</span> <br/><span class="btn btn--location inline-location">Mackenzie</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
@@ -897,7 +897,7 @@ script: |
             <table class="tutorial-table">
                 <tr id="tutorial">
                     <td>
-                        <span class="tutorial-title"><strong>[T4] Deep Learning for Dialogue Systems.</strong> Yun-Nung Chen, Asli Celikyilmaz, and Dilek Hakkani-Tur. </span><br/><span class="btn btn--location inline-location">Salons A/B</span>
+                        <span class="tutorial-title"><strong>[T4] Deep Learning for Dialogue Systems.</strong> Yun-Nung Chen, Asli Celikyilmaz and Dilek Hakkani-Tur. </span><br/><span class="btn btn--location inline-location">Salons A/B</span>
                     </td>
                 </tr>
                 <tr id="tutorial">
@@ -931,7 +931,7 @@ script: |
     </div>
     <div class="session session-plenary" id="session-welcome">
         <span class="session-title">Welcome Session / Presidential Address</span><br/>        
-        <span class="session-people">Chris Callison-Burch, Regina Barzilay, Min-Yen Kan, and Marti Hearst</span><br/>
+        <span class="session-people">Chris Callison-Burch, Regina Barzilay, Min-Yen Kan and Jokim Nivre</span><br/>
         <span class="session-time">9:00 AM &ndash; 10:00 AM</span><br/>
         <span class="session-location btn btn--location">Bayshore Grande Ballroom</span>
     </div>
@@ -1003,7 +1003,7 @@ script: |
                     <tr id="paper" paper-id="6">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
-                            <span class="paper-title">Inducing Symbolic Meaning Representations for Semantic Parsing. </span><em>Jianpeng Cheng, Siva Reddy, Vijay Saraswat and Mirella Lapata</em>
+                            <span class="paper-title">Learning Structured Natural Language Representations for Semantic Parsing. </span><em>Jianpeng Cheng, Siva Reddy, Vijay Saraswat and Mirella Lapata</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="7">
@@ -1062,13 +1062,13 @@ script: |
                     <tr id="paper" paper-id="13">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
-                            <span class="paper-title">Discourse Mode Identification in Essays. </span><em>Wei Song</em>
+                            <span class="paper-title">Discourse Mode Identification in Essays. </span><em>Wei Song, Dong Wang, Ruiji Fu, Lizhen Liu, Ting Liu, Guoping Hu</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="14">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
-                            <span class="paper-title">Winning on the Merits: The Joint Effects of Content and Style on Debate Outcomes. </span><em>Lu Wang, Nick Beauchamp, Sarah Shugars, Kechen Qin</em>
+                            <span class="paper-title">[TACL] Winning on the Merits: The Joint Effects of Content and Style on Debate Outcomes. </span><em>Lu Wang, Nick Beauchamp, Sarah Shugars, Kechen Qin</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="15">
@@ -1109,13 +1109,13 @@ script: |
                     <tr id="paper" paper-id="18">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
-                            <span class="paper-title">A Polynomial-Time Dynamic Programming Algorithm for Phrase-Based Decoding with a Fixed Distortion Limit. </span><em>Yin-Wen Chang and Michael Collins</em>
+                            <span class="paper-title">[TACL] A Polynomial-Time Dynamic Programming Algorithm for Phrase-Based Decoding with a Fixed Distortion Limit. </span><em>Yin-Wen Chang and Michael Collins</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="19">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
-                            <span class="paper-title">Context Gates for Neural Machine Translation. </span><em>Zhaopeng Tu, Yang Liu, Zhengdong Lu, Xiaohua Liu, and Hang Li</em>
+                            <span class="paper-title">[TACL] Context Gates for Neural Machine Translation. </span><em>Zhaopeng Tu, Yang Liu, Zhengdong Lu, Xiaohua Liu and Hang Li</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="20">
@@ -1201,25 +1201,25 @@ script: |
                     <tr id="paper" paper-id="27">
                         <td id="paper-time">1:59-2:17</td>
                         <td>
-                            <span class="paper-title">Generating Natural Answer by Incorporating Copying and Retrieving Mechanisms in Sequence-to-Sequence Learning. </span><em>Shizhu He, Kang Liu and Jun Zhao</em>
+                            <span class="paper-title">Generating Natural Answer by Incorporating Copying and Retrieving Mechanisms in Sequence-to-Sequence Learning. </span><em>Shizhu He, Cao Liu, Kang Liu and Jun Zhao</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="28">
                         <td id="paper-time">2:18-2:36</td>
                         <td>
-                            <span class="paper-title">Coarse-to-Fine Question Answering for Long Documents. </span><em>Eunsol Choi, Daniel Hewlett, Illia Polosukhin, Alexandre Lacoste, Jakob Uszkoreit and Jonathan Berant</em>
+                            <span class="paper-title">Coarse-to-Fine Question Answering for Long Documents. </span><em>Eunsol Choi, Daniel Hewlett, Jakob Uszkoreit, Illia Polosukhin, Alexandre Lacoste and Jonathan Berant</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="29">
                         <td id="paper-time">2:37-2:55</td>
                         <td>
-                            <span class="paper-title">An End-to-End Model for Question Answering over Knowledge Base with Cross-Attention Combining Global Knowledge. </span><em>Yanchao Hao, Yuanzhe Zhang, Shizhu He, Kang Liu and Jun Zhao</em>
+                            <span class="paper-title">An End-to-End Model for Question Answering over Knowledge Base with Cross-Attention Combining Global Knowledge. </span><em>Yanchao Hao, Yuanzhe Zhang, Kang Liu, Shizhu He, Zhanyi Liu, Hua Wu and Jun Zhao</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="30">
                         <td id="paper-time">2:56-3:14</td>
                         <td>
-                            <span class="paper-title">Domain-Targeted, High Precision Knowledge Extraction. </span><em>Bhavana Dalvi, Niket Tandon, Peter Clark</em>
+                            <span class="paper-title">[TACL] Domain-Targeted, High Precision Knowledge Extraction. </span><em>Bhavana Dalvi, Niket Tandon, Peter Clark</em>
                         </td>
                     </tr>
                 </table>
@@ -1248,7 +1248,7 @@ script: |
                     <tr id="paper" paper-id="32">
                         <td id="paper-time">1:59-2:17</td>
                         <td>
-                            <span class="paper-title">Combining distributional and referential information for naming objects through cross-modal mapping and direct word prediction. </span><em>Sina Zarrieß and David Schlangen</em>
+                            <span class="paper-title">Obtaining referential word meanings from visual and distributional information: Experiments on object naming. </span><em>Sina Zarrieß and David Schlangen</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="33">
@@ -1266,7 +1266,7 @@ script: |
                     <tr id="paper" paper-id="35">
                         <td id="paper-time">2:56-3:14</td>
                         <td>
-                            <span class="paper-title">Visually Grounded and Textual Semantic Models Differentially Decode Brain Activity Associated with Concrete and Abstract Nouns. </span><em>Andrew J. Anderson, Douwe Kiela, Stephen Clark, Massimo Poesio</em>
+                            <span class="paper-title">[TACL] Visually Grounded and Textual Semantic Models Differentially Decode Brain Activity Associated with Concrete and Abstract Nouns. </span><em>Andrew J. Anderson, Douwe Kiela, Stephen Clark and Massimo Poesio</em>
                         </td>
                     </tr>
                 </table>
@@ -1307,13 +1307,13 @@ script: |
                     <tr id="paper" paper-id="39">
                         <td id="paper-time">2:37-2:55</td>
                         <td>
-                            <span class="paper-title">Fine-Grained Prediction of Syntactic Typology: Discovering Latent Structure with Supervised Learning. </span><em>Dingquan Wang and Jason Eisner</em>
+                            <span class="paper-title">[TACL] Fine-Grained Prediction of Syntactic Typology: Discovering Latent Structure with Supervised Learning. </span><em>Dingquan Wang and Jason Eisner</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="40">
                         <td id="paper-time">2:56-3:14</td>
                         <td>
-                            <span class="paper-title">Learning to Prune: Exploring the Frontier of Fast and Accurate Parsing. </span><em>Tim Vieira, Jason Eisner</em>
+                            <span class="paper-title">[TACL] Learning to Prune: Exploring the Frontier of Fast and Accurate Parsing. </span><em>Tim Vieira, Jason Eisner</em>
                         </td>
                     </tr>
                 </table>
@@ -1407,7 +1407,7 @@ script: |
                     <tr id="paper" paper-id="50">
                         <td id="paper-time">2:56-3:14</td>
                         <td>
-                            <span class="paper-title">Overcoming Language Variation in Sentiment Analysis with Social Attention. </span><em>Yi Yang, Jacob Eisenstein</em>
+                            <span class="paper-title">[TACL] Overcoming Language Variation in Sentiment Analysis with Social Attention. </span><em>Yi Yang and Jacob Eisenstein</em>
                         </td>
                     </tr>
                 </table>
@@ -1434,7 +1434,7 @@ script: |
                     <tr id="paper" paper-id="51">
                         <td id="paper-time">3:45-4:03</td>
                         <td>
-                            <span class="paper-title">Automatically Labeled Data Generation for Large Scale Event Extraction. </span><em>Yubo Chen, Kang Liu and Jun Zhao</em>
+                            <span class="paper-title">Automatically Labeled Data Generation for Large Scale Event Extraction. </span><em>Yubo Chen, Shulin Liu, Xiang Zhang, Kang Liu and Jun Zhao</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="52">
@@ -1452,7 +1452,7 @@ script: |
                     <tr id="paper" paper-id="54">
                         <td id="paper-time">4:42-5:00</td>
                         <td>
-                            <span class="paper-title">Ordinal Common-sense Inference. </span><em>Sheng Zhang, Rachel Rudinger, Kevin Duh, Benjamin Van Durme</em>
+                            <span class="paper-title">[TACL] Ordinal Common-sense Inference. </span><em>Sheng Zhang, Rachel Rudinger, Kevin Duh and Benjamin Van Durme</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="55">
@@ -1546,7 +1546,7 @@ script: |
                     <tr id="paper" paper-id="64">
                         <td id="paper-time">4:42-5:00</td>
                         <td>
-                            <span class="paper-title">Joint CTC-attention End-to-end Speech Recognition. </span><em>Shinji Watanabe, Takaaki Hori and John Hershey</em>
+                            <span class="paper-title">Joint CTC-attention End-to-end Speech Recognition. </span><em>Takaaki Hori, Shinji Watanabe and John Hershey</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="65">
@@ -1587,13 +1587,13 @@ script: |
                     <tr id="paper" paper-id="68">
                         <td id="paper-time">4:23-4:41</td>
                         <td>
-                            <span class="paper-title">Decoding Anagrammed Texts Written in an Unknown Language and Script. </span><em>Bradley Hauer and Grzegorz Kondrak</em>
+                            <span class="paper-title">[TACL] Decoding Anagrammed Texts Written in an Unknown Language and Script. </span><em>Bradley Hauer and Grzegorz Kondrak</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="69">
                         <td id="paper-time">4:42-5:00</td>
                         <td>
-                            <span class="paper-title">Sparse Coding of Neural Word Embeddings for Multilingual Sequence Labeling. </span><em>Gábor Berend</em>
+                            <span class="paper-title">[TACL] Sparse Coding of Neural Word Embeddings for Multilingual Sequence Labeling. </span><em>Gábor Berend</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="70">
@@ -1628,25 +1628,25 @@ script: |
                     <tr id="paper" paper-id="72">
                         <td id="paper-time">4:04-4:22</td>
                         <td>
-                            <span class="paper-title">A Generative Model of Phonotactics. </span><em>Richard Futrell, Adam Albright, Peter Graff, and Timothy J. O’Donnell</em>
+                            <span class="paper-title">[TACL] A Generative Model of Phonotactics. </span><em>Richard Futrell, Adam Albright, Peter Graff and Timothy J. O’Donnell</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="73">
                         <td id="paper-time">4:23-4:41</td>
                         <td>
-                            <span class="paper-title">Joint Semantic Synthesis and Morphological Analysis of the Derived Word. </span><em>Ryan Cotterell and Hinrich Schütze</em>
+                            <span class="paper-title">[TACL] Joint Semantic Synthesis and Morphological Analysis of the Derived Word. </span><em>Ryan Cotterell and Hinrich Schütze</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="74">
                         <td id="paper-time">4:42-5:00</td>
                         <td>
-                            <span class="paper-title">Unsupervised Learning of Morphological Forests. </span><em>Jiaming Luo, Karthik, Narasimhan</em>
+                            <span class="paper-title">{TACL] Unsupervised Learning of Morphological Forests. </span><em>Jiaming Luo and Karthik Narasimhan</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="75">
                         <td id="paper-time">5:01-5:13</td>
                         <td>
-                            <span class="paper-title">Evaluation of Compound Splitting with Textual Entailment. </span><em>Glorianna Jagfeld, Patrick Ziering and Lonneke van der Plas</em>
+                            <span class="paper-title">Evaluating Compound Splitters Extrinsically with Textual Entailment. </span><em>Glorianna Jagfeld, Patrick Ziering and Lonneke van der Plas</em>
                         </td>
                     </tr>
                 </table>
@@ -1656,7 +1656,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Posters &amp; Dinner</a><br/>        
         <span class="session-time">6:20 PM &ndash; 9:50 PM</span>
         <br/>
-        <span class="session-location btn btn--location">Bayshore Grand Foyer/Stanley Park Foyer/Cypress</span>
+        <span class="session-location btn btn--location">Bayshore Grand Ballroom &amp; Foyer/Stanley Park Foyer/Cypress</span>
         <div class="poster-session-details">
             <hr class="detail-separator"/>
             <h4 class="poster-type" style="text-decoration: underline;">Long Papers</h4>
@@ -1678,7 +1678,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">A Neural Local Coherence Model. </span><em>Shafiq Joty and Dat Tien Nguyen</em>
+                        <span class="poster-title">A Neural Local Coherence Model. </span><em>Dat Tien Nguyen and Shafiq Joty</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1713,7 +1713,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Transductive Non-linear Learning for Chinese Hypernym Prediction. </span><em>Chengyu Wang, Xiaofeng He and Aoying Zhou</em>
+                        <span class="poster-title">Transductive Non-linear Learning for Chinese Hypernym Prediction. </span><em>Chengyu Wang, Junchi Yan, Aoying Zhou and Xiaofeng He</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1783,7 +1783,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Combating Human Trafficking with Multimodal Deep Models. </span><em>Edmund Tong, Amir Zadeh and Louis-Philippe Morency</em>
+                        <span class="poster-title">Combating Human Trafficking with Multimodal Deep Models. </span><em>Edmund Tong, Amir Zadeh, Cara Jones and Louis-Philippe Morency</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1813,7 +1813,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Learning Translational Semantic Correspondences in Technical Documentation. </span><em>Kyle Richardson and Jonas Kuhn</em>
+                        <span class="poster-title">Learning Semantic Correspondences in Technical Documentation. </span><em>Kyle Richardson and Jonas Kuhn</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1843,7 +1843,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Linguistically Regularized LSTM for Sentiment Classification. </span><em>Qiao Qian, Minlie Huang and Xiaoyan Zhu</em>
+                        <span class="poster-title">Linguistically Regularized LSTM for Sentiment Classification. </span><em>Qiao Qian, Minlie Huang, Jinhao Lei and Xiaoyan Zhu</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1853,7 +1853,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Active Sentiment Domain Adaptation. </span><em>Fangzhao Wu and Yongfeng Huang</em>
+                        <span class="poster-title">Active Sentiment Domain Adaptation. </span><em>Fangzhao Wu, Yongfeng Huang and Jun Yan</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1891,7 +1891,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">How to Make Contexts More Useful? An Empirical Study to Context-Aware Neural Conversation Models. </span><em>Zhiliang Tian, Rui Yan, Lili Mou, Yiping Song, Yansong Feng and Dongyan Zhao</em>
+                        <span class="poster-title">How to Make Contexts More Useful? An Empirical Study on Context-Aware Neural Conversation Models. </span><em>Zhiliang Tian, Rui Yan, Lili Mou, Yiping Song, Yansong Feng and Dongyan Zhao</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1911,7 +1911,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">A Recurrent Neural Model with Attention for the Recognition of Chinese Implicit Discourse Relations. </span><em>Niko Schenk and Samuel Rönnqvist</em>
+                        <span class="poster-title">A Recurrent Neural Model with Attention for the Recognition of Chinese Implicit Discourse Relations. </span><em>Samuel Rönnqvist, Niko Schenk and Christian Chiarcos</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1936,7 +1936,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Learning to Generate Natural Language Descriptions From Source Code Changes. </span><em>Pablo Loyola, Edison Marrese-Taylor and Yutaka Matsuo</em>
+                        <span class="poster-title">A Neural Architecture for Generating Natural Language Descriptions from Source Code Changes. </span><em>Pablo Loyola, Edison Marrese-Taylor and Yutaka Matsuo</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1946,7 +1946,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">EviNets: Evidence Neural Networks for Combining Evidence Signals for Factoid Question Answering. </span><em>Denis Savenkov and Eugene Agichtein</em>
+                        <span class="poster-title">EviNets: Neural Networks for Combining Evidence Signals for Factoid Question Answering. </span><em>Denis Savenkov and Eugene Agichtein</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1956,7 +1956,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Complex Question Answering by Reasoning over Open Information Extraction. </span><em>Tushar Khot, Ashish Sabharwal and Peter Clark</em>
+                        <span class="poster-title">Answering Complex Questions Using Open Information Extraction. </span><em>Tushar Khot, Ashish Sabharwal and Peter Clark</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -1996,7 +1996,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Question Answering with Universal Schema and Memory Networks. </span><em>Rajarshi Das, Manzil Zaheer, Siva Reddy and Andrew McCallum</em>
+                        <span class="poster-title">Question Answering on Knowledge Bases and Text using Universal Schema and Memory Networks. </span><em>Rajarshi Das, Manzil Zaheer, Siva Reddy and Andrew McCallum</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -2006,7 +2006,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">A Deep Network with Visual Text Composition Behavior. </span><em>Hongyu GUO</em>
+                        <span class="poster-title">A Deep Network with Visual Text Composition Behavior. </span><em>Hongyu Guo</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -2026,7 +2026,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Feature Hashing for Language and Dialect Identification. </span><em>Shervin Malmasi</em>
+                        <span class="poster-title">Feature Hashing for Language and Dialect Identification. </span><em>Shervin Malmasi and Mark Dras</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -2071,7 +2071,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Methodical Evaluation of Arabic Word Embeddings. </span><em>Mohammed Elrazzaz, Chadi Helwe, Shady Elbassuoni and Khaled Shaban</em>
+                        <span class="poster-title">Methodical Evaluation of Arabic Word Embeddings. </span><em>Mohammed Elrazzaz, Shady Elbassuoni, Khaled Shaban and Chadi Helwe</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -2086,12 +2086,12 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Demographic Inference on Twitter using Recursive Neural Networks. </span><em>Sunghwan Mac Kim, Qiongkai Xu, Lizhen Qu and Stephen Wan</em>
+                        <span class="poster-title">Demographic Inference on Twitter using Recursive Neural Networks. </span><em>Sunghwan Mac Kim, Qiongkai Xu, Lizhen Qu, Stephen Wan and Cecile Paris</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Twitter Demographic Classification using deep Multi-modal Multi-task Learning. </span><em>Soroush Vosoughi, Prashanth Vijayaraghavan and Deb Roy</em>
+                        <span class="poster-title">Twitter Demographic Classification using deep Multi-modal Multi-task Learning. </span><em>Prashanth Vijayaraghavan, Soroush Vosoughi and Deb Roy</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -2275,7 +2275,7 @@ script: |
                     <tr id="paper" paper-id="78">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
-                            <span class="paper-title">Deep Keyphrase Generation. </span><em>Rui Meng, Daqing He, Sanqiang Zhao and Shuguang Han</em>
+                            <span class="paper-title">Deep Keyphrase Generation. </span><em>Rui Meng, Sanqiang Zhao, Shuguang Han, Daqing He, Peter Brusilovsky and Yu Chi</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="79">
@@ -2287,7 +2287,7 @@ script: |
                     <tr id="paper" paper-id="80">
                         <td id="paper-time">11:46-12:04</td>
                         <td>
-                            <span class="paper-title">Cross-Sentence N-ary Relation Extraction with Graph LSTMs. </span><em>Nanyun Peng, Hoifung Poon, Chris Quirk, Kristina Toutanova, Wen-Tau Yih</em>
+                            <span class="paper-title">[TACL] Cross-Sentence N-ary Relation Extraction with Graph LSTMs. </span><em>Nanyun Peng, Hoifung Poon, Chris Quirk, Kristina Toutanova, Scott Wen-tau Yih</em>
                         </td>
                     </tr>
                 </table>
@@ -2328,13 +2328,13 @@ script: |
                     <tr id="paper" paper-id="84">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
-                            <span class="paper-title">Modeling Semantic Expectation: Using Script Knowledge for Referent Prediction. </span><em>Ashutosh Modi, Ivan Titov, Vera Demberg, Asad Sayeed, Manfred Pinkal</em>
+                            <span class="paper-title">[TACL] Modeling Semantic Expectation: Using Script Knowledge for Referent Prediction. </span><em>Ashutosh Modi, Ivan Titov, Vera Demberg, Asad Sayeed and Manfred Pinkal</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="85">
                         <td id="paper-time">11:46-11:58</td>
                         <td>
-                            <span class="paper-title">A Survey on Action Recognition Datasets and Tasks for Still Images. </span><em>Spandana Gella and Frank Keller</em>
+                            <span class="paper-title">An Analysis of Action Recognition Datasets for Language and Vision Tasks. </span><em>Spandana Gella and Frank Keller</em>
                         </td>
                     </tr>
                 </table>
@@ -2357,7 +2357,7 @@ script: |
                     <tr id="paper" paper-id="86">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
-                            <span class="paper-title">Affect-LM: A Neural Language Model for Customizable Affective Text Generation. </span><em>Sayan Ghosh, Mathieu Chollet, Eugene Laksana, Stefan Scherer and Louis-Philippe Morency</em>
+                            <span class="paper-title">Affect-LM: A Neural Language Model for Customizable Affective Text Generation. </span><em>Sayan Ghosh, Mathieu Chollet, Eugene Laksana, Louis-Philippe Morency and Stefan Scherer</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="87">
@@ -2404,7 +2404,7 @@ script: |
                     <tr id="paper" paper-id="91">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
-                            <span class="paper-title">Modeling Source Syntax for Neural Machine Translation. </span><em>Junhui Li, Deyi Xiong, Zhaopeng Tu, Muhua Zhu and Guodong Zhou</em>
+                            <span class="paper-title">Modeling Source Syntax for Neural Machine Translation. </span><em>Junhui Li, Deyi Xiong, Zhaopeng Tu, Muhua Zhu, Min Zhang and Guodong Zhou</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="92">
@@ -2416,13 +2416,13 @@ script: |
                     <tr id="paper" paper-id="93">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
-                            <span class="paper-title">Head-Lexicalized Bidirectional Tree LSTMs. </span><em>Zhiyang Teng and Yue Zhang</em>
+                            <span class="paper-title">[TACL] Head-Lexicalized Bidirectional Tree LSTMs. </span><em>Zhiyang Teng and Yue Zhang</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="94">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
-                            <span class="paper-title">Pushing the Limits of Translation Quality Estimation. </span><em>André F. T. Martins, Marcin Junczys-Dowmunt, Fabio N. Kepler, Ramón Astudillo, Chris Hokamp, Roman Grundkiewicz</em>
+                            <span class="paper-title">[TACL] Pushing the Limits of Translation Quality Estimation. </span><em>André F. T. Martins, Marcin Junczys-Dowmunt, Fabio N. Kepler, Ramón Astudillo, Chris Hokamp and Roman Grundkiewicz</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="95">
@@ -2451,7 +2451,7 @@ script: |
                     <tr id="paper" paper-id="96">
                         <td id="paper-time">10:30-10:48</td>
                         <td>
-                            <span class="paper-title">Detect Rumors in Microblog Posts Using Propagation Structure via Kernel Learning. </span><em>Ma Jing, Wei Gao and Kam-Fai Wong</em>
+                            <span class="paper-title">Detect Rumors in Microblog Posts Using Propagation Structure via Kernel Learning. </span><em>Jing Ma, Wei Gao and Kam-Fai Wong</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="97">
@@ -2469,13 +2469,13 @@ script: |
                     <tr id="paper" paper-id="99">
                         <td id="paper-time">11:27-11:45</td>
                         <td>
-                            <span class="paper-title">Leveraging Behavioral and Social Information for Weakly Supervised Collective Classification of Political Discourse on Twitter. </span><em>Kristen Johnson and Dan Goldwasser</em>
+                            <span class="paper-title">Leveraging Behavioral and Social Information for Weakly Supervised Collective Classification of Political Discourse on Twitter. </span><em>Kristen Johnson, Di Jin and Dan Goldwasser</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="100">
                         <td id="paper-time">11:46-11:58</td>
                         <td>
-                            <span class="paper-title">On the Distribution of Lexical Features in Social Media. </span><em>Fatemeh Almodaresi, Lyle Ungar, Vivek Kulkarni, Mohsen Zakeri, Salvatore Giorgi and H. Andrew Schwartz</em>
+                            <span class="paper-title">On the Distribution of Lexical Features at Multiple Levels of Analysis. </span><em>Fatemeh Almodaresi, Lyle Ungar, Vivek Kulkarni, Mohsen Zakeri, Salvatore Giorgi and H. Andrew Schwartz</em>
                         </td>
                     </tr>
                 </table>
@@ -2562,7 +2562,7 @@ script: |
                     <tr id="paper" paper-id="108">
                         <td id="paper-time">2:08-2:26</td>
                         <td>
-                            <span class="paper-title">Evaluation Metrics for Reading Comprehension: Prerequisite Skills and Readability. </span><em>Saku Sugawara, Yusuke Kido, Hikaru Yokono and Akiko Aizawa</em>
+                            <span class="paper-title">Evaluation Metrics for Machine Reading Comprehension: Prerequisite Skills and Readability. </span><em>Saku Sugawara, Yusuke Kido, Hikaru Yokono and Akiko Aizawa</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="109">
@@ -2656,13 +2656,13 @@ script: |
                     <tr id="paper" paper-id="118">
                         <td id="paper-time">2:08-2:26</td>
                         <td>
-                            <span class="paper-title">Fully Character-Level Neural Machine Translation without Explicit Segmentation. </span><em>Jason Lee, Kyunghyun Cho, Thomas Hofmann</em>
+                            <span class="paper-title">[TACL] Fully Character-Level Neural Machine Translation without Explicit Segmentation. </span><em>Jason Lee, Kyunghyun Cho and Thomas Hofmann</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="119">
                         <td id="paper-time">2:27-2:39</td>
                         <td>
-                            <span class="paper-title">Hybrid Neural Network Alignment and Lexicon Model in Direct HMM for Statistical Machine Translation. </span><em>Weiyue Wang, Derui Zhu and Hermann Ney</em>
+                            <span class="paper-title">Hybrid Neural Network Alignment and Lexicon Model in Direct HMM for Statistical Machine Translation. </span><em>Weiyue Wang, Tamer Alkhouli, Derui Zhu and Hermann Ney</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="120">
@@ -2691,7 +2691,7 @@ script: |
                     <tr id="paper" paper-id="121">
                         <td id="paper-time">1:30-1:48</td>
                         <td>
-                            <span class="paper-title">Modeling Contextual Relationship Among Utterances in Multimodal Sentiment Analysis. </span><em>Soujanya Poria, Devamanyu Hazarika, Navonil Majumder and Erik Cambria</em>
+                            <span class="paper-title">Context-Dependent Sentiment Analysis in User-Generated Videos. </span><em>Soujanya Poria, Erik Cambria, Devamanyu Hazarika, Navonil Majumder, Amir Zadeh and Louis-Philippe Morency</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="122">
@@ -2709,7 +2709,7 @@ script: |
                     <tr id="paper" paper-id="124">
                         <td id="paper-time">2:21-2:33</td>
                         <td>
-                            <span class="paper-title">Supervised Aspect Extraction with Knowledge Retention. </span><em>Lei Shu, Hu Xu and Bing Liu</em>
+                            <span class="paper-title">Lifelong Learning CRF for Supervised Aspect Extraction. </span><em>Lei Shu, Hu Xu and Bing Liu</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="125">
@@ -2748,7 +2748,7 @@ script: |
                     <tr id="paper" paper-id="127">
                         <td id="paper-time">3:44-4:02</td>
                         <td>
-                            <span class="paper-title">Comparing Apples to Apples: Learning Semantics of Common Entities Through a Novel Comprehension Task. </span><em>Omid Bakhshandeh and James Allen</em>
+                            <span class="paper-title">Apples to Apples: Learning Semantics of Common Entities Through a Novel Comprehension Task. </span><em>Omid Bakhshandeh and James Allen</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="128">
@@ -2760,13 +2760,13 @@ script: |
                     <tr id="paper" paper-id="129">
                         <td id="paper-time">4:22-4:40</td>
                         <td>
-                            <span class="paper-title">Evaluating Visual Representations for Topic Understanding and Their Effects on Manually Generated Labels. </span><em>Alison Smith, Tak Yeon Lee, Forough-Poursabzi Sangdeh, Jordan Boyd-Graber, Niklas Elmqvist, Leah Findlater</em>
+                            <span class="paper-title">[TACL] Evaluating Visual Representations for Topic Understanding and Their Effects on Manually Generated Labels. </span><em>Alison Smith, Tak Yeon Lee, Forough-Poursabzi Sangdeh, Jordan Boyd-Graber, Niklas Elmqvist, Leah Findlater</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="130">
                         <td id="paper-time">4:41-4:53</td>
                         <td>
-                            <span class="paper-title">Separating Reranking Effects from Model Combination Effects in Generative Neural Constituency Parsers. </span><em>Daniel Fried, Mitchell Stern and Dan Klein</em>
+                            <span class="paper-title">Improving Neural Parsing by Disentangling Model Combination and Reranking Effects. </span><em>Daniel Fried, Mitchell Stern and Dan Klein</em>
                         </td>
                     </tr>
                 </table>
@@ -2813,7 +2813,7 @@ script: |
                     <tr id="paper" paper-id="135">
                         <td id="paper-time">4:41-4:59</td>
                         <td>
-                            <span class="paper-title">Enriching Word Vectors with Subword Information. </span><em>Piotr Bojanowski, Edouard Grave, Armand Joulin and Tomas Mikolov</em>
+                            <span class="paper-title">[TACL] Enriching Word Vectors with Subword Information. </span><em>Piotr Bojanowski, Edouard Grave, Armand Joulin and Tomas Mikolov</em>
                         </td>
                     </tr>
                 </table>
@@ -2836,13 +2836,13 @@ script: |
                     <tr id="paper" paper-id="136">
                         <td id="paper-time">3:25-3:43</td>
                         <td>
-                            <span class="paper-title">Joint Modeling of Content and Discourse Relations in Dialogues. </span><em>Kechen Qin, Lu Wang, Joseph Kim and Julie Shah</em>
+                            <span class="paper-title">Joint Modeling of Content and Discourse Relations in Dialogues. </span><em>Kechen Qin, Lu Wang and Joseph Kim</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="137">
                         <td id="paper-time">3:44-4:02</td>
                         <td>
-                            <span class="paper-title">Argument Mining with Structured SVMs and RNNs. </span><em>Vlad Niculae, Claire Cardie and Joonsuk Park</em>
+                            <span class="paper-title">Argument Mining with Structured SVMs and RNNs. </span><em>Vlad Niculae, Joonsuk Park and Claire Cardie</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="138">
@@ -2854,7 +2854,7 @@ script: |
                     <tr id="paper" paper-id="139">
                         <td id="paper-time">4:22-4:40</td>
                         <td>
-                            <span class="paper-title">Adversarial Connective-exploiting Networks for Implicit Discourse Relation Classification. </span><em>Lianhui Qin, Zhisong Zhang, Hai Zhao, Eric Xing and Zhiting Hu</em>
+                            <span class="paper-title">Adversarial Connective-exploiting Networks for Implicit Discourse Relation Classification. </span><em>Lianhui Qin, Zhisong Zhang, Hai Zhao, Zhiting Hu and Eric Xing</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="140">
@@ -2883,7 +2883,7 @@ script: |
                     <tr id="paper" paper-id="141">
                         <td id="paper-time">3:25-3:43</td>
                         <td>
-                            <span class="paper-title">Bayesian Modeling of Lexical Resources for Low-Resource Settings. </span><em>Nicholas Andrews, Jason Eisner, Mark Dredze and Benjamin Van Durme</em>
+                            <span class="paper-title">Bayesian Modeling of Lexical Resources for Low-Resource Settings. </span><em>Nicholas Andrews, Mark Dredze, Benjamin Van Durme and Jason Eisner</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="142">
@@ -2963,7 +2963,7 @@ script: |
     <div class="session session-expandable session-posters" id="session-poster-2">
         <div id="expander"></div><a href="#" class="session-title">Posters, Demos &amp; Dinner</a><br/>        
         <span class="session-time">5:45 PM &ndash; 7:45 PM</span><br/>
-        <span class="session-location btn btn--location">Bayshore Grand Foyer/Stanley Park Foyer/Cypress</span>
+        <span class="session-location btn btn--location">Bayshore Grand Ballroom/Stanley Park Foyer/Cypress</span>
         <div class="poster-session-details">
             <hr class="detail-separator"/>
             <h4 class="poster-type" style="text-decoration: underline;">Long Papers</h4>
@@ -2980,22 +2980,22 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Exploiting Argument Information to Improve Event Detection via Supervised Attention Mechanisms. </span><em>Shulin Liu, Kang Liu and Jun Zhao</em>
+                        <span class="poster-title">Exploiting Argument Information to Improve Event Detection via Supervised Attention Mechanisms. </span><em>Shulin Liu, Yubo Chen, Kang Liu and Jun Zhao</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Topical Coherence in LDA-based Models through Induced Segmentation. </span><em>Hesam Amoualian, Wei Lu, Eric Gaussier, Massih R Amini, Georgios Balikas and Marianne Clausel</em>
+                        <span class="poster-title">Topical Coherence in LDA-based Models through Induced Segmentation. </span><em>Hesam Amoualian, Wei Lu, Eric Gaussier, Georgios Balikas, Massih R Amini and Marianne Clausel</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Joint Extraction of Relations with Class Ties via Effective Deep Ranking. </span><em>Hai Ye, Wenhan Chao and Zhunchen Luo</em>
+                        <span class="poster-title">Jointly Extracting Relations with Class Ties via Effective Deep Ranking. </span><em>Hai Ye, Wenhan Chao, Zhunchen Luo and Zhoujun Li</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Search-based Neural Structured Learning for Sequential Question Answering. </span><em>Mohit Iyyer, Wen-tau Yih and Ming-Wei Chang</em>
+                        <span class="poster-title">Search-based Neural Structured Learning for Sequential Question Answering. </span><em>Mohit Iyyer, Scott Wen-tau Yih and Ming-Wei Chang</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3005,7 +3005,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Determining Gains Acquired from Word Embedding Quantitatively using Discrete Distribution Clustering. </span><em>Jianbo Ye, Yanran Li, Zhaohui Wu, James Z. Wang and Jia Li</em>
+                        <span class="poster-title">Determining Gains Acquired from Word Embedding Quantitatively using Discrete Distribution Clustering. </span><em>Jianbo Ye, Yanran Li, Zhaohui Wu, James Z. Wang, Wenjie Li and Jia Li</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3020,7 +3020,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Learning to Skim Text. </span><em>Adams Wei Yu, Quoc Le and Hongrae Lee</em>
+                        <span class="poster-title">Learning to Skim Text. </span><em>Adams Wei Yu, Hongrae Lee and Quoc Le</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3105,7 +3105,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">A Progressive Learning Approach to Chinese SRL Using Heterogeneous Data. </span><em>Qiaolin Xia, Zhifang Sui and Baobao Chang</em>
+                        <span class="poster-title">A Progressive Learning Approach to Chinese SRL Using Heterogeneous Data. </span><em>Qiaolin Xia, Lei Sha, Baobao Chang and Zhifang Sui</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3115,7 +3115,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Using Ontology-Grounded Token Embeddings To Predict Prepositional Phrase Attachments. </span><em>Pradeep Dasigi, Waleed Ammar, Chris Dyer and Eduard Hovy</em>
+                        <span class="poster-title">Ontology-Aware Token Embeddings for Prepositional Phrase Attachment. </span><em>Pradeep Dasigi, Waleed Ammar, Chris Dyer and Eduard Hovy</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3143,12 +3143,12 @@ script: |
             <table class="poster-table">
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">MeChat: A Sequence to Sequence and Rerank based Chatbot Engine. </span><em>Minghui Qiu and Feng-Lin Li</em>
+                        <span class="poster-title">AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine. </span><em>Minghui Qiu, Feng-Lin Li, Siyu Wang, Xing Gao, Yan Chen, Weipeng Zhao, Haiqing Chen, Jun Huang and Wei Chu</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">A Conditional Variational Framework for Dialog Generation. </span><em>Xiaoyu Shen, Hui Su, Yanran Li, Wenjie Li, Shuzi Niu and Akiko Aizawa</em>
+                        <span class="poster-title">A Conditional Variational Framework for Dialog Generation. </span><em>Xiaoyu Shen, Hui Su, Yanran Li, Wenjie Li, Shuzi Niu, Yang Zhao, Akiko Aizawa and Guoping Long</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3188,7 +3188,7 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">On the Equivalence of Holographic and Complex Embeddings for Knowledge Graph Completion. </span><em>Katsuhiko Hayashi and Masashi Shimbo</em>
+                        <span class="poster-title">On the Equivalence of Holographic and Complex Embeddings for Link Prediction. </span><em>Katsuhiko Hayashi and Masashi Shimbo</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3228,12 +3228,12 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Fast and Accurate Neural Word Segmentation. </span><em>Deng Cai and Hai Zhao</em>
+                        <span class="poster-title">Fast and Accurate Neural Word Segmentation for Chinese. </span><em>Deng Cai, Hai Zhao, Zhisong Zhang, Yuan Xin, Yongjian Wu and Feiyue Huang</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">The Value of Curated Negative Examples: Strong Baselines for Story Cloze Tasks. </span><em>Zheng Cai, Lifu Tu and Kevin Gimpel</em>
+                        <span class="poster-title">Pay Attention to the Ending: Strong Neural Baselines for the ROC Story Cloze Task. </span><em>Zheng Cai, Lifu Tu and Kevin Gimpel</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3243,27 +3243,27 @@ script: |
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Geometry of Sentences. </span><em>Jiaqi Mu, Suma Bhat and Pramod Viswanath</em>
+                        <span class="poster-title">GRepresenting Sentences as Low-Rank Subspaces. </span><em>Jiaqi Mu, Suma Bhat and Pramod Viswanath</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Improving Semantic Relevance for Chinese Social Media Text Summarization. </span><em>Shuming Ma and Xu Sun</em>
+                        <span class="poster-title">Improving Semantic Relevance for Sequence-to-Sequence Learning of Chinese Social Media Text Summarization. </span><em>Shuming Ma, Xu Sun, Jingjing Xu, Houfeng Wang, Wenjie Li and Qi Su</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Determining Whether and When People Participate in the Events They Tweet About. </span><em>Krishna Sanagavarapu, Alakananda Vempala and Eduardo Blanco</em>
+                        <span class="poster-title">Determining Whether and When People Participate in the Events They Tweet About. </span><em>Krishna Chaitanya Sanagavarapu, Alakananda Vempala and Eduardo Blanco</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Separating Facts from Fiction: Linguistic Models to Classify Suspicious and Trusted News Posts on Twitter. </span><em>Kyle Shaffer, Jin Yea Jang, Nathan Hodas and Svitlana Volkova</em>
+                        <span class="poster-title">Separating Facts from Fiction: Linguistic Models to Classify Suspicious and Trusted News Posts on Twitter. </span><em>Svitlana Volkova, Kyle Shaffer, Jin Yea Jang and Nathan Hodas</em>
                     </td>
                 </tr>
                 <tr id="poster">
                     <td>
-                        <span class="poster-title">Recognizing Counterfactual Thinking in Social Media Texts. </span><em>Youngseo Son, Anneke Buffone, H. Andrew Schwartz and Lyle Ungar</em>
+                        <span class="poster-title">Recognizing Counterfactual Thinking in Social Media Texts. </span><em>Youngseo Son, Anneke Buffone, Joe Raso, Allegra Larche, Anthony Janocko, Kevin Zembroski, H. Andrew Schwartz and Lyle Ungar</em>
                     </td>
                 </tr>
                 <tr id="poster">
@@ -3479,7 +3479,7 @@ script: |
                     <tr id="paper" paper-id="155">
                         <td id="paper-time">11:50-12:02</td>
                         <td>
-                            <span class="paper-title">A Two-stage Parsing Method for Text-level Discourse Analysis. </span><em>Yizhong Wang and Sujian Li</em>
+                            <span class="paper-title">A Two-stage Parsing Method for Text-level Discourse Analysis. </span><em>Yizhong Wang, Sujian Li and Houfeng Wang</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="156">
@@ -3562,7 +3562,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Outstanding Papers 3</a><br/>
             <span class="session-time">3:00 PM &ndash; 4:40 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons A/B/C</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-8a-selector">
@@ -3575,7 +3575,7 @@ script: |
                     <tr id="paper" paper-id="163">
                         <td id="paper-time">3:00-3:18</td>
                         <td>
-                            <span class="paper-title">Abstractive Document Summarization with a Graph-Based Attentional Neural Model. </span><em>Jiwei Tan and Xiaojun Wan</em>
+                            <span class="paper-title">Abstractive Document Summarization with a Graph-Based Attentional Neural Model. </span><em>JJiwei Tan, Xiaojun Wan and Jianguo Xiao</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="164">
@@ -3609,7 +3609,7 @@ script: |
         <div id="expander"></div><a href="#" class="session-title">Outstanding Papers 4</a><br/>
             <span class="session-time">3:00 PM &ndash; 4:40 PM</span>
             <br/>
-            <span class="session-location btn btn--location">Grande Ballroom A</span>
+            <span class="session-location btn btn--location">Salons D/E/F</span>
             <div class="paper-session-details">
                 <hr class="detail-separator"/>
                 <a href="#" class="session-selector" id="session-8b-selector">
@@ -3622,13 +3622,13 @@ script: |
                     <tr id="paper" paper-id="168">
                         <td id="paper-time">3:00-3:18</td>
                         <td>
-                            <span class="paper-title">Joint Extraction of Entities and Relations Based on a Novel Tagging Scheme. </span><em>Suncong Zheng, Feng Wang and Hongyun Bao</em>
+                            <span class="paper-title">Joint Extraction of Entities and Relations Based on a Novel Tagging Scheme. </span><em>Suncong Zheng, Feng Wang, Hongyun Bao, Yuexing Hao, Peng Zhou and Bo Xu</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="169">
                         <td id="paper-time">3:19-3:37</td>
                         <td>
-                            <span class="paper-title">A FOFE-based Local Detection Approach for Named Entity Recognition and Mention Detection. </span><em>Mingbin Xu, Hui Jiang and Sedtawut Watcharawittayakul</em>
+                            <span class="paper-title">A Local Detection Approach for Named Entity Recognition and Mention Detection. </span><em>Mingbin Xu, Hui Jiang and Sedtawut Watcharawittayakul</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="170">
