@@ -1,8 +1,8 @@
 # main links links
 main:
 
-  # - title: "Calls"
-  #   url: /calls/papers/
+  - title: "Program"
+    url: /program
 
   - title: "Registration"
     url: /registration
@@ -25,9 +25,6 @@ main:
   - title: "Sponsors"
     url: /sponsors/overview/
 
-  - title: "Archive"
-    url: /archive
-
 
 pages:
   - title: Organization
@@ -40,13 +37,10 @@ pages:
       - title: "ACL 2017 Workshops"
       - url: /pages/workshops.md
 
-# program:
-#   - title: Calls
-#     children:
-#       - title: "Papers"
-#         url: /calls/papers/
-#       - title: "Demos"
-#         url: /calls/demos/
+  - title: Program
+    children:
+      - title: "ACL 2017 Program"
+      - url: /pages/program.md
 
 participants:
   - title: "Information for Participants"

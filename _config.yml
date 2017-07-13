@@ -100,7 +100,6 @@ include:
   - _pages/calls
   - _pages/participants
   - _pages/sponsors
-  - _pages/testing
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"

@@ -1,0 +1,23 @@
+<div class="session session-expandable session-papers{{ session.count }}" id="session-{{ session.id }}">
+    <div id="expander"></div><a href="#" class="session-title">{{ session.title }}</a><br/>
+        <span class="session-time">{{ session.start_end }}</span>
+        <br/>
+        <span class="session-location btn btn--location">Grande Ballroom A</span>
+        <div class="paper-session-details">
+            <hr class="detail-separator"/>
+            <a href="#" class="session-selector" id="session-{{ session.id }}-selector">
+            Choose All</a>
+            <a href="#" class="session-deselector" id="session-{{ session.id }}-deselector">Remove All</a>
+            <table class="paper-table">
+                <tr>
+                    <td colspan="2">Chair: XXX</td>
+                </tr>{% for paper in papers %}
+                <tr id="paper">
+                    <td id="paper-time">{{ paper.time }}</td>
+                    <td>
+                        <span class="paper-title">{{ paper.title }}. </span><em>{{ paper.authors}}</em>
+                    </td>
+                </tr>{% endfor %}
+            </table>
+        </div>
+</div>
