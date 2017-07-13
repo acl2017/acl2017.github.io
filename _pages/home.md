@@ -14,7 +14,7 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 **July 13, 2017**. The ACL program is now [available](/program). For the first time, it allows attendees to choose the sessions (and individual papers and posters) they want to attend and generate a PDF of their customized schedule!
 {: .notice--info} 
 
-**July 13, 2017**. T We encourage you to bring your family to ACL!  This year, we are offering on-site professional childcare at the conference hotel through KiddieCorp. The subsidized cost is $10 USD per hour (or $5 USD per hour for students who are parents).  You can [sign up in advance](https://form.jotform.com/KiddieCorp/ACLKids). Drop-ins are also welcome (space permitting). The [social event](/participants#social-event) for this year is a family-friendly evening at the Vancouver Aquarium Marine Science Center.
+**July 13, 2017**. We encourage you to bring your family to ACL!  This year, we are offering on-site professional childcare at the conference hotel through KiddieCorp. The subsidized cost is $10 USD per hour (or $5 USD per hour for students who are parents).  You can [sign up in advance](https://form.jotform.com/KiddieCorp/ACLKids). Drop-ins are also welcome (space permitting). The [social event](/participants#social-event) for this year is a family-friendly evening at the Vancouver Aquarium Marine Science Center.
 {: .notice--info} 
 
 **July 12, 2017**. Information for oral presentations and posters is now [posted](/participants#presenter-information).
