@@ -464,7 +464,7 @@ script: |
 
             $('span.session-external-location').on('click', function(event) {
                 var placeName = $(this).text().trim().replace(" ", "+");
-                window.open("https://www.google.com/maps/place/" + placeName, "_blank")
+                window.open("https://www.google.com/maps/place/" + placeName, "_blank");
                 event.stopPropagation();
             });
 
