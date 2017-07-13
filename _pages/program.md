@@ -462,6 +462,12 @@ script: |
                 event.stopPropagation();
             });
 
+            $('span.session-external-location').on('click', function(event) {
+                var placeName = $(this).text().trim().replace(" ", "+");
+                window.open("https://www.google.com/maps/place/" + placeName, "_blank")
+                event.stopPropagation();
+            });
+
             /* show the floorplan when any location is clicked */
             $('span.session-location, span.inline-location').magnificPopup({
                 items: {
@@ -541,7 +547,12 @@ script: |
              $('.session-plenary').each(function() {
                 var session = {};
                 session.title = $(this).children('.session-title').text().trim();
-                session.location = $(this).children('span.session-location').text().trim();
+                if (session.title == "Social Event") {
+                    session.location = $(this).children('span.session-external-location').text().trim();
+                }
+                else {
+                    session.location = $(this).children('span.session-location').text().trim();                    
+                }
                 session.day = $(this).prevAll('.day:first').text().trim();
                 session.id = $(this).attr('id');
                 var sessionTimeText = $(this).children('span.session-time').text().trim();
@@ -3403,16 +3414,14 @@ script: |
         </div>
     </div>
     <div class="session session-expandable session-plenary" id="session-social">
-        <div id="expander"></div><a href="#" class="session-title">Social Event (Vancouver Aquarium)</a><br/>        
+        <div id="expander"></div><a href="#" class="session-title">Social Event</a><br/>        
         <span class="session-time">7:00 PM &ndash; 10:00 PM</span><br/>
-        <span class="session-location btn btn--location">Vancouver Aquarium</span>
+        <span class="session-external-location btn btn--location">Vancouver Aquarium</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
             <div class="session-abstract">
                 
-                <span class="info-button btn btn--small">Included in registration</span>
-
-                <p>Enjoy a fun evening under the stars!</p>
+                <p>Enjoy a fun evening under the stars! This event is included as part of conference registartion. </p>
 
                 <p>Bring your Flower Power to our SoCal Beach Party! After the main dinner and Poster Session, join us on the Bayview Lawn adjacent to the Pavilion for desserts, coffee, tea, and drinks (cash bar). A Beach Boys style band will entertain you when you are not busy in the VW Bus Photo Booth, talking amongst your friends and colleagues, or playing with the beach balls.</p>
 
