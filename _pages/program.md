@@ -2481,10 +2481,9 @@ script: |
                 </table>
             </div>
     </div>    
-    <div class="session session-plenary" id="session-lunch-arxiv">
-        <span class="session-title">Bring Lunch and Discuss: Double Blind Reviewing &amp; arXiv</span><br/>
+    <div class="session session-plenary" id="session-lunch-3">
+        <span class="session-title">Lunch</span><br/>
         <span class="session-time">12:05 PM &ndash; 1:30 PM</span><br/>
-        <span class="session-location btn btn--location">Salons E/F</span>
     </div>
     <div class="session session-expandable session-papers1" id="session-5a">
         <div id="expander"></div><a href="#" class="session-title">Multidisciplinary</a><br/>
@@ -3544,7 +3543,7 @@ script: |
                 </table>
             </div>
     </div>
-    <div class="session session-plenary" id="session-lunch-3">
+    <div class="session session-plenary" id="session-lunch-4">
         <span class="session-title">Lunch</span><br/>        
         <span class="session-time">12:15 PM &ndash; 1:30 PM</span>
     </div>
