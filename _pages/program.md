@@ -855,7 +855,7 @@ script: |
         <li>The generated PDF might have some blank rows at the bottom as padding since the PDF generation has been programmed to avoid rows being split across pages.</li>
         <li>While saving the generated PDF on mobile devices, its name cannot be changed.</li>
         <li>This page does not show any paper/poster abstracts. To see abstracts, please refer to <a href="https://chairs-blog.acl2017.org/2017/06/04/preliminary-paper-details/">this page</a>.</li>
-        <li><strong>If you have any suggestions or problem, please report them <a href="https://github.com/acl2017/acl2017.github.io/issues/new" target="_blank">here</a>. You will need a GitHub account.</strong></li>
+        <li><strong>If you notice any errors, encounter any problems, or have any suggestions, please submit them <a href="https://github.com/acl2017/acl2017.github.io/issues/new" target="_blank">here</a>. You will need a GitHub account.</strong></li>
     </ul>
 </div>
 
