@@ -624,7 +624,7 @@ script: |
                     var sessionId = $(sessionObj).attr('id').match(/session-\d/)[0];
                     var parallelSessions = $(sessionObj).siblings().addBack().filter(function() { return this.id.match(sessionId); });
 
-                    var unexpandedParallelSessions = $(parallelSessions).filter(function() { return !$(this).children('#expander').hasClass('expanded'); })
+                    var unexpandedParallelSessions = $(parallelSessions).filter(function() { return !$(this).children('#expander').hasClass('expanded'); });
 
                     /* if all sessions are already expanded, then shift-clicking should close all of them */
                     if (unexpandedParallelSessions.length == 0) {
