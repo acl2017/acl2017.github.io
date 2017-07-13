@@ -929,11 +929,17 @@ script: |
         <span class="session-title">Breakfast</span><br/>        
         <span class="session-time">7:30 AM &ndash; 8:45 AM</span>
     </div>
-    <div class="session session-plenary" id="session-welcome">
-        <span class="session-title">Welcome Session / Presidential Address</span><br/>        
+    <div class="session session-expandable session-plenary" id="session-welcome">
+        <div id="expander"></div><a href="#" class="session-title">Welcome Session / Presidential Address</a><br/>
         <span class="session-people">Chris Callison-Burch, Regina Barzilay, Min-Yen Kan and Jokim Nivre</span><br/>
         <span class="session-time">9:00 AM &ndash; 10:00 AM</span><br/>
         <span class="session-location btn btn--location">Bayshore Grande Ballroom</span>
+        <div class="paper-session-details">
+            <hr class="detail-separator"/>
+            <div class="session-abstract">
+                <p>Computational linguistics is a booming field and our association is flourishing with it. As our conferences grow larger and the pace of publishing quickens, there is a constant need to reflect on strategies that will allow us to prosper and grow even stronger in the future. In my presidential address, I will focus on three topics that I think require our attention. The first is equity and diversity, where the ACL executive committee has recently launched a number of actions intended to improve the inclusiveness and diversity of our community, but where there is clearly a need to do more. The second topic is publishing and reviewing, where the landscape is changing very quickly and our current system is starting to strain under the sheer volume of submissions. In particular, there has been an active discussion recently about the pros and cons of preprint publishing and the way it interacts with our standard model for double-blind reviewing. On this topic, I will present the results of a large-scale survey organized by the ACL executive committee to learn more about current practices and views in our community, a survey that will be followed up by a panel and discussion at the ACL business meeting later in the week. The third and final topic is good science and what we can do to promote scientific methodology and research ethics, which is becoming increasingly important in a world where the role of science in society cannot be taken for granted.</p>
+            </div>
+        </div>
     </div>
     <div class="session session-plenary" id="session-break-1">
         <span class="session-title">Break</span><br/>        
