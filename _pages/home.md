@@ -11,18 +11,14 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**July 10, 2017**. The ACL program is now [available](/program). For the first time, it allows attendees to choose the sessions (and individual papers and posters) they want to attend and generate a PDF of their customized schedule!
+**July 13, 2017**. The ACL program is now [available](/program). For the first time, it allows attendees to choose the sessions (and individual papers and posters) they want to attend and generate a PDF of their customized schedule!
 {: .notice--info} 
 
+**July 13, 2017**. T We encourage you to bring your family to ACL!  This year, we are offering on-site professional childcare at the conference hotel through KiddieCorp. The subsidized cost is $10 USD per hour (or $5 USD per hour for students who are parents).  You can [sign up in advance](https://form.jotform.com/KiddieCorp/ACLKids). Drop-ins are also welcome (space permitting). The [social event](/participants#social-event) for this year is a family-friendly evening at the Vancouver Aquarium Marine Science Center.
+{: .notice--info} 
 
-**June 23, 2017**. All hotel rooms offering ACL special rates are now SOLD OUT for both [regular](/participants#regular-accommodation) &amp; [student](/participants#student-accommodation) attendees. 
-{: .notice} 
-
-**June 2, 2017**. Thanks to the support of the Don and Betty Walker Scholarship, limited funding is available for supporting student travel, registration and accommodation. Please apply [here](https://goo.gl/forms/2tQIbWzpwsniDSdK2) by June 20th. Decisions will be announced on June 23rd. Direct all questions to the [Student Research Workshop organizers](mailto:acl-srw-2017@googlegroups.com).
-{: .notice} 
-
-**April 24, 2017**. ACL will be offering [on-site childcare](/participants#on-site-childcare) at the conference hotel.  It will be provided by a professional childcare service, KiddieCorp, and partially subsidized by ACL.  The cost will be $10.00 USD per hour for general registrants and $5.00 USD per hour for student registrants.  Availability is limited.  Please sign up using [this form from KiddieCorp](https://form.jotform.com/KiddieCorp/ACLKids). 
-{: .notice} 
+**July 12, 2017**. Information for oral presentations and posters is now [posted](/participants#presenter-information).
+{: .notice--info} 
  
 <h2>Welcome!</h2>
 
