@@ -1062,7 +1062,7 @@ script: |
                     <tr id="paper" paper-id="13">
                         <td id="paper-time">11:08-11:26</td>
                         <td>
-                            <span class="paper-title">Discourse Mode Identification in Essays. </span><em>Wei Song, Dong Wang, Ruiji Fu, Lizhen Liu, Ting Liu, Guoping Hu</em>
+                            <span class="paper-title">Discourse Mode Identification in Essays. </span><em>Wei Song, Dong Wang, Ruiji Fu, Lizhen Liu, Ting Liu and Guoping Hu</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="14">
