@@ -61,6 +61,26 @@ to listen to the poster presenter).  There will be one poster per side
 of the board.  Posters are likely to be arranged by subject area, so
 presenters may be co-located near other posters on similar topics.
 
+## Conference App
+
+This year, we are also experimenting with building a smartphone guide for the conference using the [GuideBook](http://www.guidebook.com) platform. The guide is designed to be an attendee's companion during the conference. Although the guide presents some of the same information on the website, its primary advantage is that, once downloaded, it can be used without an internet connection. It also has the following additional features: 
+
+- A "Schedule" section which shows all of the sessions. 
+- "Papers" and "Posters" section which lists all of the papers/posters along with their abstracts.
+- An "Authors" section which lists all of presenting authors.
+- All of the above sections are searchable and, most importantly, they are all linked appropriately. That is, if you click on a paper session, it shows you all of the papers that will be presented in that session. If you click on a paper, it shows you the session it will be presented in and its authors. And if you click on an author, it shows you all of their papers. 
+- A "Floorplan" section showing the conference floor plan.
+- A "My Schedule" section to which you can add sessions you want to attend. **Note**: Unfortunately, GuideBook doesn't allow individual papers to be selected. This is a clear disadvantage of the guide compared to the ACL website which --- for the first time -- allows users to generate and print their own [custom schedules](/program) down to individual papers and posters!
+- A "My Notes" section where users can jot down notes on any paper/session etc.
+- A "My To-Do" section where users can add to-do action items on any paper/session etc.
+- Social sections showing all tweets with the hashtag #acl2017nlp and from the official twitter account [@acl2017](http://twitter.com/acl2017), and a communal photo album.
+
+To use the guide, you need to [download the GuideBook app](https://guidebook.com/g/acl2017nlp/) first and then download the "ACL 2017" guide from within that app. If you already have the GuideBook app installed on your smartphone, you can simply scan the QR code below to download the ACL 2017 guide.
+
+![image-center](/images/guideqr.png){: .align-center}
+
+
+
 ## Regular Accommodation
 <span style="color: red; font-weight: bold; font-size: larger; border: 2px solid red; padding: 3px;">EVERYTHING SOLD OUT</span>
 
