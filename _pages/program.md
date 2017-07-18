@@ -857,7 +857,8 @@ script: |
         <li>Click/Tap on a tutorial/paper/poster to select it, click/tap again to unselect it.</li>
         <li>You can select more than one paper for a time slot.</li>
         <li>Click on the <em>Generate PDF</em> button at the bottom of the page to generate the PDF for your selected talks.</li>
-        <li>To expand all parallel sessions at the same time, hold down the Shift key and click on any of the sessions. Shift-clicking is contextual, i.e., if there are any collapsed sessions, it will expand all of them. If all of the sessions are expanded, Shift-clicking will collapse all of them.</li>
+        <li>To expand all parallel sessions at the same time, hold down the Shift key and click on any of the sessions. </li>
+        <li>Shift-clicking is contextual, i.e., if there are any collapsed sessions, it will expand all of them. If all of the sessions are expanded, Shift-clicking will collapse all of them.</li>
         <li>Clicking/Tapping on any of the location buttons will show the conference floor plan.</li>
         <li>When you hover on a paper for a time slot, it is highlighted in yellow and its conflicting papers are highlighted in red for an easier comparison. This only works on non-mobile devices where parallel sessions are displayed adjacent to each other.</li>
         <li>If papers have already been selected for a time slot, hovering on them or on papers that conflict with them highlights them in green.</li>
@@ -865,8 +866,13 @@ script: |
         <li>If you are using Safari, you will need to use <em>Cmd-P</em> to print and <em>File > Save as ... </em>to download the schedule. Chrome and Firefox have buttons for printing and saving as part of their PDF rendering UI.</li>
         <li>The generated PDF might have some blank rows at the bottom as padding since the PDF generation has been programmed to avoid rows being split across pages.</li>
         <li>While saving the generated PDF on mobile devices, its name cannot be changed.</li>
-        <li>This page does not show any paper/poster abstracts. To see abstracts, please refer to <a href="https://chairs-blog.acl2017.org/2017/06/04/preliminary-paper-details/">this page</a>.</li>
         <li><strong>If you notice any errors, encounter any problems, or have any suggestions, please submit them <a href="https://github.com/acl2017/acl2017.github.io/issues/new" target="_blank">here</a>. You will need a GitHub account.</strong></li>
+    </ul>
+    
+    <strong>Notes</strong>:
+    <ul>
+        <li>If you just want a list of all accepted papers without any timing information, please refer to <a href="https://chairs-blog.acl2017.org/2017/04/05/accepted-papers-and-demonstrations/">this page</a>.</li>
+        <li>This page does not show any paper/poster abstracts. To see the abstracts, please refer to <a href="https://chairs-blog.acl2017.org/2017/06/04/preliminary-paper-details/">this page</a>.</li>
     </ul>
 </div>
 
