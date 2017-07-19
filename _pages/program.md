@@ -3427,10 +3427,12 @@ script: |
             <hr class="detail-separator"/>
             <div class="session-abstract">
                 
-                <p>Enjoy a fun evening under the stars! This event is included as part of conference registartion. </p>
+                <p>With over 50,000 amazing aquatic creatures, the Vancouver Aquarium Marine Science Centre provides a beautiful backdrop for our event with unforgettable galleries filled with aquatic life, plus expansive outdoor spaces.</p>
 
-                <p>Bring your Flower Power to our SoCal Beach Party! After the main dinner and Poster Session, join us on the Bayview Lawn adjacent to the Pavilion for desserts, coffee, tea, and drinks (cash bar). A Beach Boys style band will entertain you when you are not busy in the VW Bus Photo Booth, talking amongst your friends and colleagues, or playing with the beach balls.</p>
+                <p>The Vancouver Aquarium is a self-supporting, non-profit society dedicated to effecting the conservation of aquatic life through display and interpretation, education, research and direct action. Our event will help to achieve a positive effect on the marine world and directly contribute to their conservation, research and education programs.</p>
 
+                <p>The social event is included with your registration. We will also offer additional admissions for people accompanying participants (see registration form for pricing details).</p>
+              
                 <p>Learn more about the social event <a class="info-link" target="_blank" href="http://acl2017.org/participants/#social-event">here</a>.</p>
             </div>
         </div>
