@@ -873,6 +873,7 @@ script: |
     <ul>
         <li>If you just want a list of all accepted papers without any timing information, please refer to <a href="https://chairs-blog.acl2017.org/2017/04/05/accepted-papers-and-demonstrations/">this page</a>.</li>
         <li>This page does not show any paper/poster abstracts. To see the abstracts, please refer to <a href="https://chairs-blog.acl2017.org/2017/06/04/preliminary-paper-details/">this page</a>.</li>
+        <li>This page also does not show workshops or co-located events, which can be found <a href="/workshops">here</a>.</li>
     </ul>
 </div>
 
