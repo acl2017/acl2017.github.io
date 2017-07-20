@@ -25,7 +25,7 @@ Please refer to each individual event's website for more details.
 
 <a href="https://sites.google.com/site/aclsrw2017/" class="btn btn--inverse btn--small">SRW</a>&nbsp;&nbsp;[ACL Student Research Workshop](https://sites.google.com/site/aclsrw2017/)
 
-<p>Part of the main conference and attendance is covered by the main conference registration fees. The posters will be displayed part of the poster session on the evening of July 30 from 6:20 pm to 9:50 pm.</p>
+<p>Part of the main conference and attendance is covered by the main conference registration fees. The posters will be displayed as part of the poster session on the evening of July 30 from 6:20 pm to 9:50 pm.</p>
 
 <span class="btn btn--location session-location">Bayshore Grand Ballroom &amp; Foyer/Stanley Park Foyer/Cypress</span>
 
@@ -149,4 +149,3 @@ Please refer to each individual event's website for more details.
 <p>Neural Machine Translation (NMT) is a simple new architecture for getting machines to learn to translate. Despite being relatively recent, NMT has demonstrated promising results and attracted much interest, achieving state-of-the-art results on a number of shared tasks. This workshop aims to cultivate research in neural machine translation and other aspects of machine translation and multilinguality that utilize neural models.</p>
 
 <span class="btn btn--location session-location">Salon C</span>
-<hr/>
