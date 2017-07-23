@@ -48,6 +48,8 @@ The session chairs will moderate the sessions and ensure timing is
 adhered to.  Papers are spaced apart with a 1 minute interval to
 provide some time for transitioning between presenters.
 
+Please test your presentations in the break before your session by connecting with the chair for your session. The conference rooms will include 2 screens, projects, an audio system and lighting, There will be no shared computer available to use for presentations so please bring your own laptops. Most screens will have a display ratio of either 16:9 (for most presentations) or 13:7 (for smaller tutorials and workshops). Please bring any VGA dongles you might need to connect your laptops to the screens and any audio connectors if you have a non-standard audio-out port. 
+
 ### Posters
 
 We are using the same provider as in previous years (e.g., at NAACL 2016).
