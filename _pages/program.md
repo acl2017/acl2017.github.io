@@ -949,7 +949,7 @@ script: |
     </div>
     <div class="session session-expandable session-plenary" id="session-welcome">
         <div id="expander"></div><a href="#" class="session-title">Welcome Session / Presidential Address</a><br/>
-        <span class="session-people">Chris Callison-Burch, Regina Barzilay, Min-Yen Kan and Jokim Nivre</span><br/>
+        <span class="session-people">Chris Callison-Burch, Regina Barzilay, Min-Yen Kan and Joakim Nivre</span><br/>
         <span class="session-time">9:00 AM &ndash; 10:00 AM</span><br/>
         <span class="session-location btn btn--location">Bayshore Grande Ballroom</span>
         <div class="paper-session-details">
