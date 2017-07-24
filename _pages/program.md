@@ -881,7 +881,7 @@ script: |
     <div class="day" id="first-day">Sunday, July 30</div>
     <div class="session session-expandable session-tutorials" id="session-morning-tutorials">
         <div id="expander"></div><a href="#" class="session-title">Morning Tutorials</a><br/>
-        <span class="session-time">9:30 AM &ndash; 12:30 PM</span><br/>
+        <span class="session-time">9:00 AM &ndash; 12:30 PM</span><br/>
         <div class="tutorial-session-details">
             <hr class="detail-separator"/>
             <table class="tutorial-table">
