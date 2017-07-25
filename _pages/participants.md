@@ -63,6 +63,8 @@ to listen to the poster presenter).  There will be one poster per side
 of the board.  Posters are likely to be arranged by subject area, so
 presenters may be co-located near other posters on similar topics.
 
+There's a local poster printing option for people who want to print their posters in Vancouver, rather than traveling with them. The FedEx office at 779 W Pender St, Vancouver will take your print order remotely and deliver to the hotel. Details of the services are available [here](http://local.fedex.com/ca_english/bc/vancouver/office-0489/).
+
 ## Conference App
 
 This year, we are also experimenting with building a smartphone guide for the conference using the [GuideBook](http://www.guidebook.com) platform. The guide is designed to be an attendee's companion during the conference. Although the guide presents some of the same information on the website, its primary advantage is that, once downloaded, it can be used without an internet connection. It also has the following additional features: 
