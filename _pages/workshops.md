@@ -122,7 +122,7 @@ Please refer to each individual event's website for more details.
 <span class="btn btn--location session-location">Mackenzie</span>
 <hr/>
 
-<a href="https://aclweb.org/aclwiki/BioNLP_Workshop" class="btn btn--inverse btn--small">W12</a>&nbsp;&nbsp;[BioNLP: Workshop on Biomedical Natural Language Processing](https://www.aclweb.org/aclwiki/index.php?title=BioNLP_Workshop)
+<a href="https://aclweb.org/aclwiki/BioNLP_Workshop" class="btn btn--inverse btn--small">W12</a>&nbsp;&nbsp;[BioNLP: Workshop on Biomedical Natural Language Processing](https://aclweb.org/aclwiki/BioNLP_Workshop)
 
 <p>An ACL 2017 Workshop associated with the SIGBIOMED special interest group, featuring an associated task: BioASQ.</p>
 
