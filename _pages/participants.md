@@ -50,6 +50,12 @@ provide some time for transitioning between presenters.
 
 Please test your presentations in the break before your session by connecting with the chair for your session. The conference rooms will include 2 screens, projects, an audio system and lighting.  There will be no shared computer available to use for presentations so please bring your own laptops. Most screens will have a display ratio of either 16:9 (for most presentations) or 13:7 (for smaller tutorials and workshops). The display connectors for the screens are mostly HDMI with VGA connections being somewhat rare. Please bring any display adapters you might need to connect your laptops to the screens and any audio connectors if you have a non-standard audio-out port. 
 
+We have hired a professional videographer to record all of the oral presentations at ACL once again this year. We will make the videos available online after the conference. Our goal is to improve the dissemination of the scientific materials that are generated for the conference.
+
+Beyond creating a great presentation that you will be proud to have other people watch, you don't need to take any further action. The copyright agreement for the final submission of your paper granted ACL permissions to record your talk and distribute it under a Creative Commons Attribution License.
+
+To simplify the logistics, all talks will be recorded. If you want to opt out after the conference or have any other feedback, you can contact [Chris Callison-Burch](mailto:ccb@upenn.edu).
+
 ### Posters
 
 We are using the same provider as in previous years (e.g., at NAACL 2016).
