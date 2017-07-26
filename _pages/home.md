@@ -11,7 +11,7 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
-**July 26, 2017**. ACL talks are going to be professionally recorded and made available as videos after the conference. More details on this and other useful information for oral presentations &amp; posters, can be found [here](/participants#presenter-information).
+**July 26, 2017**. ACL talks are going to be professionally recorded and made available as videos after the conference. More details on this and other useful information for oral presentations &amp; posters can be found [here](/participants#presenter-information).
 {: .notice--info} 
 
 **July 18, 2017**. The ACL smartphone app has been released. It uses the [GuideBook](http://www.guidebook.com) platform and is designed to be the ACL attendee's companion during the conference. More details on the app including download links can be found [here](/participants#conference-app).
