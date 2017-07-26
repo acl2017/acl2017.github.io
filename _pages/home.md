@@ -11,6 +11,9 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
+**July 26, 2017**. ACL talks are going to be professionally recorded and made available as videos after the conference. More details on this and other useful information for oral presentations &amp; posters, can be found [here](/participants#presenter-information).
+{: .notice--info} 
+
 **July 18, 2017**. The ACL smartphone app has been released. It uses the [GuideBook](http://www.guidebook.com) platform and is designed to be the ACL attendee's companion during the conference. More details on the app including download links can be found [here](/participants#conference-app).
 {: .notice--info} 
 
@@ -18,9 +21,6 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 {: .notice--info} 
 
 **July 13, 2017**. We encourage you to bring your family to ACL!  This year, we are offering on-site professional childcare at the conference hotel through KiddieCorp. The subsidized cost is $10 USD per hour (or $5 USD per hour for students who are parents).  You can [sign up in advance](https://form.jotform.com/KiddieCorp/ACLKids). Drop-ins are also welcome (space permitting). The [social event](/participants#social-event) for this year is a family-friendly evening at the Vancouver Aquarium Marine Science Center.
-{: .notice--info} 
-
-**July 12, 2017**. Information for oral presentations and posters is now [posted](/participants#presenter-information).
 {: .notice} 
  
 <h2>Welcome!</h2>
