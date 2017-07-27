@@ -52,7 +52,7 @@ Please test your presentations in the break before your session by connecting wi
 
 We have hired a professional videographer to record all of the oral presentations at ACL once again this year. We will make the videos available online after the conference. Our goal is to improve the dissemination of the scientific materials that are generated for the conference.
 
-Beyond creating a great presentation that you will be proud to have other people watch, you don't need to take any further action. The copyright agreement for the final submission of your paper granted ACL permissions to record your talk and distribute it under a Creative Commons Attribution License.
+Beyond creating a great presentation that you will be proud to have other people watch, you don't need to take any further action. The copyright agreement for the final submission of your paper granted ACL permissions to record your talk and distribute it under a Creative Commons Attribution License. Please do check that the images that you use in your presentations are cleared for dissemination and have been attributed, where possible and applicable.
 
 To simplify the logistics, all talks will be recorded. If you want to opt out after the conference or have any other feedback, you can contact [Chris Callison-Burch](mailto:ccb@upenn.edu).
 
