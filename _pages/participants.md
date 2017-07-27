@@ -223,6 +223,32 @@ Transportation to the Westin Bayshore Hotel, the Marriott Vancouver Pinnacle Dow
 - Subway: $ 8.75 CAD (one way)
 - Taxi: $35 CAD (one way; prices may vary)
 
+### Public transit to downtown
+
+Take the Canada Line to Waterfront. It takes 25 mins (12 stops). Get off at the Waterfront Station. Walk south on Granville (away from the North Shore mountains) to the corner of Granville and Pender. Take Bus 19 (use the same ticket you bought at the airport). Get off at the corner of Georgia St and Cardero St. (6 mins, 5 stops). It is a short walk from that intersection (5 mins, 190 metres) to the hotel going north.
+
+Other downtown hotels are similarly close by from the Waterfront station. Depending on your hotel you might have to take a taxi from Waterfront (see the section below about hailing a taxi in 
+
+You can also take the [Canada Line train](http://www.yvr.ca/en/passengers/transportation/public-transportation) from the airport to downtown.
+
+### Taxis to downtown
+
+Taxis and wheelchair-accessible vehicles are available at taxi stands located on Level 2 of the Domestic and International Arrivals Area at YVR. There is a fixed fare from the airport depending on the zone you travel to. The conference hotel will cost either Cdn $31 or Cdn $35 (it falls in between two zones). For more info about taking a taxi from the airport, see [here](http://www.yvr.ca/en/passengers/transportation/taxis).
+
+**Note that there is no Uber or Lyft in Vancouver as yet.**
+
+### Hailing taxis in Vancouver
+
+It is often difficult to hail a taxi in Vancouver by just walking out on the street and raising your hand. You will have to call the taxi company on the phone and tell them your address. Here is one such taxi company's phone number: Vancouver-Taxi 604-871-1111. 
+
+You can also install the [eCab app](https://www.e-cab.com/en/vancouver/) which will let you hail a taxi from multiple vendors. 
+
+### Walking around the Conference Hotel
+
+The hotel is very close to Stanley Park. Head north from the hotel and take the walking / running / cycling path to the sea wall at Stanley Park. It is an excellent place to walk, jog, run or cycle. The Vancouver Aquarium is also in Stanley Park and is a 20 minute walk from the hotel. 
+
+If you come in on the weekend and are looking for a place to eat that you can walk to. Walk south up Cardero St until you get to Robson St (6 mins, 650 metres) and there are many restaurants to choose from along Robson and along the walk to Robson St. 
+
 ## Social Event
 
 The social event is included with your registration.  We will also offer additional admissions for people accompanying participants (see registration form for pricing details). 
