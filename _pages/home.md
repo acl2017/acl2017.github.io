@@ -11,6 +11,9 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
+**July 28, 2017**. ACL 2017 proceedings are now available on the [ACL anthology website](http://www.aclweb.org/anthology/P/P17/). In addition, proceedings for [CoNLL](http://www.aclweb.org/anthology/K/K17/), [*SEM/SemEval](http://www.aclweb.org/anthology/S/S17/), and the [ACL workshops](http://www.aclweb.org/anthology/W/W17) are also available. This also means that the links from "Papers" section in the [conference app](/participants/#conference-app) now work.
+{: .notice--info} 
+
 **July 26, 2017**. ACL talks are going to be professionally recorded and made available as videos after the conference. More details on this and other useful information for oral presentations &amp; posters can be found [here](/participants#presenter-information).
 {: .notice--info} 
 
