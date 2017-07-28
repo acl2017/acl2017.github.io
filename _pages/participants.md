@@ -35,6 +35,24 @@ All parts of the conference will take place at the Westin Bayshore Hotel on the 
 
 Enjoy views of the coastline, distant mountains, and Stanley Park, plus easy access to all of the best things to do in Vancouver.  Boasting one of the most spectacular coastal locations in the world, the snowcapped mountains and the Pacific Ocean come together to create a truly magnificent setting. In addition, you are moments from shopping at Robson Street and Pacific Centre Mall, and attractions like the Vancouver Aquarium and Granville Island. Find even more things to do in Vancouver at <a href="http://www.tourismvancouver.com">www.tourismvancouver.com</a> or visit the hotel's website.
 
+In addition, here is a list of kid-friendly things to do in Vancouver (these can be reached with public transit, but it is more convenient if you have a car):
+
+1. The [aquarium](http://www.vanaqua.org/), [train ride](http://vancouver.ca/parks-recreation-culture/stanley-park-miniature-train.aspx), [horse drawn tour](http://www.stanleypark.com/) in Stanley park.
+
+2. Go to top of [Grouse Mountain](https://www.grousemountain.com/) to see the bears. 
+
+3. [Granville Island](http://granvilleisland.com/public-market) has some fun stuff for kids
+
+4. [Maritime museum](https://www.vancouvermaritimemuseum.com/) (if they are a little older)
+
+5. The [planetarium](http://www.spacecentre.ca/) (for older kids)
+
+6. [Jericho beach](http://vancouver.ca/parks-recreation-culture/jericho-beach.aspx) and the [Spanish banks](http://vancouver.ca/parks-recreation-culture/spanish-bank-beach.aspx)
+
+7. A little further out from downtown: [Play land](https://www.pne.ca/playland/) and the PNE
+
+8. A little more further out: [Burnaby Central Railway](http://burnabyrailway.org/) in Confederation Park has these amazing tiny working trains that one can ride on.
+
 ## Presenter Information
 
 ### Oral Presentations
