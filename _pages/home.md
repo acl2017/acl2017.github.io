@@ -27,7 +27,7 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 {: .notice} 
 
 **July 18, 2017**. The ACL smartphone app has been released. It uses the [GuideBook](http://www.guidebook.com) platform and is designed to be the ACL attendee's companion during the conference. More details on the app including download links can be found [here](/participants#conference-app).
-{: .notice--info} 
+{: .notice} 
 
 **July 13, 2017**. The ACL program is now [available](/program). For the first time, it allows attendees to choose the sessions (and individual papers and posters) they want to attend and generate a PDF of their customized schedule!
 {: .notice} 
