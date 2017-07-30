@@ -35,6 +35,24 @@ All parts of the conference will take place at the Westin Bayshore Hotel on the 
 
 Enjoy views of the coastline, distant mountains, and Stanley Park, plus easy access to all of the best things to do in Vancouver.  Boasting one of the most spectacular coastal locations in the world, the snowcapped mountains and the Pacific Ocean come together to create a truly magnificent setting. In addition, you are moments from shopping at Robson Street and Pacific Centre Mall, and attractions like the Vancouver Aquarium and Granville Island. Find even more things to do in Vancouver at <a href="http://www.tourismvancouver.com">www.tourismvancouver.com</a> or visit the hotel's website.
 
+In addition, here is a list of kid-friendly things to do in Vancouver (these can be reached with public transit, but it is more convenient if you have a car):
+
+1. The [aquarium](http://www.vanaqua.org/), [train ride](http://vancouver.ca/parks-recreation-culture/stanley-park-miniature-train.aspx), [horse drawn tour](http://www.stanleypark.com/) in Stanley park.
+
+2. Go to top of [Grouse Mountain](https://www.grousemountain.com/) to see the bears. 
+
+3. [Granville Island](http://granvilleisland.com/public-market) has some fun stuff for kids
+
+4. [Maritime museum](https://www.vancouvermaritimemuseum.com/) (if they are a little older)
+
+5. The [planetarium](http://www.spacecentre.ca/) (for older kids)
+
+6. [Jericho beach](http://vancouver.ca/parks-recreation-culture/jericho-beach.aspx) and the [Spanish banks](http://vancouver.ca/parks-recreation-culture/spanish-bank-beach.aspx)
+
+7. A little further out from downtown: [Play land](https://www.pne.ca/playland/) and the PNE
+
+8. A little more further out: [Burnaby Central Railway](http://burnabyrailway.org/) in Confederation Park has these amazing tiny working trains that one can ride on.
+
 ## Presenter Information
 
 ### Oral Presentations
@@ -50,6 +68,12 @@ provide some time for transitioning between presenters.
 
 Please test your presentations in the break before your session by connecting with the chair for your session. The conference rooms will include 2 screens, projects, an audio system and lighting.  There will be no shared computer available to use for presentations so please bring your own laptops. Most screens will have a display ratio of either 16:9 (for most presentations) or 13:7 (for smaller tutorials and workshops). The display connectors for the screens are mostly HDMI with VGA connections being somewhat rare. Please bring any display adapters you might need to connect your laptops to the screens and any audio connectors if you have a non-standard audio-out port. 
 
+We have hired a professional videographer to record all of the oral presentations at ACL once again this year. We will make the videos available online after the conference. Our goal is to improve the dissemination of the scientific materials that are generated for the conference.
+
+Beyond creating a great presentation that you will be proud to have other people watch, you don't need to take any further action. The copyright agreement for the final submission of your paper granted ACL permissions to record your talk and distribute it under a Creative Commons Attribution License. Please do check that the images that you use in your presentations are cleared for dissemination and have been attributed, where possible and applicable.
+
+To simplify the logistics, all talks will be recorded. If you want to opt out after the conference or have any other feedback, you can contact [Chris Callison-Burch](mailto:ccb@upenn.edu).
+
 ### Posters
 
 We are using the same provider as in previous years (e.g., at NAACL 2016).
@@ -62,6 +86,8 @@ The extra space on the side of the poster is intended for the audience
 to listen to the poster presenter).  There will be one poster per side
 of the board.  Posters are likely to be arranged by subject area, so
 presenters may be co-located near other posters on similar topics.
+
+There's a local poster printing option for people who want to print their posters in Vancouver, rather than traveling with them. The FedEx office at 779 W Pender St, Vancouver will take your print order remotely and deliver to the hotel. Details of the services are available [here](http://local.fedex.com/ca_english/bc/vancouver/office-0489/).
 
 ## Conference App
 
@@ -214,6 +240,32 @@ Transportation to the Westin Bayshore Hotel, the Marriott Vancouver Pinnacle Dow
 - Bus: $8.75 CAD (one way)
 - Subway: $ 8.75 CAD (one way)
 - Taxi: $35 CAD (one way; prices may vary)
+
+### Public transit to downtown
+
+Take the Canada Line to Waterfront. It takes 25 mins (12 stops). Get off at the Waterfront Station. Walk south on Granville (away from the North Shore mountains) to the corner of Granville and Pender. Take Bus 19 (use the same ticket you bought at the airport). Get off at the corner of Georgia St and Cardero St. (6 mins, 5 stops). It is a short walk from that intersection (5 mins, 190 metres) to the hotel going north.
+
+Other downtown hotels are similarly close by from the Waterfront station. Depending on your hotel you might have to take a taxi from Waterfront (see the section below about hailing a taxi in 
+
+You can also take the [Canada Line train](http://www.yvr.ca/en/passengers/transportation/public-transportation) from the airport to downtown.
+
+### Taxis to downtown
+
+Taxis and wheelchair-accessible vehicles are available at taxi stands located on Level 2 of the Domestic and International Arrivals Area at YVR. There is a fixed fare from the airport depending on the zone you travel to. The conference hotel will cost either Cdn $31 or Cdn $35 (it falls in between two zones). For more info about taking a taxi from the airport, see [here](http://www.yvr.ca/en/passengers/transportation/taxis).
+
+**Note that there is no Uber or Lyft in Vancouver as yet.**
+
+### Hailing taxis in Vancouver
+
+It is often difficult to hail a taxi in Vancouver by just walking out on the street and raising your hand. You will have to call the taxi company on the phone and tell them your address. Here is one such taxi company's phone number: Vancouver-Taxi 604-871-1111. 
+
+You can also install the [eCab app](https://www.e-cab.com/en/vancouver/) which will let you hail a taxi from multiple vendors. 
+
+### Walking around the Conference Hotel
+
+The hotel is very close to Stanley Park. Head north from the hotel and take the walking / running / cycling path to the sea wall at Stanley Park. It is an excellent place to walk, jog, run or cycle. The Vancouver Aquarium is also in Stanley Park and is a 20 minute walk from the hotel. 
+
+If you come in on the weekend and are looking for a place to eat that you can walk to. Walk south up Cardero St until you get to Robson St (6 mins, 650 metres) and there are many restaurants to choose from along Robson and along the walk to Robson St. 
 
 ## Social Event
 
