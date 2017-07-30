@@ -11,6 +11,9 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
+**July 30, 2017**. In addition to posting regular updates on Facebook ([@acl2017](http://facebook.com/acl2017)) and Twitter ([@acl2017](http://twitter.com/acl2017)), we will also be sharing photos and videos of the conference on Instagram ([@aclnlp](http://instagram.com/aclnlp)).
+{: .notice--info} 
+
 **July 29, 2017**. The conference venue is the Westin Bayshore Hotel located at [1601 Bayshore Drive, Vancouver BC, V6G 2V4 Canada](https://www.google.com/maps/place/1601+Bayshore+Dr,+Vancouver,+BC+V6G+2V4,+Canada/@49.2921158,-123.1291628,15z/data=!4m2!3m1!1s0x548671861f6bda17:0x2a200d7dcc8f34d6). Here is information about [ground transportation from Vancouver International Airport](/participants#transportation). 
 {: .notice--info} 
 
@@ -21,7 +24,7 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 {: .notice--info} 
 
 **July 26, 2017**. ACL talks are going to be professionally recorded and made available as videos after the conference. More details on this and other useful information for oral presentations &amp; posters can be found [here](/participants#presenter-information).
-{: .notice--info} 
+{: .notice} 
 
 **July 18, 2017**. The ACL smartphone app has been released. It uses the [GuideBook](http://www.guidebook.com) platform and is designed to be the ACL attendee's companion during the conference. More details on the app including download links can be found [here](/participants#conference-app).
 {: .notice--info} 
