@@ -43,7 +43,7 @@ platinum:
     image_path: facebook-logo.png
     alt: "Facebook Logo"
     title: "Facebook"
-  - url: http://www.bloomberg.com
+  - url: https://www.techatbloomberg.com/nlp/
     image_path: bloomberg-logo.png
     alt: "Bloomberg Logo"
     title: "Bloomberg"
