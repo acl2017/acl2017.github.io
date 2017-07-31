@@ -1665,7 +1665,7 @@ script: |
                     <tr id="paper" paper-id="74">
                         <td id="paper-time">4:42-5:00</td>
                         <td>
-                            <span class="paper-title">{TACL] Unsupervised Learning of Morphological Forests. </span><em>Jiaming Luo and Karthik Narasimhan</em>
+                            <span class="paper-title">[TACL] Unsupervised Learning of Morphological Forests. </span><em>Jiaming Luo, Karthik Narasimhan and Regina Barzilay</em>
                         </td>
                     </tr>
                     <tr id="paper" paper-id="75">
