@@ -11,6 +11,9 @@ excerpt: "July 30-August 4, 2017 <br/> Vancouver, Canada"
 
 <h2>News</h2>
 
+**July 31, 2017**. Microsoft is providing live captioning for the ACL conference sessions. Learn how to access these captions [here](/participants#live-captioning).
+{: .notice--info} 
+
 **July 30, 2017**. In addition to posting regular updates on Facebook ([@acl2017](http://facebook.com/acl2017)) and Twitter ([@acl2017](http://twitter.com/acl2017)), we will also be sharing photos and videos of the conference on Instagram ([@aclnlp](http://instagram.com/aclnlp)).
 {: .notice--info} 
 

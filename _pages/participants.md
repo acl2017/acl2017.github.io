@@ -89,6 +89,19 @@ presenters may be co-located near other posters on similar topics.
 
 There's a local poster printing option for people who want to print their posters in Vancouver, rather than traveling with them. The FedEx office at 779 W Pender St, Vancouver will take your print order remotely and deliver to the hotel. Details of the services are available [here](http://local.fedex.com/ca_english/bc/vancouver/office-0489/).
 
+## Live Captioning
+
+This year, in addition to recording all sessions, ACL is also providing live captions for each of the sessions. Participants to ACL can have the captions, with translations if so desired, transmitted to their local devices (phones, computers, etc.). The speech recognition being used for ACL has been customized to papers submitted to the conference, ensuring higher quality recognition, especially of much of the technical vocabulary used at the conference. Live captions are provided using the [Microsoft Translator live service](http://translate.it) and model adaptation by the [Microsoft CRIS service](http://cris.ai). 
+
+To access the captions, use the following links (notices will also be posted on the doors for each session):
+
+- [Session 1](http://www.aka.ms/1ACL) (Monday/Tuesday: Salons B/C, Wednesday: Salons A/B/C, Tuesday/Wednesday: Invited Talks)
+- [Session 2](http://www.aka.ms/2ACL) (Monday/Tuesday: Salons E/F, Wednesday: Salons D/E/F)
+- [Session 3](http://www.aka.ms/3ACL) (Monday/Tuesday: Salon D)
+- [Session 4](http://www.aka.ms/4ACL) (Monday/Tuesday: Salon 1)
+- [Session 5](http://www.aka.ms/5ACL) (Monday/Tuesday: Salons 2/3)
+
+
 ## Conference App
 
 This year, we are also experimenting with building a smartphone guide for the conference using the [GuideBook](http://www.guidebook.com) platform. The guide is designed to be an attendee's companion during the conference. Although the guide presents some of the same information on the website, its primary advantage is that, once downloaded, it can be used without an internet connection. It also has the following additional features: 
