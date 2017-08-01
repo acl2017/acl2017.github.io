@@ -3423,7 +3423,7 @@ script: |
     </div>
     <div class="session session-expandable session-plenary" id="session-social">
         <div id="expander"></div><a href="#" class="session-title">Social Event</a><br/>        
-        <span class="session-time">7:00 PM &ndash; 10:00 PM</span><br/>
+        <span class="session-time">7:30 PM &ndash; 10:30 PM</span><br/>
         <span class="session-external-location btn btn--location">Vancouver Aquarium</span>
         <div class="paper-session-details">
             <hr class="detail-separator"/>
